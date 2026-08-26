@@ -1,0 +1,973 @@
+/* Police Star Jedi */
+@font-face {
+    font-family: 'Star Jedi';
+    src: url('fonts/Starjedi.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Reset de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Header étoilé */
+.starry-header {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(to bottom, #000000, #0a0a2e);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Titre Star Wars */
+.starry-header h1 {
+    font-family: 'Star Jedi', sans-serif;
+    color: #FFE81F;
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    text-align: center;
+    z-index: 10;
+    position: relative;
+    text-shadow: 0 0 10px rgba(255, 232, 31, 0.5);
+    padding: 0 20px;
+}
+
+/* Couches d'étoiles */
+.stars, .stars2, .stars3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.stars {
+    background-image:
+        radial-gradient(1px 1px at 20px 30px, white, transparent),
+        radial-gradient(1px 1px at 40px 70px, white, transparent),
+        radial-gradient(1px 1px at 50px 160px, white, transparent),
+        radial-gradient(1px 1px at 90px 40px, white, transparent),
+        radial-gradient(1px 1px at 130px 80px, white, transparent),
+        radial-gradient(1px 1px at 160px 120px, white, transparent),
+        radial-gradient(1px 1px at 200px 50px, white, transparent),
+        radial-gradient(1px 1px at 250px 130px, white, transparent),
+        radial-gradient(1px 1px at 300px 20px, white, transparent),
+        radial-gradient(1px 1px at 350px 90px, white, transparent),
+        radial-gradient(1px 1px at 400px 150px, white, transparent),
+        radial-gradient(1px 1px at 450px 60px, white, transparent),
+        radial-gradient(1px 1px at 500px 100px, white, transparent),
+        radial-gradient(1px 1px at 550px 180px, white, transparent),
+        radial-gradient(1px 1px at 600px 30px, white, transparent),
+        radial-gradient(1px 1px at 650px 140px, white, transparent),
+        radial-gradient(1px 1px at 700px 70px, white, transparent),
+        radial-gradient(1px 1px at 750px 200px, white, transparent),
+        radial-gradient(1px 1px at 800px 50px, white, transparent),
+        radial-gradient(1px 1px at 850px 120px, white, transparent),
+        radial-gradient(1px 1px at 900px 80px, white, transparent),
+        radial-gradient(1px 1px at 950px 170px, white, transparent),
+        radial-gradient(1px 1px at 1000px 40px, white, transparent),
+        radial-gradient(1px 1px at 1050px 110px, white, transparent),
+        radial-gradient(1px 1px at 1100px 190px, white, transparent),
+        radial-gradient(1px 1px at 75px 95px, white, transparent),
+        radial-gradient(1px 1px at 115px 175px, white, transparent),
+        radial-gradient(1px 1px at 185px 25px, white, transparent),
+        radial-gradient(1px 1px at 275px 85px, white, transparent),
+        radial-gradient(1px 1px at 325px 145px, white, transparent),
+        radial-gradient(1px 1px at 425px 35px, white, transparent),
+        radial-gradient(1px 1px at 525px 195px, white, transparent),
+        radial-gradient(1px 1px at 575px 55px, white, transparent),
+        radial-gradient(1px 1px at 675px 165px, white, transparent),
+        radial-gradient(1px 1px at 725px 15px, white, transparent),
+        radial-gradient(1px 1px at 825px 75px, white, transparent),
+        radial-gradient(1px 1px at 925px 135px, white, transparent),
+        radial-gradient(1px 1px at 1025px 185px, white, transparent),
+        radial-gradient(1px 1px at 1125px 45px, white, transparent),
+        radial-gradient(1px 1px at 55px 215px, white, transparent),
+        radial-gradient(1px 1px at 155px 235px, white, transparent),
+        radial-gradient(1px 1px at 255px 205px, white, transparent),
+        radial-gradient(1px 1px at 355px 225px, white, transparent),
+        radial-gradient(1px 1px at 455px 245px, white, transparent),
+        radial-gradient(1px 1px at 555px 215px, white, transparent),
+        radial-gradient(1px 1px at 655px 235px, white, transparent),
+        radial-gradient(1px 1px at 755px 205px, white, transparent),
+        radial-gradient(1px 1px at 855px 225px, white, transparent),
+        radial-gradient(1px 1px at 955px 245px, white, transparent);
+    background-repeat: repeat;
+    background-size: 1200px 280px;
+    animation: twinkle 3s ease-in-out infinite;
+}
+
+.stars2 {
+    background-image:
+        radial-gradient(1.5px 1.5px at 100px 50px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 180px 120px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 280px 200px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 380px 30px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 480px 170px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 580px 90px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 680px 220px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 780px 60px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 880px 150px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 980px 100px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 1080px 180px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 50px 130px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 150px 210px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 230px 40px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 330px 160px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 430px 100px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 530px 240px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 630px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 730px 190px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 830px 25px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 930px 200px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 1030px 85px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 1130px 145px, rgba(255,255,255,0.8), transparent);
+    background-repeat: repeat;
+    background-size: 1200px 260px;
+    animation: twinkle 4s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+.stars3 {
+    background-image:
+        radial-gradient(2px 2px at 70px 100px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 220px 80px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 420px 140px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 620px 40px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 820px 190px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 1020px 70px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 150px 180px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 320px 30px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 520px 210px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 720px 120px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 920px 50px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 1120px 160px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 30px 220px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 270px 150px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 470px 60px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 670px 240px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 870px 90px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 1070px 230px, rgba(255,255,255,0.9), transparent);
+    background-repeat: repeat;
+    background-size: 1200px 270px;
+    animation: twinkle 5s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+/* Animation de scintillement */
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Section étoilée générique */
+.starry-section {
+    position: relative;
+    background: linear-gradient(to bottom, #0a0a2e, #000000);
+    overflow: hidden;
+}
+
+/* Section Présentation */
+.presentation {
+    padding: 60px 20px;
+}
+
+.presentation-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    position: relative;
+    z-index: 10;
+}
+
+.profile-photo {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 20px rgba(255, 232, 31, 0.3);
+    border: 3px solid #FFE81F;
+    flex-shrink: 0;
+}
+
+.presentation-text {
+    flex: 1;
+}
+
+.presentation-text h2 {
+    font-family: 'Star Jedi', sans-serif;
+    color: #FFE81F;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 232, 31, 0.5);
+}
+
+.presentation-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #e0e0e0;
+    margin-bottom: 15px;
+}
+
+/* Section Retromania */
+.retromania {
+    padding: 60px 20px;
+    background: linear-gradient(to top, #0a0a2e, #000000);
+    min-height: 400px;
+}
+
+.retromania-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+.retromania h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: #ffffff;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8),
+                 0 0 20px rgba(255, 215, 0, 0.6),
+                 0 0 40px rgba(255, 215, 0, 0.4),
+                 0 0 60px rgba(255, 215, 0, 0.3);
+    font-weight: 700;
+}
+
+.retromania p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #ffffff;
+}
+
+.video-description {
+    font-size: 1.1rem;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+    min-height: 80px;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Aperçu du site RetroMania */
+.retromania-site-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.retromania-site-link {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 999px;
+    background: #FFD700;
+    color: #1a1a1a;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.retromania-site-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+}
+
+.retromania-site-frame {
+    display: block;
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    aspect-ratio: 16 / 12;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.retromania-site-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    pointer-events: none;
+}
+
+.retromania-site-overlay {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    transition: background 0.3s ease;
+}
+
+.retromania-site-frame:hover .retromania-site-overlay {
+    background: rgba(255, 215, 0, 0.08);
+}
+
+/* Video container Retromania */
+.video-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.video-container iframe {
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Carousel Retromania */
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.carousel-wrapper {
+    width: 560px;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
+}
+
+.carousel-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-slide {
+    position: absolute;
+    width: 100%;
+    height: 315px;
+    opacity: 0;
+    transform: translateY(100%) scale(0.5);
+    transition: all 0.6s ease-in-out;
+    z-index: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+}
+
+.carousel-slide.prev {
+    opacity: 0.5;
+    transform: translateY(-45%) scale(0.6);
+    z-index: 5;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    z-index: 10;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    pointer-events: auto;
+}
+
+.carousel-slide.next {
+    opacity: 0.5;
+    transform: translateY(45%) scale(0.6);
+    z-index: 5;
+}
+
+.carousel-slide iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.instagram-thumbnail {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.instagram-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.instagram-thumbnail:hover img {
+    transform: scale(1.05);
+}
+
+.play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.instagram-thumbnail:hover .play-overlay {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.play-overlay svg {
+    margin-left: 5px;
+}
+
+.instagram-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Gear control */
+.gear-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.gear {
+    width: 180px;
+    height: 180px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.gear:hover {
+    transform: scale(1.05);
+}
+
+.gear:active {
+    transform: scale(0.95);
+}
+
+.gear-img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+    filter: drop-shadow(3px 5px 8px rgba(0, 0, 0, 0.6));
+}
+
+.gear-text {
+    font-size: 0.9rem;
+    color: #FFD700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Section La Lanterne de Yuna */
+.lanterne-yuna {
+    padding: 60px 20px;
+    background: linear-gradient(to bottom, #0a0a2e, #000000);
+    min-height: 400px;
+}
+
+.lanterne-yuna-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+.lanterne-yuna h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: #ffffff;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8),
+                 0 0 20px rgba(255, 215, 0, 0.6),
+                 0 0 40px rgba(255, 215, 0, 0.4),
+                 0 0 60px rgba(255, 215, 0, 0.3);
+    font-weight: 700;
+}
+
+.lanterne-yuna p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #ffffff;
+}
+
+.lanterne-insta-link {
+    display: inline-block;
+    color: #FFD700;
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.lanterne-insta-link:hover {
+    border-color: #FFD700;
+}
+
+.lanterne-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.lanterne-nav {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.15s ease, opacity 0.3s ease;
+}
+
+.lanterne-nav:hover:not(:disabled) {
+    background: rgba(255, 215, 0, 0.25);
+    transform: scale(1.08);
+}
+
+.lanterne-nav:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.lanterne-posts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    flex: 1;
+    max-width: 800px;
+}
+
+.lanterne-post {
+    position: relative;
+    display: block;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.lanterne-post img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.lanterne-post:hover img {
+    transform: scale(1.05);
+}
+
+.lanterne-post-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lanterne-post:hover .lanterne-post-overlay {
+    opacity: 1;
+}
+
+.lanterne-post-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.lanterne-status {
+    grid-column: 1 / -1;
+    color: #cccccc;
+    font-size: 1rem;
+    padding: 40px 20px;
+}
+
+/* Section CPNV */
+.cpnv {
+    padding: 60px 20px;
+    background: linear-gradient(to top, #0a0a2e, #000000);
+    min-height: 400px;
+}
+
+.cpnv-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+.cpnv h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: #ffffff;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8),
+                 0 0 20px rgba(255, 215, 0, 0.6),
+                 0 0 40px rgba(255, 215, 0, 0.4),
+                 0 0 60px rgba(255, 215, 0, 0.3);
+    font-weight: 700;
+}
+
+.cpnv p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #ffffff;
+}
+
+.cpnv-category {
+    font-family: 'Orbitron', sans-serif;
+    color: #FFD700;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.cpnv-category:first-of-type {
+    margin-top: 20px;
+}
+
+.cpnv-project {
+    margin-top: 20px;
+}
+
+.cpnv-project h4 {
+    font-family: 'Orbitron', sans-serif;
+    color: #f18854;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.cpnv-project p {
+    max-width: 700px;
+    margin: 0 auto 30px;
+}
+
+.cpnv-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.cpnv-gallery-item {
+    display: block;
+    width: 280px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.cpnv-media-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.cpnv-media-row .cpnv-gallery-item {
+    width: 260px;
+    margin-bottom: 0;
+    background: transparent;
+    flex-shrink: 0;
+}
+
+.cpnv-media-row .cpnv-video-card {
+    width: 260px;
+    flex-shrink: 0;
+}
+
+.cpnv-media-row .cpnv-gallery-item img {
+    height: auto;
+    aspect-ratio: 734 / 416;
+    object-fit: cover;
+    object-position: center;
+    background: transparent;
+}
+
+.cpnv-gallery-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    display: block;
+    background: #ffffff;
+    transition: transform 0.3s ease;
+}
+
+.cpnv-gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.cpnv-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.cpnv-doc-link {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: #752a0f;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    border: 1px solid #f18854;
+    transition: background 0.3s ease, transform 0.15s ease;
+}
+
+.cpnv-doc-link:hover {
+    background: #f18854;
+    transform: translateY(-2px);
+}
+
+.cpnv-videos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 260px));
+    justify-content: center;
+    gap: 25px 20px;
+}
+
+/* À partir de 5 vidéos, ajouter la classe "cpnv-videos-3col" sur .cpnv-videos
+   pour passer en grille 3 par 3 (voir index.html). */
+.cpnv-videos.cpnv-videos-3col {
+    grid-template-columns: repeat(3, minmax(0, 260px));
+}
+
+.cpnv-video-card {
+    display: block;
+    text-decoration: none;
+}
+
+.cpnv-video-thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.cpnv-video-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.cpnv-video-card:hover .cpnv-video-thumb img {
+    transform: scale(1.05);
+}
+
+.cpnv-video-thumb .play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.cpnv-video-card:hover .play-overlay {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.cpnv-video-thumb .play-overlay svg {
+    margin-left: 4px;
+}
+
+.cpnv-video-short {
+    aspect-ratio: 9 / 16;
+    max-width: 150px;
+    margin: 0 auto;
+}
+
+.cpnv-video-title {
+    margin-top: 10px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-align: center;
+}
+
+/* Écran large : toutes les vidéos sur une seule ligne */
+@media (min-width: 900px) {
+    .cpnv-videos {
+        grid-template-columns: repeat(auto-fit, minmax(0, 260px));
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .presentation-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-photo {
+        width: 200px;
+        height: 200px;
+    }
+
+    .carousel-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .carousel-wrapper {
+        width: 100%;
+        max-width: 400px;
+        height: 225px;
+    }
+
+    .gear {
+        width: 100px;
+        height: 100px;
+    }
+
+    .yt-card {
+        flex: 0 0 220px;
+    }
+
+    .yt-card img {
+        height: 124px;
+    }
+
+    .yt-slider-thumb {
+        width: 42px;
+        height: 42px;
+    }
+
+    .lanterne-posts {
+        grid-template-columns: 1fr;
+        max-width: 260px;
+        gap: 15px;
+    }
+
+    .lanterne-nav {
+        width: 38px;
+        height: 38px;
+    }
+
+    .cpnv-gallery-item {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .cpnv-videos {
+        grid-template-columns: minmax(0, 280px);
+    }
+
+    .cpnv-video-short {
+        max-width: 160px;
+    }
+}
+
+/* Footer */
+.site-footer {
+    background: #000000;
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.site-footer p {
+    color: #cccccc;
+    font-size: 0.95rem;
+    margin: 6px 0;
+}
+
+.footer-name {
+    color: #FFD700;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.site-footer a {
+    color: #cccccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.site-footer a:hover {
+    color: #FFD700;
+}
