@@ -1,78 +1,62 @@
 # Connexion Instagram — La Lanterne de Yuna
 
-Cette fonction (`instagram-posts.js`) sert les 9 dernières publications du
-compte Instagram professionnel `la_lanterne_de_yuna` au site, sans jamais
-exposer de token dans le code ou le navigateur.
+Cette fonction (`instagram-posts.js`, et son équivalent PHP
+`php/instagram-posts.php`) sert les dernières publications du compte
+Instagram professionnel `la_lanterne_de_yuna` au site.
 
-**Important : ne mets jamais de mot de passe Instagram ni de token dans le
-code du site ou dans un chat.** Les identifiants ne s'utilisent que via les
-pages officielles Meta / Netlify ci-dessous.
+Elle passe par **Behold.so** (https://behold.so), un service gratuit qui se
+connecte une fois à ton compte Instagram et gère lui-même le renouvellement
+du token à ta place — plus besoin de régénérer quoi que ce soit tous les
+~60 jours comme avec l'API Instagram Graph en direct. Ton site appelle
+juste une URL JSON publique fournie par Behold.
 
-## 1. Compte Instagram professionnel + Page Facebook
+**Important : ne mets jamais de mot de passe Instagram dans le code du site
+ou dans un chat.** La connexion à Instagram se fait uniquement via
+l'interface officielle de Behold.
+
+## 1. Compte Instagram professionnel
 
 1. Instagram → Paramètres → Compte → vérifier que le compte est en mode
-   Professionnel (Créateur ou Entreprise).
-2. Ce compte doit être lié à une Page Facebook (Paramètres → Compte lié).
-   Si tu n'as pas de Page, crée-en une (gratuit, quelques clics).
+   Professionnel (Créateur ou Entreprise). Behold ne demande pas de Page
+   Facebook liée.
 
-## 2. Créer l'app Meta for Developers
+## 2. Créer le feed sur Behold.so
 
-1. Va sur https://developers.facebook.com/apps et connecte-toi avec le
-   compte Facebook lié à ta Page.
-2. « Créer une app » → type **Autre** → **Entreprise**.
-3. Dans le tableau de bord de l'app, ajoute le produit **Instagram Graph
-   API** (ou « Instagram » selon la version de l'interface).
-4. Dans les paramètres de l'app, ajoute ton compte comme testeur/utilisateur
-   si demandé (mode développement suffit pour un usage personnel).
+1. Va sur https://behold.so et crée un compte gratuit.
+2. Crée un nouveau feed et connecte-le au compte Instagram
+   `la_lanterne_de_yuna` (Behold ouvre le flux d'autorisation Instagram
+   officiel — aucun mot de passe ne transite par un tiers).
+3. Dans les réglages du feed, ouvre l'onglet **JSON Feed** et copie l'URL
+   fournie (ex: `https://feeds.behold.so/xxxxxxxxxxxx`).
 
-## 3. Récupérer l'ID Instagram Business et le token
+Le plan gratuit affiche jusqu'à 6 posts et se met à jour environ une fois
+par jour — largement suffisant pour cet usage, et Behold renouvelle le
+token Instagram tout seul en arrière-plan.
 
-1. Ouvre l'outil **Graph API Explorer** :
-   https://developers.facebook.com/tools/explorer/
-2. Sélectionne ton app dans le menu déroulant.
-3. « Générer un token d'accès utilisateur », coche les permissions :
-   - `instagram_basic`
-   - `pages_show_list`
-   - `pages_read_engagement`
-4. Autorise l'accès à ton compte Instagram quand demandé.
-5. Récupère l'**ID Instagram Business** :
-   requête `GET /me/accounts` → note l'`id` de ta Page, puis
-   `GET /{page-id}?fields=instagram_business_account` → c'est l'`id`
-   retourné qui est ton `IG_USER_ID`.
-6. Le token généré à l'étape 3 est un token court (~1h). Échange-le contre
-   un **token longue durée** (~60 jours) :
-   ```
-   GET https://graph.facebook.com/v21.0/oauth/access_token
-     ?grant_type=fb_exchange_token
-     &client_id={app-id}
-     &client_secret={app-secret}
-     &fb_exchange_token={token-court}
-   ```
-   Le `access_token` renvoyé est ton `IG_ACCESS_TOKEN`.
-
-Ce token expire tous les ~60 jours : il faudra répéter l'étape 6
-périodiquement (ou automatiser un renouvellement, à voir plus tard si
-besoin).
-
-## 4. Déployer sur Netlify
+## 3. Déployer sur Netlify
 
 1. Crée un compte gratuit sur https://netlify.com et relie ce dossier de
    projet (par Git, ou glisser-déposer pour un déploiement manuel).
 2. Une fois le site créé : **Site settings → Environment variables**,
    ajoute :
-   - `IG_USER_ID` = l'ID récupéré à l'étape 3.5
-   - `IG_ACCESS_TOKEN` = le token longue durée de l'étape 3.6
-3. Redéploie le site pour que les variables soient prises en compte.
+   - `BEHOLD_FEED_URL` = l'URL JSON copiée à l'étape 2.3
+3. Redéploie le site pour que la variable soit prise en compte.
 
 La fonction sera alors disponible à `/.netlify/functions/instagram-posts`
 et le site ira automatiquement chercher les nouvelles publications à chaque
-chargement de page — plus besoin de mettre à jour un tableau à la main.
+chargement de page — plus besoin de mettre à jour un tableau à la main, ni
+de jamais retoucher à un token.
+
+## 4. Sur un hébergement PHP (ex: mediamatique.ch)
+
+Renseigne la même URL dans `php/config.php` (constante `BEHOLD_FEED_URL`)
+— voir la section dédiée plus bas dans ce document.
 
 ## 5. Sécurité
 
-- Ne commite jamais `IG_ACCESS_TOKEN` dans le code ou un fichier versionné.
-- Si ce token a été partagé accidentellement quelque part, régénère-le
-  immédiatement depuis le Graph API Explorer.
+- L'URL du feed Behold est publique par nature (elle ne fait que lire tes
+  posts déjà publics) : pas besoin de la traiter comme un secret, mais
+  évite quand même de la republier inutilement ailleurs.
 
 ---
 
@@ -120,8 +104,8 @@ PHP des deux fonctions Netlify ci-dessus :
   de code, sauvegarde des niveaux de compétences), stocké dans de simples
   fichiers JSON au lieu de Netlify Blobs.
 - `instagram-posts.php` -> équivalent de `instagram-posts.js` (proxy public
-  vers l'API Instagram Graph), avec les identifiants dans `config.php` au
-  lieu des variables d'environnement Netlify.
+  vers le feed Behold.so), avec l'URL du feed dans `config.php` au lieu
+  d'une variable d'environnement Netlify.
 
 Utilisable sur n'importe quel hébergement mutualisé qui exécute PHP.
 
@@ -134,9 +118,9 @@ dans le code au moment de la migration, juste la configuration ci-dessous.
 1. Ouvre `php/config.php` et renseigne :
    - `ADMIN_EMAIL` / `ADMIN_PASSWORD_DEFAULT` (ce dernier ne sert que tant
      qu'aucun code n'a encore été changé depuis `admin.html`).
-   - `IG_USER_ID` / `IG_ACCESS_TOKEN` (voir la procédure d'obtention plus
-     haut dans ce document) — sans ces valeurs, la section Instagram
-     affichera une erreur.
+   - `BEHOLD_FEED_URL` (voir la procédure de création plus haut dans ce
+     document) — sans cette valeur, la section Instagram affichera une
+     erreur.
 2. Dépose tout le contenu du projet sur le serveur via FileZilla, y compris
    le dossier `php/` avec ses sous-fichiers (`config.php`, `skills.php`,
    `instagram-posts.php`, `data/.htaccess`).

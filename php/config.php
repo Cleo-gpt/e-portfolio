@@ -13,9 +13,9 @@
 define('ADMIN_EMAIL', 'cleoforclaz2007@gmail.com');
 define('ADMIN_PASSWORD_DEFAULT', 'change-moi');
 
-// Identifiants Instagram Graph API pour instagram-posts.php (voir
-// netlify/functions/README.md pour la procédure d'obtention).
-// Ne mets jamais ces valeurs dans un fichier versionné publiquement.
+// URL du feed JSON Behold.so pour instagram-posts.php (voir
+// netlify/functions/README.md pour la procédure de création du compte).
+// Behold gère la connexion et le renouvellement du token Instagram à
+// notre place — aucune maintenance de token nécessaire ici.
 
-define('IG_USER_ID', '');
-define('IG_ACCESS_TOKEN', '');
+define('BEHOLD_FEED_URL', '');
