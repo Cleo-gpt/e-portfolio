@@ -225,6 +225,195 @@ body {
     margin-bottom: 15px;
 }
 
+/* Section Profil & Compétences */
+.profil {
+    padding: 60px 20px;
+    background: linear-gradient(to bottom, #000000, #0a0a2e, #000000);
+}
+
+.profil-content {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+.profil h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: #ffffff;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8),
+                 0 0 20px rgba(255, 215, 0, 0.6),
+                 0 0 40px rgba(255, 215, 0, 0.4),
+                 0 0 60px rgba(255, 215, 0, 0.3);
+    font-weight: 700;
+}
+
+.profil-subtitle {
+    font-family: 'Orbitron', sans-serif;
+    color: #FFD700;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.profil-subtitle-center {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.profil-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.profil-traits {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.profil-traits li {
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    color: #ffffff;
+    font-size: 0.9rem;
+}
+
+.profil-langues {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profil-langues li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    color: #ffffff;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 8px;
+}
+
+.profil-langues li span {
+    font-weight: 700;
+}
+
+.profil-langues li em {
+    font-style: normal;
+    color: #cccccc;
+    font-size: 0.85rem;
+}
+
+.skill-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.skill-bar-label {
+    display: flex;
+    justify-content: space-between;
+    color: #ffffff;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.skill-bar-track {
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.skill-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #f18854, #FFD700);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.tools-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.tool-chip {
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: #752a0f;
+    color: #ffffff;
+    font-size: 0.9rem;
+    border: 1px solid #f18854;
+}
+
+.experience-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.experience-item {
+    padding: 18px 22px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border-left: 3px solid #FFD700;
+}
+
+.experience-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.experience-header h4 {
+    font-family: 'Orbitron', sans-serif;
+    color: #f18854;
+    font-size: 1.1rem;
+}
+
+.experience-date {
+    color: #FFD700;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.experience-place {
+    color: #cccccc;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+}
+
+.experience-item p:last-child {
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
 /* Section Retromania */
 .retromania {
     padding: 60px 20px;
@@ -880,6 +1069,15 @@ body {
     .presentation-content {
         flex-direction: column;
         text-align: center;
+    }
+
+    .profil-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .experience-header {
+        flex-direction: column;
+        gap: 4px;
     }
 
     .profile-photo {
