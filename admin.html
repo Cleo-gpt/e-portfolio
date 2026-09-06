@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Administration — E-portefolio de Cléo Ana Forclaz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(to bottom, #000000, #0a0a2e, #000000);
+            min-height: 100vh;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .admin-container {
+            width: 100%;
+            max-width: 700px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Écran de connexion */
+        .login-box {
+            max-width: 380px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .login-box label,
+        .admin-category label {
+            display: block;
+            font-size: 0.85rem;
+            color: #FFD700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .login-box input,
+        .admin-category input[type="password"] {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+
+        .login-box input:focus,
+        .admin-category input[type="password"]:focus {
+            outline: none;
+            border-color: #FFD700;
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            border-radius: 999px;
+            background: #FFD700;
+            color: #1a1a1a;
+            border: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .login-error {
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            margin-top: 12px;
+            text-align: center;
+            min-height: 1.2em;
+        }
+
+        /* Panneau admin */
+        .admin-panel {
+            display: none;
+        }
+
+        .admin-panel.visible {
+            display: block;
+        }
+
+        .login-box.hidden {
+            display: none;
+        }
+
+        .admin-category {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .admin-category h2 {
+            font-size: 1.1rem;
+            color: #FFD700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .skill-slider {
+            margin-bottom: 20px;
+        }
+
+        .skill-slider:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-slider-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .skill-slider-label span:last-child {
+            color: #f18854;
+            font-weight: 700;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+            appearance: none;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #FFD700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #FFD700;
+            border: none;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+            cursor: pointer;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 14px;
+            margin-top: 10px;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #FFD700;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+        }
+
+        .save-status {
+            text-align: center;
+            color: #FFD700;
+            font-size: 0.85rem;
+            margin-top: 16px;
+            min-height: 1.2em;
+        }
+
+        .admin-note {
+            font-size: 0.8rem;
+            color: #999999;
+            text-align: center;
+            margin-top: 24px;
+            line-height: 1.6;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            color: #cccccc;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-top: 20px;
+        }
+
+        .back-link:hover {
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Administration — Maîtrise des logiciels</h1>
+
+        <div class="login-box" id="loginBox">
+            <label for="emailInput">Adresse mail</label>
+            <input type="email" id="emailInput" autocomplete="username">
+            <label for="passwordInput">Code</label>
+            <input type="password" id="passwordInput" autocomplete="current-password">
+            <button class="btn" id="loginBtn">Se connecter</button>
+            <p class="login-error" id="loginError"></p>
+        </div>
+
+        <div class="admin-panel" id="adminPanel">
+            <div class="admin-category">
+                <h2>Adobe</h2>
+                <div class="skill-slider" data-skill="adobe-illustrator" data-label="Adobe Illustrator"></div>
+                <div class="skill-slider" data-skill="adobe-photoshop" data-label="Adobe Photoshop"></div>
+                <div class="skill-slider" data-skill="adobe-indesign" data-label="Adobe InDesign"></div>
+            </div>
+
+            <div class="admin-category">
+                <h2>Google</h2>
+                <div class="skill-slider" data-skill="google-slides" data-label="Google Slides"></div>
+                <div class="skill-slider" data-skill="google-sheets" data-label="Google Sheets"></div>
+                <div class="skill-slider" data-skill="google-docs" data-label="Google Docs"></div>
+            </div>
+
+            <div class="admin-category">
+                <h2>Microsoft</h2>
+                <div class="skill-slider" data-skill="microsoft-powerpoint" data-label="Microsoft PowerPoint"></div>
+                <div class="skill-slider" data-skill="microsoft-excel" data-label="Microsoft Excel"></div>
+                <div class="skill-slider" data-skill="microsoft-word" data-label="Microsoft Word"></div>
+            </div>
+
+            <div class="admin-category">
+                <h2>Autres</h2>
+                <div class="skill-slider" data-skill="developpement-web" data-label="Développement Web"></div>
+                <div class="skill-slider" data-skill="procreate" data-label="Procreate"></div>
+            </div>
+
+            <div class="admin-actions">
+                <button class="btn" id="saveBtn">Enregistrer</button>
+                <button class="btn btn-secondary" id="resetBtn">Réinitialiser</button>
+            </div>
+            <p class="save-status" id="saveStatus"></p>
+
+            <p class="admin-note">
+                Ces réglages sont enregistrés sur le serveur et s'appliquent immédiatement
+                à l'E-portefolio pour tous les visiteurs du site.
+            </p>
+
+            <div class="admin-category">
+                <h2>Changer le code de connexion</h2>
+                <label for="newPasswordInput">Nouveau code</label>
+                <input type="password" id="newPasswordInput" autocomplete="new-password">
+                <label for="newPasswordConfirmInput">Confirmer le nouveau code</label>
+                <input type="password" id="newPasswordConfirmInput" autocomplete="new-password">
+                <button class="btn btn-secondary" id="changePasswordBtn">Changer le code</button>
+                <p class="save-status" id="changePasswordStatus"></p>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-link">← Retour à l'E-portefolio</a>
+    </div>
+
+    <script>
+        const API_URL = '/php/skills.php';
+        const SESSION_EMAIL_KEY = 'cleoAdminEmail';
+        const SESSION_PASSWORD_KEY = 'cleoAdminPassword';
+
+        const defaultSkills = {
+            'adobe-illustrator': 8,
+            'adobe-photoshop': 7,
+            'adobe-indesign': 8,
+            'google-slides': 0,
+            'google-sheets': 0,
+            'google-docs': 0,
+            'microsoft-powerpoint': 0,
+            'microsoft-excel': 0,
+            'microsoft-word': 0,
+            'developpement-web': 8,
+            'procreate': 0
+        };
+
+        function getSessionEmail() {
+            return sessionStorage.getItem(SESSION_EMAIL_KEY) || '';
+        }
+
+        function getSessionPassword() {
+            return sessionStorage.getItem(SESSION_PASSWORD_KEY) || '';
+        }
+
+        function fetchSkills() {
+            return fetch(API_URL)
+                .then(function (res) { return res.json(); })
+                .then(function (data) { return Object.assign({}, defaultSkills, data.skills || {}); })
+                .catch(function () { return Object.assign({}, defaultSkills); });
+        }
+
+        function buildSliders(skills) {
+            document.querySelectorAll('.skill-slider').forEach(function (container) {
+                const id = container.dataset.skill;
+                const label = container.dataset.label;
+                const value = skills[id] !== undefined ? skills[id] : 0;
+                container.innerHTML =
+                    '<div class="skill-slider-label"><span>' + label + '</span><span data-value-for="' + id + '">' + value + '/10</span></div>' +
+                    '<input type="range" min="0" max="10" step="1" value="' + value + '" data-input-for="' + id + '">';
+            });
+
+            document.querySelectorAll('[data-input-for]').forEach(function (input) {
+                input.addEventListener('input', function () {
+                    const id = input.dataset.inputFor;
+                    document.querySelector('[data-value-for="' + id + '"]').textContent = input.value + '/10';
+                });
+            });
+        }
+
+        function saveSkills() {
+            const skills = {};
+            document.querySelectorAll('[data-input-for]').forEach(function (input) {
+                skills[input.dataset.inputFor] = Number(input.value);
+            });
+
+            const status = document.getElementById('saveStatus');
+            status.textContent = 'Enregistrement…';
+
+            fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Admin-Email': getSessionEmail(),
+                    'X-Admin-Password': getSessionPassword()
+                },
+                body: JSON.stringify({ skills: skills })
+            })
+                .then(function (res) {
+                    if (!res.ok) throw new Error('save-failed');
+                    return res.json();
+                })
+                .then(function () {
+                    status.textContent = 'Enregistré ✓ — visible immédiatement pour tous les visiteurs.';
+                    setTimeout(function () { status.textContent = ''; }, 4000);
+                })
+                .catch(function () {
+                    status.textContent = 'Erreur lors de l\'enregistrement. Réessaie.';
+                });
+        }
+
+        function resetSkills() {
+            buildSliders(defaultSkills);
+            const status = document.getElementById('saveStatus');
+            status.textContent = 'Valeurs par défaut affichées — clique sur Enregistrer pour les appliquer.';
+            setTimeout(function () { status.textContent = ''; }, 5000);
+        }
+
+        function showAdminPanel() {
+            document.getElementById('loginBox').classList.add('hidden');
+            document.getElementById('adminPanel').classList.add('visible');
+            fetchSkills().then(buildSliders);
+        }
+
+        document.getElementById('loginBtn').addEventListener('click', function () {
+            const email = document.getElementById('emailInput').value.trim();
+            const password = document.getElementById('passwordInput').value;
+            const errorEl = document.getElementById('loginError');
+            errorEl.textContent = '';
+
+            // On vérifie email + code en tentant un enregistrement à blanc
+            // (les valeurs par défaut) : la fonction serveur rejette avec 401
+            // si les identifiants sont incorrects, sans rien modifier côté client.
+            fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Admin-Email': email,
+                    'X-Admin-Password': password
+                },
+                body: JSON.stringify({ skills: {}, __checkOnly: true })
+            })
+                .then(function (res) {
+                    if (res.status === 401) {
+                        errorEl.textContent = 'Email ou code incorrect.';
+                        return;
+                    }
+                    if (!res.ok) {
+                        errorEl.textContent = 'Impossible de vérifier les identifiants. Réessaie.';
+                        return;
+                    }
+                    sessionStorage.setItem(SESSION_EMAIL_KEY, email);
+                    sessionStorage.setItem(SESSION_PASSWORD_KEY, password);
+                    showAdminPanel();
+                })
+                .catch(function () {
+                    errorEl.textContent = 'Impossible de contacter le serveur. Réessaie.';
+                });
+        });
+
+        document.getElementById('emailInput').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') document.getElementById('loginBtn').click();
+        });
+
+        document.getElementById('passwordInput').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') document.getElementById('loginBtn').click();
+        });
+
+        document.getElementById('saveBtn').addEventListener('click', saveSkills);
+        document.getElementById('resetBtn').addEventListener('click', resetSkills);
+
+        document.getElementById('changePasswordBtn').addEventListener('click', function () {
+            const newPassword = document.getElementById('newPasswordInput').value;
+            const confirmPassword = document.getElementById('newPasswordConfirmInput').value;
+            const status = document.getElementById('changePasswordStatus');
+            status.textContent = '';
+
+            if (newPassword.length < 4) {
+                status.textContent = 'Le nouveau code doit contenir au moins 4 caractères.';
+                return;
+            }
+            if (newPassword !== confirmPassword) {
+                status.textContent = 'Les deux codes ne correspondent pas.';
+                return;
+            }
+
+            status.textContent = 'Changement en cours…';
+
+            fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Admin-Email': getSessionEmail(),
+                    'X-Admin-Password': getSessionPassword()
+                },
+                body: JSON.stringify({ __changePassword: true, newPassword: newPassword })
+            })
+                .then(function (res) {
+                    if (!res.ok) throw new Error('change-failed');
+                    return res.json();
+                })
+                .then(function () {
+                    sessionStorage.setItem(SESSION_PASSWORD_KEY, newPassword);
+                    document.getElementById('newPasswordInput').value = '';
+                    document.getElementById('newPasswordConfirmInput').value = '';
+                    status.textContent = 'Code changé ✓ — utilise-le dès la prochaine connexion.';
+                    setTimeout(function () { status.textContent = ''; }, 5000);
+                })
+                .catch(function () {
+                    status.textContent = 'Erreur lors du changement de code. Réessaie.';
+                });
+        });
+
+        // Reste connectée pour la durée de l'onglet (identifiants non persistés au-delà)
+        if (getSessionEmail() && getSessionPassword()) {
+            showAdminPanel();
+        }
+    </script>
+</body>
+</html>

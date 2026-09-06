@@ -1,0 +1,10 @@
+{
+  "name": "cleo-forclaz-e-portefolio",
+  "private": true,
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^27.5.0"
+  }
+}

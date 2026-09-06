@@ -14,8 +14,22 @@
         <div class="stars"></div>
         <div class="stars2"></div>
         <div class="stars3"></div>
+        <button class="login-trigger" id="loginTriggerBtn">Login</button>
         <h1>Le E-portefolio de Cléo Ana Forclaz</h1>
     </header>
+
+    <div class="login-modal-overlay" id="loginModalOverlay" hidden>
+        <div class="login-modal">
+            <button class="login-modal-close" id="loginModalClose" aria-label="Fermer">&times;</button>
+            <h2>Log in</h2>
+            <label for="loginModalEmail">Adresse mail</label>
+            <input type="email" id="loginModalEmail" autocomplete="username">
+            <label for="loginModalPassword">Code</label>
+            <input type="password" id="loginModalPassword" autocomplete="current-password">
+            <button class="btn login-modal-submit" id="loginModalSubmit">Se connecter</button>
+            <p class="login-modal-error" id="loginModalError"></p>
+        </div>
+    </div>
 
     <section class="presentation starry-section">
         <div class="stars"></div>
@@ -40,21 +54,81 @@
             <h2>Profil &amp; Compétences</h2>
 
             <div class="profil-grid">
-                <div class="profil-block">
-                    <h3 class="profil-subtitle">Qui suis-je ?</h3>
-                    <ul class="profil-traits">
-                        <li>Créative</li>
-                        <li>Persévérante</li>
-                        <li>Optimiste</li>
-                        <li>Patiente</li>
-                        <li>Soigneuse</li>
-                        <li>Impulsive</li>
-                        <li>Débrouillarde</li>
-                        <li>Confiante</li>
-                    </ul>
+                <div class="profil-card profil-card-wide">
+                    <h3 class="profil-subtitle">Formation</h3>
+                    <div class="experience-timeline experience-timeline-compact">
+                        <div class="experience-item">
+                            <h4>Centre professionnel du Nord vaudois (CPNV)</h4>
+                            <p class="experience-place">CFC Médiamaticienne (en cours) · 2023 – 2027</p>
+                        </div>
+                    </div>
+
+                    <h3 class="profil-subtitle profil-subtitle-inner">Expérience professionnelle</h3>
+                    <div class="experience-timeline">
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <h4>ASP PolyManga</h4>
+                                <span class="experience-date">Avril 2026 · 1 mois</span>
+                            </div>
+                            <p class="experience-place">Polymanga · CDD · Lausanne, Vaud, Suisse · Sur site</p>
+                            <p>Mise en place des espaces de restauration, distribution des repas, accueil des participants et soutien aux équipes en cuisine.</p>
+                        </div>
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <h4>ASP PolyManga</h4>
+                                <span class="experience-date">Avril 2025 · 1 mois</span>
+                            </div>
+                            <p class="experience-place">Polymanga · CDD · Béaulieu Lausanne · Sur site</p>
+                            <p>Accueil des visiteurs, mise en œuvre des procédures de sécurité du théâtre, gestion des effets personnels des spectateurs avec remise en main propre à la fin du spectacle.</p>
+                        </div>
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <h4>Scanner des dossiers</h4>
+                                <span class="experience-date">Janvier 2025 - Mars 2025 · 3 mois</span>
+                            </div>
+                            <p class="experience-place">Cabinet de cardiologie Andrei Forclaz · CDD · Yverdon-les-Bains, Vaud, Suisse · Sur site</p>
+                            <p>La tâche consistait à scanner les dossiers médicaux.</p>
+                        </div>
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <h4>Stagiaire de travail chez Bankai Adventure</h4>
+                                <span class="experience-date">Février 2025 · 1 mois</span>
+                            </div>
+                            <p class="experience-place">Bankai Adventures · Stage · Suisse romande, Vaud, Suisse · Sur site</p>
+                            <p>Stage de deux jours au magasin Bankai Adventures.</p>
+                        </div>
+                        <div class="experience-item experience-item-extra" hidden>
+                            <div class="experience-header">
+                                <h4>Production de vidéo</h4>
+                                <span class="experience-date">Octobre 2024 · 1 mois</span>
+                            </div>
+                            <p class="experience-place">Salon des métiers · Stage · Lausanne, Vaud, Suisse · Sur site</p>
+                            <p>Réalisation de vidéos pour le Salon des métiers.</p>
+                        </div>
+                        <div class="experience-item experience-item-extra" hidden>
+                            <div class="experience-header">
+                                <h4>Stagiaire ergothérapie</h4>
+                                <span class="experience-date">Janvier 2022 · 1 mois</span>
+                            </div>
+                            <p class="experience-place">EXPLORiT · Stage · Suisse romande, Vaud, Suisse · Sur site</p>
+                            <p>Stagiaire durant un jour, le 25/01/2022 en ergothérapie.</p>
+                        </div>
+                        <div class="experience-item experience-item-extra" hidden>
+                            <div class="experience-header">
+                                <h4>Stagiaire d'observation travailleur social de proximité</h4>
+                                <span class="experience-date">Janvier 2022 · 1 mois</span>
+                            </div>
+                            <p class="experience-place">Commune d'Yverdon-les-Bains · Stage · Yverdon-les-Bains, Vaud, Suisse · Sur site</p>
+                            <p>Observation du métier de travailleur social durant 3 jours, aux côtés de Nathalie Rapin et de ses collègues.</p>
+                        </div>
+                    </div>
+
+                    <div class="experience-more">
+                        <button class="experience-more-btn" id="experienceMoreBtn">Voir plus</button>
+                    </div>
                 </div>
 
-                <div class="profil-block">
+                <div class="profil-card">
                     <h3 class="profil-subtitle">Langues</h3>
                     <ul class="profil-langues">
                         <li><span>Français</span><em>Langue maternelle</em></li>
@@ -65,92 +139,149 @@
             </div>
 
             <h3 class="profil-subtitle profil-subtitle-center">Maîtrise des logiciels</h3>
+            <div class="tools-categories">
+                <button class="tools-category active" data-skills-category="adobe">Adobe</button>
+                <button class="tools-category" data-skills-category="google">Google</button>
+                <button class="tools-category" data-skills-category="microsoft">Microsoft</button>
+                <button class="tools-category" data-skills-category="autres">Autres</button>
+            </div>
             <div class="skill-bars">
-                <div class="skill-bar">
-                    <div class="skill-bar-label">
-                        <span>Adobe Illustrator</span>
-                        <span>8/10</span>
+                <div class="skill-bars-panel" data-skills-panel="adobe">
+                    <div class="skill-bar">
+                        <div class="skill-bar-label">
+                            <span>Adobe Illustrator</span>
+                            <span class="skill-bar-value" data-skill="adobe-illustrator">8/10</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-skill-fill="adobe-illustrator" style="width: 80%;"></div>
+                        </div>
                     </div>
-                    <div class="skill-bar-track">
-                        <div class="skill-bar-fill" style="width: 80%;"></div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-label">
+                            <span>Adobe Photoshop</span>
+                            <span class="skill-bar-value" data-skill="adobe-photoshop">7/10</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-skill-fill="adobe-photoshop" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-label">
+                            <span>Adobe InDesign</span>
+                            <span class="skill-bar-value" data-skill="adobe-indesign">8/10</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-skill-fill="adobe-indesign" style="width: 80%;"></div>
+                        </div>
                     </div>
                 </div>
-                <div class="skill-bar">
-                    <div class="skill-bar-label">
-                        <span>Adobe Photoshop</span>
-                        <span>7/10</span>
+                <div class="skill-bars-panel" data-skills-panel="google" hidden>
+                    <div class="skill-bar">
+                        <div class="skill-bar-label">
+                            <span>Google Slides</span>
+                            <span class="skill-bar-value" data-skill="google-slides">0/10</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-skill-fill="google-slides" style="width: 0%;"></div>
+                        </div>
                     </div>
-                    <div class="skill-bar-track">
-                        <div class="skill-bar-fill" style="width: 70%;"></div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-label">
+                            <span>Google Sheets</span>
+                            <span class="skill-bar-value" data-skill="google-sheets">0/10</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-skill-fill="google-sheets" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-label">
+                            <span>Google Docs</span>
+                            <span class="skill-bar-value" data-skill="google-docs">0/10</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-skill-fill="google-docs" style="width: 0%;"></div>
+                        </div>
                     </div>
                 </div>
-                <div class="skill-bar">
-                    <div class="skill-bar-label">
-                        <span>Adobe InDesign</span>
-                        <span>8/10</span>
+                <div class="skill-bars-panel" data-skills-panel="microsoft" hidden>
+                    <div class="skill-bar">
+                        <div class="skill-bar-label">
+                            <span>Microsoft PowerPoint</span>
+                            <span class="skill-bar-value" data-skill="microsoft-powerpoint">0/10</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-skill-fill="microsoft-powerpoint" style="width: 0%;"></div>
+                        </div>
                     </div>
-                    <div class="skill-bar-track">
-                        <div class="skill-bar-fill" style="width: 80%;"></div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-label">
+                            <span>Microsoft Excel</span>
+                            <span class="skill-bar-value" data-skill="microsoft-excel">0/10</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-skill-fill="microsoft-excel" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-label">
+                            <span>Microsoft Word</span>
+                            <span class="skill-bar-value" data-skill="microsoft-word">0/10</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-skill-fill="microsoft-word" style="width: 0%;"></div>
+                        </div>
                     </div>
                 </div>
-                <div class="skill-bar">
-                    <div class="skill-bar-label">
-                        <span>Développement Web</span>
-                        <span>8/10</span>
+                <div class="skill-bars-panel" data-skills-panel="autres" hidden>
+                    <div class="skill-bar">
+                        <div class="skill-bar-label">
+                            <span>Développement Web</span>
+                            <span class="skill-bar-value" data-skill="developpement-web">8/10</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-skill-fill="developpement-web" style="width: 80%;"></div>
+                        </div>
                     </div>
-                    <div class="skill-bar-track">
-                        <div class="skill-bar-fill" style="width: 80%;"></div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-label">
+                            <span>Procreate</span>
+                            <span class="skill-bar-value" data-skill="procreate">0/10</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-skill-fill="procreate" style="width: 0%;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <h3 class="profil-subtitle profil-subtitle-center">Outils &amp; logiciels</h3>
-            <div class="tools-grid">
-                <span class="tool-chip">Google Slides</span>
-                <span class="tool-chip">Google Sheets</span>
-                <span class="tool-chip">Google Docs</span>
-                <span class="tool-chip">Microsoft PowerPoint</span>
-                <span class="tool-chip">Microsoft Excel</span>
-                <span class="tool-chip">Microsoft Word</span>
-                <span class="tool-chip">Adobe InDesign</span>
-                <span class="tool-chip">Adobe Illustrator</span>
-                <span class="tool-chip">Adobe Photoshop</span>
-                <span class="tool-chip">After Effects</span>
+            <div class="tools-categories">
+                <button class="tools-category active" data-tools-category="google">Google</button>
+                <button class="tools-category" data-tools-category="microsoft">Microsoft</button>
+                <button class="tools-category" data-tools-category="adobe">Adobe</button>
+                <button class="tools-category" data-tools-category="autres">Autres</button>
             </div>
-
-            <h3 class="profil-subtitle profil-subtitle-center">Expérience professionnelle</h3>
-            <div class="experience-timeline">
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h4>ASP PolyManga</h4>
-                        <span class="experience-date">Avril 2026 · 1 mois</span>
-                    </div>
-                    <p class="experience-place">Polymanga · Lausanne, Vaud, Suisse · Sur site</p>
-                    <p>Participation à la mise en place des espaces de restauration et à la distribution des produits.</p>
+            <div class="tools-grid">
+                <div class="tools-panel" data-tools-panel="google">
+                    <span class="tool-chip">Google Slides</span>
+                    <span class="tool-chip">Google Sheets</span>
+                    <span class="tool-chip">Google Docs</span>
                 </div>
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h4>ASP PolyManga</h4>
-                        <span class="experience-date">Avril 2025 · 1 mois</span>
-                    </div>
-                    <p class="experience-place">Béaulieu Lausanne, Vaud, Suisse</p>
-                    <p>Accueil des visiteurs, mise en oeuvre des procédures de sécurité du théâtre et gestion des files d'attente.</p>
+                <div class="tools-panel" data-tools-panel="microsoft" hidden>
+                    <span class="tool-chip">Microsoft PowerPoint</span>
+                    <span class="tool-chip">Microsoft Excel</span>
+                    <span class="tool-chip">Microsoft Word</span>
                 </div>
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h4>Scanner de dossiers</h4>
-                        <span class="experience-date">Janvier 2025 - Mars 2025 · 3 mois</span>
-                    </div>
-                    <p class="experience-place">Cabinet de cardiologie Andrei Forclaz · CDD · Yverdon-les-Bains, Vaud, Suisse · Sur site</p>
-                    <p>Numérisation et classement des dossiers médicaux.</p>
+                <div class="tools-panel" data-tools-panel="adobe" hidden>
+                    <span class="tool-chip">Adobe InDesign</span>
+                    <span class="tool-chip">Adobe Illustrator</span>
+                    <span class="tool-chip">Adobe Photoshop</span>
+                    <span class="tool-chip">Adobe Premiere Pro</span>
+                    <span class="tool-chip">After Effects</span>
                 </div>
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h4>Stagiaire de travail</h4>
-                        <span class="experience-date">Février 2025 · 1 mois</span>
-                    </div>
-                    <p class="experience-place">Bankai Adventure · Vaud, Suisse · Sur site</p>
-                    <p>Stage de travail pendant deux jours, du 21/02/2025 au 22/02/2025.</p>
+                <div class="tools-panel" data-tools-panel="autres" hidden>
+                    <span class="tool-chip">Procreate</span>
                 </div>
             </div>
         </div>
@@ -268,127 +399,398 @@
         <div class="stars3"></div>
         <div class="cpnv-content">
             <h2>CPNV-Médiamatique</h2>
-            <h3 class="cpnv-category">Design</h3>
-            <div class="cpnv-project">
-                <h4>Duck n'go — Identité visuelle</h4>
-                <p>
-                    Projet pédagogique de création d'une identité de marque pour un fast-food
-                    engagé autour du canard : mascotte Bucky, charte graphique complète
-                    (logo, typographies, palette chromatique) et set administratif
-                    (carte de visite, enveloppe, courrier).
-                </p>
-                <div class="cpnv-gallery">
-                    <a href="Images/Duck n'go logo.png" target="_blank" class="cpnv-gallery-item">
-                        <img src="Images/Duck n'go logo.png" alt="Logo Duck n'go avec la mascotte Bucky">
-                    </a>
-                    <a href="Images/Duck n'go logo texte.png" target="_blank" class="cpnv-gallery-item">
-                        <img src="Images/Duck n'go logo texte.png" alt="Logo Duck n'go avec le texte Duck n'go">
-                    </a>
-                    <a href="Images/Duck n'go carte de visite.jpg" target="_blank" class="cpnv-gallery-item">
-                        <img src="Images/Duck n'go carte de visite.jpg" alt="Carte de visite Duck n'go">
-                    </a>
-                </div>
-                <div class="cpnv-links">
-                    <a href="Documents/Duck n'go charte graphique.pdf" target="_blank" class="cpnv-doc-link">
-                        Voir la charte graphique (PDF)
-                    </a>
-                    <a href="Documents/Duck n'go carte de visite.pdf" target="_blank" class="cpnv-doc-link">
-                        Voir la carte de visite (PDF)
-                    </a>
-                </div>
+
+            <div class="cpnv-filters">
+                <button class="cpnv-filter-btn active" data-filter="tous">Tous</button>
+                <button class="cpnv-filter-btn" data-filter="design">Design</button>
+                <button class="cpnv-filter-btn" data-filter="multimedias">Multimédias</button>
+                <button class="cpnv-filter-btn" data-filter="marketing">Marketing</button>
             </div>
 
-            <h3 class="cpnv-category">Multimédias</h3>
-            <div class="cpnv-project">
-                <h4>Vidéos</h4>
-                <div class="cpnv-videos">
-                    <a class="cpnv-video-card" href="https://youtu.be/VHWPITKgmTo" target="_blank">
-                        <div class="cpnv-video-thumb">
-                            <img src="https://img.youtube.com/vi/VHWPITKgmTo/hqdefault.jpg" alt="Famille recomposée">
-                            <div class="play-overlay">
-                                <svg viewBox="0 0 24 24" fill="white" width="50" height="50">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                            </div>
+            <div class="cpnv-grid">
+                <button class="cpnv-card" data-category="design" data-project="duck-n-go">
+                    <div class="cpnv-card-image">
+                        <img src="Images/Duck n'go logo texte.png" alt="Logo Duck n'go">
+                    </div>
+                    <div class="cpnv-card-info">
+                        <h3 class="cpnv-card-title">Duck n'go — Identité visuelle</h3>
+                        <p class="cpnv-card-desc">Création d'une identité de marque complète pour un fast-food engagé autour du canard.</p>
+                        <div class="cpnv-card-footer">
+                            <span class="cpnv-card-badge">Design</span>
+                            <span class="cpnv-card-link">En savoir plus →</span>
                         </div>
-                        <p class="cpnv-video-title">Famille recomposée</p>
-                    </a>
-                    <a class="cpnv-video-card" href="https://youtu.be/at5eeLY0Xyw" target="_blank">
-                        <div class="cpnv-video-thumb">
-                            <img src="https://img.youtube.com/vi/at5eeLY0Xyw/hqdefault.jpg" alt="Vidéo CPNV 2">
-                            <div class="play-overlay">
-                                <svg viewBox="0 0 24 24" fill="white" width="50" height="50">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                            </div>
+                    </div>
+                </button>
+
+                <button class="cpnv-card" data-category="multimedias" data-project="videos">
+                    <div class="cpnv-card-image">
+                        <img src="https://img.youtube.com/vi/VHWPITKgmTo/hqdefault.jpg" alt="Vidéos CPNV">
+                    </div>
+                    <div class="cpnv-card-info">
+                        <h3 class="cpnv-card-title">Vidéos</h3>
+                        <p class="cpnv-card-desc">Quatre réalisations vidéo : fiction, tutoriel technique et reportage d'événement.</p>
+                        <div class="cpnv-card-footer">
+                            <span class="cpnv-card-badge">Multimédias</span>
+                            <span class="cpnv-card-link">En savoir plus →</span>
                         </div>
-                        <p class="cpnv-video-title">Première Pro</p>
-                    </a>
-                    <a class="cpnv-video-card" href="https://youtu.be/AxhW9_Kfvwc" target="_blank">
-                        <div class="cpnv-video-thumb">
-                            <img src="https://img.youtube.com/vi/AxhW9_Kfvwc/hqdefault.jpg" alt="Femme Fragile Violences Conjugales">
-                            <div class="play-overlay">
-                                <svg viewBox="0 0 24 24" fill="white" width="50" height="50">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                            </div>
+                    </div>
+                </button>
+
+                <button class="cpnv-card" data-category="marketing" data-project="sleepy-bear">
+                    <div class="cpnv-card-image">
+                        <img src="Images/Sleepy Bear Coffee couverture.png" alt="Sleepy Bear Coffee">
+                    </div>
+                    <div class="cpnv-card-info">
+                        <h3 class="cpnv-card-title">Sleepy Bear Coffee</h3>
+                        <p class="cpnv-card-desc">Stratégie marketing complète pour un café-espace de coworking à Lausanne.</p>
+                        <div class="cpnv-card-footer">
+                            <span class="cpnv-card-badge">Marketing</span>
+                            <span class="cpnv-card-link">En savoir plus →</span>
                         </div>
-                        <p class="cpnv-video-title">Femme Fragile Violences Conjugales</p>
-                    </a>
-                    <a class="cpnv-video-card" href="https://youtube.com/shorts/Bjy2dsa-m3M" target="_blank">
-                        <div class="cpnv-video-thumb cpnv-video-short">
-                            <img src="https://img.youtube.com/vi/Bjy2dsa-m3M/hqdefault.jpg" alt="Short CPNV 4">
-                            <div class="play-overlay">
-                                <svg viewBox="0 0 24 24" fill="white" width="50" height="50">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <p class="cpnv-video-title">Le Cinéma Open Air d'Estavayer le Lac</p>
-                    </a>
-                </div>
+                    </div>
+                </button>
             </div>
 
-            <h3 class="cpnv-category">Marketing</h3>
-            <div class="cpnv-project">
-                <h4>Sleepy Bear Coffee</h4>
-                <p>
-                    Projet de stratégie marketing pour Sleepy Bear Coffee, café-espace de
-                    coworking à Lausanne : étude de marché, focus group, persona, mix marketing
-                    (4P), sales funnel, campagnes Ad Words et Meta Ads, et plan de communication.
-                </p>
-                <div class="cpnv-media-row">
-                    <a href="Documents/Sleepy Bear Coffee présentation.pdf" target="_blank" class="cpnv-gallery-item">
-                        <img src="Images/Sleepy Bear Coffee couverture.png" alt="Couverture de la présentation Sleepy Bear Coffee">
-                    </a>
-                    <a class="cpnv-video-card" href="https://youtu.be/IXso1eFylj8" target="_blank">
-                        <div class="cpnv-video-thumb">
-                            <img src="https://img.youtube.com/vi/IXso1eFylj8/hqdefault.jpg" alt="Audio marketing Sleepy Bear Coffee mixage final 2">
-                            <div class="play-overlay">
-                                <svg viewBox="0 0 24 24" fill="white" width="50" height="50">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <p class="cpnv-video-title">Audio marketing Sleepy Bear Coffee mixage final 2</p>
-                    </a>
+            <div class="cpnv-detail">
+                <p class="cpnv-detail-hint" id="cpnvDetailHint">Sélectionnez un projet ci-dessus pour voir le détail.</p>
+
+                <div class="cpnv-project" data-project-detail="duck-n-go" hidden>
+                    <h4>Duck n'go — Identité visuelle</h4>
+                    <p>
+                        Projet pédagogique de création d'une identité de marque pour un fast-food
+                        engagé autour du canard : mascotte Bucky, charte graphique complète
+                        (logo, typographies, palette chromatique) et set administratif
+                        (carte de visite, enveloppe, courrier).
+                    </p>
+                    <div class="cpnv-gallery">
+                        <a href="Images/Duck n'go logo.png" target="_blank" class="cpnv-gallery-item">
+                            <img src="Images/Duck n'go logo.png" alt="Logo Duck n'go avec la mascotte Bucky">
+                        </a>
+                        <a href="Images/Duck n'go logo texte.png" target="_blank" class="cpnv-gallery-item">
+                            <img src="Images/Duck n'go logo texte.png" alt="Logo Duck n'go avec le texte Duck n'go">
+                        </a>
+                        <a href="Images/Duck n'go carte de visite.jpg" target="_blank" class="cpnv-gallery-item">
+                            <img src="Images/Duck n'go carte de visite.jpg" alt="Carte de visite Duck n'go">
+                        </a>
+                    </div>
+                    <div class="cpnv-links">
+                        <a href="Documents/Duck n'go charte graphique.pdf" target="_blank" class="cpnv-doc-link">
+                            Voir la charte graphique (PDF)
+                        </a>
+                        <a href="Documents/Duck n'go carte de visite.pdf" target="_blank" class="cpnv-doc-link">
+                            Voir la carte de visite (PDF)
+                        </a>
+                    </div>
                 </div>
-                <div class="cpnv-links">
-                    <a href="Documents/Sleepy Bear Coffee présentation.pdf" target="_blank" class="cpnv-doc-link">
-                        Voir la présentation complète (PDF)
-                    </a>
+
+                <div class="cpnv-project" data-project-detail="videos" hidden>
+                    <h4>Vidéos</h4>
+                    <div class="cpnv-videos">
+                        <a class="cpnv-video-card" href="https://youtu.be/VHWPITKgmTo" target="_blank">
+                            <div class="cpnv-video-thumb">
+                                <img src="https://img.youtube.com/vi/VHWPITKgmTo/hqdefault.jpg" alt="Famille recomposée">
+                                <div class="play-overlay">
+                                    <svg viewBox="0 0 24 24" fill="white" width="50" height="50">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="cpnv-video-title">Famille recomposée</p>
+                        </a>
+                        <a class="cpnv-video-card" href="https://youtu.be/at5eeLY0Xyw" target="_blank">
+                            <div class="cpnv-video-thumb">
+                                <img src="https://img.youtube.com/vi/at5eeLY0Xyw/hqdefault.jpg" alt="Vidéo CPNV 2">
+                                <div class="play-overlay">
+                                    <svg viewBox="0 0 24 24" fill="white" width="50" height="50">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="cpnv-video-title">Première Pro</p>
+                        </a>
+                        <a class="cpnv-video-card" href="https://youtu.be/AxhW9_Kfvwc" target="_blank">
+                            <div class="cpnv-video-thumb">
+                                <img src="https://img.youtube.com/vi/AxhW9_Kfvwc/hqdefault.jpg" alt="Femme Fragile Violences Conjugales">
+                                <div class="play-overlay">
+                                    <svg viewBox="0 0 24 24" fill="white" width="50" height="50">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="cpnv-video-title">Femme Fragile Violences Conjugales</p>
+                        </a>
+                        <a class="cpnv-video-card" href="https://youtube.com/shorts/Bjy2dsa-m3M" target="_blank">
+                            <div class="cpnv-video-thumb cpnv-video-short">
+                                <img src="https://img.youtube.com/vi/Bjy2dsa-m3M/hqdefault.jpg" alt="Short CPNV 4">
+                                <div class="play-overlay">
+                                    <svg viewBox="0 0 24 24" fill="white" width="50" height="50">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="cpnv-video-title">Le Cinéma Open Air d'Estavayer le Lac</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="cpnv-project" data-project-detail="sleepy-bear" hidden>
+                    <h4>Sleepy Bear Coffee</h4>
+                    <p>
+                        Projet de stratégie marketing pour Sleepy Bear Coffee, café-espace de
+                        coworking à Lausanne : étude de marché, focus group, persona, mix marketing
+                        (4P), sales funnel, campagnes Ad Words et Meta Ads, et plan de communication.
+                    </p>
+                    <div class="cpnv-media-row">
+                        <a href="Documents/Sleepy Bear Coffee présentation.pdf" target="_blank" class="cpnv-gallery-item">
+                            <img src="Images/Sleepy Bear Coffee couverture.png" alt="Couverture de la présentation Sleepy Bear Coffee">
+                        </a>
+                        <a class="cpnv-video-card" href="https://youtu.be/IXso1eFylj8" target="_blank">
+                            <div class="cpnv-video-thumb">
+                                <img src="https://img.youtube.com/vi/IXso1eFylj8/hqdefault.jpg" alt="Audio marketing Sleepy Bear Coffee mixage final 2">
+                                <div class="play-overlay">
+                                    <svg viewBox="0 0 24 24" fill="white" width="50" height="50">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="cpnv-video-title">Audio marketing Sleepy Bear Coffee mixage final 2</p>
+                        </a>
+                    </div>
+                    <div class="cpnv-links">
+                        <a href="Documents/Sleepy Bear Coffee présentation.pdf" target="_blank" class="cpnv-doc-link">
+                            Voir la présentation complète (PDF)
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="site-footer">
-        <p class="footer-name">Cléo Ana Forclaz</p>
-        <p><a href="mailto:cleoforclaz2007@gmail.com">cleoforclaz2007@gmail.com</a></p>
-        <p><a href="tel:0764391272">076 439 12 72</a></p>
+    <footer class="site-footer starry-section">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+        <div class="footer-content">
+            <p class="footer-name">Cléo Ana Forclaz</p>
+            <div class="footer-divider"></div>
+            <p class="footer-tel"><a href="tel:0764391272">076 439 12 72</a></p>
+
+            <div class="footer-buttons">
+                <a href="https://www.instagram.com/le_mini_portefolio_de_cleo/" target="_blank" rel="noopener" class="footer-btn footer-btn-instagram">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.256 1.216.6 1.772 1.153a4.908 4.908 0 011.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 01-1.153 1.772 4.915 4.915 0 01-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 01-1.772-1.153 4.904 4.904 0 01-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.065.217-1.79.465-2.428a4.88 4.88 0 011.153-1.772A4.897 4.897 0 015.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm0 8.25a3.25 3.25 0 110-6.5 3.25 3.25 0 010 6.5zm5.25-9.75a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z"/>
+                    </svg>
+                    <span>Portfolio</span>
+                </a>
+                <a href="https://www.instagram.com/la_lanterne_de_yuna/" target="_blank" rel="noopener" class="footer-btn footer-btn-instagram">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.256 1.216.6 1.772 1.153a4.908 4.908 0 011.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 01-1.153 1.772 4.915 4.915 0 01-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 01-1.772-1.153 4.904 4.904 0 01-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.065.217-1.79.465-2.428a4.88 4.88 0 011.153-1.772A4.897 4.897 0 015.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm0 8.25a3.25 3.25 0 110-6.5 3.25 3.25 0 010 6.5zm5.25-9.75a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z"/>
+                    </svg>
+                    <span>La Lanterne de Yuna</span>
+                </a>
+                <a href="https://www.linkedin.com/in/cleo-forclaz/" target="_blank" rel="noopener" class="footer-btn footer-btn-linkedin">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.11 20.45H3.56V9h3.55v11.45z"/>
+                    </svg>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="mailto:cleoforclaz2007@gmail.com" class="footer-btn footer-btn-mail">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                        <path d="M2 7l10 6 10-6"/>
+                    </svg>
+                    <span>cleoforclaz2007@gmail.com</span>
+                </a>
+            </div>
+        </div>
     </footer>
 
     <script>
+        // Pop up de connexion admin : vérifie le mot de passe via la même
+        // fonction Netlify que admin.html, puis redirige vers admin.html
+        // (déjà authentifiée pour la durée de l'onglet).
+        document.addEventListener('DOMContentLoaded', function () {
+            const SESSION_EMAIL_KEY = 'cleoAdminEmail';
+            const SESSION_PASSWORD_KEY = 'cleoAdminPassword';
+            const API_URL = '/php/skills.php';
+
+            const triggerBtn = document.getElementById('loginTriggerBtn');
+            const overlay = document.getElementById('loginModalOverlay');
+            const closeBtn = document.getElementById('loginModalClose');
+            const emailInput = document.getElementById('loginModalEmail');
+            const passwordInput = document.getElementById('loginModalPassword');
+            const submitBtn = document.getElementById('loginModalSubmit');
+            const errorEl = document.getElementById('loginModalError');
+
+            function openModal() {
+                overlay.hidden = false;
+                errorEl.textContent = '';
+                emailInput.value = '';
+                passwordInput.value = '';
+                emailInput.focus();
+            }
+
+            function closeModal() {
+                overlay.hidden = true;
+            }
+
+            function attemptLogin() {
+                const email = emailInput.value.trim();
+                const password = passwordInput.value;
+                errorEl.textContent = '';
+                submitBtn.disabled = true;
+
+                fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Admin-Email': email,
+                        'X-Admin-Password': password
+                    },
+                    body: JSON.stringify({ skills: {}, __checkOnly: true })
+                })
+                    .then(function (res) {
+                        submitBtn.disabled = false;
+                        if (res.status === 401) {
+                            errorEl.textContent = 'Email ou code incorrect.';
+                            return;
+                        }
+                        if (!res.ok) {
+                            errorEl.textContent = 'Impossible de vérifier les identifiants. Réessaie.';
+                            return;
+                        }
+                        sessionStorage.setItem(SESSION_EMAIL_KEY, email);
+                        sessionStorage.setItem(SESSION_PASSWORD_KEY, password);
+                        window.location.href = 'admin.html';
+                    })
+                    .catch(function () {
+                        submitBtn.disabled = false;
+                        errorEl.textContent = 'Impossible de contacter le serveur. Réessaie.';
+                    });
+            }
+
+            triggerBtn.addEventListener('click', openModal);
+            closeBtn.addEventListener('click', closeModal);
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) closeModal();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && !overlay.hidden) closeModal();
+            });
+            submitBtn.addEventListener('click', attemptLogin);
+            emailInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') attemptLogin();
+            });
+            passwordInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') attemptLogin();
+            });
+        });
+
+        // Charge les niveaux de maîtrise des logiciels depuis le serveur (partagé
+        // avec tous les visiteurs, mis à jour depuis la page admin.html).
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/.netlify/functions/skills')
+                .then(function (res) { return res.json(); })
+                .then(function (data) {
+                    const skills = data.skills || {};
+                    Object.keys(skills).forEach(function (skillId) {
+                        const level = Math.max(0, Math.min(10, Number(skills[skillId]) || 0));
+                        const valueEl = document.querySelector('[data-skill="' + skillId + '"]');
+                        const fillEl = document.querySelector('[data-skill-fill="' + skillId + '"]');
+                        if (valueEl) valueEl.textContent = level + '/10';
+                        if (fillEl) fillEl.style.width = (level * 10) + '%';
+                    });
+                })
+                .catch(function () {
+                    // Hors ligne ou fonction indisponible : on garde les valeurs par défaut du HTML.
+                });
+        });
+
+        // Outils & logiciels : afficher les logiciels de la catégorie sélectionnée
+        document.addEventListener('DOMContentLoaded', function () {
+            const toolsButtons = document.querySelectorAll('.tools-category[data-tools-category]');
+            const toolsPanels = document.querySelectorAll('.tools-panel');
+
+            toolsButtons.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    toolsButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const category = btn.dataset.toolsCategory;
+                    toolsPanels.forEach(panel => {
+                        panel.hidden = panel.dataset.toolsPanel !== category;
+                    });
+                });
+            });
+        });
+
+        // Maîtrise des logiciels : afficher les barres de la catégorie sélectionnée
+        document.addEventListener('DOMContentLoaded', function () {
+            const skillsButtons = document.querySelectorAll('.tools-category[data-skills-category]');
+            const skillsPanels = document.querySelectorAll('.skill-bars-panel');
+
+            skillsButtons.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    skillsButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const category = btn.dataset.skillsCategory;
+                    skillsPanels.forEach(panel => {
+                        panel.hidden = panel.dataset.skillsPanel !== category;
+                    });
+                });
+            });
+        });
+
+        // Expérience professionnelle : afficher/masquer les entrées supplémentaires
+        document.addEventListener('DOMContentLoaded', function () {
+            const moreBtn = document.getElementById('experienceMoreBtn');
+            const extraItems = document.querySelectorAll('.experience-item-extra');
+
+            if (moreBtn) {
+                moreBtn.addEventListener('click', function () {
+                    const isHidden = extraItems[0].hidden;
+                    extraItems.forEach(item => { item.hidden = !isHidden; });
+                    moreBtn.textContent = isHidden ? 'Voir moins' : 'Voir plus';
+                });
+            }
+        });
+
+        // Grille de projets CPNV : filtres par catégorie + affichage du détail au clic
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterButtons = document.querySelectorAll('.cpnv-filter-btn');
+            const cards = document.querySelectorAll('.cpnv-card');
+            const details = document.querySelectorAll('.cpnv-project[data-project-detail]');
+            const detailHint = document.getElementById('cpnvDetailHint');
+
+            function showDetail(projectId) {
+                if (detailHint) detailHint.hidden = true;
+                details.forEach(detail => {
+                    detail.hidden = detail.dataset.projectDetail !== projectId;
+                });
+                cards.forEach(card => {
+                    card.classList.toggle('active', card.dataset.project === projectId);
+                });
+            }
+
+            cards.forEach(card => {
+                card.addEventListener('click', function () {
+                    showDetail(card.dataset.project);
+                    document.querySelector('.cpnv-detail').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const filter = btn.dataset.filter;
+
+                    cards.forEach(card => {
+                        card.style.display = (filter === 'tous' || card.dataset.category === filter) ? '' : 'none';
+                    });
+                });
+            });
+        });
+
         let currentSlide = 0;
         const totalSlides = 5;
         let gearRotation = 0;
@@ -510,7 +912,7 @@
 
             showMessage("Chargement des publications…");
 
-            fetch('/.netlify/functions/instagram-posts')
+            fetch('/php/instagram-posts.php')
                 .then(res => res.json().then(data => ({ ok: res.ok, data })))
                 .then(({ ok, data }) => {
                     if (!ok || !data.posts || data.posts.length === 0) {

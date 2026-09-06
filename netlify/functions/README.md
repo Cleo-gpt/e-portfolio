@@ -73,3 +73,87 @@ chargement de page — plus besoin de mettre à jour un tableau à la main.
 - Ne commite jamais `IG_ACCESS_TOKEN` dans le code ou un fichier versionné.
 - Si ce token a été partagé accidentellement quelque part, régénère-le
   immédiatement depuis le Graph API Explorer.
+
+---
+
+# Administration — Maîtrise des logiciels
+
+La fonction `skills.js` stocke les niveaux affichés dans la section
+« Maîtrise des logiciels » de l'E-portefolio, dans un store **Netlify
+Blobs** partagé par tous les visiteurs du site. La page `admin.html`
+permet de modifier ces niveaux avec des curseurs, protégée par mot de
+passe.
+
+## Configurer le mot de passe admin
+
+1. Sur Netlify : **Site settings → Environment variables**.
+2. Ajoute une variable `ADMIN_PASSWORD` = le mot de passe de ton choix.
+3. Redéploie le site.
+
+Sans cette variable configurée, la page admin refuse toute modification
+(l'API renvoie une erreur 500) — c'est volontaire, pour ne jamais
+autoriser d'écriture avec un mot de passe par défaut.
+
+**Ne mets jamais ce mot de passe dans le code du site.** Il ne doit
+exister que dans les variables d'environnement Netlify.
+
+## Utilisation
+
+1. Ouvre `admin.html` (ex: `https://tonsite.netlify.app/admin.html`).
+2. Entre le mot de passe configuré ci-dessus.
+3. Ajuste les curseurs par catégorie (Adobe, Google, Microsoft, Autres).
+4. Clique sur **Enregistrer** : le changement est immédiatement visible
+   par tous les visiteurs de l'E-portefolio, sans qu'ils aient besoin de
+   faire quoi que ce soit.
+
+`Netlify Blobs` est disponible nativement dans les fonctions Netlify —
+aucun compte ni service tiers à configurer en plus.
+
+---
+
+# Migration vers un hébergement PHP classique (ex: FileZilla / mediamatique.ch)
+
+Le dossier `php/` à la racine du projet contient l'équivalent complet en
+PHP des deux fonctions Netlify ci-dessus :
+
+- `skills.php` -> équivalent de `skills.js` (login email + code, changement
+  de code, sauvegarde des niveaux de compétences), stocké dans de simples
+  fichiers JSON au lieu de Netlify Blobs.
+- `instagram-posts.php` -> équivalent de `instagram-posts.js` (proxy public
+  vers l'API Instagram Graph), avec les identifiants dans `config.php` au
+  lieu des variables d'environnement Netlify.
+
+Utilisable sur n'importe quel hébergement mutualisé qui exécute PHP.
+
+**`index.html` et `admin.html` pointent déjà vers ces fichiers PHP**
+(`/php/skills.php` et `/php/instagram-posts.php`) — aucune ligne à changer
+dans le code au moment de la migration, juste la configuration ci-dessous.
+
+## Étapes pour basculer
+
+1. Ouvre `php/config.php` et renseigne :
+   - `ADMIN_EMAIL` / `ADMIN_PASSWORD_DEFAULT` (ce dernier ne sert que tant
+     qu'aucun code n'a encore été changé depuis `admin.html`).
+   - `IG_USER_ID` / `IG_ACCESS_TOKEN` (voir la procédure d'obtention plus
+     haut dans ce document) — sans ces valeurs, la section Instagram
+     affichera une erreur.
+2. Dépose tout le contenu du projet sur le serveur via FileZilla, y compris
+   le dossier `php/` avec ses sous-fichiers (`config.php`, `skills.php`,
+   `instagram-posts.php`, `data/.htaccess`).
+3. Vérifie que le dossier `php/data/` est accessible en écriture par PHP
+   (permissions 755 ou 775 selon l'hébergeur).
+4. Si `php/` n'est pas déployé à la racine du site, adapte les chemins
+   `/php/skills.php` et `/php/instagram-posts.php` dans `index.html` et
+   `admin.html` en conséquence.
+5. Ouvre `admin.html` sur le nouveau serveur, connecte-toi avec le code par
+   défaut défini à l'étape 1, puis change immédiatement le code depuis la
+   section "Changer le code de connexion".
+
+Le dossier `data/` contient un `.htaccess` qui bloque tout accès direct
+aux fichiers `.json` depuis le navigateur — ne le supprime pas.
+
+## Revenir à Netlify
+
+Pour redéployer sur Netlify, remets `/.netlify/functions/skills` et
+`/.netlify/functions/instagram-posts` dans `index.html` et `admin.html` à
+la place des chemins `/php/...`.
