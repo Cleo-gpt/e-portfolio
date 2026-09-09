@@ -1,0 +1,61 @@
+{
+    "categories": [
+        {
+            "id": "adobe",
+            "label": "Adobe",
+            "skills": [
+                { "id": "adobe-illustrator", "label": "Adobe Illustrator", "level": 8 },
+                { "id": "adobe-photoshop", "label": "Adobe Photoshop", "level": 7 },
+                { "id": "adobe-indesign", "label": "Adobe InDesign", "level": 8 }
+            ]
+        },
+        {
+            "id": "google",
+            "label": "Google",
+            "skills": [
+                { "id": "google-slides", "label": "Google Slides", "level": 0 },
+                { "id": "google-sheets", "label": "Google Sheets", "level": 0 },
+                { "id": "google-docs", "label": "Google Docs", "level": 0 }
+            ]
+        },
+        {
+            "id": "microsoft",
+            "label": "Microsoft",
+            "skills": [
+                { "id": "microsoft-powerpoint", "label": "Microsoft PowerPoint", "level": 0 },
+                { "id": "microsoft-excel", "label": "Microsoft Excel", "level": 0 },
+                { "id": "microsoft-word", "label": "Microsoft Word", "level": 0 }
+            ]
+        },
+        {
+            "id": "autres",
+            "label": "Autres",
+            "skills": [
+                { "id": "developpement-web", "label": "Développement Web", "level": 8 },
+                { "id": "procreate", "label": "Procreate", "level": 0 }
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "id": "google",
+            "label": "Google",
+            "items": ["Google Slides", "Google Sheets", "Google Docs"]
+        },
+        {
+            "id": "microsoft",
+            "label": "Microsoft",
+            "items": ["Microsoft PowerPoint", "Microsoft Excel", "Microsoft Word"]
+        },
+        {
+            "id": "adobe",
+            "label": "Adobe",
+            "items": ["Adobe InDesign", "Adobe Illustrator", "Adobe Photoshop", "Adobe Premiere Pro", "After Effects"]
+        },
+        {
+            "id": "autres",
+            "label": "Autres",
+            "items": ["Procreate"]
+        }
+    ]
+}

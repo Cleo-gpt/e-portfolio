@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Back office — E-portefolio de Cléo Ana Forclaz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(to bottom, #000000, #0a0a2e, #000000);
+            min-height: 100vh;
+            color: #ffffff;
+            padding: 20px;
+        }
+
+        .bo-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            color: #FFD700;
+            margin-bottom: 16px;
+        }
+
+        .login-box {
+            max-width: 380px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            color: #FFD700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            margin-top: 14px;
+        }
+
+        label:first-child { margin-top: 0; }
+
+        input[type="text"], input[type="email"], input[type="password"], input[type="url"], input[type="tel"], textarea, select {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        textarea { resize: vertical; min-height: 70px; }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #FFD700;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 22px;
+            border-radius: 999px;
+            background: #FFD700;
+            color: #1a1a1a;
+            border: none;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+
+        .btn:hover { transform: translateY(-2px); }
+        .btn:disabled { opacity: 0.5; cursor: default; transform: none; }
+
+        .btn-secondary {
+            background: transparent;
+            color: #FFD700;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-danger {
+            background: transparent;
+            color: #ff6b6b;
+            border: 1px solid rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-small { padding: 6px 14px; font-size: 0.75rem; }
+
+        .error-msg { color: #ff6b6b; font-size: 0.85rem; margin-top: 12px; min-height: 1.2em; }
+        .status-msg { color: #8fd68f; font-size: 0.85rem; margin-top: 10px; min-height: 1.2em; }
+
+        .bo-panel { display: none; }
+        .bo-panel.visible { display: block; }
+
+        .bo-section {
+            margin-bottom: 40px;
+            padding: 24px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+        }
+
+        .bo-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .bo-nav-btn {
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: transparent;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: #cccccc;
+            font-family: inherit;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .bo-nav-btn.active { background: #FFD700; color: #1a1a1a; border-color: #FFD700; }
+
+        .bo-tab { display: none; }
+        .bo-tab.active { display: block; }
+
+        .item-card {
+            padding: 16px;
+            margin-bottom: 14px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .item-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .item-card-header span {
+            font-size: 0.85rem;
+            color: #FFD700;
+        }
+
+        .item-actions { display: flex; gap: 6px; }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .checkbox-row input { width: auto; }
+        .checkbox-row label { margin: 0; text-transform: none; letter-spacing: normal; font-size: 0.9rem; color: #ffffff; }
+
+        .slider-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .slider-row span:first-child { flex: 1; font-size: 0.9rem; }
+        .slider-row input[type="range"] { flex: 2; }
+        .slider-row span:last-child { width: 40px; text-align: right; font-size: 0.85rem; color: #FFD700; }
+
+        .gallery-item-row, .doc-item-row, .video-item-row {
+            display: grid;
+            gap: 8px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .upload-hint {
+            font-size: 0.75rem;
+            color: #999999;
+            margin-top: 4px;
+        }
+
+        .upload-unavailable {
+            font-size: 0.8rem;
+            color: #ffcc66;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: rgba(255, 204, 102, 0.08);
+            margin-top: 6px;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #999999;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .back-link:hover { color: #FFD700; }
+
+        .save-bar {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bo-container">
+        <h1>Back office — E-portefolio</h1>
+
+        <div class="login-box" id="loginBox">
+            <label for="emailInput">Adresse mail</label>
+            <input type="email" id="emailInput" autocomplete="username">
+            <label for="passwordInput">Code</label>
+            <input type="password" id="passwordInput" autocomplete="current-password">
+            <div class="save-bar">
+                <button class="btn" id="loginBtn">Se connecter</button>
+            </div>
+            <p class="error-msg" id="loginError"></p>
+        </div>
+
+        <div class="bo-panel" id="boPanel">
+            <div class="bo-nav">
+                <button class="bo-nav-btn active" data-tab="presentation">Présentation</button>
+                <button class="bo-nav-btn" data-tab="timeline">Formation &amp; expérience</button>
+                <button class="bo-nav-btn" data-tab="skills">Compétences &amp; outils</button>
+                <button class="bo-nav-btn" data-tab="cpnv">Projets CPNV</button>
+                <button class="bo-nav-btn" data-tab="social">Réseaux sociaux</button>
+                <button class="bo-nav-btn" data-tab="account">Compte</button>
+            </div>
+
+            <!-- Présentation -->
+            <div class="bo-tab active" data-tab-panel="presentation">
+                <div class="bo-section">
+                    <h2>À propos de moi</h2>
+                    <label for="presPhoto">Chemin de la photo</label>
+                    <input type="text" id="presPhoto" placeholder="Images/Photo Cléo.jpeg">
+                    <div id="presPhotoUpload"></div>
+                    <div id="presParagraphs"></div>
+                    <div class="save-bar">
+                        <button class="btn btn-secondary btn-small" id="presAddParagraph">+ Ajouter un paragraphe</button>
+                    </div>
+                    <div class="save-bar">
+                        <button class="btn" id="presSaveBtn">Enregistrer</button>
+                        <span class="status-msg" id="presStatus"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formation & expérience -->
+            <div class="bo-tab" data-tab-panel="timeline">
+                <div class="bo-section">
+                    <h2>Formation</h2>
+                    <div id="formationList"></div>
+                    <button class="btn btn-secondary btn-small" id="formationAddBtn">+ Ajouter une formation</button>
+                </div>
+
+                <div class="bo-section">
+                    <h2>Expérience professionnelle</h2>
+                    <div id="experienceList"></div>
+                    <button class="btn btn-secondary btn-small" id="experienceAddBtn">+ Ajouter une expérience</button>
+                </div>
+
+                <div class="bo-section">
+                    <h2>Langues</h2>
+                    <div id="languagesList"></div>
+                    <button class="btn btn-secondary btn-small" id="languagesAddBtn">+ Ajouter une langue</button>
+                </div>
+
+                <div class="save-bar">
+                    <button class="btn" id="timelineSaveBtn">Enregistrer</button>
+                    <span class="status-msg" id="timelineStatus"></span>
+                </div>
+            </div>
+
+            <!-- Compétences & outils -->
+            <div class="bo-tab" data-tab-panel="skills">
+                <div class="bo-section">
+                    <h2>Maîtrise des logiciels</h2>
+                    <div id="skillsCategoriesList"></div>
+                    <button class="btn btn-secondary btn-small" id="skillsAddCategoryBtn">+ Ajouter une catégorie</button>
+                </div>
+
+                <div class="bo-section">
+                    <h2>Outils &amp; logiciels</h2>
+                    <div id="toolsCategoriesList"></div>
+                    <button class="btn btn-secondary btn-small" id="toolsAddCategoryBtn">+ Ajouter une catégorie</button>
+                </div>
+
+                <div class="save-bar">
+                    <button class="btn" id="skillsSaveBtn">Enregistrer</button>
+                    <span class="status-msg" id="skillsStatus"></span>
+                </div>
+            </div>
+
+            <!-- Projets CPNV -->
+            <div class="bo-tab" data-tab-panel="cpnv">
+                <div class="bo-section">
+                    <h2>Projets CPNV-Médiamatique</h2>
+                    <div id="cpnvProjectsList"></div>
+                    <button class="btn btn-secondary btn-small" id="cpnvAddProjectBtn">+ Ajouter un projet</button>
+                    <div class="save-bar">
+                        <button class="btn" id="cpnvSaveBtn">Enregistrer</button>
+                        <span class="status-msg" id="cpnvStatus"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Réseaux sociaux -->
+            <div class="bo-tab" data-tab-panel="social">
+                <div class="bo-section">
+                    <h2>Réseaux sociaux &amp; contact</h2>
+                    <label for="socialName">Nom affiché</label>
+                    <input type="text" id="socialName">
+                    <label for="socialPhone">Téléphone (format tel:)</label>
+                    <input type="tel" id="socialPhone" placeholder="0764391272">
+                    <label for="socialPhoneDisplay">Téléphone affiché</label>
+                    <input type="text" id="socialPhoneDisplay" placeholder="076 439 12 72">
+                    <label for="socialInstagramPortfolio">Instagram — Portfolio</label>
+                    <input type="url" id="socialInstagramPortfolio">
+                    <label for="socialInstagramLanterne">Instagram — La Lanterne de Yuna</label>
+                    <input type="url" id="socialInstagramLanterne">
+                    <label for="socialLinkedin">LinkedIn</label>
+                    <input type="url" id="socialLinkedin">
+                    <label for="socialEmail">Adresse mail affichée</label>
+                    <input type="email" id="socialEmail">
+                    <div class="save-bar">
+                        <button class="btn" id="socialSaveBtn">Enregistrer</button>
+                        <span class="status-msg" id="socialStatus"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compte -->
+            <div class="bo-tab" data-tab-panel="account">
+                <div class="bo-section">
+                    <h2>Changer le code de connexion</h2>
+                    <label for="newPasswordInput">Nouveau code</label>
+                    <input type="password" id="newPasswordInput" autocomplete="new-password">
+                    <label for="newPasswordConfirmInput">Confirmer le nouveau code</label>
+                    <input type="password" id="newPasswordConfirmInput" autocomplete="new-password">
+                    <div class="save-bar">
+                        <button class="btn btn-secondary" id="changePasswordBtn">Changer le code</button>
+                        <span class="status-msg" id="changePasswordStatus"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-link">← Retour à l'E-portefolio</a>
+    </div>
+
+    <script src="content.js"></script>
+    <script src="back-office.js"></script>
+</body>
+</html>

@@ -37,7 +37,7 @@ exports.handler = async function () {
         const posts = (data.posts || []).map((item) => ({
             id: item.id,
             url: item.permalink,
-            image: item.sizes?.medium?.url || item.mediaUrl,
+            image: item.sizes?.medium?.mediaUrl || item.mediaUrl,
             caption: item.prunedCaption ? item.prunedCaption.slice(0, 120) : "",
             likes: item.likeCount ?? 0,
             comments: item.commentsCount ?? 0,

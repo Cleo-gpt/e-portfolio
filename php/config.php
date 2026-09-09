@@ -1,21 +1,24 @@
 <?php
-// Configuration du login admin pour l'hébergement PHP.
-//
-// ADMIN_EMAIL : adresse mail exigée pour se connecter (fixe).
-// ADMIN_PASSWORD_DEFAULT : code utilisé UNIQUEMENT tant qu'aucun code n'a
-// encore été enregistré via "Changer le code" dans admin.html. Une fois
-// changé, le nouveau code est stocké dans data/credentials.json et cette
-// constante n'est plus utilisée.
-//
-// Change ADMIN_PASSWORD_DEFAULT ci-dessous avant le premier déploiement,
-// puis change le code depuis admin.html dès la première connexion.
+// Configuration de l'hébergement PHP.
+
+// Back office : email exigé pour se connecter (fixe) et code initial
+// (utilisé UNIQUEMENT tant qu'aucun code n'a encore été enregistré via
+// "Changer le code" dans back-office.html — une fois changé, le nouveau
+// code est stocké dans data/credentials.json et cette constante n'est
+// plus utilisée). Change ADMIN_PASSWORD_DEFAULT avant le premier
+// déploiement, puis change le code depuis back-office.html.
 
 define('ADMIN_EMAIL', 'cleoforclaz2007@gmail.com');
 define('ADMIN_PASSWORD_DEFAULT', 'change-moi');
 
-// URL du feed JSON Behold.so pour instagram-posts.php (voir
-// netlify/functions/README.md pour la procédure de création du compte).
-// Behold gère la connexion et le renouvellement du token Instagram à
-// notre place — aucune maintenance de token nécessaire ici.
+// Secret protégeant update-instagram-token.php, chargé depuis secrets.php
+// (fichier NON versionné, voir php/secrets.example.php et le README pour
+// la procédure de configuration). Ne mets jamais ce secret directement
+// dans ce fichier : config.php est public sur le dépôt GitHub du projet.
 
-define('BEHOLD_FEED_URL', '');
+if (file_exists(__DIR__ . '/secrets.php')) {
+    require __DIR__ . '/secrets.php';
+}
+if (!defined('INSTAGRAM_TOKEN_UPDATE_SECRET')) {
+    define('INSTAGRAM_TOKEN_UPDATE_SECRET', '');
+}

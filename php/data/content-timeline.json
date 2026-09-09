@@ -1,0 +1,72 @@
+{
+    "formation": [
+        {
+            "id": "cpnv-mediamatique",
+            "title": "Centre professionnel du Nord vaudois (CPNV)",
+            "place": "CFC Médiamaticienne (en cours) · 2023 – 2027"
+        }
+    ],
+    "experience": [
+        {
+            "id": "asp-polymanga-2026",
+            "title": "ASP PolyManga",
+            "date": "Avril 2026 · 1 mois",
+            "place": "Polymanga · CDD · Lausanne, Vaud, Suisse · Sur site",
+            "description": "Mise en place des espaces de restauration, distribution des repas, accueil des participants et soutien aux équipes en cuisine.",
+            "extra": false
+        },
+        {
+            "id": "asp-polymanga-2025",
+            "title": "ASP PolyManga",
+            "date": "Avril 2025 · 1 mois",
+            "place": "Polymanga · CDD · Béaulieu Lausanne · Sur site",
+            "description": "Accueil des visiteurs, mise en œuvre des procédures de sécurité du théâtre, gestion des effets personnels des spectateurs avec remise en main propre à la fin du spectacle.",
+            "extra": false
+        },
+        {
+            "id": "scanner-dossiers",
+            "title": "Scanner des dossiers",
+            "date": "Janvier 2025 - Mars 2025 · 3 mois",
+            "place": "Cabinet de cardiologie Andrei Forclaz · CDD · Yverdon-les-Bains, Vaud, Suisse · Sur site",
+            "description": "La tâche consistait à scanner les dossiers médicaux.",
+            "extra": false
+        },
+        {
+            "id": "bankai-adventure",
+            "title": "Stagiaire de travail chez Bankai Adventure",
+            "date": "Février 2025 · 1 mois",
+            "place": "Bankai Adventures · Stage · Suisse romande, Vaud, Suisse · Sur site",
+            "description": "Stage de deux jours au magasin Bankai Adventures.",
+            "extra": false
+        },
+        {
+            "id": "salon-des-metiers",
+            "title": "Production de vidéo",
+            "date": "Octobre 2024 · 1 mois",
+            "place": "Salon des métiers · Stage · Lausanne, Vaud, Suisse · Sur site",
+            "description": "Réalisation de vidéos pour le Salon des métiers.",
+            "extra": true
+        },
+        {
+            "id": "explorit-ergotherapie",
+            "title": "Stagiaire ergothérapie",
+            "date": "Janvier 2022 · 1 mois",
+            "place": "EXPLORiT · Stage · Suisse romande, Vaud, Suisse · Sur site",
+            "description": "Stagiaire durant un jour, le 25/01/2022 en ergothérapie.",
+            "extra": true
+        },
+        {
+            "id": "yverdon-travailleur-social",
+            "title": "Stagiaire d'observation travailleur social de proximité",
+            "date": "Janvier 2022 · 1 mois",
+            "place": "Commune d'Yverdon-les-Bains · Stage · Yverdon-les-Bains, Vaud, Suisse · Sur site",
+            "description": "Observation du métier de travailleur social durant 3 jours, aux côtés de Nathalie Rapin et de ses collègues.",
+            "extra": true
+        }
+    ],
+    "languages": [
+        { "name": "Français", "level": "Langue maternelle" },
+        { "name": "Anglais", "level": "Connaissances scolaires" },
+        { "name": "Allemand", "level": "Connaissances scolaires" }
+    ]
+}

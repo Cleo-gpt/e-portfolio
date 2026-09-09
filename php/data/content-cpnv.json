@@ -1,0 +1,112 @@
+{
+    "projects": [
+        {
+            "id": "duck-n-go",
+            "category": "design",
+            "categoryLabel": "Design",
+            "title": "Duck n'go — Identité visuelle",
+            "cardImage": "Images\/Duck n'go logo texte.png",
+            "cardImageAlt": "Logo Duck n'go",
+            "cardDescription": "Création d'une identité de marque complète pour un fast-food engagé autour du canard.",
+            "detailText": "Projet pédagogique de création d'une identité de marque pour un fast-food engagé autour du canard : mascotte Bucky, charte graphique complète (logo, typographies, palette chromatique) et set administratif (carte de visite, enveloppe, courrier).",
+            "gallery": [
+                {
+                    "image": "Images\/Duck n'go logo.png",
+                    "alt": "Logo Duck n'go avec la mascotte Bucky"
+                },
+                {
+                    "image": "Images\/Duck n'go logo texte.png",
+                    "alt": "Logo Duck n'go avec le texte Duck n'go"
+                },
+                {
+                    "image": "Images\/Duck n'go carte de visite.jpg",
+                    "alt": "Carte de visite Duck n'go"
+                }
+            ],
+            "documents": [
+                {
+                    "label": "Voir la charte graphique (PDF)",
+                    "file": "Documents\/Duck n'go charte graphique.pdf"
+                },
+                {
+                    "label": "Voir la carte de visite (PDF)",
+                    "file": "Documents\/Duck n'go carte de visite.pdf"
+                }
+            ],
+            "videos": []
+        },
+        {
+            "id": "videos",
+            "category": "multimedias",
+            "categoryLabel": "Multimédias",
+            "title": "Vidéos",
+            "cardImage": "https:\/\/img.youtube.com\/vi\/VHWPITKgmTo\/hqdefault.jpg",
+            "cardImageAlt": "Vidéos CPNV",
+            "cardDescription": "Quatre réalisations vidéo : fiction, tutoriel technique et reportage d'événement.",
+            "detailText": "",
+            "gallery": [],
+            "documents": [],
+            "videos": [
+                {
+                    "url": "https:\/\/youtu.be\/VHWPITKgmTo",
+                    "thumbnail": "https:\/\/img.youtube.com\/vi\/VHWPITKgmTo\/hqdefault.jpg",
+                    "alt": "Famille recomposée",
+                    "title": "Famille recomposée",
+                    "short": false
+                },
+                {
+                    "url": "https:\/\/youtu.be\/at5eeLY0Xyw",
+                    "thumbnail": "https:\/\/img.youtube.com\/vi\/at5eeLY0Xyw\/hqdefault.jpg",
+                    "alt": "Vidéo CPNV 2",
+                    "title": "Première Pro",
+                    "short": false
+                },
+                {
+                    "url": "https:\/\/youtu.be\/AxhW9_Kfvwc",
+                    "thumbnail": "https:\/\/img.youtube.com\/vi\/AxhW9_Kfvwc\/hqdefault.jpg",
+                    "alt": "Femme Fragile Violences Conjugales",
+                    "title": "Femme Fragile Violences Conjugales",
+                    "short": false
+                },
+                {
+                    "url": "https:\/\/youtube.com\/shorts\/Bjy2dsa-m3M",
+                    "thumbnail": "https:\/\/img.youtube.com\/vi\/Bjy2dsa-m3M\/hqdefault.jpg",
+                    "alt": "Short CPNV 4",
+                    "title": "Le Cinéma Open Air d'Estavayer le Lac",
+                    "short": true
+                }
+            ]
+        },
+        {
+            "id": "sleepy-bear",
+            "category": "marketing",
+            "categoryLabel": "Marketing",
+            "title": "Sleepy Bear Coffee",
+            "cardImage": "Images\/Sleepy Bear Coffee couverture.png",
+            "cardImageAlt": "Sleepy Bear Coffee",
+            "cardDescription": "Stratégie marketing complète pour un café-espace de coworking à Lausanne.",
+            "detailText": "Projet de stratégie marketing pour Sleepy Bear Coffee, café-espace de coworking à Lausanne : étude de marché, focus group, persona, mix marketing (4P), sales funnel, campagnes Ad Words et Meta Ads, et plan de communication.",
+            "gallery": [],
+            "documents": [
+                {
+                    "label": "Voir la présentation complète (PDF)",
+                    "file": "Documents\/Sleepy Bear Coffee présentation.pdf"
+                }
+            ],
+            "videos": [
+                {
+                    "url": "https:\/\/youtu.be\/IXso1eFylj8",
+                    "thumbnail": "https:\/\/img.youtube.com\/vi\/IXso1eFylj8\/hqdefault.jpg",
+                    "alt": "Audio marketing Sleepy Bear Coffee mixage final 2",
+                    "title": "Audio marketing Sleepy Bear Coffee mixage final 2",
+                    "short": false
+                }
+            ],
+            "coverDocument": {
+                "image": "Images\/Sleepy Bear Coffee couverture.png",
+                "imageAlt": "Couverture de la présentation Sleepy Bear Coffee",
+                "file": "Documents\/Sleepy Bear Coffee présentation.pdf"
+            }
+        }
+    ]
+}

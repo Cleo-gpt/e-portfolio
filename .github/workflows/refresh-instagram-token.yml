@@ -1,0 +1,52 @@
+name: Renouveler le token Instagram
+
+# Renouvelle automatiquement le token d'accès Instagram Graph API avant son
+# expiration (~60 jours). Le token n'est jamais stocké dans GitHub : ce
+# workflow le lit et l'écrit uniquement sur l'hébergement PHP du site, via
+# php/update-instagram-token.php. Voir netlify/functions/README.md pour la
+# procédure de configuration complète des secrets utilisés ici.
+
+on:
+  schedule:
+    # Tous les 45 jours (le token dure ~60 jours, on renouvelle avec marge).
+    - cron: '0 6 1,16 * *'
+  workflow_dispatch: {}
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lire le token actuel depuis le serveur
+        id: current
+        run: |
+          set -e
+          RESPONSE=$(curl -sf "${{ secrets.INSTAGRAM_TOKEN_UPDATE_URL }}" \
+            -H "X-Update-Secret: ${{ secrets.INSTAGRAM_TOKEN_UPDATE_SECRET }}")
+          CURRENT_TOKEN=$(echo "$RESPONSE" | python3 -c "import sys, json; print(json.load(sys.stdin).get('access_token', ''))")
+          if [ -z "$CURRENT_TOKEN" ]; then
+            echo "Impossible de lire le token actuel : $RESPONSE"
+            exit 1
+          fi
+          echo "::add-mask::$CURRENT_TOKEN"
+          echo "current_token=$CURRENT_TOKEN" >> "$GITHUB_OUTPUT"
+
+      - name: Rafraîchir le token auprès de Meta
+        id: refresh
+        run: |
+          set -e
+          RESPONSE=$(curl -s "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${{ steps.current.outputs.current_token }}")
+          NEW_TOKEN=$(echo "$RESPONSE" | python3 -c "import sys, json; print(json.load(sys.stdin).get('access_token', ''))")
+          if [ -z "$NEW_TOKEN" ]; then
+            echo "Échec du renouvellement auprès de Meta : $RESPONSE"
+            exit 1
+          fi
+          echo "::add-mask::$NEW_TOKEN"
+          echo "new_token=$NEW_TOKEN" >> "$GITHUB_OUTPUT"
+
+      - name: Enregistrer le nouveau token sur le serveur
+        run: |
+          set -e
+          curl -sf -X POST "${{ secrets.INSTAGRAM_TOKEN_UPDATE_URL }}" \
+            -H "Content-Type: application/json" \
+            -H "X-Update-Secret: ${{ secrets.INSTAGRAM_TOKEN_UPDATE_SECRET }}" \
+            -d "{\"access_token\":\"${{ steps.refresh.outputs.new_token }}\"}"

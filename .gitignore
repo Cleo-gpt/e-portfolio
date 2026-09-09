@@ -3,3 +3,6 @@
 
 # Dependencies
 node_modules/
+
+# Secrets PHP (jamais versionnés — voir php/secrets.example.php)
+php/secrets.php
