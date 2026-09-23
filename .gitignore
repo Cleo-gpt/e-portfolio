@@ -14,3 +14,8 @@ php/secrets.php
 # jamais versionnées : elles n'existent que sur le serveur de déploiement.
 php/data/credentials.json
 php/data/instagram-token.json
+
+# Base de données SQLite du sous-projet "Sylvain site" (projets-web/sylvain-site) —
+# fichier généré automatiquement au premier accès depuis data/schema.sqlite.sql
+# (qui reste versionné). Contient des données de test/exécution, jamais commitées.
+projets-web/sylvain-site/data/*.sqlite

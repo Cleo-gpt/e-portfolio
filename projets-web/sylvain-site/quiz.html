@@ -1,0 +1,69 @@
+<!DOCTYPE html> <!-- Spécifie au navigateur que ce document est codé en HTML5 -->
+<html lang="fr"> <!-- Balise principale du document, configurée pour le public francophone -->
+<head> <!-- Section d'en-tête technique contenant les métadonnées globales (non affichées à l'écran) -->
+    <meta charset="UTF-8"> <!-- Définit le codage en UTF-8 pour s'assurer que les accents s'affichent sans bug -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Permet l'affichage responsive et fluide sur les écrans mobiles -->
+    <title>Quiz - Sylvain Lyve</title> <!-- Le titre officiel affiché sur l'onglet du navigateur Internet -->
+    <link rel="stylesheet" href="style.css"> <!-- Raccorde la feuille de style CSS externe pour habiller graphiquement la page -->
+</head> <!-- Fin de la section head -->
+<body> <!-- Début de la zone du corps, contenant les éléments visibles de l'interface utilisateur -->
+
+<header class="site-header"> <!-- En-tête principal affiché en haut du site -->
+    <div class="header-inner"> <!-- Conteneur interne servant à centrer et aligner les composants du bandeau -->
+        <a href="index.php" class="logo-wrap"> <!-- Lien cliquable global renvoyant vers la page d'accueil d'index -->
+            <img src="img/channels4_profile.jpg" alt="Sylvain Lyve" class="logo-img"> <!-- Image du logo (la photo de profil) avec son texte alternatif -->
+            <span class="logo-text">SYLVAIN LYVE</span> <!-- Texte textuel du logo placé à droite de l'avatar -->
+        </a> <!-- Fin du lien du logo -->
+        <nav class="site-nav"> <!-- Barre de navigation regroupant les hyperliens fonctionnels du site -->
+            <a href="index.php">Accueil</a> <!-- Lien direct vers la page d'accueil -->
+            <a href="index.php#about">À propos</a> <!-- Lien ancré menant directement au bloc de présentation sur l'accueil -->
+            <a href="quiz.html" class="active">Quiz</a> <!-- Lien vers le quiz, marqué graphiquement "active" comme la page en cours -->
+            <a href="admin.php">Résultats</a> <!-- Lien vers l'espace d'administration et de listing des scores -->
+        </nav> <!-- Fin de la barre de navigation -->
+    </div> <!-- Fin du conteneur interne de l'en-tête -->
+</header> <!-- Fin de l'en-tête principal -->
+
+<main> <!-- Zone centrale réservée au contenu spécifique et unique du document en cours -->
+<div class="quiz-wrapper"> <!-- Enveloppe globale stylisée encadrant toute l'interface liée au module de jeu -->
+    <h1 class="section-title">Le <span>Quiz</span> Ultime</h1> <!-- Titre de niveau 1 de la section avec une balise span pour colorer le mot "Quiz" -->
+    <div class="section-line"></div> <!-- Balise générant une ligne décorative horizontale sous le titre via le CSS -->
+    <div id="quiz-container"></div> <!-- Conteneur vide crucial : c'est ici que le fichier "quiz.js" va injecter dynamiquement les questions -->
+</div> <!-- Fin de l'enveloppe quiz-wrapper -->
+</main> <!-- Fin du contenu principal -->
+
+<footer class="site-footer"> <!-- Section de pied de page globale du site web -->
+    <div class="footer-inner"> <!-- Sous-conteneur gérant l'espacement et l'alignement des éléments du footer -->
+        <div class="footer-social"> <!-- Zone horizontale regroupant les liens vers les différents réseaux sociaux -->
+            <!-- Lien cliquable externe vers la chaîne YouTube principale (sécurisé avec target et noopener) -->
+            <a href="https://www.youtube.com/@SylvainLyve" target="_blank" rel="noopener" class="social-link social-yt">
+                <!-- Icône vectorielle SVG dessinant le logo officiel de YouTube en taille 18x18 pixels -->
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+                YouTube <!-- Intitulé textuel associé à l'icône -->
+            </a>
+            <!-- Lien cliquable externe vers la chaîne YouTube Best Of -->
+            <a href="https://www.youtube.com/@SylvainLyvebestof" target="_blank" rel="noopener" class="social-link social-yt">
+                <!-- Reproduction du tracé vectoriel SVG pour l'icône YouTube -->
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+                YouTube Best Of <!-- Intitulé textuel associé -->
+            </a>
+            <!-- Lien cliquable externe vers la page Instagram officielle -->
+            <a href="https://www.instagram.com/sylvain_lyve/" target="_blank" rel="noopener" class="social-link social-ig">
+                <!-- Icône vectorielle SVG dessinant le logo d'Instagram -->
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.2 4.8 1.7 5 5 .1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.2 3.3-1.7 4.8-5 5-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.2-4.8-1.7-5-5C2.1 15.6 2 15.3 2 12c0-3.2 0-3.6.1-4.8.2-3.3 1.7-4.8 5-5C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.2 0-3.5 0-4.8.1-2.3.1-3.3 1.1-3.4 3.4C3.7 8.5 3.7 8.8 3.7 12s0 3.5.1 4.8c.1 2.3 1.1 3.3 3.4 3.4 1.3.1 1.6.1 4.8.1s3.5 0 4.8-.1c2.3-.1 3.3-1.1 3.4-3.4.1-1.3.1-1.6.1-4.8s0-3.5-.1-4.8c-.1-2.3-1.1-3.3-3.4-3.4C15.5 4 15.2 4 12 4zm0 3a5 5 0 1 1 0 10A5 5 0 0 1 12 7zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm5.2-.2a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
+                Instagram <!-- Intitulé textuel associé -->
+            </a>
+            <!-- Lien cliquable externe vers la chaîne de streaming Twitch officielle -->
+            <a href="https://www.twitch.tv/sylvainlyve" target="_blank" rel="noopener" class="social-link social-tw">
+                <!-- Icône vectorielle SVG dessinant le logo géométrique de Twitch -->
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M11.6 6H13v4.5h-1.4V6zm3.8 0h1.4v4.5h-1.4V6zM2 1L.5 4.5V21h5V24h3l3-3h4l5.5-5.5V1H2zm19 13.5L17.5 18H13l-3 3v-3H5V2.5h16v12z"/></svg>
+                Twitch <!-- Intitulé textuel associé -->
+            </a>
+        </div> <!-- Fin de la zone des réseaux sociaux -->
+        <p class="footer-copy">&copy; 2025 Sylvain Lyve &mdash; Fan site non officiel</p> <!-- Ligne légale indiquant le droit d'auteur (2025), le nom et la note de site non officiel séparée par un tiret long -->
+        <p class="footer-credit">Fait avec passion &amp; JavaScript</p> <!-- Ligne de crédit technologique avec esperluette correctement encodée en entité HTML -->
+    </div> <!-- Fin du conteneur interne du pied de page -->
+</footer> <!-- Fin du pied de page -->
+
+<script src="quiz.js"></script> <!-- Charge et exécute le script JavaScript externe "quiz.js" chargé du fonctionnement logique du jeu -->
+</body> <!-- Fermeture de la balise du corps de la page -->
+</html> <!-- Fin de la structure du fichier HTML complet -->

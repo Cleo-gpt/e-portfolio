@@ -23,8 +23,10 @@ body {
         radial-gradient(ellipse at top, rgba(155, 93, 229, 0.1), transparent 55%),
         linear-gradient(to bottom, #050308, #12071f);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 14px;
     overflow: hidden;
 }
 
@@ -39,9 +41,7 @@ body {
 
 /* Bouton de connexion admin */
 .login-trigger {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    position: relative;
     z-index: 20;
     padding: 8px 20px;
     border-radius: 999px;
@@ -1453,6 +1453,12 @@ body {
 .cpnv-doc-link:hover {
     background: #7dd3fc;
     transform: translateY(-2px);
+}
+
+.cpnv-site-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .cpnv-videos {

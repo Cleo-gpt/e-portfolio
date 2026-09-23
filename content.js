@@ -53,7 +53,7 @@
                     date: "Janvier 2025 - Mars 2025 · 3 mois",
                     place: "Cabinet de cardiologie Andrei Forclaz · CDD · Yverdon-les-Bains, Vaud, Suisse · Sur site",
                     description: "La tâche consistait à scanner les dossiers médicaux.",
-                    extra: false
+                    extra: true
                 },
                 {
                     id: "bankai-adventure",
@@ -61,7 +61,7 @@
                     date: "Février 2025 · 1 mois",
                     place: "Bankai Adventures · Stage · Suisse romande, Vaud, Suisse · Sur site",
                     description: "Stage de deux jours au magasin Bankai Adventures.",
-                    extra: false
+                    extra: true
                 },
                 {
                     id: "salon-des-metiers",
@@ -148,13 +148,12 @@
                     title: "Identité visuelle CF",
                     cardImage: "Images/identite-visuelle-cf/logo-cf-monogramme.png",
                     cardImageAlt: "Logo CF Multi médiamaticienne",
-                    cardDescription: "Création de mon identité visuelle personnelle : monogramme CF et élément graphique associé.",
-                    detailText: "Création de mon identité visuelle personnelle, autour d'un monogramme \"CF\" habillé d'un motif de poissons stylisés (violet et bleu), décliné avec le libellé \"Multi médiamaticienne\".",
-                    gallery: [
-                        { image: "Images/identite-visuelle-cf/logo-cf-monogramme.png", alt: "Logo CF Multi médiamaticienne, monogramme complet" },
-                        { image: "Images/identite-visuelle-cf/logo-cf-poissons.png", alt: "Élément graphique des poissons stylisés de l'identité visuelle CF" }
+                    cardDescription: "Création de mon identité visuelle personnelle : monogramme CF, choix des couleurs, des polices et déclinaisons du logo.",
+                    detailText: "Création de mon identité visuelle personnelle, autour d'un monogramme \"CF\" habillé d'un motif de carpes koï stylisées (violet et bleu), symbole d'indépendance et de créativité. Le dossier complet détaille les déclinaisons du logo (normal, favicon, nuances de gris, inversé), le choix des couleurs et des polices, ainsi que la carte de visite.",
+                    gallery: [],
+                    documents: [
+                        { label: "Voir le dossier d'identité visuelle complet (PDF)", file: "Documents/Identité visuelle CF.pdf" }
                     ],
-                    documents: [],
                     videos: []
                 },
                 {
@@ -216,6 +215,34 @@
                         imageAlt: "Couverture de la présentation Sleepy Bear Coffee",
                         file: "Documents/Sleepy Bear Coffee présentation.pdf"
                     }
+                },
+                {
+                    id: "sleep-coffe-bears-site",
+                    category: "design",
+                    categoryLabel: "Design",
+                    title: "Sleep Coffe Bears — Site web",
+                    cardImage: "Images/projets-web-captures/sleep-coffe-bears-capture.png",
+                    cardImageAlt: "Logo Sleep Coffe Bears",
+                    cardDescription: "Site vitrine et boutique en ligne (HTML/CSS) pour un café-torréfacteur fictif, avec page panier.",
+                    detailText: "Conception et intégration d'un site web statique complet pour Sleep Coffe Bears : page d'accueil vitrine et page panier (checkout), en HTML et CSS pur, sans framework.",
+                    gallery: [],
+                    documents: [],
+                    videos: [],
+                    siteUrl: "projets-web/sleep-coffe-bears/index.html"
+                },
+                {
+                    id: "sylvain-lyve-site",
+                    category: "web",
+                    categoryLabel: "Web",
+                    title: "Sylvain Lyve — Fan site",
+                    cardImage: "Images/projets-web-captures/sylvain-site-capture.png",
+                    cardImageAlt: "Sylvain Lyve",
+                    cardDescription: "Fan site PHP dynamique avec base de données : présentation, quiz interactif et résultats.",
+                    detailText: "Développement d'un fan site PHP complet pour le YouTubeur Sylvain Lyve : page d'accueil, quiz interactif en JavaScript avec sauvegarde des scores, page de résultats et gestion des vidéos, le tout connecté à une base de données (SQLite dans cette démo).",
+                    gallery: [],
+                    documents: [],
+                    videos: [],
+                    siteUrl: "projets-web/sylvain-site/index.php"
                 }
             ]
         },
@@ -459,6 +486,13 @@
         let html = '<h4>' + escapeHtml(project.title) + '</h4>';
         if (project.detailText) {
             html += '<p>' + escapeHtml(project.detailText) + '</p>';
+        }
+
+        if (project.siteUrl) {
+            html += '<div class="cpnv-links">' +
+                '<a href="' + escapeHtml(project.siteUrl) + '" target="_blank" rel="noopener" class="cpnv-doc-link cpnv-site-link">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>' +
+                ' Voir le site</a></div>';
         }
 
         if (project.gallery && project.gallery.length) {

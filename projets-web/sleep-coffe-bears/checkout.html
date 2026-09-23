@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panier — Sleep Coffee Bears</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══ HEADER ══ -->
+  <div class="top-bar">
+    <a href="index.html">
+      <img class="top-bar-logo" src="images/SB_logo_200-02.png" alt="Sleep Coffee Bears" />
+    </a>
+    <nav class="top-bar-nav">
+      <a href="index.html">Accueil</a>
+      <a href="index.html#reserver-horaire">Réserver</a>
+      <a href="index.html#faq">FAQ</a>
+    </nav>
+    <div class="top-bar-icons">
+      <a href="index.html">← Continuer</a>
+    </div>
+  </div>
+
+  <!-- ══ PROMO ROW ══ -->
+  <div class="promo-row">
+    <div class="promo-left">
+      NOUVEAU ICI ? &nbsp;<span>Première session offerte</span>&nbsp; avec le code : &nbsp;<span>WELCOME</span>
+    </div>
+    <div class="promo-right">
+      <span>RÉSERVATION CONFIRMÉE EN QUELQUES MINUTES</span>
+      <small>Annulation possible jusqu'à 24h avant</small>
+    </div>
+  </div>
+
+  <!-- ══ LAYOUT PRINCIPAL ══ -->
+  <div id="checkout-main">
+    <div class="checkout-layout">
+
+      <!-- ── COLONNE GAUCHE : panier ── -->
+      <div class="bag-col">
+
+        <div class="bag-header">
+          <h1>Ma réservation</h1>
+          <span>Réservée pendant 60 minutes</span>
+        </div>
+
+        <div class="bag-item">
+          <div class="bag-item-badge">
+            <div class="bag-item-img">☕</div>
+            <div class="badge-label">Disponible</div>
+          </div>
+
+          <div class="bag-item-body">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <div class="bag-item-price" id="r-total">— CHF</div>
+              <button class="btn-remove" onclick="supprimerCommande()" title="Supprimer">×</button>
+            </div>
+
+            <div class="bag-item-name">
+              Session d'étude — <strong id="r-formule">—</strong><br>
+              <span style="font-size:13px;color:#888;" id="r-nom-prenom">—</span>
+            </div>
+
+            <div class="bag-item-meta">
+              <span class="bag-meta-tag" id="r-date">—</span>
+              <span class="bag-meta-tag" id="r-creneau">—</span>
+              <span class="bag-meta-tag" id="r-sessions">—</span>
+            </div>
+
+            <div style="font-size:12px;color:#888;margin-bottom:12px;">
+              📧 <span id="r-email">—</span> &nbsp;|&nbsp; 📞 <span id="r-tel">—</span>
+            </div>
+
+            <div class="bag-item-actions">
+              <button class="btn-modify" onclick="modifierCommande()">
+                ✏ Modifier
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── COLONNE DROITE : total + paiement ── -->
+      <div class="summary-col">
+        <div class="summary-card">
+
+          <div class="summary-card-header">
+            <h2>Total</h2>
+          </div>
+
+          <div class="summary-rows">
+            <div class="summary-row">
+              <span class="label">Session</span>
+              <span class="value" id="s-formule">—</span>
+            </div>
+            <div class="summary-row">
+              <span class="label">Durée</span>
+              <span class="value" id="s-sessions">—</span>
+            </div>
+            <div class="summary-row">
+              <span class="label">Réservation</span>
+              <span class="value" style="color:#2e7d32;">Incluse</span>
+            </div>
+          </div>
+
+          <!-- Code de réduction -->
+          <div class="promo-code-area">
+            <div class="promo-code-row">
+              <input type="text" id="promo-input" class="promo-input" placeholder="Code de réduction" />
+              <button class="promo-btn" onclick="appliquerCode()">→</button>
+            </div>
+            <div id="promo-msg"></div>
+          </div>
+
+          <div class="summary-total-row">
+            <span class="t-label">Total</span>
+            <span class="t-value" id="s-total">—</span>
+          </div>
+
+          <div class="summary-btn-area">
+            <button class="btn-checkout" id="btn-confirmer" onclick="confirmerPaiement()">
+              Confirmer le paiement
+            </button>
+          </div>
+
+          <!-- Méthodes de paiement -->
+          <div class="payment-label">Nous acceptons :</div>
+          <div class="payment-icons">
+            <span class="pay-badge twint">TWINT</span>
+            <span class="pay-badge paypal">PayPal</span>
+            <span class="pay-badge">Carte</span>
+            <span class="pay-badge">Virement</span>
+            <span class="pay-badge apple">Apple Pay</span>
+          </div>
+
+          <div style="padding: 0 20px 6px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#333; border-top:1px solid #e8e8e8; padding-top:14px;">
+            Choisir le mode de paiement
+          </div>
+          <div class="payment-methods">
+
+            <div class="payment-option" id="pay-twint" onclick="selectPayment('twint')">
+              <input type="radio" name="payment" id="radio-twint" />
+              <span class="payment-name">TWINT</span>
+            </div>
+            <div class="payment-detail" id="detail-twint">
+              <div class="twint-detail">
+                <img
+                  class="twint-qr"
+                  src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=tel%3A0764391272"
+                  alt="QR Code Twint 0764391272"
+                />
+                <div class="twint-info">
+                  <div class="twint-num">📱 076 439 12 72</div>
+                  <div class="twint-hint">Scannez le QR code avec votre app Twint ou entrez le numéro manuellement.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="payment-option" id="pay-paypal" onclick="selectPayment('paypal')">
+              <input type="radio" name="payment" id="radio-paypal" />
+              <span class="payment-name">PayPal</span>
+            </div>
+            <div class="payment-detail" id="detail-paypal">
+              Vous serez redirigé vers PayPal.<br>
+              <strong>Email :</strong> paiement@sleepybearcoffee.ch
+            </div>
+
+            <div class="payment-option" id="pay-carte" onclick="selectPayment('carte')">
+              <input type="radio" name="payment" id="radio-carte" />
+              <span class="payment-name">Carte bancaire</span>
+            </div>
+            <div class="payment-detail" id="detail-carte">
+              <div class="card-form">
+                <div class="card-field-group">
+                  <label class="card-label">Titulaire de la carte</label>
+                  <input class="card-input" id="card-titulaire" type="text" placeholder="NOM PRÉNOM" autocomplete="cc-name" />
+                </div>
+                <div class="card-field-group">
+                  <label class="card-label">Numéro de carte</label>
+                  <input class="card-input" id="card-numero" type="text" placeholder="0000 0000 0000 0000" maxlength="19" autocomplete="cc-number" oninput="formatCardNumber(this)" />
+                </div>
+                <div class="card-row">
+                  <div class="card-field-group">
+                    <label class="card-label">MM/AA</label>
+                    <input class="card-input" id="card-expiry" type="text" placeholder="MM/AA" maxlength="5" autocomplete="cc-exp" oninput="formatExpiry(this)" />
+                  </div>
+                  <div class="card-field-group">
+                    <label class="card-label">CVV</label>
+                    <input class="card-input" id="card-cvv" type="password" placeholder="•••" maxlength="4" autocomplete="cc-csc" />
+                  </div>
+                </div>
+                <p class="card-secure">🔒 Paiement chiffré SSL 256 bits — aucune donnée stockée</p>
+              </div>
+            </div>
+
+            <div class="payment-option" id="pay-virement" onclick="selectPayment('virement')">
+              <input type="radio" name="payment" id="radio-virement" />
+              <span class="payment-name">Virement bancaire</span>
+            </div>
+            <div class="payment-detail" id="detail-virement">
+              <strong>IBAN :</strong> CH56 0483 5012 3456 7800 9<br>
+              <strong>Bénéficiaire :</strong> Sleepy Bear Coffee Sàrl<br>
+              <strong>Référence :</strong> nom + date de réservation
+            </div>
+
+          </div>
+
+          <div style="padding:0 20px 16px;font-size:11px;color:#999;text-align:center;">
+            🔒 Paiement 100% sécurisé — Sleep Coffee Bears
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ SUCCÈS ══ -->
+  <div id="success-msg">
+    <div class="success-icon">🎉</div>
+    <h2>Réservation confirmée !</h2>
+    <p>
+      Merci pour votre réservation chez <strong>Sleepy Bear Coffee</strong>.<br>
+      Un email de confirmation vous sera envoyé à l'adresse indiquée.<br>
+      À très bientôt !
+    </p>
+
+    <!-- QR Twint affiché uniquement si paiement Twint -->
+    <div id="twint-payment-block" style="display:none; margin-bottom:24px;">
+      <p style="font-size:14px;font-weight:700;margin-bottom:12px;">Finalisez votre paiement via Twint :</p>
+      <div class="twint-detail" style="justify-content:center;">
+        <img
+          class="twint-qr"
+          src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=tel%3A0764391272"
+          alt="QR Code Twint"
+          style="width:150px;height:150px;"
+        />
+        <div class="twint-info">
+          <div class="twint-num">📱 076 439 12 72</div>
+          <div class="twint-hint">Scannez ce QR code avec votre app Twint<br>ou entrez le numéro manuellement.</div>
+          <div style="font-size:13px;font-weight:800;color:#d94f6b;margin-top:4px;" id="twint-montant"></div>
+        </div>
+      </div>
+    </div>
+
+    <a class="btn-back-home" href="index.html">Retour à l'accueil</a>
+  </div>
+
+  <!-- ══ COMMANDE VIDE ══ -->
+  <div id="no-order-msg">
+    <div class="no-order-icon">☕</div>
+    <h2>Aucune réservation</h2>
+    <p>Il semblerait que vous n'ayez pas encore rempli le formulaire de réservation.</p>
+    <a class="btn-back-home" href="index.html#reserver-horaire">Réserver une session</a>
+  </div>
+
+  <script>
+    const CODES_PROMO = { 'WELCOME': 5, 'BEAR5': 5, 'SCB5': 5 };
+    let reductionAppliquee = 0;
+    let totalBrut = 0;
+    let totalFinal = 0;
+
+    const raw = localStorage.getItem('scb_order');
+
+    if (!raw) {
+      document.getElementById('checkout-main').style.display = 'none';
+      document.getElementById('no-order-msg').style.display = 'block';
+    } else {
+      const order = JSON.parse(raw);
+      const prenomNom = [order.prenom, order.nom].filter(Boolean).join(' ') || '—';
+
+      document.getElementById('r-total').textContent      = order.total    || '—';
+      document.getElementById('r-formule').textContent    = order.formule  || '—';
+      document.getElementById('r-nom-prenom').textContent = prenomNom;
+      document.getElementById('r-date').textContent       = order.date     || '—';
+      document.getElementById('r-creneau').textContent    = order.creneau  || '—';
+      document.getElementById('r-sessions').textContent   = (order.sessions || '—') + (order.sessions > 1 ? ' heures' : ' heure');
+      document.getElementById('r-email').textContent      = order.email    || '—';
+      document.getElementById('r-tel').textContent        = order.tel      || '—';
+
+      document.getElementById('s-formule').textContent    = order.formule  || '—';
+      document.getElementById('s-sessions').textContent   = (order.sessions || '—') + (order.sessions > 1 ? ' heures' : ' heure');
+      document.getElementById('s-total').textContent      = order.total    || '—';
+
+      totalBrut = parseFloat((order.total || '0').replace(' CHF', '')) || 0;
+      totalFinal = totalBrut;
+    }
+
+    function appliquerCode() {
+      const code = document.getElementById('promo-input').value.trim().toUpperCase();
+      const msg = document.getElementById('promo-msg');
+      if (!code) { msg.textContent = ''; return; }
+
+      if (CODES_PROMO[code] !== undefined) {
+        reductionAppliquee = CODES_PROMO[code];
+        totalFinal = Math.max(0, totalBrut - reductionAppliquee);
+        document.getElementById('s-total').textContent = totalFinal.toFixed(2) + ' CHF';
+        document.getElementById('r-total').textContent = totalFinal.toFixed(2) + ' CHF';
+        msg.textContent = '✓ Code appliqué — -' + reductionAppliquee.toFixed(2) + ' CHF';
+        msg.style.color = '#2e7d32';
+        document.getElementById('promo-input').disabled = true;
+        document.querySelector('.promo-btn').disabled = true;
+      } else {
+        msg.textContent = '✗ Code invalide';
+        msg.style.color = '#d94f6b';
+      }
+    }
+
+    function formatCardNumber(input) {
+      let v = input.value.replace(/\D/g, '').substring(0, 16);
+      input.value = v.replace(/(.{4})/g, '$1 ').trim();
+    }
+
+    function formatExpiry(input) {
+      let v = input.value.replace(/\D/g, '').substring(0, 4);
+      if (v.length >= 3) v = v.substring(0, 2) + '/' + v.substring(2);
+      input.value = v;
+    }
+
+    let selectedPayment = null;
+
+    function selectPayment(method) {
+      selectedPayment = method;
+      ['twint', 'paypal', 'carte', 'virement'].forEach(m => {
+        document.getElementById('pay-' + m).classList.toggle('selected', m === method);
+        document.getElementById('detail-' + m).classList.toggle('visible', m === method);
+        document.getElementById('radio-' + m).checked = (m === method);
+      });
+    }
+
+    function modifierCommande() {
+      window.location.href = 'index.html#reserver-horaire';
+    }
+
+    function supprimerCommande() {
+      if (confirm('Voulez-vous vraiment supprimer cette réservation ?')) {
+        localStorage.removeItem('scb_order');
+        window.location.href = 'index.html';
+      }
+    }
+
+    function confirmerPaiement() {
+      if (!selectedPayment) {
+        alert('Veuillez sélectionner une méthode de paiement.');
+        return;
+      }
+      document.getElementById('checkout-main').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+
+      if (selectedPayment === 'twint') {
+        document.getElementById('twint-payment-block').style.display = 'block';
+        document.getElementById('twint-montant').textContent = 'Montant à payer : ' + totalFinal.toFixed(2) + ' CHF';
+      }
+
+      localStorage.removeItem('scb_order');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>

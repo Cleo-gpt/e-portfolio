@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sleep Coffee Bears</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZD3284LXMK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZD3284LXMK');
+  </script>
+</head>
+<body>
+
+  <!-- ══════════════ MODAL PLAN HORAIRE ══════════════ -->
+  <div id="plan-overlay" onclick="if(event.target===this)closePlanHoraire()">
+    <div id="plan-modal">
+      <button id="plan-close" onclick="closePlanHoraire()">✕</button>
+      <h2 id="plan-title">Plan horaire</h2>
+      <p id="plan-subtitle">Sleepy Bear Coffee — Ouvert 7j/7</p>
+
+      <div class="plan-table">
+        <div class="plan-row plan-row-header">
+          <span>Jour</span>
+          <span>Ouverture</span>
+          <span>Fermeture</span>
+          <span>Statut</span>
+        </div>
+        <div class="plan-row">
+          <span>Lundi</span><span>08h00</span><span>21h00</span>
+          <span class="plan-open">Ouvert</span>
+        </div>
+        <div class="plan-row">
+          <span>Mardi</span><span>08h00</span><span>21h00</span>
+          <span class="plan-open">Ouvert</span>
+        </div>
+        <div class="plan-row">
+          <span>Mercredi</span><span>08h00</span><span>21h00</span>
+          <span class="plan-open">Ouvert</span>
+        </div>
+        <div class="plan-row">
+          <span>Jeudi</span><span>08h00</span><span>21h00</span>
+          <span class="plan-open">Ouvert</span>
+        </div>
+        <div class="plan-row">
+          <span>Vendredi</span><span>08h00</span><span>21h00</span>
+          <span class="plan-open">Ouvert</span>
+        </div>
+        <div class="plan-row">
+          <span>Samedi</span><span>08h00</span><span>21h00</span>
+          <span class="plan-open">Ouvert</span>
+        </div>
+        <div class="plan-row">
+          <span>Dimanche</span><span>08h00</span><span>21h00</span>
+          <span class="plan-open">Ouvert</span>
+        </div>
+      </div>
+
+      <!-- Barre visuelle de la journée -->
+      <div class="plan-timeline">
+        <div class="plan-timeline-labels">
+          <span>8h</span><span>10h</span><span>12h</span><span>14h</span><span>16h</span><span>18h</span><span>20h</span><span>21h</span>
+        </div>
+        <div class="plan-timeline-bar">
+          <div class="plan-timeline-fill" id="plan-timeline-fill"></div>
+          <div class="plan-timeline-now" id="plan-timeline-now"></div>
+        </div>
+        <p class="plan-now-label" id="plan-now-label"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ POP-UP ══════════════ -->
+  <div id="popup-overlay" style="display:none">
+    <div id="popup">
+      <img id="popup-img" src="images/sleepy-bear-coffee-ta1ya4.webp" alt="Sleepy Bear Coffee" />
+      <div id="popup-content">
+        <div id="popup-title">Inscrivez-vous à notre Newsletter</div>
+        <p id="popup-subtitle">Vous hésitez encore à réservez votre première heure ? Inscrivez-vous à notre Newsletter et obtenez la première heure gratuite.</p>
+        <label class="field-label">Prénom</label>
+        <input class="field-input" type="text" placeholder="Jean" />
+        <label class="field-label">Nom</label>
+        <input class="field-input" type="text" placeholder="Dupont" />
+        <label class="field-label">E-mail</label>
+        <input class="field-input" type="email" placeholder="Ton email">
+        <button id="insc">S'inscrire</button>
+      </div>
+      <button id="popup-close" onclick="document.getElementById('popup-overlay').style.display='none'">✕</button>
+    </div>
+  </div>
+
+  <!-- ══════════════ HEADER ══════════════ -->
+  <header>
+    <nav>
+      <img class="nav-logo" src="images/SB_logo_200-02.png" alt="Sleep Coffee Bears logo" />
+      <a class="nav-link" href="#">Acceuil</a>
+      <a class="nav-link" href="#">Magasin</a>
+      <a class="nav-link" href="#">Galerie</a>
+      <a class="nav-plan" href="#" onclick="openPlanHoraire(event)">Plan horaire</a>
+      <button class="nav-popup-btn" onclick="openPopup()">Newsletter</button>
+      <a class="nav-cta" href="#reserver-horaire">Réserver</a>
+    </nav>
+  </header>
+
+  <!-- ══════════════ HERO BANNER ══════════════ -->
+  <section id="hero">
+    <img class="hero-img" src="images/Sleepy-Bear-Coffee-Shop-cafes-1024x1024.jpg" alt="Sleepy Bear Coffee Shop" />
+  </section>
+
+  <!-- ══════════════ SECTION PROBLÈME ══════════════ -->
+  <section id="probleme">
+    <h2 class="section-title">Vous avez du mal à trouver un espace de travail adapté ? </h2>
+    <h3 class="section-title2">Notre équipe est là pour vous guider vers la solution idéale.</h3>
+    <p class="section-text">TTrouver un lieu calme pour étudier est devenu un vrai défi. Les bibliothèques ferment tôt, les espaces publics sont bruyants, et rester chez soi rime souvent avec distractions. Les cafés classiques tolèrent rarement les longues sessions de travail et quand ils le font, impossible de se concentrer entre le bruit ambiant et le manque de prises.</p>
+    <p class="section-text">Chez <strong>Sleepy Bear Coffee</strong> on a pensé l'espace pour vous, un environnement accueillant, pensé pour les esprits qui ont besoin de calme et de caféine pour avancer.</p>
+
+    <div class="valeurs-row">
+      <div class="valeur-card">
+        <div class="valeur-icon">☕</div>
+        <h3>Ambiance studieuse</h3>
+        <p class="valeur-desc">Un cadre calme et cosy, conçu pour favoriser la concentration. Musique douce, lumière adaptée, sans le chaos des cafés ordinaires.</p>
+      </div>
+      <div class="valeur-card">
+        <div class="valeur-icon">⚡</div>
+        <h3>Équipé pour travailler</h3>
+        <p class="valeur-desc">Wi-Fi haut débit, prises électriques et ports USB à chaque table réservée. Tout ce qu'il faut pour une session productive sans interruption.</p>
+      </div>
+      <div class="valeur-card">
+        <div class="valeur-icon">📅</div>
+        <h3>Sessions réservées</h3>
+        <p class="valeur-desc">Réserve ta place à l'avance et assure-toi d'avoir un coin tranquille, même en pleine période d'examens. Plus de stress pour trouver une table.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ SECTION RÉSERVER / HORAIRE ══════════════ -->
+  <section id="reserver-horaire">
+    <div class="reserver-horaire-grid">
+
+      <!-- Colonne Réserver -->
+      <div class="reserver-col">
+        <h2>Réservation </h2>
+        <p class="form-intro">Réservez votre session en 3 étapes simples :</p>
+        <ol class="form-steps">
+          <li>Remplissez vos informations ci-dessous</li>
+          <li>Choisissez votre formule et le nombre d'heure </li>
+          <li>Sélectionnez une date et un créneau dans le calendrier, puis cliquez sur <strong>Payer</strong></li>
+        </ol>
+
+        <div class="form-fields">
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label">Prénom</label>
+              <input class="field-input" id="field-prenom" type="text" placeholder="Jean" />
+            </div>
+            <div class="field-group">
+              <label class="field-label">Nom</label>
+              <input class="field-input" id="field-nom" type="text" placeholder="Dupont" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Email</label>
+            <input class="field-input" id="field-email" type="email" placeholder="jean.dupont@email.com" />
+          </div>
+          <div class="field-group">
+            <label class="field-label">Téléphone</label>
+            <input class="field-input" id="field-tel" type="tel" placeholder="+41 79 000 00 00" />
+          </div>
+        </div>
+
+        <!-- Nombre de sessions -->
+        <div class="form-group">
+          <label class="form-label">Nombre d'heure</label> <br>
+          <div class="sessions-counter">
+            <button class="counter-btn" id="btn-minus">−</button>
+            <span class="counter-value" id="session-count">1</span>
+            <button class="counter-btn" id="btn-plus">+</button>
+          </div>
+        </div>
+
+        <!-- Options -->
+        <div class="form-group">
+            <br>
+          <label class="form-label">Formule</label>
+          <div class="form-btns">
+            <button class="form-btn-sm active" id="opt1" onclick="selectOption(1)">Sans boisson<br><span class="opt-price">20 CHF / session</span></button>
+            <button class="form-btn-sm" id="opt2" onclick="selectOption(2)">Avec boisson<br><span class="opt-price">25 CHF / session</span></button>
+          </div>
+        </div>
+
+        <!-- Total -->
+        <div class="total-box">
+          <span class="total-label">Total</span>
+          <span class="total-amount" id="total-amount">20.00 CHF</span>
+        </div>
+
+        <button class="form-btn-payer" id="btn-payer" onclick="goToCheckout()">Payer</button>
+      </div>
+
+      <!-- Colonne Horaire / Calendrier -->
+      <div class="horaire-col">
+        <h2>Horaire</h2>
+
+        <!-- Navigation mois -->
+        <div class="cal-nav">
+          <button class="cal-arrow" id="cal-prev">&#8592;</button>
+          <span class="cal-month-label" id="cal-month-label"></span>
+          <button class="cal-arrow" id="cal-next">&#8594;</button>
+        </div>
+
+        <!-- Grille calendrier -->
+        <div class="cal-grid" id="cal-grid"></div>
+
+        <!-- Créneaux horaires -->
+        <div class="creneaux" id="creneaux">
+          <p class="creneaux-title">Choisir un créneau :</p>
+          <div class="creneaux-grid" id="creneaux-grid"></div>
+        </div>
+
+        <p class="cal-selection" id="cal-selection"></p>
+        <button class="cal-order-btn" onclick="openPopup()">Newsletter</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ SECTION AVIS ══════════════ -->
+  <section id="avis">
+    <h2 class="section-title">Ce qu'ils en pensent</h2>
+    <p class="section-text" style="margin-bottom: 36px;">Des étudiants qui ont trouvé leur spot préféré.</p>
+
+    <div class="avis-slider-wrapper">
+      <button class="avis-arrow left" id="avis-prev">&#8592;</button>
+
+      <div class="avis-track-container">
+        <div class="avis-track" id="avis-track">
+
+          <div class="avis-card">
+            <div class="avis-header">
+              <div class="avis-avatar">LM</div>
+              <div>
+                <div class="avis-name">Léa M.</div>
+                <div class="avis-stars">★★★★★</div>
+              </div>
+            </div>
+            <p class="avis-text">« Enfin un endroit où je peux réviser sans être dérangée ! Le Wi-Fi est super rapide, les prises sont partout et le café est délicieux. Je viens presque tous les jours en période d'examens. »</p>
+          </div>
+
+          <div class="avis-card">
+            <div class="avis-header">
+              <div class="avis-avatar">TR</div>
+              <div>
+                <div class="avis-name">Tom R.</div>
+                <div class="avis-stars">★★★★★</div>
+              </div>
+            </div>
+            <p class="avis-text">« Le système de réservation est super pratique. Je bloque ma place le matin et je sais que j'aurai un coin calme pour bosser l'après-midi. Le café au lait d'avoine est incroyable en plus ! »</p>
+          </div>
+
+          <div class="avis-card">
+            <div class="avis-header">
+              <div class="avis-avatar">SC</div>
+              <div>
+                <div class="avis-name">Sofia C.</div>
+                <div class="avis-stars">★★★★★</div>
+              </div>
+            </div>
+            <p class="avis-text">« J'ai découvert ce café il y a 2 mois et je ne peux plus m'en passer. L'ambiance est vraiment studieuse sans être austère. La musique en fond est parfaite pour se concentrer. »</p>
+          </div>
+
+          <div class="avis-card">
+            <div class="avis-header">
+              <div class="avis-avatar">NB</div>
+              <div>
+                <div class="avis-name">Nathan B.</div>
+                <div class="avis-stars">★★★★☆</div>
+              </div>
+            </div>
+            <p class="avis-text">« Super endroit pour travailler en groupe. On a réservé 3 sessions côte à côte pour préparer notre projet de fin d'année. Le personnel est sympa et discret. »</p>
+          </div>
+
+          <div class="avis-card">
+            <div class="avis-header">
+              <div class="avis-avatar">AP</div>
+              <div>
+                <div class="avis-name">Amélie P.</div>
+                <div class="avis-stars">★★★★★</div>
+              </div>
+            </div>
+            <p class="avis-text">« Je cherchais depuis longtemps un café qui tolère qu'on reste plusieurs heures. Ici c'est fait pour ça ! La formule avec boisson incluse à 25 CHF est vraiment rentable pour une longue session. »</p>
+          </div>
+
+          <div class="avis-card">
+            <div class="avis-header">
+              <div class="avis-avatar">KD</div>
+              <div>
+                <div class="avis-name">Karim D.</div>
+                <div class="avis-stars">★★★★★</div>
+              </div>
+            </div>
+            <p class="avis-text">« Ouvert jusqu'à 21h, c'est une vraie bénédiction pour les étudiants comme moi qui bossent le soir. Bien meilleur que la bibliothèque qui ferme à 18h. Je recommande à 100%. »</p>
+          </div>
+
+          <div class="avis-card">
+            <div class="avis-header">
+              <div class="avis-avatar">EV</div>
+              <div>
+                <div class="avis-name">Emma V.</div>
+                <div class="avis-stars">★★★★★</div>
+              </div>
+            </div>
+            <p class="avis-text">« L'ambiance est chaleureuse et les ours endormis sur la déco sont trop mignons ! J'y viens le dimanche pour rédiger mes travaux. C'est devenu mon bureau secondaire. »</p>
+          </div>
+
+          <div class="avis-card">
+            <div class="avis-header">
+              <div class="avis-avatar">JF</div>
+              <div>
+                <div class="avis-name">Jules F.</div>
+                <div class="avis-stars">★★★★☆</div>
+              </div>
+            </div>
+            <p class="avis-text">« Très bon café, ambiance calme, personnel attentionné. J'aurais juste aimé plus de tables disponibles sans réservation, mais le système en ligne est rapide à utiliser. »</p>
+          </div>
+
+          <div class="avis-card">
+            <div class="avis-header">
+              <div class="avis-avatar">CL</div>
+              <div>
+                <div class="avis-name">Chloé L.</div>
+                <div class="avis-stars">★★★★★</div>
+              </div>
+            </div>
+            <p class="avis-text">« Un vrai havre de paix en pleine ville. J'y viens avec mon ordi pour travailler sur mon mémoire. Les snacks sont bons et les cafés excellents. On se sent vraiment chez soi. »</p>
+          </div>
+
+          <div class="avis-card">
+            <div class="avis-header">
+              <div class="avis-avatar">MO</div>
+              <div>
+                <div class="avis-name">Matteo O.</div>
+                <div class="avis-stars">★★★★★</div>
+              </div>
+            </div>
+            <p class="avis-text">« Je viens en session de 3h minimum à chaque fois. C'est productif, agréable et les boissons sont excellentes. Vraiment pensé pour les étudiants, je conseille à tous mes camarades ! »</p>
+          </div>
+
+        </div>
+      </div>
+
+      <button class="avis-arrow right" id="avis-next">&#8594;</button>
+    </div>
+
+    <div class="avis-dots" id="avis-dots"></div>
+  </section>
+
+  <!-- ══════════════ SECTION FAQ ══════════════ -->
+  <section id="faq">
+    <h2 class="section-title">FAQ</h2>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <span>Peut-on venir étudier sans réservation ?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Oui, les places libres sont accessibles sans réservation. Cependant, pour être sûr d'avoir une place, notamment en période d'examens, nous recommandons de réserver à l'avance via notre formulaire en ligne.</div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <span>Un accès Wi‑Fi est-il proposé sur place ?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Absolument ! Un Wi-Fi haut débit gratuit est disponible pour tous nos clients. Les identifiants de connexion sont affichés sur les tables et disponibles sur demande au comptoir.</div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <span>Une limite de temps ?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Si vous venez sans réservation, vous pouvez rester aussi longtemps que vous le souhaitez. En revanche, si vous avez réservé un créneau, il est nécessaire de respecter l’horaire choisi.</div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <span>Des prises électriques sont‑elles disponibles pour recharger ses appareils ?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Oui, plusieurs tables sont équipées de prises électriques et de ports USB. Ces places sont disponibles en priorité pour les personnes qui ont réservé une session.</div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <span>Le café est-il adapté aux groupes d'étude ?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Oui ! Nous disposons de tables pouvant accueillir jusqu'à 4 personnes. Pour les groupes plus grands, nous vous conseillons de réserver plusieurs sessions en même temps afin de garantir des places côte à côte.</div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <span>Peut-on apporter son propre repas ?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Les repas extérieurs ne sont pas autorisés. Toutefois, notre carte propose une sélection de snacks, sandwichs et petites restaurations adaptés aux longues sessions de travail. Les boissons extérieures ne sont pas acceptées non plus.</div>
+    </div>
+
+  </section>
+
+  <!-- ══════════════ SCRIPT AVIS ══════════════ -->
+  <script>
+    const CARDS_VISIBLE = 3;
+    let avisIndex = 0;
+
+    function initAvis() {
+      const cards = document.querySelectorAll('.avis-card');
+      const total = cards.length;
+      const maxIndex = total - CARDS_VISIBLE;
+      const dots = document.getElementById('avis-dots');
+
+      // Créer les points
+      for (let i = 0; i <= maxIndex; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'avis-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => goTo(i));
+        dots.appendChild(dot);
+      }
+
+      function goTo(index) {
+        avisIndex = Math.max(0, Math.min(index, maxIndex));
+        const cardWidth = document.querySelector('.avis-card').offsetWidth + 20;
+        document.getElementById('avis-track').style.transform = `translateX(-${avisIndex * cardWidth}px)`;
+        document.querySelectorAll('.avis-dot').forEach((d, i) => d.classList.toggle('active', i === avisIndex));
+      }
+
+      document.getElementById('avis-prev').addEventListener('click', () => goTo(avisIndex - 1));
+      document.getElementById('avis-next').addEventListener('click', () => goTo(avisIndex + 1));
+    }
+
+    window.addEventListener('load', initAvis);
+  </script>
+
+  <!-- ══════════════ SCRIPT POPUP ══════════════ -->
+  <script>
+    let popupShown = false;
+
+    function openPopup() {
+      document.getElementById('popup-overlay').style.display = 'flex';
+    }
+
+    window.addEventListener("scroll", function () {
+      if (popupShown) return;
+      const section = document.getElementById("reserver-horaire");
+      if (!section) return;
+      const bottom = section.getBoundingClientRect().bottom;
+      if (bottom < 0) {
+        popupShown = true;
+        openPopup();
+      }
+    });
+  </script>
+
+  <!-- ══════════════ SCRIPT FAQ ══════════════ -->
+  <script>
+    function toggleFaq(item) {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+  </script>
+
+  <!-- ══════════════ SCRIPT PLAN HORAIRE ══════════════ -->
+  <script>
+    function openPlanHoraire(e) {
+      e.preventDefault();
+      const overlay = document.getElementById('plan-overlay');
+      overlay.style.display = 'flex';
+
+      // Heure actuelle
+      const now = new Date();
+      const h = now.getHours() + now.getMinutes() / 60;
+      const OPEN = 8, CLOSE = 21, DURATION = CLOSE - OPEN;
+
+      // Barre de remplissage (zone ouverte)
+      document.getElementById('plan-timeline-fill').style.width = '100%';
+
+      // Indicateur "maintenant"
+      const nowEl = document.getElementById('plan-timeline-now');
+      const label = document.getElementById('plan-now-label');
+      if (h >= OPEN && h <= CLOSE) {
+        const pct = ((h - OPEN) / DURATION) * 100;
+        nowEl.style.left = pct + '%';
+        nowEl.style.display = 'block';
+        const hh = String(now.getHours()).padStart(2,'0');
+        const mm = String(now.getMinutes()).padStart(2,'0');
+        label.textContent = 'Maintenant : ' + hh + 'h' + mm + ' — Le café est ouvert';
+        label.style.color = '#4caf50';
+      } else {
+        nowEl.style.display = 'none';
+        label.textContent = 'Le café est actuellement fermé';
+        label.style.color = '#d94f6b';
+      }
+    }
+
+    function closePlanHoraire() {
+      document.getElementById('plan-overlay').style.display = 'none';
+    }
+  </script>
+
+
+  <!-- ══════════════ SCRIPTS RÉSERVATION + CALENDRIER + CHECKOUT ══════════════ -->
+  <script>
+    // ── Variables globales ──
+    let sessions = 1;
+    let selectedOption = 1;
+    const PRIX = { 1: 20, 2: 25 };
+
+    const JOURS = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+    const MOIS = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+    const CRENEAUX = ['8h00','9h00','10h00','11h00','12h00','14h00','15h00','16h00','17h00','18h00','19h00'];
+
+    let today = new Date();
+    let current = new Date(today.getFullYear(), today.getMonth(), 1);
+    let selectedDate = null;
+    let selectedCreneau = null;
+
+    // ── Total ──
+    function updateTotal() {
+      const total = sessions * PRIX[selectedOption];
+      document.getElementById('total-amount').textContent = total.toFixed(2) + ' CHF';
+    }
+
+    // ── Sélection formule ──
+    function selectOption(n) {
+      selectedOption = n;
+      document.getElementById('opt1').classList.toggle('active', n === 1);
+      document.getElementById('opt2').classList.toggle('active', n === 2);
+      updateTotal();
+      saveDraft();
+    }
+
+    // ── Brouillon ──
+    function saveDraft() {
+      localStorage.setItem('scb_draft', JSON.stringify({
+        sessions,
+        option: selectedOption,
+        creneau: selectedCreneau,
+        dateISO: selectedDate ? selectedDate.toISOString() : null
+      }));
+    }
+
+    // ── Calendrier ──
+    function renderCalendar() {
+      const grid = document.getElementById('cal-grid');
+      const label = document.getElementById('cal-month-label');
+      grid.innerHTML = '';
+      label.textContent = MOIS[current.getMonth()] + ' ' + current.getFullYear();
+
+      JOURS.forEach(j => {
+        const h = document.createElement('div');
+        h.className = 'cal-header-cell';
+        h.textContent = j;
+        grid.appendChild(h);
+      });
+
+      const firstDay = new Date(current.getFullYear(), current.getMonth(), 1);
+      let startOffset = firstDay.getDay() - 1;
+      if (startOffset < 0) startOffset = 6;
+      for (let i = 0; i < startOffset; i++) {
+        const empty = document.createElement('div');
+        empty.className = 'cal-cell empty';
+        grid.appendChild(empty);
+      }
+
+      const daysInMonth = new Date(current.getFullYear(), current.getMonth() + 1, 0).getDate();
+      for (let d = 1; d <= daysInMonth; d++) {
+        const cell = document.createElement('div');
+        cell.className = 'cal-cell';
+        cell.textContent = d;
+        const cellDate = new Date(current.getFullYear(), current.getMonth(), d);
+        if (cellDate < new Date(today.getFullYear(), today.getMonth(), today.getDate())) {
+          cell.classList.add('past');
+        } else {
+          cell.addEventListener('click', () => selectDate(cellDate, cell));
+          if (selectedDate && cellDate.toDateString() === selectedDate.toDateString()) {
+            cell.classList.add('selected');
+          }
+        }
+        grid.appendChild(cell);
+      }
+    }
+
+    function selectDate(date, cell) {
+      selectedDate = date;
+      selectedCreneau = null;
+      document.getElementById('cal-selection').textContent = '';
+      document.querySelectorAll('.cal-cell').forEach(c => c.classList.remove('selected'));
+      cell.classList.add('selected');
+      renderCreneaux();
+      saveDraft();
+    }
+
+    function renderCreneaux() {
+      const container = document.getElementById('creneaux');
+      const grid = document.getElementById('creneaux-grid');
+      grid.innerHTML = '';
+      container.style.display = 'block';
+      CRENEAUX.forEach(c => {
+        const btn = document.createElement('button');
+        btn.className = 'creneau-btn';
+        btn.textContent = c;
+        if (selectedCreneau === c) btn.classList.add('selected');
+        btn.addEventListener('click', () => {
+          selectedCreneau = c;
+          document.querySelectorAll('.creneau-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          const dateStr = selectedDate.toLocaleDateString('fr-FR', {weekday:'long', day:'numeric', month:'long'});
+          document.getElementById('cal-selection').textContent = '✓ ' + dateStr + ' à ' + c;
+          saveDraft();
+        });
+        grid.appendChild(btn);
+      });
+    }
+
+    // ── Checkout ──
+    function goToCheckout() {
+      const prenom = document.getElementById('field-prenom').value.trim();
+      const nom    = document.getElementById('field-nom').value.trim();
+      const email  = document.getElementById('field-email').value.trim();
+      const tel    = document.getElementById('field-tel').value.trim();
+
+      saveDraft();
+
+      const formule = selectedOption === 1 ? 'Sans boisson' : 'Avec boisson';
+      const total = sessions * PRIX[selectedOption];
+      const dateStr = selectedDate
+        ? selectedDate.toLocaleDateString('fr-FR', {weekday:'long', day:'numeric', month:'long', year:'numeric'})
+        : '—';
+
+      localStorage.setItem('scb_order', JSON.stringify({
+        prenom, nom, email, tel,
+        formule, sessions,
+        date: dateStr,
+        creneau: selectedCreneau || '—',
+        total: total.toFixed(2) + ' CHF'
+      }));
+
+      window.location.href = 'checkout.html';
+    }
+
+    // ── Init ──
+    function init() {
+
+      // Boutons +/-
+      document.getElementById('btn-plus').addEventListener('click', () => {
+        sessions++;
+        document.getElementById('session-count').textContent = sessions;
+        updateTotal();
+        saveDraft();
+      });
+      document.getElementById('btn-minus').addEventListener('click', () => {
+        if (sessions > 1) {
+          sessions--;
+          document.getElementById('session-count').textContent = sessions;
+          updateTotal();
+          saveDraft();
+        }
+      });
+
+      // Navigation calendrier
+      document.getElementById('cal-prev').addEventListener('click', () => {
+        current.setMonth(current.getMonth() - 1);
+        renderCalendar();
+      });
+      document.getElementById('cal-next').addEventListener('click', () => {
+        current.setMonth(current.getMonth() + 1);
+        renderCalendar();
+      });
+
+      document.getElementById('creneaux').style.display = 'none';
+      renderCalendar();
+
+      // Restaure le brouillon
+      const draft = JSON.parse(localStorage.getItem('scb_draft') || '{}');
+      if (draft.sessions) {
+        sessions = draft.sessions;
+        document.getElementById('session-count').textContent = sessions;
+        updateTotal();
+      }
+      if (draft.option) {
+        selectedOption = draft.option;
+        document.getElementById('opt1').classList.toggle('active', draft.option === 1);
+        document.getElementById('opt2').classList.toggle('active', draft.option === 2);
+        updateTotal();
+      }
+      if (draft.dateISO) {
+        selectedDate = new Date(draft.dateISO);
+        current = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+        renderCalendar();
+        if (draft.creneau) {
+          selectedCreneau = draft.creneau;
+          renderCreneaux();
+          const dateStr = selectedDate.toLocaleDateString('fr-FR', {weekday:'long', day:'numeric', month:'long'});
+          document.getElementById('cal-selection').textContent = '✓ ' + dateStr + ' à ' + draft.creneau;
+        }
+      }
+
+      // Restaure les champs texte
+      ['prenom','nom','email','tel'].forEach(f => {
+        const saved = localStorage.getItem('scb_field-' + f);
+        if (saved) document.getElementById('field-' + f).value = saved;
+        document.getElementById('field-' + f).addEventListener('input', e => {
+          localStorage.setItem('scb_field-' + f, e.target.value);
+        });
+      });
+
+    }
+    init();
+  </script>
+
+  <!-- ══════════════ FOOTER ══════════════ -->
+  <footer>
+    <div class="footer-left">
+      <p class="footer-copy">&copy; 2021 Sleepy Bear Coffee</p>
+      <a class="footer-shop" href="https://sleepybearcoffee.ch/?page_id=744" target="_blank">Shop</a>
+      <p class="footer-credit">Conçu avec ♥ par<br><strong>WORLDNAUT</strong></p>
+    </div>
+    <div class="footer-socials">
+      <a class="footer-social-link" href="https://www.instagram.com/sleepybearcoffee" target="_blank" title="Instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.266.07 1.646.07 4.851s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.975-.975 2.242-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.014 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
+      <a class="footer-social-link" href="#" title="Facebook">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.884v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+      </a>
+      <a class="footer-social-link" href="#" title="YouTube">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>

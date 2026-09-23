@@ -1,0 +1,971 @@
+/* ============================================================
+   SYLVAIN LYVE — Feuille de styles principale
+   Structure :
+     1. Import & Reset
+     2. Variables CSS
+     3. Base (html, body)
+     4. Header
+     5. Hero
+     6. Boutons
+     7. Sections (gabarit commun)
+     8. About
+     9. Projet
+    10. Vidéos
+    11. Quiz
+    12. Admin / Résultats
+    13. Détail vidéo
+    14. Formulaire Ajouter
+    15. Footer sticky
+    16. Responsive
+   ============================================================ */
+
+
+/* ── 1. IMPORT & RESET ── */
+
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;600;700&display=swap');
+
+/* Reset universel : supprime marges/paddings natifs et unifie le calcul de taille des boîtes */
+*, *::before, *::after { box-sizing: border-box; /* inclut padding et border dans la taille déclarée */ margin: 0; /* supprime les marges par défaut du navigateur */ padding: 0; /* supprime les paddings par défaut du navigateur */ }
+
+
+/* ── 2. VARIABLES CSS ── */
+
+:root {
+    --green-dark:  #1a3a1a; /* vert très sombre utilisé pour les fonds et arrière-plans profonds */
+    --green-mid:   #2d5a2d; /* vert intermédiaire pour les badges de catégorie et éléments secondaires */
+    --green-light: #4a8c4a; /* vert clair utilisé pour les bordures, accents et mises en surbrillance */
+    --blue-sky:    #4a9aba; /* bleu ciel disponible pour des variantes de couleur (non utilisé activement) */
+    --blue-light:  #87ceeb; /* bleu clair disponible comme teinte complémentaire */
+    --yellow:      #FFE033; /* jaune signature du site — couleur principale des titres et éléments mis en avant */
+    --orange:      #d97600; /* orange pour les ombres portées des textes, crée l'effet bande dessinée */
+    --white:       #f0f8f0; /* blanc légèrement teinté de vert pour une meilleure harmonie avec la palette */
+    /* Fond semi-transparent réutilisé sur toutes les cartes du site */
+    --card-bg:     rgba(10, 30, 10, 0.82); /* fond vert très sombre semi-transparent pour les cartes de contenu */
+}
+
+
+/* ── 3. BASE (html, body) ── */
+
+html {
+    /* Défilement fluide lors des navigations vers des ancres (#section) */
+    scroll-behavior: smooth; /* anime le défilement vers les ancres au lieu d'un saut instantané */
+    /* Nécessaire pour que l'image de fond couvre toute la hauteur même sur les pages courtes */
+    min-height: 100%; /* garantit que l'image de fond couvre toute la hauteur de la fenêtre */
+    /* Couleur de secours affichée si l'image de fond ne charge pas */
+    background-color: #2d5a2d; /* vert de secours affiché si l'image de fond ne charge pas */
+    background-image: url('img/windows-xp.jpg'); /* image de fond principale du site, visible en permanence */
+    /* L'image couvre toute la surface sans laisser de bord blanc */
+    background-size: cover; /* étire l'image pour qu'elle couvre entièrement la surface sans bord blanc */
+    /* Fixe l'image au viewport : elle ne défile pas avec la page (effet parallaxe) */
+    background-attachment: fixed; /* fixe l'image au viewport pour un effet parallaxe lors du défilement */
+    background-position: center; /* centre l'image de fond horizontalement et verticalement */
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* police principale du site pour tous les textes courants */
+    /* Flexbox colonne : indispensable pour le layout sticky-footer (header / main / footer) */
+    display: flex; /* active le mode flexbox pour organiser header, main et footer en colonne */
+    flex-direction: column; /* empile les éléments enfants verticalement (header / main / footer) */
+    /* Force le body à occuper au moins toute la hauteur de la fenêtre */
+    min-height: 100vh; /* garantit que le body occupe au moins toute la hauteur de la fenêtre */
+    color: var(--white); /* couleur de texte par défaut — blanc légèrement teinté de vert */
+    /* Transparent pour laisser apparaître l'image de fond posée sur <html> */
+    background: transparent; /* laisse l'image de fond du <html> transparaître derrière le body */
+}
+
+
+/* ── 4. HEADER ── */
+
+.site-header {
+    background: rgba(10, 28, 10, 0.92); /* fond vert très sombre presque opaque pour lisibilité du menu */
+    /* Flou de l'arrière-plan visible derrière le header semi-transparent */
+    backdrop-filter: blur(8px); /* applique un flou derrière le header pour un effet verre dépoli */
+    border-bottom: 2px solid var(--green-light); /* ligne de séparation verte sous le header */
+    /* Reste collé en haut de l'écran lors du défilement */
+    position: sticky; /* maintient le header visible en haut de l'écran pendant le défilement */
+    top: 0; /* colle le header sur le bord supérieur de la fenêtre */
+    /* Passe devant toutes les sections de contenu */
+    z-index: 100; /* assure que le header reste au-dessus de tout le contenu de la page */
+}
+
+.header-inner {
+    max-width: 1100px; /* limite la largeur du contenu du header pour centrer sur grands écrans */
+    margin: 0 auto; /* centre le header-inner horizontalement dans la page */
+    padding: 0.8rem 1.5rem; /* espace intérieur vertical et horizontal du header */
+    display: flex; /* aligne logo et navigation sur une même ligne */
+    align-items: center; /* centre verticalement le logo et la navigation */
+    justify-content: space-between; /* pousse le logo à gauche et la navigation à droite */
+    gap: 1rem; /* espace minimum entre le logo et la navigation */
+}
+
+.logo-wrap { display: flex; /* aligne l'image et le texte du logo sur une ligne */ align-items: center; /* centre verticalement l'image et le texte du logo */ gap: 0.7rem; /* espace entre l'image du logo et le texte */ text-decoration: none; /* supprime le soulignement du lien du logo */ }
+
+.logo-img { width: 44px; /* largeur fixe de l'image ronde du logo */ height: 44px; /* hauteur fixe égale à la largeur pour former un cercle parfait */ border-radius: 50%; /* rend l'image du logo parfaitement ronde */ object-fit: cover; /* recadre l'image pour qu'elle remplisse le cercle sans déformation */ border: 2px solid var(--green-light); /* contour vert autour de l'image du logo */ }
+
+/* Police display Bangers + ombre jaune/orange pour le nom du site */
+.logo-text {
+    font-family: 'Bangers', cursive; /* police display pour le nom du site, style bande dessinée */
+    font-size: 1.6rem; /* taille du nom du site dans le header */
+    letter-spacing: 2px; /* espacement entre les lettres pour renforcer l'effet display */
+    color: var(--yellow); /* nom du site en jaune signature */
+    text-shadow: 2px 2px 0 var(--orange); /* ombre orange décalée pour l'effet bande dessinée */
+}
+
+.site-nav { display: flex; /* affiche les liens de navigation sur une seule ligne */ gap: 0.4rem; /* petit espace entre chaque lien de navigation */ flex-wrap: wrap; /* permet aux liens de passer à la ligne sur les écrans intermédiaires */ }
+
+.site-nav a {
+    color: var(--white); /* couleur de texte des liens de navigation au repos */
+    text-decoration: none; /* supprime le soulignement des liens de navigation */
+    padding: 0.4rem 0.9rem; /* espace intérieur des boutons de navigation */
+    border-radius: 6px; /* arrondit les coins des boutons de navigation */
+    font-size: 0.9rem; /* taille légèrement réduite pour compacter la navigation */
+    font-weight: 600; /* graisse semi-bold pour une meilleure lisibilité des liens */
+    transition: background 0.2s, color 0.2s; /* anime le changement de fond et de couleur au survol */
+}
+
+/* Mise en surbrillance sur hover ET sur la page active (classe .active ajoutée via PHP) */
+.site-nav a:hover,
+.site-nav a.active { background: var(--green-light); /* fond vert mis en avant au survol ou sur la page courante */ color: #fff; /* texte blanc sur fond vert pour le contraste */ }
+
+
+/* ── 5. HERO ── */
+
+.hero-section {
+    min-height: 80vh; /* la section hero occupe au moins 80 % de la hauteur de l'écran */
+    display: flex; /* active flexbox pour centrer le contenu hero */
+    align-items: center; /* centre le contenu hero verticalement dans la section */
+    padding: 4rem 1.5rem 3rem; /* espace intérieur autour du contenu hero */
+    /* Dégradé sombre du haut vers le bas pour améliorer la lisibilité du texte sur l'image de fond */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(10,40,10,0.55) 100%); /* assombrit la zone hero pour rendre le texte lisible sur l'image de fond */
+}
+
+/* Grille 2 colonnes : texte à gauche, image à droite */
+.hero-content {
+    max-width: 1100px; /* limite la largeur du contenu hero pour ne pas s'étaler sur très grands écrans */
+    margin: 0 auto; /* centre le contenu hero dans la page */
+    display: grid; /* active une grille pour disposer texte et image côte à côte */
+    grid-template-columns: 1fr 1fr; /* deux colonnes égales : texte à gauche, image à droite */
+    gap: 3rem; /* espace important entre la colonne texte et la colonne image */
+    align-items: center; /* aligne verticalement le texte et l'image au centre */
+    width: 100%; /* le contenu hero prend toute la largeur disponible jusqu'au max-width */
+}
+
+.hero-text h1 {
+    font-family: 'Bangers', cursive; /* police display pour le titre principal de la page */
+    /* clamp() : taille fluide entre 3.5rem (mobile) et 7rem (grand écran) */
+    font-size: clamp(3.5rem, 8vw, 7rem); /* taille fluide du titre : s'adapte entre mobile et grand écran */
+    line-height: 0.95; /* interligne très serré pour donner un aspect compact et percutant au titre */
+    color: var(--yellow); /* titre principal en jaune signature du site */
+    /* Double ombre portée décalée pour un effet bande dessinée */
+    text-shadow: 4px 4px 0 var(--orange), 6px 6px 0 #b85e00; /* double ombre orange pour l'effet bande dessinée du titre */
+    /* Contour fin autour de chaque lettre (propriété webkit) */
+    -webkit-text-stroke: 1px var(--orange); /* contour orange fin autour des lettres du titre */
+    letter-spacing: 3px; /* espacement large entre les lettres pour accentuer l'effet display */
+    margin-bottom: 1.2rem; /* espace sous le titre avant le slogan */
+}
+
+/* Le <span> dans le h1 contient le mot mis en blanc pour casser la couleur jaune */
+.hero-text h1 span { color: #fff; /* mot en blanc pour contraster avec le jaune du reste du titre */ -webkit-text-stroke: 1px rgba(255,255,255,0.3); /* contour blanc très subtil autour du mot en blanc */ text-shadow: 3px 3px 0 rgba(0,0,0,0.4); /* ombre sombre pour détacher le mot blanc du fond */ }
+
+.tagline { font-size: 1.1rem; /* taille légèrement agrandie pour le slogan sous le titre */ color: #c8e8c8; /* vert clair doux pour le texte du slogan */ margin-bottom: 2rem; /* espace sous le slogan avant les boutons d'appel à l'action */ line-height: 1.6; /* interligne confortable pour la lisibilité du slogan */ }
+.tagline strong { color: var(--yellow); /* met en jaune les mots importants du slogan */ }
+
+.hero-cta { display: flex; /* aligne les boutons d'action sur une ligne */ gap: 1rem; /* espace entre les boutons d'appel à l'action */ flex-wrap: wrap; /* permet aux boutons de passer à la ligne sur petits écrans */ }
+
+.hero-img-wrap { position: relative; /* référence de positionnement pour le badge absolu */ }
+
+.hero-img-wrap img {
+    width: 100%; /* l'image prend toute la largeur de sa colonne */
+    border-radius: 12px; /* arrondit les coins de l'image hero */
+    border: 3px solid var(--green-light); /* contour vert autour de l'image hero */
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5); /* ombre portée profonde sous l'image pour la faire ressortir */
+    display: block; /* supprime l'espace vide sous l'image dû au comportement inline par défaut */
+}
+
+/* Badge positionné en absolu par rapport à .hero-img-wrap (position: relative) */
+.hero-badge {
+    position: absolute; /* positionné par rapport à .hero-img-wrap qui est en position relative */
+    bottom: -12px; /* dépasse légèrement en bas de l'image pour un effet dynamique */
+    right: 12px; /* aligné à droite de l'image avec un léger retrait */
+    background: var(--yellow); /* fond jaune pour que le badge attire l'œil */
+    color: #1a1a00; /* texte vert très sombre sur fond jaune pour le contraste */
+    font-family: 'Bangers', cursive; /* police display pour le badge, cohérente avec les titres */
+    font-size: 1.1rem; /* taille lisible pour le texte du badge */
+    letter-spacing: 1px; /* léger espacement des lettres du badge */
+    padding: 0.3rem 1rem; /* espace intérieur du badge en forme de pilule */
+    border-radius: 20px; /* forme de pilule arrondie pour le badge */
+    border: 2px solid var(--orange); /* contour orange pour délimiter le badge sur l'image */
+}
+
+
+/* ── 6. BOUTONS ── */
+
+.btn {
+    display: inline-block; /* permet au bouton d'avoir des dimensions tout en restant dans le flux du texte */
+    padding: 0.7rem 1.6rem; /* espace intérieur confortable pour les boutons */
+    border-radius: 8px; /* arrondit légèrement les coins des boutons */
+    font-weight: 700; /* texte en gras pour les boutons */
+    font-size: 0.95rem; /* taille de texte légèrement réduite pour les boutons */
+    text-decoration: none; /* supprime le soulignement quand le bouton est un lien */
+    cursor: pointer; /* affiche le curseur main pour indiquer l'interactivité */
+    border: none; /* supprime la bordure native des éléments <button> */
+    transition: transform 0.15s, box-shadow 0.15s; /* anime la montée et l'ombre du bouton au survol */
+}
+
+/* Légère élévation au survol pour tous les boutons */
+.btn:hover { transform: translateY(-2px); /* remonte le bouton de 2px au survol pour simuler une élévation */ box-shadow: 0 4px 16px rgba(0,0,0,0.3); /* ombre portée au survol pour renforcer l'effet d'élévation */ }
+
+.btn-primary       { background: var(--yellow); /* fond jaune signature pour le bouton d'action principal */ color: #1a1a00; /* texte sombre pour le contraste sur fond jaune */ }
+.btn-primary:hover { background: #ffd000; /* jaune légèrement plus intense au survol du bouton principal */ }
+
+.btn-outline       { background: #1a3a1a; /* fond vert sombre pour le bouton secondaire */ color: #ffffff; /* texte blanc sur fond vert sombre */ border: 2px solid var(--green-light); /* contour vert clair définissant le style "outline" */ }
+.btn-outline:hover { background: #2d6e2d; /* fond vert plus clair au survol du bouton outline */ color: #ffffff; /* texte blanc conservé au survol */ }
+
+.btn-danger        { background: #c0392b; /* fond rouge pour les actions destructrices (suppression) */ color: #fff; /* texte blanc sur fond rouge pour le contraste */ }
+.btn-danger:hover  { background: #e74c3c; /* rouge plus vif au survol du bouton danger */ }
+
+
+/* ── 7. SECTIONS (gabarit commun) ── */
+
+/* Conteneur centré réutilisé dans toutes les sections */
+.section-inner { max-width: 1100px; /* limite la largeur du contenu de chaque section */ margin: 0 auto; /* centre le contenu de la section dans la page */ padding: 0 1.5rem; /* espace latéral pour éviter que le contenu touche les bords */ }
+
+section { padding: 4rem 0; /* espace vertical généreux au-dessus et en dessous de chaque section */ }
+
+/* Titre de section avec police display et ombre bande dessinée (idem hero) */
+.section-title {
+    font-family: 'Bangers', cursive; /* police display cohérente avec les titres hero pour les titres de section */
+    font-size: clamp(2rem, 5vw, 3.2rem); /* taille fluide des titres de section adaptée à tous les écrans */
+    color: var(--yellow); /* couleur jaune signature pour tous les titres de section */
+    text-shadow: 4px 4px 0 var(--orange), 6px 6px 0 #b85e00; /* double ombre orange pour l'effet bande dessinée des titres */
+    -webkit-text-stroke: 1px var(--orange); /* contour orange fin autour des lettres des titres de section */
+    letter-spacing: 2px; /* espacement des lettres pour renforcer l'effet display des titres */
+    margin-bottom: 0.5rem; /* espace réduit sous le titre avant la ligne décorative */
+    text-align: center; /* centre les titres de section */
+}
+
+.section-title span { color: #fff; /* mot alternatif en blanc pour briser la couleur jaune du titre */ -webkit-text-stroke: 1px rgba(255,255,255,0.2); /* contour blanc très subtil autour du mot en blanc */ text-shadow: 3px 3px 0 rgba(0,0,0,0.3); /* ombre sombre légère pour détacher le mot blanc du fond */ }
+
+/* Ligne décorative jaune centrée sous le titre de section */
+.section-line { width: 60px; /* largeur fixe de la ligne décorative sous le titre */ height: 4px; /* épaisseur de la ligne décorative */ background: var(--yellow); /* couleur jaune signature pour la ligne décorative */ margin: 0 auto 2.5rem; /* centre la ligne et crée un espace sous elle avant le contenu */ border-radius: 2px; /* arrondit légèrement les extrémités de la ligne décorative */ }
+
+
+/* ── 8. ABOUT ── */
+
+.about-section { background: rgba(0,0,0,0.35); /* fond noir semi-transparent pour distinguer la section About */ }
+
+/* Grille 2 colonnes : photos à gauche, texte à droite */
+.about-grid { display: grid; /* active la grille pour la section About */ grid-template-columns: 1fr 1fr; /* deux colonnes égales : photos à gauche, texte à droite */ gap: 2.5rem; /* espace entre la grille de photos et le texte */ align-items: start; /* aligne le contenu en haut de chaque colonne */ }
+
+/* Sous-grille 2×2 pour les photos (la dernière s'étale sur toute la largeur via .img-frame-wide) */
+.about-imgs { display: grid; /* grille interne pour les photos de la section About */ grid-template-columns: 1fr 1fr; /* deux colonnes égales pour les photos About */ gap: 0.8rem; /* espace réduit entre les photos de la grille About */ }
+
+.img-frame { border-radius: 10px; /* arrondit les coins des cadres de photos */ overflow: hidden; /* masque les débordements pour respecter le border-radius */ border: 2px solid var(--green-light); /* contour vert autour des cadres de photos */ background: #000; /* fond noir visible pendant le chargement des images */ }
+.img-frame img { width: 100%; /* l'image remplit toute la largeur de son cadre */ height: auto; /* hauteur automatique pour conserver les proportions */ display: block; /* supprime l'espace vide sous les images en mode inline */ }
+
+/* Fait s'étaler une image sur les 2 colonnes de .about-imgs */
+.img-frame-wide { grid-column: 1 / -1; /* étale l'image large sur toutes les colonnes de la grille */ }
+
+.about-text h3 {
+    font-family: 'Bangers', cursive; /* police display cohérente pour les sous-titres de la section About */
+    font-size: 1.8rem; /* taille intermédiaire pour les sous-titres About */
+    color: var(--yellow); /* sous-titres About en jaune signature */
+    text-shadow: 3px 3px 0 var(--orange); /* ombre orange pour l'effet bande dessinée des sous-titres */
+    -webkit-text-stroke: 1px var(--orange); /* contour orange fin autour des lettres des sous-titres */
+    margin-bottom: 1rem; /* espace sous les sous-titres avant les paragraphes */
+    letter-spacing: 1px; /* léger espacement des lettres pour les sous-titres */
+}
+
+.about-text p        { color: #c8e8c8; /* vert clair doux pour le texte des paragraphes About */ line-height: 1.7; /* interligne généreux pour la lisibilité des paragraphes */ margin-bottom: 1rem; /* espace sous chaque paragraphe */ font-size: 0.95rem; /* taille légèrement réduite pour le texte courant */ }
+.about-text p strong { color: var(--yellow); /* met en jaune les mots importants dans les paragraphes About */ }
+
+.stats-row   { display: flex; /* aligne les statistiques sur une ligne */ gap: 1.5rem; /* espace entre chaque statistique */ margin-top: 1.5rem; /* espace au-dessus de la rangée de statistiques */ flex-wrap: wrap; /* permet aux statistiques de passer à la ligne si nécessaire */ }
+.stat        { text-align: center; /* centre le chiffre et le libellé de chaque statistique */ }
+.stat-number { font-family: 'Bangers', cursive; /* police display pour les grands chiffres des statistiques */ font-size: 2rem; /* grande taille pour mettre en valeur les chiffres */ color: var(--yellow); /* chiffres des statistiques en jaune signature */ text-shadow: 2px 2px 0 var(--orange); /* ombre orange pour l'effet bande dessinée des chiffres */ }
+.stat-label  { font-size: 0.75rem; /* petite taille pour les libellés des statistiques */ color: #a8c8a8; /* vert clair atténué pour les libellés secondaires */ text-transform: uppercase; /* libellés en majuscules pour un effet label */ letter-spacing: 1px; /* espacement des lettres pour renforcer l'effet label */ }
+
+
+/* ── 9. PROJET ── */
+
+.projet-section { background: rgba(0,20,0,0.4); /* fond vert très sombre semi-transparent pour la section Projet */ }
+
+/* Carte projet : grille 2 colonnes (image + texte), bord arrondi, fond semi-transparent */
+.projet-card {
+    display: grid; /* active la grille pour disposer image et texte côte à côte */
+    grid-template-columns: 1fr 1fr; /* deux colonnes égales : image à gauche, texte à droite */
+    gap: 2.5rem; /* espace entre l'image et le texte de la carte projet */
+    align-items: center; /* aligne verticalement l'image et le texte au centre */
+    background: var(--card-bg); /* fond semi-transparent sombre de la carte projet */
+    border-radius: 16px; /* arrondit fortement les coins de la carte projet */
+    overflow: hidden; /* masque les débordements pour respecter le border-radius */
+    border: 2px solid var(--green-light); /* contour vert autour de la carte projet */
+    padding: 2rem; /* espace intérieur généreux dans la carte projet */
+}
+
+.projet-img img { width: 100%; /* l'image projet remplit toute la largeur de sa colonne */ border-radius: 10px; /* arrondit les coins de l'image projet */ display: block; /* supprime l'espace vide sous l'image */ }
+
+/* Étiquette de catégorie en forme de pilule */
+.projet-label {
+    background: var(--yellow); /* fond jaune pour l'étiquette de catégorie */
+    color: #1a1a00; /* texte sombre pour le contraste sur fond jaune */
+    font-size: 0.8rem; /* petite taille pour l'étiquette de catégorie */
+    font-weight: 700; /* graisse forte pour l'étiquette de catégorie */
+    padding: 0.2rem 0.8rem; /* espace intérieur pour la forme de pilule */
+    border-radius: 20px; /* forme de pilule arrondie pour l'étiquette */
+    text-transform: uppercase; /* texte en majuscules pour l'étiquette */
+    letter-spacing: 1px; /* espacement des lettres de l'étiquette */
+}
+
+.projet-content h3 { font-family: 'Bangers', cursive; /* police display pour le titre de la carte projet */ font-size: 3rem; /* grande taille pour le titre principal de la carte projet */ color: #fff; /* titre en blanc pour contraster avec le fond sombre */ text-shadow: 3px 3px 0 rgba(0,0,0,0.5); /* ombre sombre pour détacher le titre blanc du fond */ letter-spacing: 2px; /* espacement des lettres du titre projet */ margin: 0.8rem 0; /* espace au-dessus et en dessous du titre */ }
+.projet-content p        { color: #c8e8c8; /* vert clair pour le texte descriptif du projet */ line-height: 1.6; /* interligne confortable pour le texte du projet */ margin-bottom: 0.8rem; /* espace sous chaque paragraphe du projet */ font-size: 0.95rem; /* taille légèrement réduite pour le texte courant du projet */ }
+.projet-content p strong { color: var(--yellow); /* met en jaune les mots importants du texte projet */ }
+.projet-content em       { color: #a8c8a8; /* vert clair atténué pour les textes en italique du projet */ font-size: 0.9rem; /* légèrement réduit pour les textes em du projet */ }
+
+
+/* ── 10. VIDÉOS ── */
+
+.videos-section { background: rgba(0,0,0,0.3); /* fond noir semi-transparent pour la section Vidéos */ }
+
+/* Grille fluide : les cartes s'adaptent automatiquement à la largeur disponible */
+.videos-grid { display: grid; /* active la grille pour les cartes vidéo */ grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* colonnes fluides : au moins 280px, s'adaptent à la largeur disponible */ gap: 1.5rem; /* espace entre les cartes vidéo */ }
+
+.video-card {
+    background: var(--card-bg); /* fond semi-transparent sombre de chaque carte vidéo */
+    border-radius: 12px; /* arrondit les coins des cartes vidéo */
+    overflow: hidden; /* masque les débordements de la miniature pour respecter le border-radius */
+    border: 1px solid var(--green-light); /* contour vert fin autour des cartes vidéo */
+    transition: transform 0.2s, box-shadow 0.2s; /* anime la montée et l'ombre de la carte au survol */
+}
+
+/* Légère élévation de la carte au survol */
+.video-card:hover { transform: translateY(-4px); /* remonte la carte de 4px au survol */ box-shadow: 0 8px 24px rgba(0,0,0,0.4); /* ombre portée au survol pour l'effet d'élévation de la carte */ }
+
+/* Hauteur fixe sur la miniature pour aligner les cartes entre elles */
+.video-card img { width: 100%; /* la miniature remplit toute la largeur de la carte */ height: 180px; /* hauteur fixe pour uniformiser toutes les miniatures vidéo */ object-fit: cover; /* recadre la miniature pour remplir la hauteur sans déformation */ display: block; /* supprime l'espace vide sous la miniature */ }
+
+.card-body     { padding: 1rem; /* espace intérieur du corps de la carte vidéo */ }
+.card-categorie { background: var(--green-mid); /* fond vert intermédiaire pour le badge de catégorie */ color: #a8e8a8; /* vert clair pour le texte du badge de catégorie */ font-size: 0.75rem; /* petite taille pour le badge de catégorie */ font-weight: 600; /* semi-bold pour le texte du badge */ padding: 0.2rem 0.6rem; /* espace intérieur du badge de catégorie */ border-radius: 4px; /* léger arrondi du badge de catégorie */ text-transform: uppercase; /* texte en majuscules pour le badge de catégorie */ }
+.card-titre    { font-size: 1rem; /* taille standard pour le titre de la carte vidéo */ font-weight: 700; /* titre en gras pour la carte vidéo */ margin: 0.6rem 0 0.4rem; /* espace au-dessus et en dessous du titre de la carte */ line-height: 1.3; /* interligne serré pour le titre de la carte */ }
+.card-titre a  { color: #fff; /* lien du titre de la carte en blanc */ text-decoration: none; /* supprime le soulignement du lien du titre */ }
+.card-titre a:hover { color: var(--yellow); /* lien du titre en jaune au survol */ }
+.card-meta     { font-size: 0.8rem; /* petite taille pour les métadonnées de la carte */ color: #a8c8a8; /* vert clair atténué pour les métadonnées secondaires */ display: flex; /* aligne les métadonnées sur une ligne */ gap: 1rem; /* espace entre les éléments de métadonnées */ margin-bottom: 0.8rem; /* espace sous les métadonnées avant les boutons */ }
+.card-actions  { display: flex; /* aligne les boutons d'action de la carte */ gap: 0.5rem; /* espace entre les boutons d'action */ }
+
+
+/* ── 11. QUIZ ── */
+
+.quiz-wrapper { max-width: 780px; /* limite la largeur du quiz pour une meilleure lisibilité */ margin: 0 auto; /* centre le quiz dans la page */ padding: 3rem 1.5rem; /* espace autour du contenu du quiz */ }
+
+.quiz-start-block { background: var(--card-bg); /* fond semi-transparent pour le bloc de démarrage du quiz */ border-radius: 12px; /* arrondit les coins du bloc de démarrage */ padding: 1.5rem; /* espace intérieur du bloc de démarrage */ margin-bottom: 2rem; /* espace sous le bloc de démarrage avant les questions */ border: 1px solid var(--green-light); /* contour vert fin autour du bloc de démarrage */ }
+.quiz-start-block label { display: block; /* le label occupe toute la largeur au-dessus du champ */ font-weight: 600; /* label en semi-bold */ color: #a8c8a8; /* vert clair pour la couleur du label */ margin-bottom: 0.5rem; /* espace sous le label avant le champ de saisie */ }
+.quiz-start-block input {
+    width: 100%; /* le champ de saisie du nom occupe toute la largeur disponible */
+    padding: 0.7rem 1rem; /* espace intérieur confortable du champ de saisie */
+    border-radius: 8px; /* arrondit les coins du champ de saisie */
+    border: 1px solid var(--green-light); /* contour vert autour du champ de saisie */
+    background: rgba(0,0,0,0.4); /* fond sombre semi-transparent du champ de saisie */
+    color: #fff; /* texte blanc dans le champ de saisie */
+    font-size: 1rem; /* taille standard pour le texte saisi */
+}
+
+.question-card {
+    background: var(--card-bg); /* fond semi-transparent sombre de chaque carte de question */
+    border-radius: 12px; /* arrondit les coins de la carte de question */
+    padding: 1.5rem; /* espace intérieur de la carte de question */
+    margin-bottom: 1.5rem; /* espace entre les cartes de questions */
+    /* Bordure subtile, s'illumine quand la carte reçoit le focus (accessibilité clavier) */
+    border: 1px solid rgba(74,140,74,0.4); /* bordure verte subtile au repos */
+    transition: border-color 0.2s; /* anime le changement de couleur de la bordure au focus */
+}
+
+/* :focus-within s'active dès qu'un enfant de la carte est focalisé */
+.question-card:focus-within { border-color: var(--green-light); /* met en valeur la carte active avec une bordure verte pleine */ }
+
+.question-num  { font-size: 0.8rem; /* petite taille pour le numéro de la question */ color: var(--yellow); /* numéro de question en jaune pour le mettre en avant */ font-weight: 700; /* graisse forte pour le numéro de question */ margin-bottom: 0.5rem; /* espace sous le numéro avant le texte de la question */ text-transform: uppercase; /* numéro en majuscules */ letter-spacing: 1px; /* espacement des lettres du numéro de question */ }
+.question-text { font-size: 1.05rem; /* taille légèrement agrandie pour le texte de la question */ font-weight: 600; /* texte de question en semi-bold */ margin-bottom: 1.2rem; /* espace sous la question avant les options de réponse */ color: #e8f8e8; /* blanc légèrement teinté de vert pour le texte des questions */ }
+
+/* Grille 2 colonnes pour les options A/B et C/D */
+.options { display: grid; /* grille pour les options de réponse */ grid-template-columns: 1fr 1fr; /* deux colonnes pour les options A/B et C/D */ gap: 0.6rem; /* espace entre les options de réponse */ }
+
+.option-label {
+    display: flex; /* aligne la pastille lettre et le texte de l'option */
+    align-items: center; /* centre verticalement la pastille et le texte */
+    gap: 0.7rem; /* espace entre la pastille lettre et le texte de l'option */
+    background: rgba(255,255,255,0.05); /* fond blanc très léger pour les options non sélectionnées */
+    border: 2px solid rgba(74,140,74,0.4); /* bordure verte subtile autour de chaque option */
+    border-radius: 8px; /* arrondit les coins de chaque option */
+    padding: 0.7rem 1rem; /* espace intérieur de chaque option */
+    cursor: pointer; /* curseur main pour indiquer que l'option est cliquable */
+    transition: background 0.2s, border-color 0.2s; /* anime le fond et la bordure au survol */
+    font-size: 0.9rem; /* taille légèrement réduite pour le texte des options */
+}
+
+.option-label:hover { background: rgba(74,140,74,0.2); /* fond vert au survol d'une option */ border-color: var(--green-light); /* bordure verte pleine au survol d'une option */ }
+
+/* Le vrai input radio est masqué ; la mise en forme visuelle est gérée par le label */
+.option-label input[type="radio"] { display: none; /* masque le radio natif, remplacé visuellement par le label */ }
+
+/* :has() cible le label dont le radio enfant est coché — style natif CSS sans JS */
+.option-label:has(input:checked) { background: rgba(74,140,74,0.35); /* fond vert plus opaque pour l'option sélectionnée */ border-color: var(--yellow); /* bordure jaune pour signaler l'option sélectionnée */ color: var(--yellow); /* texte jaune pour l'option sélectionnée */ }
+
+/* Pastille lettre (A, B, C, D) alignée dans un cercle vert */
+.opt-letter {
+    background: var(--green-mid); /* fond vert intermédiaire pour la pastille lettre */
+    color: #fff; /* lettre en blanc sur fond vert */
+    font-weight: 700; /* lettre en gras */
+    font-size: 0.8rem; /* petite taille pour la lettre dans la pastille */
+    width: 24px; /* largeur fixe de la pastille lettre */
+    height: 24px; /* hauteur fixe égale à la largeur pour former un cercle */
+    border-radius: 50%; /* forme circulaire de la pastille lettre */
+    display: flex; /* active flexbox pour centrer la lettre dans le cercle */
+    align-items: center; /* centre verticalement la lettre dans le cercle */
+    justify-content: center; /* centre horizontalement la lettre dans le cercle */
+    flex-shrink: 0; /* empêche la pastille de se réduire si le texte est long */
+}
+
+/* ── Select personnalisé (question de type liste déroulante) ── */
+
+/* Wrapper relatif nécessaire pour positionner une éventuelle icône de flèche custom */
+.select-wrap { position: relative; /* référence de positionnement pour une éventuelle flèche personnalisée */ }
+
+.quiz-select {
+    width: 100%; /* le select déroulant occupe toute la largeur disponible */
+    padding: 0.75rem 1rem; /* espace intérieur confortable du select déroulant */
+    border-radius: 8px; /* arrondit les coins du select */
+    border: 2px solid rgba(74,140,74,0.4); /* bordure verte subtile autour du select */
+    background: rgba(0,0,0,0.5); /* fond sombre semi-transparent du select */
+    color: #fff; /* texte blanc dans le select */
+    font-size: 0.95rem; /* taille légèrement réduite pour le texte du select */
+    cursor: pointer; /* curseur main pour le select */
+    /* Supprime la flèche native du navigateur pour uniformiser l'apparence */
+    appearance: none; /* supprime le style natif du select pour un rendu uniforme */
+    -webkit-appearance: none; /* supprime le style natif webkit du select */
+    /* Force le thème sombre sur la liste déroulante native */
+    color-scheme: dark; /* force le thème sombre sur la liste native dépliée */
+}
+
+.quiz-select:focus { outline: none; /* supprime le contour focus natif du navigateur sur le select */ border-color: var(--green-light); /* met en évidence le select avec une bordure verte quand il est actif */ }
+
+/* ── Radio visible (question de type choix unique avec radio stylisé) ── */
+
+.radio-group { display: flex; /* active flexbox pour empiler les options radio */ flex-direction: column; /* empile les options radio verticalement */ gap: 0.6rem; /* espace entre chaque option radio */ }
+
+.radio-label {
+    display: flex; /* aligne le radio et le texte sur une ligne */
+    align-items: center; /* centre verticalement le radio et le texte */
+    gap: 0.8rem; /* espace entre le radio redessiné et le texte de l'option */
+    background: rgba(255,255,255,0.05); /* fond blanc très léger pour les options radio */
+    border: 2px solid rgba(74,140,74,0.4); /* bordure verte subtile autour des options radio */
+    border-radius: 8px; /* arrondit les coins des options radio */
+    padding: 0.75rem 1rem; /* espace intérieur des options radio */
+    cursor: pointer; /* curseur main pour indiquer que l'option radio est cliquable */
+    transition: background 0.2s, border-color 0.2s; /* anime fond et bordure au survol des options radio */
+    font-size: 0.9rem; /* taille légèrement réduite pour le texte des options radio */
+    /* Hauteur minimale pour faciliter le clic sur mobile */
+    min-height: 48px; /* hauteur minimale de 48px pour faciliter le tap sur écrans tactiles */
+}
+
+.radio-label:hover { background: rgba(74,140,74,0.2); /* fond vert au survol d'une option radio */ border-color: var(--green-light); /* bordure verte pleine au survol d'une option radio */ }
+
+/* Input radio entièrement redessiné en cercle blanc avec bordure verte */
+.radio-label input[type="radio"] {
+    appearance: none; /* supprime le style natif du radio pour le redessiner entièrement */
+    -webkit-appearance: none; /* supprime le style natif webkit du radio */
+    width: 18px; /* largeur fixe du cercle radio redessiné */
+    height: 18px; /* hauteur fixe égale à la largeur pour former un cercle */
+    border-radius: 50%; /* forme circulaire du radio redessiné */
+    border: 2px solid #a8c8a8; /* bordure vert clair autour du radio au repos */
+    background: #fff; /* fond blanc du radio redessiné */
+    flex-shrink: 0; /* empêche le cercle radio de se réduire */
+    position: relative; /* référence pour le pseudo-élément ::after (pastille centrale) */
+    cursor: pointer; /* curseur main pour le radio */
+    transition: border-color 0.2s; /* anime la couleur de la bordure au changement d'état */
+}
+
+/* Pastille noire centrale affichée uniquement quand le radio est coché */
+.radio-label input[type="radio"]::after {
+    content: ''; /* pseudo-élément vide formant la pastille centrale du radio coché */
+    position: absolute; /* positionné par rapport au cercle radio (position: relative) */
+    top: 50%; /* point de départ vertical au centre du cercle */
+    left: 50%; /* point de départ horizontal au centre du cercle */
+    transform: translate(-50%, -50%); /* centrage parfait de la pastille dans le cercle */
+    width: 8px; /* largeur de la pastille centrale du radio coché */
+    height: 8px; /* hauteur de la pastille centrale du radio coché */
+    border-radius: 50%; /* forme circulaire de la pastille centrale */
+    background: #000; /* pastille noire pour contraster avec le fond blanc */
+    /* Invisible par défaut, révélée via opacity à l'état :checked */
+    opacity: 0; /* pastille invisible au repos, rendue visible via :checked */
+    transition: opacity 0.15s; /* anime l'apparition de la pastille quand le radio est coché */
+}
+
+.radio-label input[type="radio"]:checked        { border-color: var(--yellow); /* bordure jaune quand le radio est coché */ background: #fff; /* fond blanc conservé quand le radio est coché */ }
+.radio-label input[type="radio"]:checked::after { opacity: 1; /* rend visible la pastille centrale quand le radio est coché */ }
+
+/* Colorie tout le label quand son radio enfant est coché */
+.radio-label:has(input:checked) { background: rgba(74,140,74,0.35); /* fond vert pour le label dont le radio est coché */ border-color: var(--yellow); /* bordure jaune pour le label dont le radio est coché */ color: var(--yellow); /* texte jaune pour le label dont le radio est coché */ }
+
+/* flex:1 pour que le texte de l'option occupe tout l'espace restant */
+.radio-text { flex: 1; /* le texte de l'option radio prend tout l'espace restant après le cercle */ }
+
+/* ── Soumission et erreurs ── */
+
+.quiz-submit       { text-align: center; /* centre le bouton de soumission du quiz */ margin-top: 2rem; /* espace au-dessus du bouton de soumission */ }
+.quiz-submit .btn  { font-size: 1.1rem; /* bouton de soumission légèrement plus grand que les autres */ padding: 0.9rem 2.5rem; /* espace intérieur généreux pour le bouton de soumission */ }
+
+.form-erreurs    { background: rgba(180,30,30,0.3); /* fond rouge semi-transparent pour le bloc d'erreurs */ border: 1px solid #e74c3c; /* contour rouge autour du bloc d'erreurs */ border-radius: 8px; /* arrondit les coins du bloc d'erreurs */ padding: 1rem 1.5rem; /* espace intérieur du bloc d'erreurs */ margin-bottom: 1.5rem; /* espace sous le bloc d'erreurs avant le contenu */ }
+.form-erreurs li { color: #ff8080; /* rouge clair pour le texte des messages d'erreur */ font-size: 0.9rem; /* taille légèrement réduite pour les messages d'erreur */ }
+
+/* ── Résultat du quiz ── */
+
+.quiz-result { text-align: center; /* centre tout le contenu du résultat du quiz */ padding: 2rem 0; /* espace vertical autour du résultat du quiz */ }
+
+/* Score affiché en très grande police Bangers */
+.result-score      { font-family: 'Bangers', cursive; /* police display pour l'affichage du score final */ font-size: 5rem; /* très grande taille pour mettre en valeur le score */ color: var(--yellow); /* score en jaune pour attirer l'attention */ text-shadow: 4px 4px 0 var(--orange); /* ombre orange pour l'effet bande dessinée du score */ line-height: 1; /* interligne serré pour le score */ }
+.result-score span { font-size: 2.5rem; /* taille réduite pour le dénominateur du score (ex: /10) */ color: #a8c8a8; /* vert clair atténué pour le dénominateur */ }
+
+/* Ombres multiples pour garantir la lisibilité du titre sur n'importe quel fond */
+.result-title { font-family: 'Bangers', cursive; /* police display pour le titre du résultat */ font-size: 2rem; /* taille du titre de résultat */ margin: 0.5rem 0; /* espace au-dessus et en dessous du titre de résultat */ letter-spacing: 1px; /* léger espacement des lettres du titre de résultat */ color: #fff; /* titre de résultat en blanc */ text-shadow: 2px 2px 6px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6); /* double ombre sombre pour lisibilité sur tous les fonds */ }
+.result-msg   { color: #fff; /* message de résultat en blanc */ font-weight: 600; /* message en semi-bold */ text-shadow: 1px 1px 4px rgba(0,0,0,0.9); /* ombre forte pour garantir la lisibilité du message sur le fond */ margin-bottom: 1.5rem; /* espace sous le message avant les boutons d'action */ }
+
+.result-actions { display: flex; /* aligne les boutons d'action du résultat */ gap: 1rem; /* espace entre les boutons d'action */ justify-content: center; /* centre les boutons d'action */ flex-wrap: wrap; /* permet aux boutons de passer à la ligne */ margin-bottom: 2rem; /* espace sous les boutons d'action avant le récapitulatif */ }
+
+/* Bloc dépliable (<details>) récapitulant les réponses données */
+.answers-recap         { background: var(--card-bg); /* fond semi-transparent pour le récapitulatif des réponses */ border-radius: 12px; /* arrondit les coins du bloc récapitulatif */ padding: 1.2rem; /* espace intérieur du bloc récapitulatif */ text-align: left; /* aligne le texte à gauche dans le récapitulatif */ border: 1px solid var(--green-light); /* contour vert autour du bloc récapitulatif */ margin-top: 1rem; /* espace au-dessus du bloc récapitulatif */ }
+.answers-recap summary { cursor: pointer; /* curseur main pour le résumé dépliable */ font-weight: 600; /* texte du résumé en semi-bold */ color: var(--yellow); /* texte du résumé en jaune pour attirer l'attention */ padding: 0.3rem 0; /* espace vertical autour du texte du résumé */ }
+
+/* ── Récapitulatif des réponses (ok = correct, ko = faux) ── */
+
+.recap-item    { padding: 0.7rem; /* espace intérieur de chaque élément récapitulatif */ border-radius: 8px; /* arrondit les coins de chaque élément récapitulatif */ margin-top: 0.6rem; /* espace au-dessus de chaque élément récapitulatif */ font-size: 0.85rem; /* petite taille pour le texte du récapitulatif */ }
+.recap-item.ok { background: rgba(50,150,50,0.2); /* fond vert pour les bonnes réponses */ border-left: 3px solid #4CAF50; /* barre verte à gauche pour signaler une bonne réponse */ }
+.recap-item.ko { background: rgba(150,50,50,0.2); /* fond rouge pour les mauvaises réponses */ border-left: 3px solid #e74c3c; /* barre rouge à gauche pour signaler une mauvaise réponse */ }
+
+.recap-q    { font-weight: 600; /* texte de la question en semi-bold dans le récapitulatif */ color: #e8f8e8; /* blanc légèrement teinté pour le texte des questions récapitulées */ margin-bottom: 0.3rem; /* espace sous le texte de la question avant la réponse */ }
+.recap-a    { color: #a8c8a8; /* vert clair pour le texte de la réponse dans le récapitulatif */ }
+.correct-tag { color: #4CAF50; /* vert pour le tag "correct" dans le récapitulatif */ font-weight: 700; /* tag correct en gras */ }
+.wrong-tag   { color: #e74c3c; /* rouge pour le tag "incorrect" dans le récapitulatif */ font-weight: 700; /* tag incorrect en gras */ }
+
+
+/* ── 12. ADMIN / RÉSULTATS ── */
+
+.admin-wrap   { max-width: 1100px; /* limite la largeur de la page admin */ margin: 0 auto; /* centre la page admin */ padding: 3rem 1.5rem; /* espace autour du contenu admin */ }
+.admin-header { display: flex; /* aligne le titre et les actions admin sur une ligne */ justify-content: space-between; /* titre à gauche, actions à droite */ align-items: flex-start; /* aligne les éléments en haut */ margin-bottom: 2rem; /* espace sous l'en-tête admin */ gap: 1rem; /* espace minimum entre titre et actions */ flex-wrap: wrap; /* permet le passage à la ligne sur petits écrans */ }
+
+/* Grille de statistiques avec colonnes fluides (auto-fit) */
+.admin-stats { display: grid; /* grille pour les statistiques admin */ grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* colonnes fluides pour les stats, minimum 140px */ gap: 1rem; /* espace entre les cartes de statistiques */ margin-bottom: 2rem; /* espace sous les statistiques */ }
+
+.admin-stat-card      { background: var(--card-bg); /* fond semi-transparent pour les cartes de statistiques */ border: 1px solid var(--green-light); /* contour vert autour des cartes de statistiques */ border-radius: 12px; /* arrondit les coins des cartes de statistiques */ padding: 1.2rem; /* espace intérieur des cartes de statistiques */ text-align: center; /* centre le contenu des cartes de statistiques */ }
+.admin-stat-card .num { font-family: 'Bangers', cursive; /* police display pour les chiffres des statistiques admin */ font-size: 2.2rem; /* grande taille pour les chiffres des statistiques admin */ color: var(--yellow); /* chiffres en jaune pour mettre en avant les statistiques */ text-shadow: 2px 2px 0 var(--orange); /* ombre orange pour l'effet bande dessinée des chiffres */ }
+.admin-stat-card .lbl { font-size: 0.78rem; /* très petite taille pour les libellés des statistiques */ color: #a8c8a8; /* vert clair atténué pour les libellés */ text-transform: uppercase; /* libellés en majuscules pour l'effet label */ letter-spacing: 1px; /* espacement des lettres des libellés */ margin-top: 0.2rem; /* petit espace au-dessus des libellés */ }
+
+/* overflow-x:auto permet de scroller horizontalement sur les petits écrans */
+.admin-table-wrap { overflow-x: auto; /* permet le défilement horizontal du tableau sur les petits écrans */ }
+
+.admin-table          { width: 100%; /* le tableau occupe toute la largeur disponible */ border-collapse: collapse; /* fusionne les bordures adjacentes des cellules */ background: var(--card-bg); /* fond semi-transparent du tableau admin */ border-radius: 12px; /* arrondit les coins du tableau (visible grâce à overflow:hidden) */ overflow: hidden; /* masque les débordements pour respecter le border-radius */ border: 1px solid var(--green-light); /* contour vert autour du tableau admin */ }
+.admin-table th       { background: rgba(74,140,74,0.3); /* fond vert semi-transparent pour l'en-tête du tableau */ padding: 0.9rem 1rem; /* espace intérieur des cellules d'en-tête */ text-align: left; /* aligne le texte des en-têtes à gauche */ font-size: 0.82rem; /* petite taille pour les en-têtes du tableau */ text-transform: uppercase; /* en-têtes en majuscules */ letter-spacing: 1px; /* espacement des lettres des en-têtes */ color: #a8e8a8; /* vert clair pour la couleur des en-têtes */ }
+.admin-table td       { padding: 0.85rem 1rem; /* espace intérieur des cellules de données */ border-bottom: 1px solid rgba(74,140,74,0.2); /* séparateur vert subtil entre les lignes */ font-size: 0.88rem; /* taille légèrement réduite pour les données du tableau */ color: #c8e8c8; /* vert clair pour le texte des cellules de données */ vertical-align: top; /* aligne le contenu en haut des cellules */ }
+/* Supprime la bordure sur la dernière ligne pour éviter un double-bord avec le contour du tableau */
+.admin-table tr:last-child td { border-bottom: none; /* supprime la bordure basse de la dernière ligne du tableau */ }
+.admin-table tr:hover td      { background: rgba(74,140,74,0.1); /* fond vert très léger au survol d'une ligne du tableau */ }
+
+/* Badge de score coloré selon la performance (high / mid / low) */
+.score-badge      { font-weight: 700; /* score en gras dans le badge */ padding: 0.2rem 0.7rem; /* espace intérieur du badge de score */ border-radius: 20px; /* forme de pilule pour le badge de score */ font-size: 0.85rem; /* taille légèrement réduite pour le badge de score */ }
+.score-badge.high { background: rgba(76,175,80,0.25); /* fond vert pour les bons scores */ color: #81c784; /* texte vert pour les bons scores */ border: 1px solid #4CAF50; /* contour vert pour les bons scores */ }
+.score-badge.mid  { background: rgba(255,193,7,0.25); /* fond jaune pour les scores moyens */ color: #ffd54f; /* texte jaune pour les scores moyens */ border: 1px solid #ffc107; /* contour jaune pour les scores moyens */ }
+.score-badge.low  { background: rgba(244,67,54,0.25); /* fond rouge pour les mauvais scores */ color: #e57373; /* texte rouge pour les mauvais scores */ border: 1px solid #f44336; /* contour rouge pour les mauvais scores */ }
+
+.inline-details summary { cursor: pointer; /* curseur main pour le résumé dépliable dans le tableau */ color: var(--yellow); /* texte en jaune pour le résumé dépliable */ font-weight: 600; /* résumé en semi-bold */ font-size: 0.85rem; /* petite taille pour le résumé dépliable */ }
+.detail-answers { margin-top: 0.6rem; /* espace au-dessus du détail des réponses dans le tableau */ max-width: 420px; /* largeur maximale du détail des réponses pour rester lisible */ }
+
+/* Lien de suppression rouge — affiché comme texte pour rester discret */
+.btn-delete       { color: #e74c3c; /* rouge pour le lien de suppression */ font-weight: 700; /* gras pour le bouton de suppression */ font-size: 1rem; /* taille standard pour le bouton de suppression */ text-decoration: none; /* supprime le soulignement du lien de suppression */ padding: 0.2rem 0.5rem; /* espace intérieur minimal pour la zone cliquable */ border-radius: 4px; /* léger arrondi du bouton de suppression */ transition: background 0.2s; /* anime l'apparition du fond rouge au survol */ }
+.btn-delete:hover { background: rgba(231,76,60,0.2); /* fond rouge semi-transparent au survol du bouton de suppression */ }
+
+.empty   { color: #a8c8a8; /* vert clair pour le message d'absence de contenu */ text-align: center; /* centre le message d'absence de contenu */ padding: 3rem; /* grand espace autour du message d'absence de contenu */ font-style: italic; /* italique pour le message d'absence de contenu */ }
+.empty a { color: var(--yellow); /* lien en jaune dans le message d'absence de contenu */ }
+
+
+/* ── 13. DÉTAIL VIDÉO ── */
+
+.detail-wrap    { max-width: 860px; /* limite la largeur de la page de détail vidéo */ margin: 0 auto; /* centre la page de détail */ padding: 3rem 1.5rem; /* espace autour du contenu de détail */ }
+.detail-img     { width: 100%; /* l'image de détail remplit toute la largeur */ border-radius: 12px; /* arrondit les coins de l'image de détail */ border: 2px solid var(--green-light); /* contour vert autour de l'image de détail */ margin-bottom: 2rem; /* espace sous l'image de détail avant les métadonnées */ display: block; /* supprime l'espace vide sous l'image */ }
+.detail-meta    { display: flex; /* aligne les métadonnées sur une ligne */ gap: 1.5rem; /* espace entre les éléments de métadonnées */ flex-wrap: wrap; /* permet aux métadonnées de passer à la ligne */ margin-bottom: 1.5rem; /* espace sous les métadonnées avant la description */ }
+.detail-meta span { color: #a8c8a8; /* vert clair pour les métadonnées */ font-size: 0.9rem; /* taille légèrement réduite pour les métadonnées */ }
+.detail-desc    { color: #c8e8c8; /* vert clair pour le texte de la description */ line-height: 1.8; /* interligne généreux pour la lisibilité de la description */ font-size: 0.98rem; /* taille quasi-standard pour le texte de description */ margin-bottom: 2rem; /* espace sous la description avant les boutons */ }
+.detail-actions { display: flex; /* aligne les boutons d'action de la page de détail */ gap: 1rem; /* espace entre les boutons d'action */ flex-wrap: wrap; /* permet aux boutons de passer à la ligne */ }
+
+
+/* ── 14. FORMULAIRE AJOUTER ── */
+
+.form-wrap  { max-width: 640px; /* limite la largeur du formulaire pour une meilleure lisibilité */ margin: 0 auto; /* centre le formulaire */ padding: 3rem 1.5rem; /* espace autour du formulaire */ }
+.form-group { margin-bottom: 1.3rem; /* espace entre chaque groupe de champ du formulaire */ }
+
+.form-group label { display: block; /* le label occupe toute la largeur au-dessus du champ */ font-weight: 600; /* label en semi-bold */ color: #a8c8a8; /* vert clair pour les labels du formulaire */ margin-bottom: 0.4rem; /* espace sous le label avant le champ */ font-size: 0.9rem; /* taille légèrement réduite pour les labels */ }
+
+/* Champs texte, textarea et select partagent le même style de base */
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%; /* les champs du formulaire occupent toute la largeur disponible */
+    padding: 0.7rem 1rem; /* espace intérieur confortable des champs du formulaire */
+    border-radius: 8px; /* arrondit les coins des champs du formulaire */
+    border: 1px solid var(--green-light); /* contour vert autour des champs du formulaire */
+    background: rgba(0,0,0,0.4); /* fond sombre semi-transparent des champs du formulaire */
+    color: #fff; /* texte blanc dans les champs du formulaire */
+    font-size: 0.95rem; /* taille légèrement réduite pour le texte saisi */
+    font-family: 'Poppins', sans-serif; /* police cohérente avec le reste du site dans les champs */
+}
+
+/* Permet à l'utilisateur d'agrandir le textarea verticalement uniquement */
+.form-group textarea { resize: vertical; /* autorise le redimensionnement vertical uniquement */ min-height: 100px; /* hauteur minimale du textarea */ }
+.form-group input[type="file"] { padding: 0.4rem; /* espace réduit pour le champ de sélection de fichier */ }
+
+.form-actions { display: flex; /* aligne les boutons du formulaire sur une ligne */ gap: 1rem; /* espace entre les boutons du formulaire */ flex-wrap: wrap; /* permet aux boutons du formulaire de passer à la ligne */ margin-top: 1.5rem; /* espace au-dessus des boutons du formulaire */ }
+
+
+/* ── 15. FOOTER STICKY ── */
+
+/*
+  Technique sticky-footer avec flexbox :
+    html/body utilisent min-height:100vh + flex-direction:column
+    main prend tout l'espace restant (flex-grow:1)
+    le footer reste collé en bas même si la page a peu de contenu
+*/
+main { flex: 1 0 auto; /* le main grandit pour occuper tout l'espace entre header et footer */ }
+
+.site-footer {
+    /* Empêche le footer de se réduire : il garde toujours sa hauteur naturelle */
+    flex-shrink: 0; /* empêche le footer de se réduire, garantissant sa hauteur naturelle */
+    background: rgba(5, 18, 5, 0.95); /* fond vert très sombre quasi-opaque pour le footer */
+    border-top: 2px solid var(--green-light); /* ligne de séparation verte au-dessus du footer */
+    padding: 2rem 1.5rem; /* espace intérieur du footer */
+    text-align: center; /* centre le contenu du footer */
+}
+
+.footer-inner  { max-width: 1100px; /* limite la largeur du contenu du footer */ margin: 0 auto; /* centre le contenu du footer */ }
+.footer-social { display: flex; /* aligne les liens sociaux sur une ligne */ gap: 1rem; /* espace entre les boutons de réseaux sociaux */ justify-content: center; /* centre les boutons de réseaux sociaux */ flex-wrap: wrap; /* permet aux boutons sociaux de passer à la ligne */ margin-bottom: 1rem; /* espace sous les boutons sociaux avant le copyright */ }
+
+.social-link {
+    display: inline-flex; /* aligne icône et texte du lien social sur une ligne */
+    align-items: center; /* centre verticalement icône et texte du lien social */
+    gap: 0.5rem; /* espace entre l'icône et le texte du lien social */
+    padding: 0.45rem 1rem; /* espace intérieur du bouton de réseau social */
+    border-radius: 8px; /* arrondit les coins du bouton de réseau social */
+    font-size: 0.85rem; /* taille légèrement réduite pour les boutons sociaux */
+    font-weight: 600; /* texte en semi-bold pour les boutons sociaux */
+    text-decoration: none; /* supprime le soulignement des liens sociaux */
+    transition: opacity 0.2s, transform 0.2s; /* anime l'opacité et la montée au survol */
+}
+
+.social-link:hover { opacity: 0.85; /* légère transparence au survol des liens sociaux */ transform: translateY(-2px); /* remonte légèrement le bouton social au survol */ }
+
+.social-yt { background: #ff0000; /* rouge YouTube pour le bouton YouTube */ color: #fff; /* texte blanc sur fond rouge YouTube */ }
+
+/* Dégradé multi-stop reproduisant les couleurs officielles d'Instagram */
+.social-ig {
+    background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); /* dégradé reproduisant les couleurs officielles d'Instagram */
+    color: #fff; /* texte blanc sur le dégradé Instagram */
+}
+
+/* Twitch utilise la couleur violet #9146ff */
+.social-tw { background: #9146ff; /* violet officiel de Twitch pour le bouton Twitch */ color: #fff; /* texte blanc sur fond violet Twitch */ }
+
+.footer-copy   { color: #a8c8a8; /* vert clair pour le texte de copyright */ font-size: 0.85rem; /* taille légèrement réduite pour le copyright */ margin-bottom: 0.3rem; /* petit espace sous le copyright */ }
+.footer-credit { color: #6a9a6a; /* vert plus sombre et atténué pour le crédit développeur */ font-size: 0.78rem; /* très petite taille pour le crédit développeur */ }
+
+
+/* ── 16. RESPONSIVE ── */
+
+@media (max-width: 768px) {
+    /* Toutes les grilles 2 colonnes passent en colonne unique sur mobile */
+    .hero-content           { grid-template-columns: 1fr; /* une seule colonne sur mobile : texte puis image */ }
+    .hero-text h1           { font-size: 3.5rem; /* titre hero réduit à 3.5rem sur mobile */ }
+    .about-grid             { grid-template-columns: 1fr; /* une seule colonne sur mobile pour la section About */ }
+    .projet-card            { grid-template-columns: 1fr; /* une seule colonne sur mobile pour la carte projet */ }
+    /* Les options du quiz s'empilent en colonne pour rester lisibles */
+    .options                { grid-template-columns: 1fr; /* options du quiz en colonne unique sur mobile */ }
+    /* Le header passe en colonne : logo puis nav en dessous */
+    .header-inner           { flex-direction: column; /* logo et navigation empilés verticalement sur mobile */ align-items: flex-start; /* aligne logo et navigation à gauche sur mobile */ }
+}
+
+
+/* ── 17. GRILLE DE VIDÉOS (index.php) ── */
+
+.videos-section { padding: 3rem 0; /* espace vertical autour de la section vidéos */ }
+
+.videos-grid {
+    display: grid; /* active la grille CSS pour aligner les cartes en colonnes */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* crée automatiquement des colonnes de min 280px, s'adapte à la largeur disponible */
+    gap: 2rem; /* espace entre chaque carte vidéo */
+    margin-bottom: 2rem; /* espace sous la grille avant le bouton "Ajouter" */
+}
+
+.video-card {
+    background: rgba(10, 30, 10, 0.85); /* fond vert très sombre semi-transparent */
+    border: 1px solid #2a5a2a; /* bordure verte discrète */
+    border-radius: 12px; /* coins arrondis de la carte */
+    overflow: hidden; /* cache les coins de l'image qui dépasseraient le border-radius */
+    transition: transform 0.2s, box-shadow 0.2s; /* anime la montée et l'ombre au survol */
+}
+
+.video-card:hover {
+    transform: translateY(-4px); /* remonte la carte de 4px au survol */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); /* ombre plus prononcée au survol */
+}
+
+.video-card-img-link { display: block; /* le lien occupe toute la largeur de la carte */ }
+
+.video-card-img {
+    width: 100%; /* l'image prend toute la largeur de la carte */
+    height: 180px; /* hauteur fixe pour aligner toutes les images */
+    object-fit: cover; /* recadre l'image pour remplir le cadre sans la déformer */
+    display: block; /* supprime l'espace sous l'image (comportement inline par défaut) */
+    transition: transform 0.3s; /* anime le zoom au survol */
+}
+
+.video-card:hover .video-card-img { transform: scale(1.04); /* zoom léger sur l'image au survol de la carte */ }
+
+.video-card-body {
+    padding: 1rem 1.2rem 1.2rem; /* espace intérieur : haut / côtés / bas */
+}
+
+.video-card-title {
+    color: #e8f5e8; /* texte blanc-vert clair pour le titre de la carte */
+    font-size: 1rem; /* taille standard pour le titre */
+    font-weight: 700; /* texte en gras */
+    margin-bottom: 0.3rem; /* petit espace sous le titre */
+    line-height: 1.3; /* hauteur de ligne pour les titres sur 2 lignes */
+}
+
+.video-card-date {
+    color: #6a9a6a; /* vert atténué pour la date */
+    font-size: 0.8rem; /* petite taille pour la date */
+    margin-bottom: 0.8rem; /* espace sous la date avant les boutons */
+}
+
+.video-card-actions {
+    display: flex; /* aligne les boutons en ligne */
+    gap: 0.5rem; /* espace entre les boutons */
+    flex-wrap: wrap; /* les boutons passent à la ligne si pas assez de place */
+}
+
+.btn-sm {
+    padding: 0.35rem 0.8rem; /* bouton plus petit que le bouton standard */
+    font-size: 0.82rem; /* texte légèrement plus petit */
+}
+
+.no-videos {
+    color: #a8c8a8; /* vert clair pour le message "aucune vidéo" */
+    text-align: center; /* centré horizontalement */
+    padding: 2rem 0; /* espace vertical autour du message */
+}
+
+.videos-add-link {
+    text-align: center; /* centre le bouton "Ajouter" sous la grille */
+    margin-top: 1rem; /* espace au-dessus du bouton */
+}
+
+
+/* ── 18. PAGE DE DÉTAIL (detail.php) ── */
+
+.detail-section { padding: 2rem 0 3rem; /* espace vertical de la section de détail */ }
+
+.back-link {
+    display: inline-block; /* permet de mettre margin et padding */
+    margin-bottom: 1.5rem; /* espace sous le lien de retour */
+}
+
+.detail-card {
+    background: rgba(10, 30, 10, 0.85); /* fond vert sombre semi-transparent */
+    border: 1px solid #2a5a2a; /* bordure verte */
+    border-radius: 12px; /* coins arrondis */
+    overflow: hidden; /* cache les débordements */
+    display: grid; /* grille pour placer l'image et le texte côte à côte */
+    grid-template-columns: 1fr 1.5fr; /* image plus petite à gauche, texte plus grand à droite */
+    gap: 0; /* pas d'espace entre les deux colonnes */
+}
+
+.detail-img-wrap { overflow: hidden; /* cache les débordements de l'image */ }
+
+.detail-img {
+    width: 100%; /* l'image prend toute la largeur de son conteneur */
+    height: 100%; /* l'image prend toute la hauteur disponible */
+    min-height: 300px; /* hauteur minimum pour éviter une image trop petite */
+    object-fit: cover; /* recadre l'image pour remplir le cadre */
+    display: block; /* supprime l'espace sous l'image */
+}
+
+.detail-body {
+    padding: 2rem; /* espace intérieur autour du contenu texte */
+    display: flex; /* active flexbox pour empiler les blocs verticalement */
+    flex-direction: column; /* empile les éléments de haut en bas */
+    gap: 1.5rem; /* espace entre chaque bloc d'information */
+}
+
+.detail-title {
+    color: #e8f5e8; /* blanc-vert clair pour le titre */
+    font-size: 1.6rem; /* titre grand et lisible */
+    font-weight: 700; /* en gras */
+    line-height: 1.2; /* hauteur de ligne pour les titres longs */
+    margin: 0; /* supprime la marge par défaut du h1 */
+}
+
+.detail-date {
+    color: #6a9a6a; /* vert atténué pour la date */
+    font-size: 0.85rem; /* petite taille */
+    margin: -1rem 0 0; /* remonte légèrement pour coller sous le titre */
+}
+
+.detail-description h2,
+.detail-youtube h2,
+.detail-table-wrap h2 {
+    color: #4caf50; /* vert vif pour les sous-titres de section */
+    font-size: 1rem; /* taille standard */
+    font-weight: 600; /* semi-gras */
+    margin: 0 0 0.5rem; /* espace uniquement sous le titre */
+    text-transform: uppercase; /* majuscules pour les sous-titres */
+    letter-spacing: 0.05em; /* espacement entre les lettres */
+}
+
+.detail-description p {
+    color: #c8e6c8; /* vert clair pour le texte de la description */
+    line-height: 1.7; /* hauteur de ligne confortable pour la lecture */
+}
+
+.detail-table {
+    width: 100%; /* tableau pleine largeur */
+    border-collapse: collapse; /* supprime l'espace entre les bordures des cellules */
+    font-size: 0.85rem; /* texte légèrement réduit dans le tableau */
+}
+
+.detail-table th,
+.detail-table td {
+    padding: 0.5rem 0.8rem; /* espace intérieur des cellules du tableau */
+    border-bottom: 1px solid #2a5a2a; /* ligne séparatrice entre les lignes */
+    text-align: left; /* texte aligné à gauche */
+    vertical-align: top; /* contenu aligné en haut de la cellule */
+}
+
+.detail-table th {
+    color: #4caf50; /* vert vif pour les en-têtes de colonne */
+    font-weight: 600; /* semi-gras */
+    white-space: nowrap; /* empêche les en-têtes de se couper */
+    width: 120px; /* largeur fixe pour les en-têtes */
+}
+
+.detail-table td {
+    color: #c8e6c8; /* vert clair pour les valeurs du tableau */
+    word-break: break-all; /* coupe les longues URL pour ne pas déborder */
+}
+
+.detail-table a { color: #4caf50; /* vert vif pour les liens dans le tableau */ }
+
+.detail-delete { margin-top: 0.5rem; /* espace au-dessus du bouton de suppression */ }
+
+.btn-delete {
+    background: #8b0000; /* rouge sombre pour le bouton de suppression */
+    color: #fff; /* texte blanc */
+    border: none; /* sans bordure */
+    padding: 0.55rem 1.2rem; /* espace intérieur du bouton */
+    border-radius: 8px; /* coins arrondis */
+    font-size: 0.9rem; /* taille du texte */
+    font-weight: 600; /* semi-gras */
+    cursor: pointer; /* curseur pointeur au survol */
+    transition: background 0.2s; /* anime le changement de couleur au survol */
+}
+
+.btn-delete:hover { background: #c62828; /* rouge plus vif au survol du bouton de suppression */ }
+
+
+/* ── 19. FORMULAIRE D'AJOUT (ajouter.php) ── */
+
+.form-section { padding: 2rem 0 3rem; /* espace vertical de la section formulaire */ }
+
+.add-form {
+    background: rgba(10, 30, 10, 0.85); /* fond vert sombre semi-transparent */
+    border: 1px solid #2a5a2a; /* bordure verte */
+    border-radius: 12px; /* coins arrondis */
+    padding: 2rem; /* espace intérieur du formulaire */
+    max-width: 640px; /* largeur maximale pour rester lisible */
+    margin: 2rem auto 0; /* centré horizontalement avec espace au-dessus */
+    display: flex; /* flexbox pour empiler les champs verticalement */
+    flex-direction: column; /* empile les groupes de haut en bas */
+    gap: 1.4rem; /* espace entre chaque groupe de champ */
+}
+
+.form-group {
+    display: flex; /* flexbox pour empiler label et champ */
+    flex-direction: column; /* label au-dessus, champ en dessous */
+    gap: 0.4rem; /* espace entre le label et le champ */
+}
+
+.form-group label {
+    color: #a8c8a8; /* vert clair pour les labels */
+    font-size: 0.9rem; /* taille légèrement réduite pour les labels */
+    font-weight: 600; /* semi-gras */
+}
+
+.required { color: #e57373; /* rouge clair pour l'astérisque obligatoire */ }
+.optional  { color: #6a9a6a; /* vert atténué pour la mention optionnel */ font-weight: 400; /* poids normal (non gras) */ }
+
+.form-group input[type="text"],
+.form-group input[type="url"],
+.form-group textarea {
+    background: rgba(0, 20, 0, 0.7); /* fond très sombre pour les champs de saisie */
+    border: 1px solid #2a5a2a; /* bordure verte discrète */
+    border-radius: 8px; /* coins arrondis */
+    color: #e8f5e8; /* texte blanc-vert clair */
+    font-size: 0.95rem; /* taille du texte dans les champs */
+    padding: 0.6rem 0.9rem; /* espace intérieur des champs */
+    font-family: inherit; /* utilise la même police que le reste du site */
+    transition: border-color 0.2s; /* anime la bordure lors de la mise au point */
+    width: 100%; /* champ pleine largeur */
+    box-sizing: border-box; /* padding inclus dans la largeur */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none; /* supprime le contour bleu par défaut du navigateur */
+    border-color: #4caf50; /* bordure verte vive quand le champ est actif */
+}
+
+.form-group textarea { resize: vertical; /* permet de redimensionner uniquement en hauteur */ min-height: 120px; /* hauteur minimum du textarea */ }
+
+.form-group input[type="file"] {
+    color: #a8c8a8; /* couleur du texte du sélecteur de fichier */
+    font-size: 0.9rem; /* taille du texte */
+    cursor: pointer; /* curseur pointeur */
+}
+
+.form-hint {
+    color: #6a9a6a; /* vert atténué pour les indications d'aide */
+    font-size: 0.78rem; /* très petite taille */
+}
+
+.form-actions {
+    display: flex; /* aligne les boutons en ligne */
+    gap: 1rem; /* espace entre les boutons */
+    flex-wrap: wrap; /* les boutons passent à la ligne sur mobile */
+    margin-top: 0.5rem; /* espace au-dessus du groupe de boutons */
+}
+
+.form-errors {
+    background: rgba(139, 0, 0, 0.3); /* fond rouge sombre pour la boîte d'erreurs */
+    border: 1px solid #c62828; /* bordure rouge pour la boîte d'erreurs */
+    border-radius: 8px; /* coins arrondis */
+    padding: 1rem 1.2rem; /* espace intérieur de la boîte d'erreurs */
+    max-width: 640px; /* même largeur que le formulaire */
+    margin: 1rem auto 0; /* centré avec espace au-dessus */
+}
+
+.form-errors ul { margin: 0; /* supprime la marge par défaut de la liste */ padding-left: 1.2rem; /* indentation des puces */ }
+.form-errors li { color: #ef9a9a; /* rouge clair pour les messages d'erreur */ font-size: 0.9rem; /* taille standard */ margin-bottom: 0.3rem; /* petit espace entre les erreurs */ }
+
+
+/* ── RESPONSIVE : pages détail et formulaire ── */
+
+@media (max-width: 768px) {
+    .detail-card            { grid-template-columns: 1fr; /* image et texte en colonne unique sur mobile */ }
+    .detail-img             { min-height: 200px; /* hauteur minimum réduite sur mobile */ }
+    .videos-grid            { grid-template-columns: 1fr; /* une seule colonne de cartes sur mobile */ }
+    .add-form               { padding: 1.2rem; /* espace intérieur réduit sur mobile */ }
+}

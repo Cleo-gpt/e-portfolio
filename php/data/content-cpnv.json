@@ -7,19 +7,15 @@
             "title": "Identité visuelle CF",
             "cardImage": "Images\/identite-visuelle-cf\/logo-cf-monogramme.png",
             "cardImageAlt": "Logo CF Multi médiamaticienne",
-            "cardDescription": "Création de mon identité visuelle personnelle : monogramme CF et élément graphique associé.",
-            "detailText": "Création de mon identité visuelle personnelle, autour d'un monogramme \"CF\" habillé d'un motif de poissons stylisés (violet et bleu), décliné avec le libellé \"Multi médiamaticienne\".",
-            "gallery": [
+            "cardDescription": "Création de mon identité visuelle personnelle : monogramme CF, choix des couleurs, des polices et déclinaisons du logo.",
+            "detailText": "Création de mon identité visuelle personnelle, autour d'un monogramme \"CF\" habillé d'un motif de carpes koï stylisées (violet et bleu), symbole d'indépendance et de créativité. Le dossier complet détaille les déclinaisons du logo (normal, favicon, nuances de gris, inversé), le choix des couleurs et des polices, ainsi que la carte de visite.",
+            "gallery": [],
+            "documents": [
                 {
-                    "image": "Images\/identite-visuelle-cf\/logo-cf-monogramme.png",
-                    "alt": "Logo CF Multi médiamaticienne, monogramme complet"
-                },
-                {
-                    "image": "Images\/identite-visuelle-cf\/logo-cf-poissons.png",
-                    "alt": "Élément graphique des poissons stylisés de l'identité visuelle CF"
+                    "label": "Voir le dossier d'identité visuelle complet (PDF)",
+                    "file": "Documents\/Identité visuelle CF.pdf"
                 }
             ],
-            "documents": [],
             "videos": []
         },
         {
@@ -129,6 +125,34 @@
                 "imageAlt": "Couverture de la présentation Sleepy Bear Coffee",
                 "file": "Documents\/Sleepy Bear Coffee présentation.pdf"
             }
+        },
+        {
+            "id": "sleep-coffe-bears-site",
+            "category": "design",
+            "categoryLabel": "Design",
+            "title": "Sleep Coffe Bears — Site web",
+            "cardImage": "Images\/projets-web-captures\/sleep-coffe-bears-capture.png",
+            "cardImageAlt": "Logo Sleep Coffe Bears",
+            "cardDescription": "Site vitrine et boutique en ligne (HTML/CSS) pour un café-torréfacteur fictif, avec page panier.",
+            "detailText": "Conception et intégration d'un site web statique complet pour Sleep Coffe Bears : page d'accueil vitrine et page panier (checkout), en HTML et CSS pur, sans framework.",
+            "gallery": [],
+            "documents": [],
+            "videos": [],
+            "siteUrl": "projets-web\/sleep-coffe-bears\/index.html"
+        },
+        {
+            "id": "sylvain-lyve-site",
+            "category": "web",
+            "categoryLabel": "Web",
+            "title": "Sylvain Lyve — Fan site",
+            "cardImage": "Images\/projets-web-captures\/sylvain-site-capture.png",
+            "cardImageAlt": "Sylvain Lyve",
+            "cardDescription": "Fan site PHP dynamique avec base de données : présentation, quiz interactif et résultats.",
+            "detailText": "Développement d'un fan site PHP complet pour le YouTubeur Sylvain Lyve : page d'accueil, quiz interactif en JavaScript avec sauvegarde des scores, page de résultats et gestion des vidéos, le tout connecté à une base de données (SQLite dans cette démo).",
+            "gallery": [],
+            "documents": [],
+            "videos": [],
+            "siteUrl": "projets-web\/sylvain-site\/index.php"
         }
     ]
 }
