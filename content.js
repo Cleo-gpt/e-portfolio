@@ -218,8 +218,8 @@
                 },
                 {
                     id: "sleep-coffe-bears-site",
-                    category: "design",
-                    categoryLabel: "Design",
+                    category: "web",
+                    categoryLabel: "Web",
                     title: "Sleep Coffe Bears — Site web",
                     cardImage: "Images/projets-web-captures/sleep-coffe-bears-capture.png",
                     cardImageAlt: "Logo Sleep Coffe Bears",
