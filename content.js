@@ -6,6 +6,214 @@
 // (aperçu / pré-remplissage des formulaires) via window.EPortfolioContent.
 
 (function () {
+    // Copie statique du contenu actuel (voir php/data/*.json), utilisée
+    // uniquement quand ni PHP ni Netlify ne répondent — cas d'un test en
+    // local via Live Server ou en ouvrant index.html directement (double-clic),
+    // qui ne font tourner aucun des deux backends. Permet au site de rester
+    // consultable partout. À tenir à jour manuellement si le contenu est
+    // édité via le back office (les fichiers php/data/*.json restent la
+    // source de vérité en production).
+    const FALLBACK_DATA = {
+        presentation: {
+            photo: "Images/presentation/Photo Cléo.jpeg",
+            paragraphs: [
+                "Bonjour ! Je suis Cléo Ana Forclaz. Je suis actuellement en troisième année de médiamatique.",
+                "J'ai énormément de passions dans la vie comme l'illustration, Star Wars, Saint Seiya/ les chevaliers du zodiaque, Naruto, et plein d'autres choses",
+                "Vous découvrirez tout au long de ce E-portefolio, mon travail durant 3 ans, à l'école comme du personnel."
+            ]
+        },
+        timeline: {
+            formation: [
+                {
+                    id: "cpnv-mediamatique",
+                    title: "Centre professionnel du Nord vaudois (CPNV)",
+                    place: "CFC Médiamaticienne (en cours) · 2023 – 2027"
+                }
+            ],
+            experience: [
+                {
+                    id: "asp-polymanga-2026",
+                    title: "ASP PolyManga",
+                    date: "Avril 2026 · 1 mois",
+                    place: "Polymanga · CDD · Lausanne, Vaud, Suisse · Sur site",
+                    description: "Mise en place des espaces de restauration, distribution des repas, accueil des participants et soutien aux équipes en cuisine.",
+                    extra: false
+                },
+                {
+                    id: "asp-polymanga-2025",
+                    title: "ASP PolyManga",
+                    date: "Avril 2025 · 1 mois",
+                    place: "Polymanga · CDD · Béaulieu Lausanne · Sur site",
+                    description: "Accueil des visiteurs, mise en œuvre des procédures de sécurité du théâtre, gestion des effets personnels des spectateurs avec remise en main propre à la fin du spectacle.",
+                    extra: false
+                },
+                {
+                    id: "scanner-dossiers",
+                    title: "Scanner des dossiers",
+                    date: "Janvier 2025 - Mars 2025 · 3 mois",
+                    place: "Cabinet de cardiologie Andrei Forclaz · CDD · Yverdon-les-Bains, Vaud, Suisse · Sur site",
+                    description: "La tâche consistait à scanner les dossiers médicaux.",
+                    extra: false
+                },
+                {
+                    id: "bankai-adventure",
+                    title: "Stagiaire de travail chez Bankai Adventure",
+                    date: "Février 2025 · 1 mois",
+                    place: "Bankai Adventures · Stage · Suisse romande, Vaud, Suisse · Sur site",
+                    description: "Stage de deux jours au magasin Bankai Adventures.",
+                    extra: false
+                },
+                {
+                    id: "salon-des-metiers",
+                    title: "Production de vidéo",
+                    date: "Octobre 2024 · 1 mois",
+                    place: "Salon des métiers · Stage · Lausanne, Vaud, Suisse · Sur site",
+                    description: "Réalisation de vidéos pour le Salon des métiers.",
+                    extra: true
+                },
+                {
+                    id: "explorit-ergotherapie",
+                    title: "Stagiaire ergothérapie",
+                    date: "Janvier 2022 · 1 mois",
+                    place: "EXPLORiT · Stage · Suisse romande, Vaud, Suisse · Sur site",
+                    description: "Stagiaire durant un jour, le 25/01/2022 en ergothérapie.",
+                    extra: true
+                },
+                {
+                    id: "yverdon-travailleur-social",
+                    title: "Stagiaire d'observation travailleur social de proximité",
+                    date: "Janvier 2022 · 1 mois",
+                    place: "Commune d'Yverdon-les-Bains · Stage · Yverdon-les-Bains, Vaud, Suisse · Sur site",
+                    description: "Observation du métier de travailleur social durant 3 jours, aux côtés de Nathalie Rapin et de ses collègues.",
+                    extra: true
+                }
+            ],
+            languages: [
+                { name: "Français", level: "Langue maternelle" },
+                { name: "Anglais", level: "Connaissances scolaires" },
+                { name: "Allemand", level: "Connaissances scolaires" }
+            ]
+        },
+        skills: {
+            categories: [
+                {
+                    id: "adobe",
+                    label: "Adobe",
+                    skills: [
+                        { id: "adobe-illustrator", label: "Adobe Illustrator", level: 8 },
+                        { id: "adobe-photoshop", label: "Adobe Photoshop", level: 7 },
+                        { id: "adobe-indesign", label: "Adobe InDesign", level: 8 }
+                    ]
+                },
+                {
+                    id: "google",
+                    label: "Google",
+                    skills: [
+                        { id: "google-slides", label: "Google Slides", level: 0 },
+                        { id: "google-sheets", label: "Google Sheets", level: 0 },
+                        { id: "google-docs", label: "Google Docs", level: 0 }
+                    ]
+                },
+                {
+                    id: "microsoft",
+                    label: "Microsoft",
+                    skills: [
+                        { id: "microsoft-powerpoint", label: "Microsoft PowerPoint", level: 0 },
+                        { id: "microsoft-excel", label: "Microsoft Excel", level: 0 },
+                        { id: "microsoft-word", label: "Microsoft Word", level: 0 }
+                    ]
+                },
+                {
+                    id: "autres",
+                    label: "Autres",
+                    skills: [
+                        { id: "developpement-web", label: "Développement Web", level: 8 },
+                        { id: "procreate", label: "Procreate", level: 0 }
+                    ]
+                }
+            ],
+            tools: [
+                { id: "google", label: "Google", items: ["Google Slides", "Google Sheets", "Google Docs"] },
+                { id: "microsoft", label: "Microsoft", items: ["Microsoft PowerPoint", "Microsoft Excel", "Microsoft Word"] },
+                { id: "adobe", label: "Adobe", items: ["Adobe InDesign", "Adobe Illustrator", "Adobe Photoshop", "Adobe Premiere Pro", "After Effects"] },
+                { id: "autres", label: "Autres", items: ["Procreate"] }
+            ]
+        },
+        cpnv: {
+            projects: [
+                {
+                    id: "duck-n-go",
+                    category: "design",
+                    categoryLabel: "Design",
+                    title: "Duck n'go — Identité visuelle",
+                    cardImage: "Images/cpnv-duck-ngo/Duck n'go logo texte.png",
+                    cardImageAlt: "Logo Duck n'go",
+                    cardDescription: "Création d'une identité de marque complète pour un fast-food engagé autour du canard.",
+                    detailText: "Projet pédagogique de création d'une identité de marque pour un fast-food engagé autour du canard : mascotte Bucky, charte graphique complète (logo, typographies, palette chromatique) et set administratif (carte de visite, enveloppe, courrier).",
+                    gallery: [
+                        { image: "Images/cpnv-duck-ngo/Duck n'go logo.png", alt: "Logo Duck n'go avec la mascotte Bucky" },
+                        { image: "Images/cpnv-duck-ngo/Duck n'go logo texte.png", alt: "Logo Duck n'go avec le texte Duck n'go" },
+                        { image: "Images/cpnv-duck-ngo/Duck n'go carte de visite.jpg", alt: "Carte de visite Duck n'go" }
+                    ],
+                    documents: [
+                        { label: "Voir la charte graphique (PDF)", file: "Documents/Duck n'go charte graphique.pdf" },
+                        { label: "Voir la carte de visite (PDF)", file: "Documents/Duck n'go carte de visite.pdf" }
+                    ],
+                    videos: []
+                },
+                {
+                    id: "videos",
+                    category: "multimedias",
+                    categoryLabel: "Multimédias",
+                    title: "Vidéos",
+                    cardImage: "https://img.youtube.com/vi/VHWPITKgmTo/hqdefault.jpg",
+                    cardImageAlt: "Vidéos CPNV",
+                    cardDescription: "Quatre réalisations vidéo : fiction, tutoriel technique et reportage d'événement.",
+                    detailText: "",
+                    gallery: [],
+                    documents: [],
+                    videos: [
+                        { url: "https://youtu.be/VHWPITKgmTo", thumbnail: "https://img.youtube.com/vi/VHWPITKgmTo/hqdefault.jpg", alt: "Famille recomposée", title: "Famille recomposée", short: false },
+                        { url: "https://youtu.be/at5eeLY0Xyw", thumbnail: "https://img.youtube.com/vi/at5eeLY0Xyw/hqdefault.jpg", alt: "Vidéo CPNV 2", title: "Première Pro", short: false },
+                        { url: "https://youtu.be/AxhW9_Kfvwc", thumbnail: "https://img.youtube.com/vi/AxhW9_Kfvwc/hqdefault.jpg", alt: "Femme Fragile Violences Conjugales", title: "Femme Fragile Violences Conjugales", short: false },
+                        { url: "https://youtube.com/shorts/Bjy2dsa-m3M", thumbnail: "https://img.youtube.com/vi/Bjy2dsa-m3M/hqdefault.jpg", alt: "Short CPNV 4", title: "Le Cinéma Open Air d'Estavayer le Lac", short: true }
+                    ]
+                },
+                {
+                    id: "sleepy-bear",
+                    category: "marketing",
+                    categoryLabel: "Marketing",
+                    title: "Sleepy Bear Coffee",
+                    cardImage: "Images/cpnv-sleepy-bear/Sleepy Bear Coffee couverture.png",
+                    cardImageAlt: "Sleepy Bear Coffee",
+                    cardDescription: "Stratégie marketing complète pour un café-espace de coworking à Lausanne.",
+                    detailText: "Projet de stratégie marketing pour Sleepy Bear Coffee, café-espace de coworking à Lausanne : étude de marché, focus group, persona, mix marketing (4P), sales funnel, campagnes Ad Words et Meta Ads, et plan de communication.",
+                    gallery: [],
+                    documents: [
+                        { label: "Voir la présentation complète (PDF)", file: "Documents/Sleepy Bear Coffee présentation.pdf" }
+                    ],
+                    videos: [
+                        { url: "https://youtu.be/IXso1eFylj8", thumbnail: "https://img.youtube.com/vi/IXso1eFylj8/hqdefault.jpg", alt: "Audio marketing Sleepy Bear Coffee mixage final 2", title: "Audio marketing Sleepy Bear Coffee mixage final 2", short: false }
+                    ],
+                    coverDocument: {
+                        image: "Images/cpnv-sleepy-bear/Sleepy Bear Coffee couverture.png",
+                        imageAlt: "Couverture de la présentation Sleepy Bear Coffee",
+                        file: "Documents/Sleepy Bear Coffee présentation.pdf"
+                    }
+                }
+            ]
+        },
+        social: {
+            name: "Cléo Ana Forclaz",
+            phone: "0764391272",
+            phoneDisplay: "076 439 12 72",
+            instagramPortfolio: "https://www.instagram.com/le_mini_portefolio_de_cleo/",
+            instagramLanterne: "https://www.instagram.com/la_lanterne_de_yuna/",
+            linkedin: "https://www.linkedin.com/in/cleo-forclaz/",
+            email: "cleoforclaz2007@gmail.com"
+        }
+    };
+
     // Sur Netlify, chaque domaine a sa propre fonction. Sur PHP, son propre
     // script. On mémorise lequel des deux répond une fois détecté, pour ne
     // pas retenter le mauvais backend à chaque appel.
@@ -39,10 +247,17 @@
 
     // Essaie d'abord le backend déjà détecté (le cas échéant), sinon PHP
     // puis Netlify en repli, pour fonctionner sans configuration explicite
-    // quel que soit l'hébergement courant.
+    // quel que soit l'hébergement courant. Si aucun des deux ne répond
+    // (Live Server, double-clic sur index.html), retombe sur FALLBACK_DATA
+    // pour que le site reste consultable.
     function fetchContent(key) {
+        const fallback = function () {
+            if (FALLBACK_DATA[key]) return FALLBACK_DATA[key];
+            throw new Error('no-fallback');
+        };
+
         if (detectedBase) {
-            return fetchJson(endpoints(detectedBase)[key]);
+            return fetchJson(endpoints(detectedBase)[key]).catch(fallback);
         }
         return fetchJson(endpoints('php')[key])
             .then(function (data) { detectedBase = 'php'; return data; })
@@ -51,7 +266,8 @@
                     detectedBase = 'netlify';
                     return data;
                 });
-            });
+            })
+            .catch(fallback);
     }
 
     function escapeHtml(str) {

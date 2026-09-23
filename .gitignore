@@ -4,5 +4,13 @@
 # Dependencies
 node_modules/
 
+# Fichiers système macOS
+.DS_Store
+
 # Secrets PHP (jamais versionnés — voir php/secrets.example.php)
 php/secrets.php
+
+# Données réelles du back office (code admin, contenu édité en prod) —
+# jamais versionnées : elles n'existent que sur le serveur de déploiement.
+php/data/credentials.json
+php/data/instagram-token.json

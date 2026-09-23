@@ -56,8 +56,14 @@ $fields = implode(',', [
     'thumbnail_url', 'permalink', 'like_count', 'comments_count'
 ]);
 
+// Pagination : le front envoie le curseur "after" reçu à la page précédente
+// pour continuer à descendre dans l'historique, jusqu'au tout premier post.
+$after = isset($_GET['after']) ? trim($_GET['after']) : '';
 $url = 'https://graph.instagram.com/v21.0/' . urlencode($igUserId)
     . '/media?fields=' . $fields . '&limit=9&access_token=' . urlencode($accessToken);
+if ($after !== '') {
+    $url .= '&after=' . urlencode($after);
+}
 
 $result = fetch_json($url);
 
@@ -98,5 +104,11 @@ foreach ($items as $item) {
     ];
 }
 
+$nextCursor = $result['data']['paging']['cursors']['after'] ?? null;
+$hasMore = isset($result['data']['paging']['next']);
+
 header('Cache-Control: public, max-age=300');
-echo json_encode(['posts' => $posts]);
+echo json_encode([
+    'posts' => $posts,
+    'nextCursor' => $hasMore ? $nextCursor : null
+]);

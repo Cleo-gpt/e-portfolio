@@ -231,6 +231,24 @@
             align-items: center;
             margin-top: 16px;
         }
+
+        .more-details {
+            margin-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 12px;
+        }
+
+        .more-details > summary {
+            cursor: pointer;
+            color: #FFD700;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            list-style: none;
+        }
+
+        .more-details > summary::-webkit-details-marker { display: none; }
+        .more-details > summary::before { content: '▸ '; }
+        .more-details[open] > summary::before { content: '▾ '; }
     </style>
 </head>
 <body>
@@ -263,7 +281,7 @@
                 <div class="bo-section">
                     <h2>À propos de moi</h2>
                     <label for="presPhoto">Chemin de la photo</label>
-                    <input type="text" id="presPhoto" placeholder="Images/Photo Cléo.jpeg">
+                    <input type="text" id="presPhoto" placeholder="Images/presentation/Photo Cléo.jpeg">
                     <div id="presPhotoUpload"></div>
                     <div id="presParagraphs"></div>
                     <div class="save-bar">

@@ -390,11 +390,12 @@
             '</div></div>' +
             '<label>Titre</label><input type="text" data-field="title" value="' + escapeAttr(project.title) + '">' +
             '<label>Catégorie (design / multimedias / marketing)</label><input type="text" data-field="category" value="' + escapeAttr(project.category) + '">' +
-            '<label>Libellé de la catégorie (affiché)</label><input type="text" data-field="categoryLabel" value="' + escapeAttr(project.categoryLabel) + '">' +
             '<label>Image de la carte</label><input type="text" data-field="cardImage" value="' + escapeAttr(project.cardImage) + '">' +
             '<div data-upload-card-image></div>' +
-            '<label>Texte alternatif de l\'image</label><input type="text" data-field="cardImageAlt" value="' + escapeAttr(project.cardImageAlt) + '">' +
             '<label>Description (carte)</label><textarea data-field="cardDescription">' + escapeHtml(project.cardDescription) + '</textarea>' +
+            '<details class="more-details"><summary>Plus de détails (texte complet, galerie, documents, vidéos)</summary>' +
+            '<label>Libellé de la catégorie (affiché)</label><input type="text" data-field="categoryLabel" value="' + escapeAttr(project.categoryLabel) + '">' +
+            '<label>Texte alternatif de l\'image</label><input type="text" data-field="cardImageAlt" value="' + escapeAttr(project.cardImageAlt) + '">' +
             '<label>Texte détaillé</label><textarea data-field="detailText">' + escapeHtml(project.detailText) + '</textarea>' +
             '<label>Galerie d\'images</label><div data-gallery-inner></div>' +
             '<button class="btn btn-secondary btn-small" data-action="add-gallery">+ Ajouter une image à la galerie</button>' +
@@ -406,7 +407,8 @@
             '<label>Documents (PDF)</label><div data-documents-inner></div>' +
             '<button class="btn btn-secondary btn-small" data-action="add-document">+ Ajouter un document</button>' +
             '<label>Vidéos</label><div data-videos-inner></div>' +
-            '<button class="btn btn-secondary btn-small" data-action="add-video">+ Ajouter une vidéo</button>';
+            '<button class="btn btn-secondary btn-small" data-action="add-video">+ Ajouter une vidéo</button>' +
+            '</details>';
         bindItemActions(card, list);
 
         const cardImageUploadContainer = card.querySelector('[data-upload-card-image]');

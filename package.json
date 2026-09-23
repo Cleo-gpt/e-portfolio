@@ -1,6 +1,9 @@
 {
   "name": "cleo-forclaz-e-portefolio",
   "private": true,
+  "scripts": {
+    "dev": "php -S localhost:8765"
+  },
   "dependencies": {
     "@netlify/blobs": "^8.1.0"
   },

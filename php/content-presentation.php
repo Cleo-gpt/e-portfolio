@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $dataFile = __DIR__ . '/data/content-presentation.json';
 
 $default = [
-    'photo' => 'Images/Photo Cléo.jpeg',
+    'photo' => 'Images/presentation/Photo Cléo.jpeg',
     'paragraphs' => []
 ];
 

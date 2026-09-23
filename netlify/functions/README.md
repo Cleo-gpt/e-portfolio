@@ -1,3 +1,24 @@
+# Développement local — ne pas utiliser Live Server seul
+
+Le contenu du site (photo de présentation, projets CPNV, compétences,
+réseaux sociaux, posts Instagram) n'est **pas** écrit en dur dans
+`index.html` : il est chargé dynamiquement au chargement de la page via
+`content.js`, qui appelle `/php/content-*.php`. **Live Server (l'extension
+VS Code) ne fait tourner aucun PHP** — ces appels échouent silencieusement
+et les sections restent vides (grille CPNV vide, etc.), ce qui peut donner
+l'impression à tort que des chemins d'image sont cassés.
+
+Pour développer en local avec le contenu dynamique fonctionnel, lance le
+serveur PHP intégré à la racine du projet :
+
+```
+npm run dev
+```
+
+(équivalent à `php -S localhost:8765`), puis ouvre `http://localhost:8765/`.
+
+---
+
 # Connexion Instagram — La Lanterne de Yuna (hébergement PHP)
 
 `php/instagram-posts.php` sert les 9 dernières publications du compte
@@ -93,23 +114,17 @@ aussi le déclencher manuellement depuis l'onglet **Actions** du dépôt
 
 ---
 
-# Alternative : Behold.so (sur Netlify, ou en secours)
+# Affichage en grille — plug-in `instagram-grid.js`
 
-Le dossier contient aussi un chemin plus simple pour Netlify, où GitHub
-Actions n'a pas accès au serveur pour déposer un token : **Behold.so**
-(https://behold.so) se connecte une fois à Instagram et gère le
-renouvellement à sa place, en échange d'une limite de 6 posts sur son plan
-gratuit (au lieu de 9).
-
-1. Va sur https://behold.so, crée un compte gratuit, connecte le compte
-   Instagram `la_lanterne_de_yuna`.
-2. Dans les réglages du feed, onglet **JSON Feed**, copie l'URL
-   (`https://feeds.behold.so/xxxxxxxxxxxx`).
-3. Sur Netlify : **Site settings → Environment variables**, ajoute
-   `BEHOLD_FEED_URL` = cette URL, puis redéploie.
-
-`netlify/functions/instagram-posts.js` utilise cette variable — voir son
-code source pour le détail.
+Le front-end affiche les publications via un plug-in autonome,
+`instagram-grid.js` (+ `instagram-grid.css`) à la racine du projet : une
+grille de 3 posts par page, avec un bouton pour charger la page suivante
+depuis l'API (pagination par curseur `after`), jusqu'au tout premier post
+du compte, et un bouton pour remonter dans les pages déjà chargées. Il ne
+dépend d'aucun service tiers — il appelle directement
+`php/instagram-posts.php`. Voir `instagram-grid.js` pour l'API
+(`InstagramGrid.mount({...})`) si tu veux le réutiliser ailleurs sur le
+site ou pour un autre compte.
 
 ---
 
@@ -180,12 +195,9 @@ migration, juste la configuration ci-dessous.
 
 ## Étapes pour basculer
 
-1. Ouvre `php/config.php` et renseigne :
-   - `ADMIN_EMAIL` / `ADMIN_PASSWORD_DEFAULT` (code initial du back
-     office, à changer depuis `back-office.html` dès la première
-     connexion).
-   - `BEHOLD_FEED_URL` (voir la procédure de création plus haut) — sans
-     cette valeur, la section Instagram affichera une erreur.
+1. Ouvre `php/config.php` et renseigne `ADMIN_EMAIL` /
+   `ADMIN_PASSWORD_DEFAULT` (code initial du back office, à changer depuis
+   `back-office.html` dès la première connexion).
 2. Dépose tout le contenu du projet sur le serveur via FileZilla, y compris
    le dossier `php/` en entier (avec `data/.htaccess`).
 3. Vérifie que le dossier `php/data/` est accessible en écriture par PHP

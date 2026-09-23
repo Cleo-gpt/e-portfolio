@@ -7,7 +7,7 @@ const { checkAdmin, getStore, CORS_HEADERS } = require("./lib/auth");
 const STORE_NAME = "content";
 const BLOB_KEY = "presentation";
 
-const DEFAULT = { photo: "Images/Photo Cléo.jpeg", paragraphs: [] };
+const DEFAULT = { photo: "Images/presentation/Photo Cléo.jpeg", paragraphs: [] };
 
 exports.handler = async function (event) {
     if (event.httpMethod === "OPTIONS") {

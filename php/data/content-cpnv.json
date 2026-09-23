@@ -5,21 +5,21 @@
             "category": "design",
             "categoryLabel": "Design",
             "title": "Duck n'go — Identité visuelle",
-            "cardImage": "Images\/Duck n'go logo texte.png",
+            "cardImage": "Images\/cpnv-duck-ngo\/Duck n'go logo texte.png",
             "cardImageAlt": "Logo Duck n'go",
             "cardDescription": "Création d'une identité de marque complète pour un fast-food engagé autour du canard.",
             "detailText": "Projet pédagogique de création d'une identité de marque pour un fast-food engagé autour du canard : mascotte Bucky, charte graphique complète (logo, typographies, palette chromatique) et set administratif (carte de visite, enveloppe, courrier).",
             "gallery": [
                 {
-                    "image": "Images\/Duck n'go logo.png",
+                    "image": "Images\/cpnv-duck-ngo\/Duck n'go logo.png",
                     "alt": "Logo Duck n'go avec la mascotte Bucky"
                 },
                 {
-                    "image": "Images\/Duck n'go logo texte.png",
+                    "image": "Images\/cpnv-duck-ngo\/Duck n'go logo texte.png",
                     "alt": "Logo Duck n'go avec le texte Duck n'go"
                 },
                 {
-                    "image": "Images\/Duck n'go carte de visite.jpg",
+                    "image": "Images\/cpnv-duck-ngo\/Duck n'go carte de visite.jpg",
                     "alt": "Carte de visite Duck n'go"
                 }
             ],
@@ -82,7 +82,7 @@
             "category": "marketing",
             "categoryLabel": "Marketing",
             "title": "Sleepy Bear Coffee",
-            "cardImage": "Images\/Sleepy Bear Coffee couverture.png",
+            "cardImage": "Images\/cpnv-sleepy-bear\/Sleepy Bear Coffee couverture.png",
             "cardImageAlt": "Sleepy Bear Coffee",
             "cardDescription": "Stratégie marketing complète pour un café-espace de coworking à Lausanne.",
             "detailText": "Projet de stratégie marketing pour Sleepy Bear Coffee, café-espace de coworking à Lausanne : étude de marché, focus group, persona, mix marketing (4P), sales funnel, campagnes Ad Words et Meta Ads, et plan de communication.",
@@ -103,7 +103,7 @@
                 }
             ],
             "coverDocument": {
-                "image": "Images\/Sleepy Bear Coffee couverture.png",
+                "image": "Images\/cpnv-sleepy-bear\/Sleepy Bear Coffee couverture.png",
                 "imageAlt": "Couverture de la présentation Sleepy Bear Coffee",
                 "file": "Documents\/Sleepy Bear Coffee présentation.pdf"
             }

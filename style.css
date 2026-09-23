@@ -13,6 +13,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Orbitron', sans-serif;
     background-color: #000000;
@@ -22,7 +26,8 @@ body {
 .starry-header {
     position: relative;
     width: 100%;
-    height: 300px;
+    min-height: 340px;
+    padding: 20px 0 70px;
     background: linear-gradient(to bottom, #000000, #0a0a2e);
     display: flex;
     justify-content: center;
@@ -53,6 +58,48 @@ body {
     background: rgba(255, 232, 31, 0.1);
     transform: translateY(-2px);
     box-shadow: 0 0 12px rgba(255, 232, 31, 0.4);
+}
+
+/* Navigation principale par ancres */
+.main-nav {
+    position: absolute;
+    bottom: 18px;
+    left: 0;
+    right: 0;
+    z-index: 15;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 22px;
+    padding: 0 20px;
+}
+
+.main-nav a {
+    color: #cccccc;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 4px 2px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.main-nav a:hover {
+    color: #FFD700;
+    border-color: #FFD700;
+}
+
+@media (max-width: 600px) {
+    .main-nav {
+        gap: 8px 14px;
+    }
+
+    .main-nav a {
+        font-size: 0.65rem;
+    }
 }
 
 /* Pop up de connexion admin */
@@ -374,7 +421,7 @@ body {
 }
 
 .profil-content {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
     position: relative;
     z-index: 10;
@@ -414,7 +461,8 @@ body {
 
 .profil-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    align-items: start;
     gap: 24px;
     margin-bottom: 20px;
 }
@@ -426,7 +474,7 @@ body {
     border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .profil-grid {
         grid-template-columns: 1fr;
     }
@@ -477,8 +525,7 @@ body {
 }
 
 .skill-bars {
-    max-width: 700px;
-    margin: 0 auto;
+    width: 100%;
 }
 
 .skill-bars-panel {
@@ -517,7 +564,6 @@ body {
 .tools-categories {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 12px;
     margin-bottom: 24px;
 }
@@ -550,16 +596,13 @@ body {
 .tools-grid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 14px;
-    max-width: 800px;
-    margin: 0 auto;
+    width: 100%;
 }
 
 .tools-panel {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 14px;
     width: 100%;
 }
@@ -639,7 +682,7 @@ body {
     margin-bottom: 6px;
 }
 
-.experience-header h4 {
+.experience-item h4 {
     font-family: 'Orbitron', sans-serif;
     color: #f18854;
     font-size: 1.1rem;
@@ -971,6 +1014,8 @@ body {
     padding: 60px 20px;
     background: linear-gradient(to bottom, #0a0a2e, #000000);
     min-height: 400px;
+    position: relative;
+    overflow: hidden;
 }
 
 .lanterne-yuna-content {
@@ -999,19 +1044,160 @@ body {
     color: #ffffff;
 }
 
-.lanterne-insta-link {
+.lanterne-logo-wrap {
+    position: relative;
     display: inline-block;
-    color: #FFD700;
-    text-decoration: none;
-    font-size: 1rem;
-    letter-spacing: 1px;
-    margin-bottom: 30px;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s ease;
+    margin: 0 auto 30px;
 }
 
-.lanterne-insta-link:hover {
-    border-color: #FFD700;
+.lanterne-logo-glow {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(168, 121, 255, 0.9) 0%, rgba(155, 93, 229, 0.5) 35%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.lanterne-logo-glow-1 {
+    top: -10px;
+    left: -10px;
+}
+
+.lanterne-logo-glow-2 {
+    top: -10px;
+    right: -10px;
+}
+
+.lanterne-logo-glow-3 {
+    bottom: -10px;
+    left: -10px;
+}
+
+.lanterne-logo-glow-4 {
+    bottom: -10px;
+    right: -10px;
+}
+
+.lanterne-logo {
+    display: block;
+    max-width: 420px;
+    width: 85%;
+    margin: 0 auto;
+    -webkit-mask-image: radial-gradient(ellipse 100% 100% at center, #000 82%, transparent 100%);
+    mask-image: radial-gradient(ellipse 100% 100% at center, #000 82%, transparent 100%);
+}
+
+.lanterne-sparkle {
+    position: absolute;
+    width: 42px;
+    height: auto;
+    pointer-events: none;
+    animation: lanterne-twinkle 2.6s ease-in-out infinite;
+}
+
+.lanterne-sparkle-1 {
+    top: -8px;
+    right: 6%;
+    animation-delay: 0s;
+}
+
+.lanterne-sparkle-2 {
+    bottom: 6%;
+    left: -6px;
+    width: 30px;
+    animation-delay: 1.1s;
+}
+
+@keyframes lanterne-twinkle {
+    0%, 100% { opacity: 0.4; transform: scale(0.85); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+.lanterne-deco {
+    position: absolute;
+    width: 100px;
+    height: auto;
+    opacity: 0.85;
+    z-index: 1;
+    pointer-events: none;
+    filter: drop-shadow(0 0 16px rgba(255, 190, 90, 0.7));
+    animation: lanterne-float 5s ease-in-out infinite;
+}
+
+.lanterne-deco-1 {
+    top: 8%;
+    left: 6%;
+    animation-delay: 0s;
+}
+
+.lanterne-deco-2 {
+    top: 55%;
+    right: 7%;
+    width: 80px;
+    animation-delay: 1.5s;
+}
+
+.lanterne-deco-3 {
+    bottom: 6%;
+    left: 12%;
+    width: 65px;
+    animation-delay: 3s;
+}
+
+@keyframes lanterne-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+}
+
+.lanterne-instagram-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.lanterne-insta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: linear-gradient(45deg, #6f3ac9, #9b5de5, #c77dff, #ffb84d);
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    transition: transform 0.2s ease;
+}
+
+.lanterne-insta-btn:hover {
+    transform: translateY(-3px);
+}
+
+.lanterne-qr-link {
+    display: inline-block;
+    line-height: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lanterne-qr-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.45);
+}
+
+.lanterne-qr {
+    display: block;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
 }
 
 .lanterne-carousel {
@@ -1053,59 +1239,7 @@ body {
     max-width: 800px;
 }
 
-.lanterne-post {
-    position: relative;
-    display: block;
-    aspect-ratio: 1 / 1;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-}
-
-.lanterne-post img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-}
-
-.lanterne-post:hover img {
-    transform: scale(1.05);
-}
-
-.lanterne-post-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.lanterne-post:hover .lanterne-post-overlay {
-    opacity: 1;
-}
-
-.lanterne-post-stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    color: #ffffff;
-    font-size: 0.85rem;
-    font-weight: 700;
-}
-
-.lanterne-status {
-    grid-column: 1 / -1;
-    color: #cccccc;
-    font-size: 1rem;
-    padding: 40px 20px;
-}
+/* Style des cartes de publication : voir instagram-grid.css (plug-in) */
 
 /* Section CPNV */
 .cpnv {
@@ -1123,6 +1257,10 @@ body {
 }
 
 .cpnv h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
     font-family: 'Orbitron', sans-serif;
     color: #ffffff;
     font-size: 2.5rem;
@@ -1132,6 +1270,12 @@ body {
                  0 0 40px rgba(255, 215, 0, 0.4),
                  0 0 60px rgba(255, 215, 0, 0.3);
     font-weight: 700;
+}
+
+.cpnv-title-icon {
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0 0 8px rgba(120, 200, 255, 0.6));
 }
 
 .cpnv p {
@@ -1149,6 +1293,9 @@ body {
 }
 
 .cpnv-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     padding: 8px 22px;
     border-radius: 999px;
     background: transparent;
@@ -1160,6 +1307,11 @@ body {
     text-transform: uppercase;
     cursor: pointer;
     transition: background 0.3s ease, color 0.3s ease, transform 0.15s ease;
+}
+
+.cpnv-filter-icon {
+    width: 18px;
+    height: 18px;
 }
 
 .cpnv-filter-btn:hover {
@@ -1534,6 +1686,35 @@ body {
     .lanterne-nav {
         width: 38px;
         height: 38px;
+    }
+
+    .lanterne-logo {
+        max-width: 300px;
+    }
+
+    .lanterne-sparkle {
+        width: 30px;
+    }
+
+    .lanterne-sparkle-2 {
+        width: 22px;
+    }
+
+    .lanterne-deco {
+        width: 60px;
+    }
+
+    .lanterne-deco-2 {
+        width: 50px;
+    }
+
+    .lanterne-deco-3 {
+        width: 42px;
+    }
+
+    .lanterne-qr {
+        width: 140px;
+        height: 140px;
     }
 
     .cpnv-gallery-item {
