@@ -1,6 +1,28 @@
 {
     "projects": [
         {
+            "id": "identite-visuelle-cf",
+            "category": "design",
+            "categoryLabel": "Design",
+            "title": "Identité visuelle CF",
+            "cardImage": "Images\/identite-visuelle-cf\/logo-cf-monogramme.png",
+            "cardImageAlt": "Logo CF Multi médiamaticienne",
+            "cardDescription": "Création de mon identité visuelle personnelle : monogramme CF et élément graphique associé.",
+            "detailText": "Création de mon identité visuelle personnelle, autour d'un monogramme \"CF\" habillé d'un motif de poissons stylisés (violet et bleu), décliné avec le libellé \"Multi médiamaticienne\".",
+            "gallery": [
+                {
+                    "image": "Images\/identite-visuelle-cf\/logo-cf-monogramme.png",
+                    "alt": "Logo CF Multi médiamaticienne, monogramme complet"
+                },
+                {
+                    "image": "Images\/identite-visuelle-cf\/logo-cf-poissons.png",
+                    "alt": "Élément graphique des poissons stylisés de l'identité visuelle CF"
+                }
+            ],
+            "documents": [],
+            "videos": []
+        },
+        {
             "id": "duck-n-go",
             "category": "design",
             "categoryLabel": "Design",
