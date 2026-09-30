@@ -607,6 +607,20 @@ input {
     margin: 0 auto;
 }
 
+/* Bouton "Admirer mon CV" (même habillage que le bouton du site RetroMania,
+   défini plus bas) */
+.profil-cv {
+    display: flex;
+    justify-content: center;
+    margin: -8px 0 32px;
+}
+
+.profil-cv .profil-cv-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .profil-subtitle {
     font-family: var(--police-titre);
     font-weight: 400;
@@ -888,7 +902,8 @@ input {
     margin-top: 24px;
 }
 
-.retromania-site-link {
+.retromania-site-link,
+.profil-cv-btn {
     display: inline-block;
     padding: 12px 30px;
     border-radius: 999px;
@@ -900,7 +915,8 @@ input {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.retromania-site-link:hover {
+.retromania-site-link:hover,
+.profil-cv-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 0 28px var(--lueur-violette), 0 0 40px var(--lueur-bleue);
 }
