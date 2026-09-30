@@ -3,7 +3,7 @@
 // "suivant" charge la page suivante depuis l'API, jusqu'au tout premier
 // post du compte ; un bouton "précédent" permet de remonter.
 //
-// Ne dépend d'aucun service tiers (pas de Netlify, pas de Behold) : il
+// Ne dépend d'aucun service tiers : il
 // interroge directement l'endpoint PHP fourni en option, qui lui-même
 // appelle l'API Instagram Graph (voir php/instagram-posts.php).
 //

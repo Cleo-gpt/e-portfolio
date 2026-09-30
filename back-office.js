@@ -16,7 +16,9 @@
         };
     }
 
-    // ---------- Détection d'environnement (PHP vs Netlify) ----------
+    // ---------- PHP disponible ? ----------
+    // Faux quand la page est ouverte sans PHP (Live Server, double-clic) :
+    // le back office le signale au lieu d'échouer en silence.
 
     let usePhp = null; // true, false, ou null (pas encore déterminé)
 
@@ -27,11 +29,11 @@
     }
 
     function authUrl(name) {
-        return usePhp ? '/php/' + name + '.php' : '/.netlify/functions/' + name;
+        return '/php/' + name + '.php';
     }
 
     function contentUrl(key) {
-        return window.EPortfolioContent.endpoints(usePhp ? 'php' : 'netlify')[key];
+        return window.EPortfolioContent.endpoints()[key];
     }
 
     // ---------- Login ----------

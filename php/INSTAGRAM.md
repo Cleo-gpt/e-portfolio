@@ -5,7 +5,7 @@ sur le site (section Lanterne de Yuna) : chaque nouveau post publié sur
 Instagram apparaît sur le site en 5 minutes maximum, sans rien toucher.
 
 Tout tourne sur l'hébergement PHP (ex : mediamatique.ch) — **aucun service
-tiers, pas de Netlify, pas de GitHub Actions**. Ne fonctionne pas avec Live
+tiers, pas de GitHub Actions**. Ne fonctionne pas avec Live
 Server : en local, lance `npm run dev` puis ouvre `http://localhost:8765/`.
 
 **Ne mets jamais de mot de passe Instagram ni de token dans le code du site

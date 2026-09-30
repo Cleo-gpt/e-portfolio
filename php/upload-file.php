@@ -2,10 +2,6 @@
 // Upload d'un fichier (image ou document PDF) depuis le back office,
 // stocké directement dans Images/ ou Documents/ à la racine du site.
 //
-// Disponible uniquement sur un hébergement PHP classique (pas de fonction
-// équivalente côté Netlify : les fonctions serverless ne peuvent pas
-// écrire de fichiers disque persistants).
-//
 // POST multipart/form-data :
 //   - file : le fichier à uploader
 //   - kind : "image" ou "document"

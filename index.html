@@ -4,26 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Le E-portefolio de Cléo Ana Forclaz</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="instagram-grid.css">
+    <meta name="theme-color" content="#06051a">
+    <link rel="icon" type="image/svg+xml" href="Images/identite-visuelle-cf/carpes-duo.svg">
+    <link rel="alternate icon" type="image/png" href="Images/identite-visuelle-cf/logo-cf-poissons.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="instagram-grid.css">
 </head>
 <body>
-    <header class="starry-header">
-        <div class="stars"></div>
-        <div class="stars2"></div>
-        <div class="stars3"></div>
-        <button class="login-trigger" id="loginTriggerBtn">Login</button>
-        <h1>Le E-portefolio de Cléo Ana Forclaz</h1>
-        <nav class="main-nav">
+    <!-- Ciel fixe derrière toute la page : étoiles (canvas animé par ciel.js)
+         et carpes koï qui traversent lentement l'écran. -->
+    <div class="ciel" aria-hidden="true">
+        <canvas class="ciel-etoiles" id="cielEtoiles"></canvas>
+        <div class="carpe-nage carpe-nage-1"><div class="carpe-ondule"><img src="Images/identite-visuelle-cf/carpe-bleue.svg" alt=""></div></div>
+        <div class="carpe-nage carpe-nage-2 vers-la-gauche"><div class="carpe-ondule"><img src="Images/identite-visuelle-cf/carpe-violette.svg" alt=""></div></div>
+        <div class="carpe-nage carpe-nage-3"><div class="carpe-ondule"><img src="Images/identite-visuelle-cf/carpe-violette.svg" alt=""></div></div>
+    </div>
+
+    <nav class="site-nav" aria-label="Navigation principale">
+        <a href="#accueil" class="site-nav-logo" aria-label="Retour en haut de la page">
+            <img src="Images/identite-visuelle-cf/carpes-duo.svg" alt="">
+        </a>
+        <div class="main-nav">
             <a href="#presentation">Présentation</a>
             <a href="#profil">Profil &amp; Compétences</a>
             <a href="#retromania">RetroMania</a>
             <a href="#lanterne-yuna">La Lanterne de Yuna</a>
             <a href="#cpnv">CPNV-Médiamatique</a>
-        </nav>
+        </div>
+        <button class="login-trigger" id="loginTriggerBtn">Login</button>
+    </nav>
+
+    <header class="hero" id="accueil">
+        <div class="hero-astre">
+            <div class="hero-lune">
+                <img src="Images/identite-visuelle-cf/logo-cf.svg" alt="CF — Multi médiamaticienne" class="hero-logo">
+            </div>
+            <div class="hero-orbite" aria-hidden="true">
+                <img src="Images/identite-visuelle-cf/carpe-bleue.svg" alt="" class="hero-carpe hero-carpe-bleue">
+                <img src="Images/identite-visuelle-cf/carpe-violette.svg" alt="" class="hero-carpe hero-carpe-violette">
+            </div>
+        </div>
+        <h1>Le E-portefolio de <span>Cléo Ana Forclaz</span></h1>
+        <p class="hero-accroche">Multimédiamaticienne, avec un fort penchant pour l'illustration et le montage vidéo.</p>
+        <a href="#presentation" class="hero-suite" aria-label="Descendre vers la présentation">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
     </header>
 
     <div class="login-modal-overlay" id="loginModalOverlay" hidden>
@@ -41,16 +69,10 @@
 
     <div class="section-divider"></div>
 
-    <section class="presentation starry-section" id="presentation">
-        <div class="stars"></div>
-        <div class="stars2"></div>
-        <div class="stars3"></div>
+    <section class="presentation" id="presentation">
         <div class="presentation-content">
             <div class="presentation-media">
                 <img src="Images/presentation/Photo Cléo.jpeg" alt="Photo de Cléo Ana Forclaz" class="profile-photo" id="presentationPhoto">
-                <div class="presentation-logo-box">
-                    <img src="Images/identite-visuelle-cf/logo-cf-monogramme.png" alt="CF — Multi médiamaticienne" class="presentation-logo">
-                </div>
             </div>
             <div class="presentation-text" id="presentationText">
                 <h2>À propos de moi</h2>
@@ -63,10 +85,7 @@
 
     <div class="section-divider"></div>
 
-    <section class="profil starry-section" id="profil">
-        <div class="stars"></div>
-        <div class="stars2"></div>
-        <div class="stars3"></div>
+    <section class="profil" id="profil">
         <div class="profil-content">
             <h2>Profil &amp; Compétences</h2>
 
@@ -169,10 +188,7 @@
 
     <div class="section-divider"></div>
 
-    <section class="retromania starry-section" id="retromania">
-        <div class="stars"></div>
-        <div class="stars2"></div>
-        <div class="stars3"></div>
+    <section class="retromania" id="retromania">
         <div class="retromania-content">
             <h2>Retromania</h2>
             <div class="carousel-container">
@@ -247,7 +263,7 @@
                 </div>
                 <div class="gear-control">
                     <div class="gear" onclick="rotateCarousel()">
-                        <img src="Images/presentation/Roue.png" alt="Roue" class="gear-img" id="gearImage">
+                        <img src="Images/identite-visuelle-cf/carpes-duo.svg" alt="Faire tourner le carrousel" class="gear-img" id="gearImage">
                     </div>
                     <p class="gear-text">Tourner</p>
                 </div>
@@ -268,10 +284,7 @@
 
     <div class="section-divider"></div>
 
-    <section class="lanterne-yuna starry-section" id="lanterne-yuna">
-        <div class="stars"></div>
-        <div class="stars2"></div>
-        <div class="stars3"></div>
+    <section class="lanterne-yuna" id="lanterne-yuna">
         <img src="Images/lanterne-yuna/lanterne-yuna-icone.png" alt="" class="lanterne-deco lanterne-deco-1" loading="lazy">
         <img src="Images/lanterne-yuna/lanterne-yuna-icone.png" alt="" class="lanterne-deco lanterne-deco-2" loading="lazy">
         <img src="Images/lanterne-yuna/lanterne-yuna-icone.png" alt="" class="lanterne-deco lanterne-deco-3" loading="lazy">
@@ -316,10 +329,7 @@
 
     <div class="section-divider"></div>
 
-    <section class="cpnv starry-section" id="cpnv">
-        <div class="stars"></div>
-        <div class="stars2"></div>
-        <div class="stars3"></div>
+    <section class="cpnv" id="cpnv">
         <div class="cpnv-content">
             <h2>
                 <img src="Images/logo-branche-media/4_symboles_general.png" alt="" class="cpnv-title-icon">
@@ -357,10 +367,8 @@
 
     <div class="section-divider"></div>
 
-    <footer class="site-footer starry-section">
-        <div class="stars"></div>
-        <div class="stars2"></div>
-        <div class="stars3"></div>
+    <footer class="site-footer">
+        <div class="frise-carpes" aria-hidden="true"></div>
         <div class="footer-content">
             <p class="footer-name" id="footerName">Cléo Ana Forclaz</p>
             <div class="footer-divider"></div>
@@ -396,6 +404,11 @@
         </div>
     </footer>
 
+    <a href="#accueil" class="retour-haut" id="retourHaut" aria-label="Retour en haut de la page">
+        <img src="Images/identite-visuelle-cf/carpe-bleue.svg" alt="">
+    </a>
+
+    <script src="ciel.js"></script>
     <script src="content.js"></script>
     <script src="instagram-grid.js"></script>
     <script>
@@ -426,28 +439,20 @@
                 overlay.hidden = true;
             }
 
-            function authCheckUrl() {
-                return fetch('/php/auth-check.php', { method: 'OPTIONS' })
-                    .then(function (res) { return res.status !== 404 ? '/php/auth-check.php' : '/.netlify/functions/auth-check'; })
-                    .catch(function () { return '/.netlify/functions/auth-check'; });
-            }
-
             function attemptLogin() {
                 const email = emailInput.value.trim();
                 const password = passwordInput.value;
                 errorEl.textContent = '';
                 submitBtn.disabled = true;
 
-                authCheckUrl().then(function (url) {
-                    return fetch(url, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-Admin-Email': email,
-                            'X-Admin-Password': password
-                        },
-                        body: JSON.stringify({})
-                    });
+                fetch('/php/auth-check.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Admin-Email': email,
+                        'X-Admin-Password': password
+                    },
+                    body: JSON.stringify({})
                 })
                     .then(function (res) {
                         submitBtn.disabled = false;
@@ -539,7 +544,7 @@
         // Publications Instagram — La Lanterne de Yuna
         // Affichées en grille via le plug-in instagram-grid.js (voir ce
         // fichier), qui appelle directement php/instagram-posts.php.
-        // Aucune dépendance à un service tiers (pas de Netlify, pas de Behold).
+        // Aucune dépendance à un service tiers.
         document.addEventListener('DOMContentLoaded', function () {
             InstagramGrid.mount({
                 container: document.getElementById('lanternePosts'),

@@ -1,15 +1,15 @@
 // Charge le contenu éditable du site (présentation, timeline, compétences,
-// projets CPNV, réseaux sociaux) depuis le backend (Netlify ou PHP selon
-// l'hébergement) et régénère le DOM correspondant.
+// projets CPNV, réseaux sociaux) depuis les scripts PHP du dossier php/
+// et régénère le DOM correspondant.
 //
 // Utilisé à la fois par index.html (rendu public) et back-office.html
 // (aperçu / pré-remplissage des formulaires) via window.EPortfolioContent.
 
 (function () {
     // Copie statique du contenu actuel (voir php/data/*.json), utilisée
-    // uniquement quand ni PHP ni Netlify ne répondent — cas d'un test en
-    // local via Live Server ou en ouvrant index.html directement (double-clic),
-    // qui ne font tourner aucun des deux backends. Permet au site de rester
+    // uniquement quand PHP ne répond pas — cas d'un test en local via Live
+    // Server ou en ouvrant index.html directement (double-clic), qui ne
+    // font pas tourner PHP. Permet au site de rester
     // consultable partout. À tenir à jour manuellement si le contenu est
     // édité via le back office (les fichiers php/data/*.json restent la
     // source de vérité en production).
@@ -257,27 +257,14 @@
         }
     };
 
-    // Sur Netlify, chaque domaine a sa propre fonction. Sur PHP, son propre
-    // script. On mémorise lequel des deux répond une fois détecté, pour ne
-    // pas retenter le mauvais backend à chaque appel.
-    let detectedBase = null;
-
-    function endpoints(base) {
-        if (base === 'php') {
-            return {
-                presentation: '/php/content-presentation.php',
-                timeline: '/php/content-timeline.php',
-                skills: '/php/content-skills.php',
-                cpnv: '/php/content-cpnv.php',
-                social: '/php/content-social.php'
-            };
-        }
+    // Chaque domaine de contenu a son propre script PHP.
+    function endpoints() {
         return {
-            presentation: '/.netlify/functions/content-presentation',
-            timeline: '/.netlify/functions/content-timeline',
-            skills: '/.netlify/functions/content-skills',
-            cpnv: '/.netlify/functions/content-cpnv',
-            social: '/.netlify/functions/content-social'
+            presentation: '/php/content-presentation.php',
+            timeline: '/php/content-timeline.php',
+            skills: '/php/content-skills.php',
+            cpnv: '/php/content-cpnv.php',
+            social: '/php/content-social.php'
         };
     }
 
@@ -288,29 +275,14 @@
         });
     }
 
-    // Essaie d'abord le backend déjà détecté (le cas échéant), sinon PHP
-    // puis Netlify en repli, pour fonctionner sans configuration explicite
-    // quel que soit l'hébergement courant. Si aucun des deux ne répond
-    // (Live Server, double-clic sur index.html), retombe sur FALLBACK_DATA
-    // pour que le site reste consultable.
+    // Lit le contenu auprès de PHP. Si PHP ne répond pas (Live Server,
+    // double-clic sur index.html), retombe sur FALLBACK_DATA pour que le
+    // site reste consultable.
     function fetchContent(key) {
-        const fallback = function () {
+        return fetchJson(endpoints()[key]).catch(function () {
             if (FALLBACK_DATA[key]) return FALLBACK_DATA[key];
             throw new Error('no-fallback');
-        };
-
-        if (detectedBase) {
-            return fetchJson(endpoints(detectedBase)[key]).catch(fallback);
-        }
-        return fetchJson(endpoints('php')[key])
-            .then(function (data) { detectedBase = 'php'; return data; })
-            .catch(function () {
-                return fetchJson(endpoints('netlify')[key]).then(function (data) {
-                    detectedBase = 'netlify';
-                    return data;
-                });
-            })
-            .catch(fallback);
+        });
     }
 
     function escapeHtml(str) {
