@@ -25,7 +25,7 @@
 
     <nav class="site-nav" aria-label="Navigation principale">
         <a href="#accueil" class="site-nav-logo" aria-label="Retour en haut de la page">
-            <img src="Images/identite-visuelle-cf/carpes-duo.svg" alt="">
+            <img src="Images/identite-visuelle-cf/logo-cf-clair.svg" alt="CF — Multi médiamaticienne">
         </a>
         <div class="main-nav">
             <a href="#presentation">Présentation</a>
@@ -72,7 +72,19 @@
     <section class="presentation" id="presentation">
         <div class="presentation-content">
             <div class="presentation-media">
-                <img src="Images/presentation/Photo Cléo.jpeg" alt="Photo de Cléo Ana Forclaz" class="profile-photo" id="presentationPhoto">
+                <div class="photo-cadre">
+                    <img src="Images/presentation/Photo Cléo.jpeg" alt="Photo de Cléo Ana Forclaz" class="profile-photo" id="presentationPhoto">
+                    <div class="photo-orbite" aria-hidden="true">
+                        <img src="Images/identite-visuelle-cf/carpe-bleue.svg" alt="" class="photo-carpe photo-carpe-bleue">
+                        <img src="Images/identite-visuelle-cf/carpe-violette.svg" alt="" class="photo-carpe photo-carpe-violette">
+                        <span class="photo-etoile"></span>
+                        <span class="photo-etoile"></span>
+                        <span class="photo-etoile"></span>
+                        <span class="photo-etoile"></span>
+                        <span class="photo-etoile"></span>
+                        <span class="photo-etoile"></span>
+                    </div>
+                </div>
             </div>
             <div class="presentation-text" id="presentationText">
                 <h2>À propos de moi</h2>
@@ -88,18 +100,6 @@
     <section class="profil" id="profil">
         <div class="profil-content">
             <h2>Profil &amp; Compétences</h2>
-
-            <!-- Le CV est attendu à cet emplacement : Documents/cv-cleo-forclaz.pdf -->
-            <div class="profil-cv">
-                <a href="Documents/cv-cleo-forclaz.pdf" target="_blank" rel="noopener" class="profil-cv-btn">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
-                        <path d="M14 3v5h5"/>
-                        <path d="M9 13h6M9 17h6"/>
-                    </svg>
-                    Admirer mon CV
-                </a>
-            </div>
 
             <div class="profil-grid">
                 <div class="profil-card">
@@ -189,10 +189,24 @@
                     <div class="skill-bars" id="skillsBars"></div>
                 </div>
 
-                <div class="profil-card">
-                    <h3 class="profil-subtitle">Outils &amp; logiciels</h3>
-                    <div class="tools-categories" id="toolsCategories"></div>
-                    <div class="tools-grid" id="toolsGrid"></div>
+                <div class="profil-colonne">
+                    <div class="profil-card">
+                        <h3 class="profil-subtitle">Outils &amp; logiciels</h3>
+                        <div class="tools-categories" id="toolsCategories"></div>
+                        <div class="tools-grid" id="toolsGrid"></div>
+                    </div>
+
+                    <!-- Le CV est attendu à cet emplacement : Documents/cv-cleo-forclaz.pdf -->
+                    <div class="profil-cv">
+                        <a href="Documents/cv-cleo-forclaz.pdf" target="_blank" rel="noopener" class="profil-cv-btn">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+                                <path d="M14 3v5h5"/>
+                                <path d="M9 13h6M9 17h6"/>
+                            </svg>
+                            Admirer mon CV
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -301,15 +315,7 @@
         <img src="Images/lanterne-yuna/lanterne-yuna-icone.png" alt="" class="lanterne-deco lanterne-deco-2" loading="lazy">
         <img src="Images/lanterne-yuna/lanterne-yuna-icone.png" alt="" class="lanterne-deco lanterne-deco-3" loading="lazy">
         <div class="lanterne-yuna-content">
-            <div class="lanterne-logo-wrap">
-                <div class="lanterne-logo-glow lanterne-logo-glow-1"></div>
-                <div class="lanterne-logo-glow lanterne-logo-glow-2"></div>
-                <div class="lanterne-logo-glow lanterne-logo-glow-3"></div>
-                <div class="lanterne-logo-glow lanterne-logo-glow-4"></div>
-                <img src="Images/lanterne-yuna/lanterne-yuna-logo-2.png" alt="La Lanterne de Yuna" class="lanterne-logo" loading="lazy">
-                <img src="Images/lanterne-yuna/lanterne-yuna-etoiles.png" alt="" class="lanterne-sparkle lanterne-sparkle-1" loading="lazy">
-                <img src="Images/lanterne-yuna/lanterne-yuna-etoiles.png" alt="" class="lanterne-sparkle lanterne-sparkle-2" loading="lazy">
-            </div>
+            <h2>La Lanterne de Yuna</h2>
 
             <div class="lanterne-carousel">
                 <button class="lanterne-nav" id="lanterneUp" aria-label="Publications précédentes">
@@ -564,7 +570,7 @@
                 btnNext: document.getElementById('lanterneDown'),
                 endpoint: '/php/instagram-posts.php',
                 postsPerPage: 3,
-                errorMessage: "Publications indisponibles pour le moment. Voir directement le compte Instagram ci-dessus."
+                errorMessage: "Publications indisponibles pour le moment. Voir directement le compte Instagram ci-dessous."
             });
         });
     </script>
