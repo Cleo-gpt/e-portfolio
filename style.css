@@ -954,13 +954,15 @@ input {
 
 /* Aperçu du site RetroMania */
 
-/* Bouton orange RetroMania (repris de l'ancienne version du site) */
+/* Bouton aux couleurs de RetroMania : jaune, orange et une pointe de rouge */
 .retromania-site-link {
     display: inline-block;
-    padding: 12px 28px;
+    padding: 12px 30px;
     border-radius: 999px;
-    background: #FF8C00;
-    color: #1a1a1a;
+    background: linear-gradient(100deg, #ffd21f 0%, #ff8c00 58%, #e42126 112%);
+    color: #ffffff;
+    /* Ombre légère : garde le texte blanc lisible sur la partie jaune */
+    text-shadow: 0 1px 3px rgba(90, 40, 0, 0.55);
     text-decoration: none;
     font-weight: 700;
     box-shadow: 0 0 15px rgba(255, 140, 0, 0.4);
@@ -1243,12 +1245,13 @@ input {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    padding: 8px 18px;
+    padding: 9px 20px;
     border-radius: 999px;
-    /* Dégradé violet → jaune orangé de La Lanterne de Yuna (repris de
-       l'ancienne version du site) */
-    background: linear-gradient(45deg, #6f3ac9, #9b5de5, #c77dff, #ffb84d);
+    /* Couleurs de La Lanterne de Yuna à parts égales : jaune et orange des
+       lanternes, violet du lettrage */
+    background: linear-gradient(100deg, #ffd24a 0%, #ff9a3c 38%, #c77dff 78%, #b266ff 100%);
     color: #ffffff;
+    text-shadow: 0 1px 3px rgba(90, 40, 0, 0.55);
     text-decoration: none;
     font-size: 1rem;
     font-weight: 700;
