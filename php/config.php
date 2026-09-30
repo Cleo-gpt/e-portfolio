@@ -10,15 +10,3 @@
 
 define('ADMIN_EMAIL', 'cleoforclaz2007@gmail.com');
 define('ADMIN_PASSWORD_DEFAULT', 'change-moi');
-
-// Secret protégeant update-instagram-token.php, chargé depuis secrets.php
-// (fichier NON versionné, voir php/secrets.example.php et le README pour
-// la procédure de configuration). Ne mets jamais ce secret directement
-// dans ce fichier : config.php est public sur le dépôt GitHub du projet.
-
-if (file_exists(__DIR__ . '/secrets.php')) {
-    require __DIR__ . '/secrets.php';
-}
-if (!defined('INSTAGRAM_TOKEN_UPDATE_SECRET')) {
-    define('INSTAGRAM_TOKEN_UPDATE_SECRET', '');
-}
