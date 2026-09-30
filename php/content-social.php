@@ -21,7 +21,7 @@ $default = [
     'name' => '',
     'phone' => '',
     'phoneDisplay' => '',
-    'instagramPortfolio' => '',
+    'linktree' => '',
     'instagramLanterne' => '',
     'linkedin' => '',
     'email' => ''
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'name' => social_str($payload['name'] ?? ''),
         'phone' => social_str($payload['phone'] ?? ''),
         'phoneDisplay' => social_str($payload['phoneDisplay'] ?? ''),
-        'instagramPortfolio' => social_str($payload['instagramPortfolio'] ?? ''),
+        'linktree' => social_str($payload['linktree'] ?? ''),
         'instagramLanterne' => social_str($payload['instagramLanterne'] ?? ''),
         'linkedin' => social_str($payload['linkedin'] ?? ''),
         'email' => social_str($payload['email'] ?? '')

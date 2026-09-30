@@ -560,7 +560,7 @@
             document.getElementById('socialName').value = data.name || '';
             document.getElementById('socialPhone').value = data.phone || '';
             document.getElementById('socialPhoneDisplay').value = data.phoneDisplay || '';
-            document.getElementById('socialInstagramPortfolio').value = data.instagramPortfolio || '';
+            document.getElementById('socialLinktree').value = data.linktree || '';
             document.getElementById('socialInstagramLanterne').value = data.instagramLanterne || '';
             document.getElementById('socialLinkedin').value = data.linkedin || '';
             document.getElementById('socialEmail').value = data.email || '';
@@ -577,7 +577,7 @@
                 name: document.getElementById('socialName').value,
                 phone: document.getElementById('socialPhone').value,
                 phoneDisplay: document.getElementById('socialPhoneDisplay').value,
-                instagramPortfolio: document.getElementById('socialInstagramPortfolio').value,
+                linktree: document.getElementById('socialLinktree').value,
                 instagramLanterne: document.getElementById('socialInstagramLanterne').value,
                 linkedin: document.getElementById('socialLinkedin').value,
                 email: document.getElementById('socialEmail').value

@@ -250,7 +250,7 @@
             name: "Cléo Ana Forclaz",
             phone: "0764391272",
             phoneDisplay: "076 439 12 72",
-            instagramPortfolio: "https://www.instagram.com/le_mini_portefolio_de_cleo/",
+            linktree: "https://linktr.ee/Cleo_Forclaz_menu",
             instagramLanterne: "https://www.instagram.com/la_lanterne_de_yuna/",
             linkedin: "https://www.linkedin.com/in/cleo-forclaz/",
             email: "cleoforclaz2007@gmail.com"
@@ -580,8 +580,8 @@
             phoneLink.textContent = data.phoneDisplay || data.phone;
         }
 
-        const igPortfolio = document.getElementById('footerInstagramPortfolio');
-        if (igPortfolio && data.instagramPortfolio) igPortfolio.href = data.instagramPortfolio;
+        const linktree = document.getElementById('footerLinktree');
+        if (linktree && data.linktree) linktree.href = data.linktree;
 
         const igLanterne = document.getElementById('footerInstagramLanterne');
         if (igLanterne && data.instagramLanterne) igLanterne.href = data.instagramLanterne;

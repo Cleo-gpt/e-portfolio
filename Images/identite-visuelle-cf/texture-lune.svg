@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Texture de lune : mers (taches), grain et cratères, dans les lilas de l'identité CF. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <radialGradient id="base" cx="0.36" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.55" stop-color="#f1e7fd"/>
+      <stop offset="1" stop-color="#cdb2ee"/>
+    </radialGradient>
+    <radialGradient id="c" cx="0.42" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#9f86c9" stop-opacity="0.34"/>
+      <stop offset="0.72" stop-color="#9f86c9" stop-opacity="0.22"/>
+      <stop offset="0.86" stop-color="#6d4fa3" stop-opacity="0.34"/>
+      <stop offset="0.93" stop-color="#ffffff" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="mers" x="0" y="0" width="1" height="1">
+      <feTurbulence type="fractalNoise" baseFrequency="0.011" numOctaves="4" seed="11"/>
+      <feColorMatrix values="0 0 0 0 0.62  0 0 0 0 0.52  0 0 0 0 0.80  7 0 0 0 -3.4"/>
+    </filter>
+    <filter id="grain" x="0" y="0" width="1" height="1">
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="3"/>
+      <feColorMatrix values="0 0 0 0 0.35  0 0 0 0 0.22  0 0 0 0 0.55  0 0 1.5 0 -0.62"/>
+    </filter>
+    <clipPath id="disque"><circle cx="200" cy="200" r="200"/></clipPath>
+  </defs>
+  <g clip-path="url(#disque)">
+    <rect width="400" height="400" fill="url(#base)"/>
+    <rect width="400" height="400" filter="url(#mers)" opacity="0.6"/>
+    <rect width="400" height="400" filter="url(#grain)" opacity="0.5"/>
+    <circle cx="92" cy="84" r="30" fill="url(#c)"/>
+    <circle cx="318" cy="96" r="22" fill="url(#c)"/>
+    <circle cx="338" cy="250" r="34" fill="url(#c)"/>
+    <circle cx="70" cy="262" r="24" fill="url(#c)"/>
+    <circle cx="206" cy="352" r="27" fill="url(#c)"/>
+    <circle cx="150" cy="40" r="13" fill="url(#c)"/>
+    <circle cx="262" cy="44" r="10" fill="url(#c)"/>
+    <circle cx="368" cy="172" r="12" fill="url(#c)"/>
+    <circle cx="36" cy="178" r="11" fill="url(#c)"/>
+    <circle cx="120" cy="338" r="12" fill="url(#c)"/>
+    <circle cx="292" cy="336" r="14" fill="url(#c)"/>
+    <circle cx="232" cy="78" r="7" fill="url(#c)"/>
+    <circle cx="60" cy="130" r="7" fill="url(#c)"/>
+    <circle cx="352" cy="318" r="8" fill="url(#c)"/>
+    <circle cx="176" cy="376" r="6" fill="url(#c)"/>
+    <circle cx="28" cy="228" r="6" fill="url(#c)"/>
+    <circle cx="300" cy="28" r="6" fill="url(#c)"/>
+    <circle cx="382" cy="214" r="5" fill="url(#c)"/>
+    <circle cx="104" cy="186" r="5" fill="url(#c)"/>
+    <circle cx="286" cy="300" r="6" fill="url(#c)"/>
+    <circle cx="250" cy="372" r="5" fill="url(#c)"/>
+    <circle cx="132" cy="300" r="5" fill="url(#c)"/>
+  </g>
+</svg>
