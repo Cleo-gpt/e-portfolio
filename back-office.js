@@ -391,7 +391,7 @@
             '<button class="btn btn-danger btn-small" data-action="remove">Supprimer</button>' +
             '</div></div>' +
             '<label>Titre</label><input type="text" data-field="title" value="' + escapeAttr(project.title) + '">' +
-            '<label>Catégorie (design / multimedias / marketing)</label><input type="text" data-field="category" value="' + escapeAttr(project.category) + '">' +
+            '<label>Catégorie (design / multimedias / marketing / web / culture-generale)</label><input type="text" data-field="category" value="' + escapeAttr(project.category) + '">' +
             '<label>Image de la carte</label><input type="text" data-field="cardImage" value="' + escapeAttr(project.cardImage) + '">' +
             '<div data-upload-card-image></div>' +
             '<label>Description (carte)</label><textarea data-field="cardDescription">' + escapeHtml(project.cardDescription) + '</textarea>' +

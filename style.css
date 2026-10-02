@@ -1362,7 +1362,8 @@ input {
 /* Grille de cartes projets */
 .cpnv-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    /* auto-fill : une carte seule (filtre) garde sa taille au lieu de s'étirer */
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 24px;
     margin-bottom: 40px;
     text-align: left;
@@ -1438,13 +1439,15 @@ input {
 
 .cpnv-card-footer {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 8px 10px;
 }
 
 .cpnv-card-badge {
     display: inline-block;
+    white-space: nowrap;
     padding: 3px 14px;
     border-radius: 999px;
     background: var(--lilas);
@@ -1454,6 +1457,7 @@ input {
 }
 
 .cpnv-card-link {
+    white-space: nowrap;
     color: var(--cyan-carpe);
     font-size: 0.95rem;
     font-weight: 700;

@@ -181,17 +181,18 @@
                     category: "multimedias",
                     categoryLabel: "Multimédias",
                     title: "Vidéos",
-                    cardImage: "https://img.youtube.com/vi/VHWPITKgmTo/hqdefault.jpg",
+                    cardImage: "Images/miniatures-videos/famille-recomposee.jpg",
                     cardImageAlt: "Vidéos CPNV",
-                    cardDescription: "Quatre réalisations vidéo : fiction, tutoriel technique et reportage d'événement.",
+                    cardDescription: "Cinq réalisations vidéo : fiction, tutoriel technique, biopic et reportage d'événement.",
                     detailText: "",
                     gallery: [],
                     documents: [],
                     videos: [
-                        { url: "https://youtu.be/VHWPITKgmTo", thumbnail: "https://img.youtube.com/vi/VHWPITKgmTo/hqdefault.jpg", alt: "Famille recomposée", title: "Famille recomposée", short: false },
-                        { url: "https://youtu.be/at5eeLY0Xyw", thumbnail: "https://img.youtube.com/vi/at5eeLY0Xyw/hqdefault.jpg", alt: "Vidéo CPNV 2", title: "Première Pro", short: false },
-                        { url: "https://youtu.be/AxhW9_Kfvwc", thumbnail: "https://img.youtube.com/vi/AxhW9_Kfvwc/hqdefault.jpg", alt: "Femme Fragile Violences Conjugales", title: "Femme Fragile Violences Conjugales", short: false },
-                        { url: "https://youtube.com/shorts/Bjy2dsa-m3M", thumbnail: "https://img.youtube.com/vi/Bjy2dsa-m3M/hqdefault.jpg", alt: "Short CPNV 4", title: "Le Cinéma Open Air d'Estavayer le Lac", short: true }
+                        { url: "https://youtu.be/VHWPITKgmTo", thumbnail: "Images/miniatures-videos/famille-recomposee.jpg", alt: "Famille recomposée", title: "Famille recomposée", short: false },
+                        { url: "https://youtu.be/at5eeLY0Xyw", thumbnail: "Images/miniatures-videos/premiere-pro.jpg", alt: "Vidéo CPNV 2", title: "Première Pro", short: false },
+                        { url: "https://youtu.be/AxhW9_Kfvwc", thumbnail: "Images/miniatures-videos/femme-fragile-violences-conjugales.jpg", alt: "Femme Fragile Violences Conjugales", title: "Femme Fragile Violences Conjugales", short: false },
+                        { url: "https://youtube.com/shorts/Bjy2dsa-m3M", thumbnail: "Images/miniatures-videos/cinema-open-air-estavayer.jpg", alt: "Short CPNV 4", title: "Le Cinéma Open Air d'Estavayer le Lac", short: true },
+                        {"url": "Images/videos/multimedias/biopic-natation.mp4", "thumbnail": "Images/miniatures-videos/biopic-natation.jpg", "alt": "Biopic natation", "title": "Biopic natation", "short": false}
                     ]
                 },
                 {
@@ -208,7 +209,8 @@
                         { label: "Voir la présentation complète (PDF)", file: "Documents/Sleepy Bear Coffee présentation.pdf" }
                     ],
                     videos: [
-                        { url: "https://youtu.be/IXso1eFylj8", thumbnail: "https://img.youtube.com/vi/IXso1eFylj8/hqdefault.jpg", alt: "Audio marketing Sleepy Bear Coffee mixage final 2", title: "Audio marketing Sleepy Bear Coffee mixage final 2", short: false }
+                        { url: "https://youtu.be/IXso1eFylj8", thumbnail: "Images/miniatures-videos/sleepy-bear-coffee-audio-marketing.jpg", alt: "Audio marketing Sleepy Bear Coffee mixage final 2", title: "Audio marketing Sleepy Bear Coffee mixage final 2", short: false },
+                        {"url": "Images/videos/marketing/sleepy-bear-coffee-posts.mp4", "thumbnail": "Images/miniatures-videos/sleepy-bear-coffee-posts.jpg", "alt": "Posts Instagram Sleepy Bear Coffee", "title": "Posts Instagram Sleepy Bear Coffee", "short": false}
                     ],
                     coverDocument: {
                         image: "Images/cpnv-sleepy-bear/Sleepy Bear Coffee couverture.png",
@@ -216,6 +218,7 @@
                         file: "Documents/Sleepy Bear Coffee présentation.pdf"
                     }
                 },
+                {"id": "crocs-marketing", "category": "marketing", "categoryLabel": "Marketing", "title": "Crocs — Vidéo marketing", "cardImage": "Images/miniatures-videos/crocs-marketing.jpg", "cardImageAlt": "Vidéo marketing Crocs", "cardDescription": "Clip publicitaire pour la marque Crocs.", "detailText": "", "gallery": [], "documents": [], "videos": [{"url": "Images/videos/marketing/crocs-marketing.mp4", "thumbnail": "Images/miniatures-videos/crocs-marketing.jpg", "alt": "Vidéo marketing Crocs", "title": "Crocs marketing", "short": false}]},
                 {
                     id: "sleep-coffe-bears-site",
                     category: "web",
@@ -243,7 +246,8 @@
                     documents: [],
                     videos: [],
                     siteUrl: "projets-web/sylvain-site/index.php"
-                }
+                },
+                {"id": "booktubing", "category": "culture-generale", "categoryLabel": "Culture générale", "title": "Booktubing", "cardImage": "Images/miniatures-videos/booktubing.jpg", "cardImageAlt": "Vidéo Booktubing", "cardDescription": "Vidéo de booktubing réalisée pour le cours de culture générale.", "detailText": "", "gallery": [], "documents": [], "videos": [{"url": "Images/videos/culture-generale/booktubing.mp4", "thumbnail": "Images/miniatures-videos/booktubing.jpg", "alt": "Vidéo Booktubing", "title": "Booktubing", "short": false}]}
             ]
         },
         social: {

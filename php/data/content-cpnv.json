@@ -5,7 +5,7 @@
             "category": "design",
             "categoryLabel": "Design",
             "title": "Identité visuelle CF",
-            "cardImage": "Images\/identite-visuelle-cf\/logo-cf-monogramme.png",
+            "cardImage": "Images/identite-visuelle-cf/logo-cf-monogramme.png",
             "cardImageAlt": "Logo CF Multi médiamaticienne",
             "cardDescription": "Création de mon identité visuelle personnelle : monogramme CF, choix des couleurs, des polices et déclinaisons du logo.",
             "detailText": "Création de mon identité visuelle personnelle, autour d'un monogramme \"CF\" habillé d'un motif de carpes koï stylisées (violet et bleu), symbole d'indépendance et de créativité. Le dossier complet détaille les déclinaisons du logo (normal, favicon, nuances de gris, inversé), le choix des couleurs et des polices, ainsi que la carte de visite.",
@@ -13,7 +13,7 @@
             "documents": [
                 {
                     "label": "Voir le dossier d'identité visuelle complet (PDF)",
-                    "file": "Documents\/Identité visuelle CF.pdf"
+                    "file": "Documents/Identité visuelle CF.pdf"
                 }
             ],
             "videos": []
@@ -23,32 +23,32 @@
             "category": "design",
             "categoryLabel": "Design",
             "title": "Duck n'go — Identité visuelle",
-            "cardImage": "Images\/cpnv-duck-ngo\/Duck n'go logo texte.png",
+            "cardImage": "Images/cpnv-duck-ngo/Duck n'go logo texte.png",
             "cardImageAlt": "Logo Duck n'go",
             "cardDescription": "Création d'une identité de marque complète pour un fast-food engagé autour du canard.",
             "detailText": "Projet pédagogique de création d'une identité de marque pour un fast-food engagé autour du canard : mascotte Bucky, charte graphique complète (logo, typographies, palette chromatique) et set administratif (carte de visite, enveloppe, courrier).",
             "gallery": [
                 {
-                    "image": "Images\/cpnv-duck-ngo\/Duck n'go logo.png",
+                    "image": "Images/cpnv-duck-ngo/Duck n'go logo.png",
                     "alt": "Logo Duck n'go avec la mascotte Bucky"
                 },
                 {
-                    "image": "Images\/cpnv-duck-ngo\/Duck n'go logo texte.png",
+                    "image": "Images/cpnv-duck-ngo/Duck n'go logo texte.png",
                     "alt": "Logo Duck n'go avec le texte Duck n'go"
                 },
                 {
-                    "image": "Images\/cpnv-duck-ngo\/Duck n'go carte de visite.jpg",
+                    "image": "Images/cpnv-duck-ngo/Duck n'go carte de visite.jpg",
                     "alt": "Carte de visite Duck n'go"
                 }
             ],
             "documents": [
                 {
                     "label": "Voir la charte graphique (PDF)",
-                    "file": "Documents\/Duck n'go charte graphique.pdf"
+                    "file": "Documents/Duck n'go charte graphique.pdf"
                 },
                 {
                     "label": "Voir la carte de visite (PDF)",
-                    "file": "Documents\/Duck n'go carte de visite.pdf"
+                    "file": "Documents/Duck n'go carte de visite.pdf"
                 }
             ],
             "videos": []
@@ -58,40 +58,47 @@
             "category": "multimedias",
             "categoryLabel": "Multimédias",
             "title": "Vidéos",
-            "cardImage": "https:\/\/img.youtube.com\/vi\/VHWPITKgmTo\/hqdefault.jpg",
+            "cardImage": "Images/miniatures-videos/famille-recomposee.jpg",
             "cardImageAlt": "Vidéos CPNV",
-            "cardDescription": "Quatre réalisations vidéo : fiction, tutoriel technique et reportage d'événement.",
+            "cardDescription": "Cinq réalisations vidéo : fiction, tutoriel technique, biopic et reportage d'événement.",
             "detailText": "",
             "gallery": [],
             "documents": [],
             "videos": [
                 {
-                    "url": "https:\/\/youtu.be\/VHWPITKgmTo",
-                    "thumbnail": "https:\/\/img.youtube.com\/vi\/VHWPITKgmTo\/hqdefault.jpg",
+                    "url": "https://youtu.be/VHWPITKgmTo",
+                    "thumbnail": "Images/miniatures-videos/famille-recomposee.jpg",
                     "alt": "Famille recomposée",
                     "title": "Famille recomposée",
                     "short": false
                 },
                 {
-                    "url": "https:\/\/youtu.be\/at5eeLY0Xyw",
-                    "thumbnail": "https:\/\/img.youtube.com\/vi\/at5eeLY0Xyw\/hqdefault.jpg",
+                    "url": "https://youtu.be/at5eeLY0Xyw",
+                    "thumbnail": "Images/miniatures-videos/premiere-pro.jpg",
                     "alt": "Vidéo CPNV 2",
                     "title": "Première Pro",
                     "short": false
                 },
                 {
-                    "url": "https:\/\/youtu.be\/AxhW9_Kfvwc",
-                    "thumbnail": "https:\/\/img.youtube.com\/vi\/AxhW9_Kfvwc\/hqdefault.jpg",
+                    "url": "https://youtu.be/AxhW9_Kfvwc",
+                    "thumbnail": "Images/miniatures-videos/femme-fragile-violences-conjugales.jpg",
                     "alt": "Femme Fragile Violences Conjugales",
                     "title": "Femme Fragile Violences Conjugales",
                     "short": false
                 },
                 {
-                    "url": "https:\/\/youtube.com\/shorts\/Bjy2dsa-m3M",
-                    "thumbnail": "https:\/\/img.youtube.com\/vi\/Bjy2dsa-m3M\/hqdefault.jpg",
+                    "url": "https://youtube.com/shorts/Bjy2dsa-m3M",
+                    "thumbnail": "Images/miniatures-videos/cinema-open-air-estavayer.jpg",
                     "alt": "Short CPNV 4",
                     "title": "Le Cinéma Open Air d'Estavayer le Lac",
                     "short": true
+                },
+                {
+                    "url": "Images/videos/multimedias/biopic-natation.mp4",
+                    "thumbnail": "Images/miniatures-videos/biopic-natation.jpg",
+                    "alt": "Biopic natation",
+                    "title": "Biopic natation",
+                    "short": false
                 }
             ]
         },
@@ -100,7 +107,7 @@
             "category": "marketing",
             "categoryLabel": "Marketing",
             "title": "Sleepy Bear Coffee",
-            "cardImage": "Images\/cpnv-sleepy-bear\/Sleepy Bear Coffee couverture.png",
+            "cardImage": "Images/cpnv-sleepy-bear/Sleepy Bear Coffee couverture.png",
             "cardImageAlt": "Sleepy Bear Coffee",
             "cardDescription": "Stratégie marketing complète pour un café-espace de coworking à Lausanne.",
             "detailText": "Projet de stratégie marketing pour Sleepy Bear Coffee, café-espace de coworking à Lausanne : étude de marché, focus group, persona, mix marketing (4P), sales funnel, campagnes Ad Words et Meta Ads, et plan de communication.",
@@ -108,51 +115,100 @@
             "documents": [
                 {
                     "label": "Voir la présentation complète (PDF)",
-                    "file": "Documents\/Sleepy Bear Coffee présentation.pdf"
+                    "file": "Documents/Sleepy Bear Coffee présentation.pdf"
                 }
             ],
             "videos": [
                 {
-                    "url": "https:\/\/youtu.be\/IXso1eFylj8",
-                    "thumbnail": "https:\/\/img.youtube.com\/vi\/IXso1eFylj8\/hqdefault.jpg",
+                    "url": "https://youtu.be/IXso1eFylj8",
+                    "thumbnail": "Images/miniatures-videos/sleepy-bear-coffee-audio-marketing.jpg",
                     "alt": "Audio marketing Sleepy Bear Coffee mixage final 2",
                     "title": "Audio marketing Sleepy Bear Coffee mixage final 2",
+                    "short": false
+                },
+                {
+                    "url": "Images/videos/marketing/sleepy-bear-coffee-posts.mp4",
+                    "thumbnail": "Images/miniatures-videos/sleepy-bear-coffee-posts.jpg",
+                    "alt": "Posts Instagram Sleepy Bear Coffee",
+                    "title": "Posts Instagram Sleepy Bear Coffee",
                     "short": false
                 }
             ],
             "coverDocument": {
-                "image": "Images\/cpnv-sleepy-bear\/Sleepy Bear Coffee couverture.png",
+                "image": "Images/cpnv-sleepy-bear/Sleepy Bear Coffee couverture.png",
                 "imageAlt": "Couverture de la présentation Sleepy Bear Coffee",
-                "file": "Documents\/Sleepy Bear Coffee présentation.pdf"
+                "file": "Documents/Sleepy Bear Coffee présentation.pdf"
             }
+        },
+        {
+            "id": "crocs-marketing",
+            "category": "marketing",
+            "categoryLabel": "Marketing",
+            "title": "Crocs — Vidéo marketing",
+            "cardImage": "Images/miniatures-videos/crocs-marketing.jpg",
+            "cardImageAlt": "Vidéo marketing Crocs",
+            "cardDescription": "Clip publicitaire pour la marque Crocs.",
+            "detailText": "",
+            "gallery": [],
+            "documents": [],
+            "videos": [
+                {
+                    "url": "Images/videos/marketing/crocs-marketing.mp4",
+                    "thumbnail": "Images/miniatures-videos/crocs-marketing.jpg",
+                    "alt": "Vidéo marketing Crocs",
+                    "title": "Crocs marketing",
+                    "short": false
+                }
+            ]
         },
         {
             "id": "sleep-coffe-bears-site",
             "category": "web",
             "categoryLabel": "Web",
             "title": "Sleep Coffe Bears — Site web",
-            "cardImage": "Images\/projets-web-captures\/sleep-coffe-bears-capture.png",
+            "cardImage": "Images/projets-web-captures/sleep-coffe-bears-capture.png",
             "cardImageAlt": "Logo Sleep Coffe Bears",
             "cardDescription": "Site vitrine et boutique en ligne (HTML/CSS) pour un café-torréfacteur fictif, avec page panier.",
             "detailText": "Conception et intégration d'un site web statique complet pour Sleep Coffe Bears : page d'accueil vitrine et page panier (checkout), en HTML et CSS pur, sans framework.",
             "gallery": [],
             "documents": [],
             "videos": [],
-            "siteUrl": "projets-web\/sleep-coffe-bears\/index.html"
+            "siteUrl": "projets-web/sleep-coffe-bears/index.html"
         },
         {
             "id": "sylvain-lyve-site",
             "category": "web",
             "categoryLabel": "Web",
             "title": "Sylvain Lyve — Fan site",
-            "cardImage": "Images\/projets-web-captures\/sylvain-site-capture.png",
+            "cardImage": "Images/projets-web-captures/sylvain-site-capture.png",
             "cardImageAlt": "Sylvain Lyve",
             "cardDescription": "Fan site PHP dynamique avec base de données : présentation, quiz interactif et résultats.",
             "detailText": "Développement d'un fan site PHP complet pour le YouTubeur Sylvain Lyve : page d'accueil, quiz interactif en JavaScript avec sauvegarde des scores, page de résultats et gestion des vidéos, le tout connecté à une base de données (SQLite dans cette démo).",
             "gallery": [],
             "documents": [],
             "videos": [],
-            "siteUrl": "projets-web\/sylvain-site\/index.php"
+            "siteUrl": "projets-web/sylvain-site/index.php"
+        },
+        {
+            "id": "booktubing",
+            "category": "culture-generale",
+            "categoryLabel": "Culture générale",
+            "title": "Booktubing",
+            "cardImage": "Images/miniatures-videos/booktubing.jpg",
+            "cardImageAlt": "Vidéo Booktubing",
+            "cardDescription": "Vidéo de booktubing réalisée pour le cours de culture générale.",
+            "detailText": "",
+            "gallery": [],
+            "documents": [],
+            "videos": [
+                {
+                    "url": "Images/videos/culture-generale/booktubing.mp4",
+                    "thumbnail": "Images/miniatures-videos/booktubing.jpg",
+                    "alt": "Vidéo Booktubing",
+                    "title": "Booktubing",
+                    "short": false
+                }
+            ]
         }
     ]
 }
