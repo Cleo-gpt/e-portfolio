@@ -6,13 +6,20 @@
 
    Deux façons de lui donner les publications :
 
-   1) OPTION A — tableau collé à la main (voir posts.js) :
+   1) OPTION B — flux JSON dynamique (recommandé, voir README.md) :
+        InstaGrille.monter('#ma-grille', { source: 'https://feeds.behold.so/XXXX' });
+      La grille se met à jour toute seule à chaque nouveau post.
+
+   2) OPTION A — tableau collé à la main (voir posts.js) :
         InstaGrille.monter('#ma-grille', { posts: INSTA_POSTS });
 
-   2) OPTION B — adresse d'un fichier ou d'un flux JSON (voir le README) :
-        InstaGrille.monter('#ma-grille', { source: 'https://…/posts.json' });
+   Formats reconnus automatiquement pour chaque publication :
+     - flux Behold.so (permalink, sizes, mediaType, timestamp…) ;
+     - API Instagram Graph (permalink, media_url, like_count…) ;
+     - ancien script php/instagram-posts.php du portfolio (url, image, likes…) ;
+     - format du plug-in, ci-dessous.
 
-   Format d'une publication (seuls "image" et "lien" sont obligatoires) :
+   Format du plug-in (seuls "image" et "lien" sont obligatoires) :
         {
             image: 'Images/instagram/mon-post.jpg',   // URL de l'image
             lien: 'https://www.instagram.com/p/XXXX/', // lien du post
@@ -70,21 +77,77 @@
         return span;
     }
 
+    // Premier champ renseigné parmi plusieurs noms possibles.
+    function premier() {
+        for (let i = 0; i < arguments.length; i++) {
+            if (arguments[i] !== undefined && arguments[i] !== null && arguments[i] !== '') return arguments[i];
+        }
+        return null;
+    }
+
+    function nombre(valeur) {
+        const n = Number(valeur);
+        return valeur !== null && valeur !== undefined && valeur !== '' && Number.isFinite(n) ? n : null;
+    }
+
+    // "VIDEO", "REELS", "CAROUSEL_ALBUM", "carrousel"… → image / video / carrousel
+    function typeDePost(valeur) {
+        const t = String(valeur || '').toUpperCase();
+        if (t === 'VIDEO' || t === 'REELS' || t === 'VIDÉO') return 'video';
+        if (t === 'CAROUSEL_ALBUM' || t === 'CARROUSEL' || t === 'CAROUSEL') return 'carrousel';
+        return 'image';
+    }
+
+    // Transforme une publication, quel que soit son format d'origine, dans le
+    // format du plug-in. Pour les vidéos, on prend la miniature (une balise
+    // <img> ne peut pas afficher un fichier vidéo).
+    function convertir(p) {
+        const tailles = p.sizes || {};
+        const taille = tailles.medium || tailles.large || tailles.small || tailles.full || {};
+        const type = typeDePost(premier(p.type, p.mediaType, p.media_type));
+        return {
+            image: premier(
+                p.image,
+                taille.mediaUrl,
+                p.thumbnailUrl, p.thumbnail_url,
+                type !== 'video' ? premier(p.mediaUrl, p.media_url) : null
+            ),
+            lien: premier(p.lien, p.permalink, p.url),
+            legende: String(premier(p.legende, p.prunedCaption, p.caption, '') || '').slice(0, 300),
+            likes: nombre(premier(p.likes, p.likeCount, p.like_count)),
+            commentaires: nombre(premier(p.commentaires, p.commentsCount, p.comments_count, p.comments)),
+            type: type,
+            date: premier(p.date, p.timestamp)
+        };
+    }
+
     // Garde seulement les publications utilisables et uniformise leurs champs.
     function normaliser(posts) {
         return (Array.isArray(posts) ? posts : [])
-            .filter(function (p) { return p && p.image && p.lien; })
+            .filter(function (p) { return p && typeof p === 'object'; })
+            .map(convertir)
+            .filter(function (p) { return p.image && p.lien; })
             .map(function (p) {
+                const date = p.date ? new Date(p.date) : null;
                 return {
                     image: String(p.image),
                     lien: String(p.lien),
-                    legende: p.legende ? String(p.legende) : '',
-                    likes: Number.isFinite(p.likes) ? p.likes : null,
-                    commentaires: Number.isFinite(p.commentaires) ? p.commentaires : null,
-                    type: p.type || 'image',
-                    date: p.date ? new Date(p.date) : null
+                    legende: p.legende,
+                    likes: p.likes,
+                    commentaires: p.commentaires,
+                    type: p.type,
+                    date: date && !isNaN(date) ? date : null
                 };
             });
+    }
+
+    // Les flux renvoient soit directement un tableau, soit un objet qui le
+    // contient (Behold : { posts: [...] }, API Instagram : { data: [...] }).
+    function extrairePosts(donnees) {
+        if (Array.isArray(donnees)) return donnees;
+        if (donnees && Array.isArray(donnees.posts)) return donnees.posts;
+        if (donnees && Array.isArray(donnees.data)) return donnees.data;
+        return [];
     }
 
     // Construit la carte d'une publication : un lien vers Instagram qui
@@ -159,9 +222,10 @@
      * Monte la grille dans un élément de la page.
      * @param {string|Element} cible   sélecteur CSS ou élément (de préférence un <ul>)
      * @param {Object} options
-     * @param {Array}  [options.posts]  OPTION A : publications collées à la main
-     * @param {string} [options.source] OPTION B : URL d'un JSON (tableau de publications,
-     *                                  ou objet { posts: [...] })
+     * @param {string} [options.source] OPTION B : URL d'un flux JSON (tableau de
+     *                                  publications, ou objet { posts } / { data })
+     * @param {Array}  [options.posts]  OPTION A : publications collées à la main,
+     *                                  aussi utilisées en secours si la source échoue
      * @param {string} [options.messageErreur] texte affiché si la source ne répond pas
      * @returns {Promise<void>}
      */
@@ -177,10 +241,7 @@
             conteneur.setAttribute('role', 'list');
         }
 
-        if (Array.isArray(options.posts)) {
-            afficher(conteneur, options.posts);
-            return Promise.resolve();
-        }
+        const secours = Array.isArray(options.posts) ? options.posts : null;
 
         if (options.source) {
             message(conteneur, 'Chargement des publications…');
@@ -190,12 +251,20 @@
                     return reponse.json();
                 })
                 .then(function (donnees) {
-                    afficher(conteneur, Array.isArray(donnees) ? donnees : donnees.posts);
+                    afficher(conteneur, extrairePosts(donnees));
                 })
                 .catch(function (erreur) {
                     console.warn('InstaGrille : source indisponible', erreur);
-                    message(conteneur, options.messageErreur || 'Publications indisponibles pour le moment.');
+                    // Flux en panne : on montre les publications de secours
+                    // (option A) s'il y en a, sinon un message.
+                    if (secours) afficher(conteneur, secours);
+                    else message(conteneur, options.messageErreur || 'Publications indisponibles pour le moment.');
                 });
+        }
+
+        if (secours) {
+            afficher(conteneur, secours);
+            return Promise.resolve();
         }
 
         message(conteneur, 'Aucune publication pour le moment.');

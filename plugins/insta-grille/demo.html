@@ -44,22 +44,29 @@
 <body>
     <main class="demo">
         <h1>Mes publications Instagram</h1>
-        <p>Démo du plug-in InstaGrille — option A (publications collées à la main dans posts.js).</p>
+        <p>Démo du plug-in InstaGrille — option B : publications lues depuis un flux JSON (Behold.so).</p>
 
         <!-- 2. L'emplacement de la grille -->
         <ul id="grille-instagram" aria-label="Publications Instagram"></ul>
     </main>
 
-    <!-- 3. Les publications (option A), puis le plug-in -->
-    <script src="posts.js"></script>
+    <!-- 3. Le plug-in, et les publications de secours (option A) -->
     <script src="insta-grille.js"></script>
+    <script src="posts.js"></script>
 
     <!-- 4. Le lancement -->
     <script>
-        InstaGrille.monter('#grille-instagram', { posts: window.INSTA_POSTS });
+        // Adresse du flux JSON. Pour le vrai compte, remplace-la par
+        // l'adresse donnée par Behold (ex : 'https://feeds.behold.so/AbCdEf123')
+        // — voir README.md.
+        const FLUX_INSTAGRAM = 'exemple-flux.json';
 
-        // Pour l'option B (données dynamiques), remplace la ligne du dessus par :
-        // InstaGrille.monter('#grille-instagram', { source: 'https://…/posts.json' });
+        InstaGrille.monter('#grille-instagram', {
+            source: FLUX_INSTAGRAM,
+            // Affichées seulement si le flux ne répond pas (ou si la page est
+            // ouverte en double-clic, sans serveur).
+            posts: window.INSTA_POSTS
+        });
     </script>
 </body>
 </html>

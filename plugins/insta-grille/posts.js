@@ -1,6 +1,9 @@
 /* ==========================================================================
    OPTION A — Publications collées à la main
    --------------------------------------------------------------------------
+   Avec l'option B (flux Behold), ces publications ne servent que de secours,
+   si le flux ne répond pas. Tu peux aussi les utiliser seules, sans flux.
+
    Pour ajouter une publication :
      1. Sur Instagram, ouvre le post → "…" → "Copier le lien".
      2. Enregistre son image dans un dossier du site (ex : Images/instagram/)

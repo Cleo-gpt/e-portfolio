@@ -1,0 +1,30 @@
+{
+    "username": "exemple",
+    "biography": "Fichier d'exemple au format d'un flux Behold.so, pour tester la démo. Remplace son adresse dans demo.html par celle de ton vrai flux.",
+    "posts": [
+        {
+            "id": "1",
+            "timestamp": "2026-03-10T18:00:00+0000",
+            "permalink": "https://www.instagram.com/p/DQpdpc6jAtp/",
+            "mediaType": "VIDEO",
+            "thumbnailUrl": "../../Images/intro-videos/Minia 1.png",
+            "prunedCaption": "Vidéo RetroMania — réservation des tables pour les vendeurs"
+        },
+        {
+            "id": "2",
+            "timestamp": "2026-03-20T18:00:00+0000",
+            "permalink": "https://www.instagram.com/p/DRfgm_Gjtaa/",
+            "mediaType": "VIDEO",
+            "thumbnailUrl": "../../Images/intro-videos/Minia 2.png",
+            "prunedCaption": "Vidéo RetroMania — réservation des tables pour les artistes"
+        },
+        {
+            "id": "3",
+            "timestamp": "2025-04-01T18:00:00+0000",
+            "permalink": "https://www.instagram.com/p/DI26sShhKiM/",
+            "mediaType": "VIDEO",
+            "thumbnailUrl": "../../Images/intro-videos/Minia 3.png",
+            "prunedCaption": "Short RetroMania"
+        }
+    ]
+}
