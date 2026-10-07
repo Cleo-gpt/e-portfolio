@@ -63,8 +63,8 @@
 
         InstaGrille.monter('#grille-instagram', {
             source: FLUX_INSTAGRAM,
-            // Affichées seulement si le flux ne répond pas (ou si la page est
-            // ouverte en double-clic, sans serveur).
+            // Complètent le flux avec les posts plus anciens (et le remplacent
+            // s'il ne répond pas, par exemple en ouvrant la page en double-clic).
             posts: window.INSTA_POSTS
         });
     </script>

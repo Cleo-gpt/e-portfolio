@@ -1,8 +1,10 @@
 /* ==========================================================================
    OPTION A — Publications collées à la main
    --------------------------------------------------------------------------
-   Avec l'option B (flux Behold), ces publications ne servent que de secours,
-   si le flux ne répond pas. Tu peux aussi les utiliser seules, sans flux.
+   Avec l'option B (flux Behold), ces publications complètent le flux : le
+   plan gratuit de Behold ne donne que les 6 derniers posts, mets donc ici
+   les plus anciens. Un post présent des deux côtés n'apparaît qu'une fois.
+   Si le flux ne répond pas, seules ces publications s'affichent.
 
    Pour ajouter une publication :
      1. Sur Instagram, ouvre le post → "…" → "Copier le lien".

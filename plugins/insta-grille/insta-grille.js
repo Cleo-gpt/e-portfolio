@@ -13,6 +13,10 @@
    2) OPTION A — tableau collé à la main (voir posts.js) :
         InstaGrille.monter('#ma-grille', { posts: INSTA_POSTS });
 
+   Les deux ensemble : le flux donne les publications récentes (Behold
+   gratuit : les 6 dernières) et le tableau complète avec les plus anciennes,
+   sans doublon. Si le flux ne répond pas, le tableau s'affiche seul.
+
    Formats reconnus automatiquement pour chaque publication :
      - flux Behold.so (permalink, sizes, mediaType, timestamp…) ;
      - API Instagram Graph (permalink, media_url, like_count…) ;
@@ -141,6 +145,22 @@
             });
     }
 
+    // Adresse d'un post sans paramètres ni "/" final, pour repérer les doublons.
+    function cle(lien) {
+        return String(lien).split(/[?#]/)[0].replace(/\/+$/, '').toLowerCase();
+    }
+
+    // Publications du flux, puis celles du tableau qui n'y sont pas déjà.
+    function fusionner(flux, complement) {
+        const vus = new Set(flux.map(function (p) { return cle(p.lien); }));
+        return flux.concat(complement.filter(function (p) {
+            const k = cle(p.lien);
+            if (vus.has(k)) return false;
+            vus.add(k);
+            return true;
+        }));
+    }
+
     // Les flux renvoient soit directement un tableau, soit un objet qui le
     // contient (Behold : { posts: [...] }, API Instagram : { data: [...] }).
     function extrairePosts(donnees) {
@@ -203,8 +223,8 @@
         conteneur.replaceChildren(item);
     }
 
-    function afficher(conteneur, posts) {
-        const liste = normaliser(posts);
+    function afficher(conteneur, posts, complement) {
+        const liste = fusionner(normaliser(posts), normaliser(complement || []));
         // Du plus récent au plus ancien quand les dates sont connues
         if (liste.every(function (p) { return p.date; })) {
             liste.sort(function (a, b) { return b.date - a.date; });
@@ -224,8 +244,9 @@
      * @param {Object} options
      * @param {string} [options.source] OPTION B : URL d'un flux JSON (tableau de
      *                                  publications, ou objet { posts } / { data })
-     * @param {Array}  [options.posts]  OPTION A : publications collées à la main,
-     *                                  aussi utilisées en secours si la source échoue
+     * @param {Array}  [options.posts]  OPTION A : publications collées à la main ;
+     *                                  avec une source, elles complètent le flux
+     *                                  (et le remplacent s'il ne répond pas)
      * @param {string} [options.messageErreur] texte affiché si la source ne répond pas
      * @returns {Promise<void>}
      */
@@ -251,7 +272,7 @@
                     return reponse.json();
                 })
                 .then(function (donnees) {
-                    afficher(conteneur, extrairePosts(donnees));
+                    afficher(conteneur, extrairePosts(donnees), secours);
                 })
                 .catch(function (erreur) {
                     console.warn('InstaGrille : source indisponible', erreur);
