@@ -1,6 +1,6 @@
 // site.js — interactions de la page publique (index.html) :
 // pop up de connexion au back office, carrousel RetroMania et grille
-// Instagram de La Lanterne de Yuna.
+// Instagram de La Lanterne de Yuna (plug-in plugins/insta-grille).
 
 (function () {
     'use strict';
@@ -127,17 +127,13 @@
     }
 
     // ---------- Publications Instagram — La Lanterne de Yuna ----------
-    // Grille affichée par le plug-in instagram-grid.js, qui appelle
-    // php/instagram-posts.php.
+    // Toutes les publications, listées dans instagram-posts.js. Ce fichier et
+    // les images (Images/instagram/) sont mis à jour toutes les heures par
+    // GitHub Actions : voir plugins/insta-grille/README.md.
 
     function initInstagram() {
-        InstagramGrid.mount({
-            container: document.getElementById('lanternePosts'),
-            btnPrev: document.getElementById('lanterneUp'),
-            btnNext: document.getElementById('lanterneDown'),
-            endpoint: '/php/instagram-posts.php',
-            postsPerPage: 3,
-            errorMessage: 'Publications indisponibles pour le moment. Voir directement le compte Instagram ci-dessous.'
+        InstaGrille.monter('#lanternePosts', {
+            posts: window.INSTA_POSTS || []
         });
     }
 

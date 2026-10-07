@@ -20,7 +20,6 @@
    Formats reconnus automatiquement pour chaque publication :
      - flux Behold.so (permalink, sizes, mediaType, timestamp…) ;
      - API Instagram Graph (permalink, media_url, like_count…) ;
-     - ancien script php/instagram-posts.php du portfolio (url, image, likes…) ;
      - format du plug-in, ci-dessous.
 
    Format du plug-in (seuls "image" et "lien" sont obligatoires) :

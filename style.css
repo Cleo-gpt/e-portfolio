@@ -1286,46 +1286,27 @@ input {
     object-fit: cover;
 }
 
-.lanterne-carousel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+/* Grille Instagram (plug-in plugins/insta-grille) aux couleurs du site.
+   ".lanterne-posts.insta-grille" pour passer devant les valeurs par défaut
+   du plug-in, dont la feuille est chargée après celle-ci. */
+.lanterne-posts.insta-grille {
+    --ig-espace: 14px;
+    --ig-arrondi: 16px;
+    --ig-fond-vide: rgba(255, 255, 255, 0.06);
+    --ig-voile: rgba(32, 26, 119, 0.62);
+    --ig-texte: var(--texte-doux);
+    --ig-police: var(--police-texte);
+    max-width: 860px;
+    margin: 0 auto;
 }
 
-.lanterne-nav {
-    flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: rgba(13, 10, 48, 0.6);
-    border: 1px solid var(--bord-fort);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.15s ease, opacity 0.3s ease;
+.lanterne-posts .insta-grille__post {
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
 }
 
-.lanterne-nav:hover:not(:disabled) {
-    background: rgba(113, 45, 163, 0.7);
-    transform: scale(1.08);
+.lanterne-posts .insta-grille__post:focus-visible {
+    outline-color: var(--lilas);
 }
-
-.lanterne-nav:disabled {
-    opacity: 0.3;
-    cursor: default;
-}
-
-.lanterne-posts {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    flex: 1;
-    max-width: 800px;
-}
-
-/* Style des cartes de publication : voir instagram-grid.css (plug-in) */
 
 /* ==========================================================================
    CPNV — Médiamatique
@@ -1967,15 +1948,9 @@ input {
         height: 110px;
     }
 
-    .lanterne-posts {
-        grid-template-columns: 1fr;
-        max-width: 260px;
-        gap: 15px;
-    }
-
-    .lanterne-nav {
-        width: 38px;
-        height: 38px;
+    .lanterne-posts.insta-grille {
+        --ig-espace: 8px;
+        --ig-arrondi: 10px;
     }
 
     .lanterne-deco {

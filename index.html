@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="instagram-grid.css">
+    <link rel="stylesheet" href="plugins/insta-grille/insta-grille.css">
 </head>
 <body>
     <!-- Ciel fixe derrière toute la page : étoiles (canvas animé par ciel.js)
@@ -316,19 +316,9 @@
         <div class="lanterne-yuna-content">
             <h2>La Lanterne de Yuna</h2>
 
-            <div class="lanterne-carousel">
-                <button class="lanterne-nav" id="lanterneUp" aria-label="Publications précédentes">
-                    <svg viewBox="0 0 24 24" fill="none" width="28" height="28">
-                        <path d="M6 15l6-6 6 6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-                <div class="lanterne-posts" id="lanternePosts"></div>
-                <button class="lanterne-nav" id="lanterneDown" aria-label="Publications suivantes">
-                    <svg viewBox="0 0 24 24" fill="none" width="28" height="28">
-                        <path d="M6 9l6 6 6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-            </div>
+            <!-- Toutes les publications Instagram, mises à jour automatiquement
+                 (voir plugins/insta-grille/README.md) -->
+            <ul class="lanterne-posts" id="lanternePosts" aria-label="Publications Instagram de La Lanterne de Yuna"></ul>
 
             <div class="lanterne-instagram-block">
                 <a href="https://www.instagram.com/la_lanterne_de_yuna/" target="_blank" rel="noopener" class="lanterne-insta-btn">
@@ -432,7 +422,8 @@
 
     <script src="ciel.js"></script>
     <script src="content.js"></script>
-    <script src="instagram-grid.js"></script>
+    <script src="plugins/insta-grille/insta-grille.js"></script>
+    <script src="instagram-posts.js"></script>
     <script src="site.js"></script>
 </body>
 </html>

@@ -1,0 +1,68 @@
+name: Publications Instagram
+
+# Toutes les heures : récupère les publications Instagram, enregistre leurs
+# images dans Images/instagram/, met à jour instagram-posts.js, puis envoie
+# ces fichiers sur le site par FTP (si les accès FTP sont configurés).
+# Mise en place : plugins/insta-grille/README.md.
+
+on:
+  schedule:
+    - cron: '17 * * * *'   # toutes les heures, à la 17e minute
+  workflow_dispatch: {}    # bouton "Run workflow" pour lancer à la main
+
+permissions:
+  contents: write          # pour commiter les nouvelles images et la liste
+
+concurrency:
+  group: instagram
+  cancel-in-progress: false
+
+jobs:
+  synchroniser:
+    runs-on: ubuntu-latest
+    env:
+      # Déclarés ici (et pas dans l'étape) pour pouvoir tester leur présence
+      # dans le "if" de l'envoi FTP.
+      FTP_SERVEUR: ${{ secrets.FTP_SERVEUR }}
+      FTP_UTILISATEUR: ${{ secrets.FTP_UTILISATEUR }}
+      FTP_MOT_DE_PASSE: ${{ secrets.FTP_MOT_DE_PASSE }}
+      FTP_DOSSIER: ${{ secrets.FTP_DOSSIER }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Récupérer les publications Instagram
+        env:
+          INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+          INSTAGRAM_TOKEN_KEY: ${{ secrets.INSTAGRAM_TOKEN_KEY }}
+        run: node scripts/instagram-sync.mjs
+
+      - name: Enregistrer les changements dans le dépôt
+        id: commit
+        run: |
+          for f in Images/instagram instagram-posts.js .github/instagram-token.enc; do
+            [ -e "$f" ] && git add -A "$f"
+          done
+          if git diff --cached --quiet; then
+            echo "Aucun changement."
+            echo "modifie=non" >> "$GITHUB_OUTPUT"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Met à jour les publications Instagram"
+            git push
+            echo "modifie=oui" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Envoyer sur le site (FTP)
+        if: steps.commit.outputs.modifie == 'oui' && env.FTP_SERVEUR != ''
+        run: |
+          sudo apt-get install -y -qq lftp > /dev/null
+          lftp -u "$FTP_UTILISATEUR,$FTP_MOT_DE_PASSE" "$FTP_SERVEUR" -e "
+            set ftp:ssl-allow yes;
+            mirror --reverse --delete --verbose Images/instagram '${FTP_DOSSIER:-.}/Images/instagram';
+            put instagram-posts.js -o '${FTP_DOSSIER:-.}/instagram-posts.js';
+            bye"

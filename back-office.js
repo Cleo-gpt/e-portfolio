@@ -598,59 +598,6 @@
             .catch(function () { status.textContent = 'Erreur lors de l\'enregistrement.'; });
     }
 
-    // ---------- Instagram (PHP uniquement) ----------
-
-    function formatDate(timestamp) {
-        return new Date(timestamp * 1000).toLocaleDateString('fr-CH', { day: 'numeric', month: 'long', year: 'numeric' });
-    }
-
-    function loadInstagram() {
-        const state = document.getElementById('igState');
-        state.className = 'instagram-state';
-
-        if (!usePhp) {
-            state.textContent = "Disponible uniquement sur l'hébergement PHP (mediamatique.ch).";
-            document.getElementById('igSaveBtn').disabled = true;
-            return;
-        }
-
-        fetch('/php/instagram-token.php', { headers: authHeaders() })
-            .then(function (res) { if (!res.ok) throw new Error(); return res.json(); })
-            .then(function (data) {
-                if (!data.configured) {
-                    state.classList.add('warning');
-                    state.textContent = 'Pas encore connecté : la grille affiche « Publications indisponibles ».';
-                    return;
-                }
-                const expired = data.expiresAt && data.expiresAt * 1000 < Date.now();
-                state.classList.add(expired ? 'warning' : 'ok');
-                state.textContent = expired
-                    ? 'Token expiré pour @' + data.username + ' : colle un nouveau token ci-dessous.'
-                    : 'Connecté à @' + data.username + ' ✓ — renouvelé le ' + formatDate(data.updatedAt)
-                        + ', valable jusqu\'au ' + formatDate(data.expiresAt) + ' (prolongé automatiquement).';
-            })
-            .catch(function () { state.textContent = "Impossible de lire l'état de la connexion Instagram."; });
-    }
-
-    function saveInstagram() {
-        const input = document.getElementById('igTokenInput');
-        const status = document.getElementById('igStatus');
-        status.textContent = 'Vérification auprès d\'Instagram…';
-        fetch('/php/instagram-token.php', {
-            method: 'POST',
-            headers: authHeaders(),
-            body: JSON.stringify({ access_token: input.value.trim() })
-        })
-            .then(function (res) { return res.json().then(function (data) { return { ok: res.ok, data: data }; }); })
-            .then(function (result) {
-                if (!result.ok) { status.textContent = result.data.error || 'Erreur lors de l\'enregistrement.'; return; }
-                input.value = '';
-                status.textContent = 'Connecté à @' + result.data.username + ' ✓';
-                loadInstagram();
-            })
-            .catch(function () { status.textContent = 'Impossible de contacter le serveur.'; });
-    }
-
     // ---------- Changement de code ----------
 
     function changePassword() {
@@ -697,7 +644,6 @@
         loadSkills();
         loadCpnv();
         loadSocial();
-        loadInstagram();
     }
 
     // ---------- Initialisation ----------
@@ -726,7 +672,6 @@
 
         document.getElementById('socialSaveBtn').addEventListener('click', saveSocial);
 
-        document.getElementById('igSaveBtn').addEventListener('click', saveInstagram);
 
         document.getElementById('changePasswordBtn').addEventListener('click', changePassword);
 

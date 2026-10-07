@@ -32,10 +32,12 @@ npm run dev
 | `ciel.js` | Ciel étoilé animé en fond de page + bouton « retour en haut ». |
 | `site.js` | Pop up de connexion, carrousel RetroMania et grille Instagram de la page publique. |
 | `content.js` | Charge le contenu éditable et l'injecte dans la page. |
-| `instagram-grid.js`, `instagram-grid.css` | Grille Instagram de La Lanterne de Yuna (voir `php/INSTAGRAM.md`). |
+| `plugins/insta-grille/` | Plug-in de grille Instagram (JavaScript pur), avec sa démo et son mode d'emploi. |
+| `instagram-posts.js`, `Images/instagram/` | Publications Instagram de La Lanterne de Yuna, mises à jour toutes les heures par GitHub Actions (ne pas modifier à la main). |
+| `scripts/instagram-sync.mjs`, `.github/workflows/instagram.yml` | Le robot qui récupère les publications Instagram et les envoie sur le site. |
 | `back-office.html`, `back-office.js` | Back office pour modifier le contenu sans toucher au code. |
-| `php/` | Scripts PHP : contenu, login, upload, Instagram. Les fonctions communes sont dans `php/_commun.php`, le login dans `php/_auth.php`. |
-| `php/data/` | Contenu édité (`content-*.json`), code admin et token Instagram. |
+| `php/` | Scripts PHP du back office : contenu, login, upload. Les fonctions communes sont dans `php/_commun.php`, le login dans `php/_auth.php`. |
+| `php/data/` | Contenu édité (`content-*.json`) et code admin. |
 | `Images/identite-visuelle-cf/` | Logo CF et carpes koï (SVG) utilisés par le site. |
 | `Images/videos/` | Vidéos compressées en 720p, rangées par catégorie (marketing, multimédias, culture générale). |
 | `Images/miniatures-videos/` | Miniatures de toutes les vidéos (YouTube et locales). |
@@ -69,10 +71,12 @@ depuis l'onglet « Compte » du back office, il est stocké dans
 `Documents/` (PDF), avec un nom sécurisé (slug + suffixe aléatoire) et une
 vérification du type réel du fichier, pas seulement de son extension.
 
-### Instagram
+## Grille Instagram
 
-L'onglet « Instagram » du back office connecte la grille de La Lanterne de
-Yuna. Procédure complète : `php/INSTAGRAM.md`.
+La grille de La Lanterne de Yuna n'utilise pas PHP : un robot GitHub
+(GitHub Actions) récupère toutes les publications toutes les heures, enregistre
+leurs images dans `Images/instagram/`, met à jour `instagram-posts.js` et envoie
+ces fichiers sur le site par FTP. Mise en place : `plugins/insta-grille/README.md`.
 
 ## Mise en ligne (FileZilla)
 

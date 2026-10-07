@@ -1,7 +1,7 @@
 <?php
 // Authentification partagée du back office (email fixe + code modifiable),
 // utilisée par tous les scripts qui écrivent (content-*.php, upload-file.php,
-// instagram-token.php…).
+// auth-change-password.php).
 //
 // Email : constante ADMIN_EMAIL dans config.php.
 // Code : stocké dans data/credentials.json, modifiable via auth-change-password.php.

@@ -214,16 +214,6 @@
             margin-top: 6px;
         }
 
-        .instagram-state {
-            font-size: 0.9rem;
-            padding: 10px 12px;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            margin-bottom: 8px;
-        }
-
-        .instagram-state.ok { color: #7ee2a8; }
-        .instagram-state.warning { color: #ffb86b; }
 
         .back-link {
             display: block;
@@ -284,7 +274,6 @@
                 <button class="bo-nav-btn" data-tab="skills">Compétences &amp; outils</button>
                 <button class="bo-nav-btn" data-tab="cpnv">Projets CPNV</button>
                 <button class="bo-nav-btn" data-tab="social">Réseaux sociaux</button>
-                <button class="bo-nav-btn" data-tab="instagram">Instagram</button>
                 <button class="bo-nav-btn" data-tab="account">Compte</button>
             </div>
 
@@ -386,21 +375,6 @@
                     <div class="save-bar">
                         <button class="btn" id="socialSaveBtn">Enregistrer</button>
                         <span class="status-msg" id="socialStatus"></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Instagram -->
-            <div class="bo-tab" data-tab-panel="instagram">
-                <div class="bo-section">
-                    <h2>Grille Instagram — La Lanterne de Yuna</h2>
-                    <p class="instagram-state" id="igState">Chargement…</p>
-                    <label for="igTokenInput">Nouveau token Instagram</label>
-                    <input type="password" id="igTokenInput" placeholder="IGAA…" autocomplete="off">
-                    <p class="upload-hint">À coller une seule fois : le site renouvelle ensuite le token tout seul. Pour l'obtenir : php/INSTAGRAM.md.</p>
-                    <div class="save-bar">
-                        <button class="btn" id="igSaveBtn">Connecter</button>
-                        <span class="status-msg" id="igStatus"></span>
                     </div>
                 </div>
             </div>
