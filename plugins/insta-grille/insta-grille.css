@@ -1,0 +1,150 @@
+/* ==========================================================================
+   InstaGrille — grille Instagram légère (CSS Grid, sans dépendance)
+   --------------------------------------------------------------------------
+   Toutes les couleurs et tailles passent par des variables : pour adapter la
+   grille à un site, il suffit de les redéfinir sur .insta-grille (voir
+   l'exemple "thème sombre" en bas du fichier).
+   ========================================================================== */
+
+.insta-grille {
+    --ig-colonnes: 3;           /* colonnes sur grand écran */
+    --ig-espace: 4px;           /* espace entre les images (Instagram : ~4px) */
+    --ig-arrondi: 0px;          /* arrondi des images (0 = style Instagram) */
+    --ig-fond-vide: #efefef;    /* fond affiché pendant le chargement */
+    --ig-voile: rgba(0, 0, 0, 0.45);
+    --ig-texte-voile: #ffffff;
+    --ig-texte: #262626;        /* textes d'état (chargement, erreur) */
+    --ig-police: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    display: grid;
+    grid-template-columns: repeat(var(--ig-colonnes), minmax(0, 1fr));
+    gap: var(--ig-espace);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--ig-police);
+}
+
+/* ---------- Une publication ---------- */
+
+.insta-grille__post {
+    position: relative;
+    display: block;
+    /* Carré parfait, quelle que soit la taille d'origine de l'image */
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: var(--ig-arrondi);
+    background: var(--ig-fond-vide);
+    color: var(--ig-texte-voile);
+    text-decoration: none;
+}
+
+.insta-grille__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;          /* recadre sans déformer */
+    transition: transform 0.35s ease;
+}
+
+/* ---------- Voile au survol (likes, commentaires ou lien sortant) ---------- */
+
+.insta-grille__voile {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    padding: 10px;
+    background: var(--ig-voile);
+    color: var(--ig-texte-voile);
+    font-size: 15px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.insta-grille__post:hover .insta-grille__voile,
+.insta-grille__post:focus-visible .insta-grille__voile {
+    opacity: 1;
+}
+
+.insta-grille__post:hover .insta-grille__image,
+.insta-grille__post:focus-visible .insta-grille__image {
+    transform: scale(1.04);
+}
+
+.insta-grille__post:focus-visible {
+    outline: 3px solid #0095f6;
+    outline-offset: 2px;
+}
+
+.insta-grille__stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.insta-grille__stat svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    fill: currentColor;
+}
+
+/* Petite icône en haut à droite (vidéo / carrousel), comme sur Instagram */
+.insta-grille__type {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 20px;
+    height: 20px;
+    fill: #ffffff;
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.6));
+    pointer-events: none;
+}
+
+/* ---------- Messages (chargement, vide, erreur) ---------- */
+
+.insta-grille__message {
+    grid-column: 1 / -1;
+    padding: 40px 16px;
+    color: var(--ig-texte);
+    font-size: 15px;
+    text-align: center;
+}
+
+/* ---------- Responsive : 3 colonnes → 2 → 1 ---------- */
+
+@media (max-width: 640px) {
+    .insta-grille {
+        --ig-colonnes: 2;
+    }
+}
+
+@media (max-width: 360px) {
+    .insta-grille {
+        --ig-colonnes: 1;
+    }
+}
+
+/* Moins d'animations si la personne l'a demandé dans ses réglages */
+@media (prefers-reduced-motion: reduce) {
+    .insta-grille__image,
+    .insta-grille__voile {
+        transition: none;
+    }
+}
+
+/* ---------- Exemple de thème sombre (à appliquer avec la classe) ----------
+   <ul class="insta-grille insta-grille--sombre">…</ul>                       */
+
+.insta-grille--sombre {
+    --ig-espace: 10px;
+    --ig-arrondi: 12px;
+    --ig-fond-vide: rgba(255, 255, 255, 0.06);
+    --ig-voile: rgba(32, 26, 119, 0.6);
+    --ig-texte: #c9bfe3;
+}

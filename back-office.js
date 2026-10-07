@@ -399,6 +399,7 @@
             '<label>Libellé de la catégorie (affiché)</label><input type="text" data-field="categoryLabel" value="' + escapeAttr(project.categoryLabel) + '">' +
             '<label>Texte alternatif de l\'image</label><input type="text" data-field="cardImageAlt" value="' + escapeAttr(project.cardImageAlt) + '">' +
             '<label>Texte détaillé</label><textarea data-field="detailText">' + escapeHtml(project.detailText) + '</textarea>' +
+            '<label>Lien du site (projets web, optionnel)</label><input type="text" data-field="siteUrl" placeholder="ex : projets-web/mon-site/index.html" value="' + escapeAttr(project.siteUrl || '') + '">' +
             '<label>Galerie d\'images</label><div data-gallery-inner></div>' +
             '<button class="btn btn-secondary btn-small" data-action="add-gallery">+ Ajouter une image à la galerie</button>' +
             '<label>Image de couverture cliquable (optionnel, ex: aperçu PDF)</label>' +
@@ -490,9 +491,16 @@
     }
 
     function readCpnvProject(card) {
-        // ":scope > [data-field]" pour ne lire que les champs directs du
-        // projet, pas ceux imbriqués dans ses lignes de galerie/documents/vidéos.
-        const field = function (name) { return card.querySelector(':scope > [data-field="' + name + '"]').value; };
+        // Champ du projet lui-même (y compris ceux du bloc "Plus de détails"),
+        // en ignorant les champs de même nom de ses lignes de galerie,
+        // documents et vidéos.
+        const field = function (name) {
+            const inputs = card.querySelectorAll('[data-field="' + name + '"]');
+            for (let i = 0; i < inputs.length; i++) {
+                if (!inputs[i].closest('.gallery-item-row, .doc-item-row, .video-item-row')) return inputs[i].value;
+            }
+            return '';
+        };
         const gallery = Array.from(card.querySelectorAll('[data-gallery-inner] .gallery-item-row')).map(function (row) {
             return { image: row.querySelector('[data-field="image"]').value, alt: row.querySelector('[data-field="alt"]').value };
         });
@@ -521,6 +529,8 @@
             documents: documents,
             videos: videos
         };
+
+        if (field('siteUrl').trim()) result.siteUrl = field('siteUrl').trim();
 
         const coverImage = field('cover-image');
         const coverFile = field('cover-file');

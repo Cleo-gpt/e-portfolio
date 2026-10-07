@@ -30,12 +30,15 @@ npm run dev
 |---|---|
 | `index.html`, `style.css` | La page publique et son style (identité visuelle CF). |
 | `ciel.js` | Ciel étoilé animé en fond de page + bouton « retour en haut ». |
+| `site.js` | Pop up de connexion, carrousel RetroMania et grille Instagram de la page publique. |
 | `content.js` | Charge le contenu éditable et l'injecte dans la page. |
 | `instagram-grid.js`, `instagram-grid.css` | Grille Instagram de La Lanterne de Yuna (voir `php/INSTAGRAM.md`). |
 | `back-office.html`, `back-office.js` | Back office pour modifier le contenu sans toucher au code. |
-| `php/` | Scripts PHP : contenu, login, upload, Instagram. |
+| `php/` | Scripts PHP : contenu, login, upload, Instagram. Les fonctions communes sont dans `php/_commun.php`, le login dans `php/_auth.php`. |
 | `php/data/` | Contenu édité (`content-*.json`), code admin et token Instagram. |
 | `Images/identite-visuelle-cf/` | Logo CF et carpes koï (SVG) utilisés par le site. |
+| `Images/videos/` | Vidéos compressées en 720p, rangées par catégorie (marketing, multimédias, culture générale). |
+| `Images/miniatures-videos/` | Miniatures de toutes les vidéos (YouTube et locales). |
 | `fonts/` | Polices du site : Dustismo (texte) et Jura (chiffres). |
 
 ## Back office
