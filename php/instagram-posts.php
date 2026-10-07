@@ -6,8 +6,7 @@
 
 require __DIR__ . '/_instagram.php';
 
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
+start_json_endpoint(['GET']);
 
 // La première page est gardée en cache 5 minutes côté serveur : le site
 // reste rapide et un nouveau post apparaît au plus 5 minutes après sa
@@ -19,7 +18,7 @@ define('IG_CACHE_TTL', 300);
 $after = isset($_GET['after']) ? trim($_GET['after']) : '';
 
 if ($after === '') {
-    $cache = ig_read_json(IG_CACHE_FILE, null);
+    $cache = read_json_file(IG_CACHE_FILE, null);
     if ($cache && time() - (int) ($cache['cached_at'] ?? 0) < IG_CACHE_TTL) {
         header('Cache-Control: public, max-age=300');
         echo json_encode($cache['response']);
@@ -29,11 +28,7 @@ if ($after === '') {
 
 $accessToken = ig_current_token();
 
-if (!$accessToken) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Token Instagram non configuré. Voir php/INSTAGRAM.md.']);
-    exit;
-}
+if (!$accessToken) json_error(500, 'Token Instagram non configuré. Voir php/INSTAGRAM.md.');
 
 $fields = implode(',', [
     'id', 'caption', 'media_type', 'media_url',
@@ -48,9 +43,7 @@ if ($after !== '') {
 $result = ig_fetch_json($url);
 
 if ($result['status'] !== 200 || !is_array($result['data'])) {
-    http_response_code($result['status'] !== 200 ? $result['status'] : 500);
-    echo json_encode(['error' => ig_error_message($result)]);
-    exit;
+    json_error($result['status'] !== 200 ? $result['status'] : 500, ig_error_message($result));
 }
 
 $items = isset($result['data']['data']) && is_array($result['data']['data']) ? $result['data']['data'] : [];
@@ -89,7 +82,7 @@ $response = [
 ];
 
 if ($after === '') {
-    ig_write_json(IG_CACHE_FILE, ['cached_at' => time(), 'response' => $response]);
+    write_json_file(IG_CACHE_FILE, ['cached_at' => time(), 'response' => $response]);
 }
 
 header('Cache-Control: public, max-age=300');

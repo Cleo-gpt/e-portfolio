@@ -32,6 +32,15 @@
         return groups;
     }
 
+    // Échappe un texte venant d'Instagram (légende, URL) avant de l'insérer
+    // dans du HTML : une légende avec des guillemets ou un "<" ne doit pas
+    // casser la carte.
+    function escapeHtml(value) {
+        const div = document.createElement('div');
+        div.textContent = value == null ? '' : String(value);
+        return div.innerHTML.replace(/"/g, '&quot;');
+    }
+
     function createPostCard(post) {
         const card = document.createElement('a');
         card.href = post.url;
@@ -39,19 +48,19 @@
         card.rel = 'noopener';
         card.className = 'instagram-grid-post';
         card.innerHTML = `
-            <img src="${post.image}" alt="${post.caption || 'Publication Instagram'}" loading="lazy">
+            <img src="${escapeHtml(post.image)}" alt="${escapeHtml(post.caption || 'Publication Instagram')}" loading="lazy">
             <div class="instagram-grid-post-overlay">
                 <div class="instagram-grid-post-stat">
                     <svg viewBox="0 0 24 24" fill="white" width="20" height="20"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5C21.27 7.61 17 4.5 12 4.5zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8a3 3 0 100 6 3 3 0 000-6z"/></svg>
-                    <span>${formatStat(post.views)}</span>
+                    <span>${escapeHtml(formatStat(post.views))}</span>
                 </div>
                 <div class="instagram-grid-post-stat">
                     <svg viewBox="0 0 24 24" fill="white" width="20" height="20"><path d="M12 21s-6.5-4.35-9.33-8.02C1 10.5 1.5 6.5 5 5c2-.83 4 0 5 2 1-2 3-2.83 5-2 3.5 1.5 4 5.5 2.33 7.98C18.5 16.65 12 21 12 21z"/></svg>
-                    <span>${formatStat(post.likes)}</span>
+                    <span>${escapeHtml(formatStat(post.likes))}</span>
                 </div>
                 <div class="instagram-grid-post-stat">
                     <svg viewBox="0 0 24 24" fill="white" width="20" height="20"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
-                    <span>${formatStat(post.comments)}</span>
+                    <span>${escapeHtml(formatStat(post.comments))}</span>
                 </div>
             </div>
         `;
@@ -74,7 +83,7 @@
         let isLoading = false;
 
         function showMessage(text) {
-            container.innerHTML = `<p class="instagram-grid-status">${text}</p>`;
+            container.innerHTML = `<p class="instagram-grid-status">${escapeHtml(text)}</p>`;
             btnPrev.disabled = true;
             btnNext.disabled = true;
         }

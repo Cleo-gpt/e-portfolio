@@ -5,55 +5,22 @@
 
 require __DIR__ . '/_auth.php';
 
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, X-Admin-Email, X-Admin-Password');
-
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(204);
-    exit;
-}
+start_json_endpoint(['GET', 'POST']);
 
 $dataFile = __DIR__ . '/data/content-presentation.json';
 
-$default = [
-    'photo' => 'Images/presentation/Photo Cléo.jpeg',
-    'paragraphs' => []
-];
-
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    echo json_encode(auth_read_json($dataFile, $default));
+    echo json_encode(read_json_file($dataFile, ['photo' => 'Images/presentation/Photo Cléo.jpeg', 'paragraphs' => []]));
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_admin();
+require_admin();
+$payload = read_request_json();
 
-    $rawBody = file_get_contents('php://input');
-    $payload = json_decode($rawBody, true);
-    if (!is_array($payload)) {
-        http_response_code(400);
-        echo json_encode(['error' => 'Corps de requête invalide.']);
-        exit;
-    }
+$photo = str_field($payload['photo'] ?? '');
+$paragraphs = array_values(array_filter(array_map('str_field', list_field($payload, 'paragraphs')), 'strlen'));
+if ($photo === '' || count($paragraphs) === 0) json_error(400, 'La photo et au moins un paragraphe sont requis.');
 
-    $photo = isset($payload['photo']) ? trim((string) $payload['photo']) : '';
-    $paragraphs = isset($payload['paragraphs']) && is_array($payload['paragraphs'])
-        ? array_values(array_filter(array_map('trim', $payload['paragraphs']), function ($p) { return $p !== ''; }))
-        : [];
-
-    if ($photo === '' || count($paragraphs) === 0) {
-        http_response_code(400);
-        echo json_encode(['error' => 'La photo et au moins un paragraphe sont requis.']);
-        exit;
-    }
-
-    $cleaned = ['photo' => $photo, 'paragraphs' => $paragraphs];
-    auth_write_json($dataFile, $cleaned);
-    echo json_encode($cleaned);
-    exit;
-}
-
-http_response_code(405);
-echo json_encode(['error' => 'Méthode non autorisée.']);
+$cleaned = ['photo' => $photo, 'paragraphs' => $paragraphs];
+write_json_file($dataFile, $cleaned);
+echo json_encode($cleaned);

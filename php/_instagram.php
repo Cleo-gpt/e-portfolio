@@ -7,6 +7,8 @@
 // est collé une seule fois dans le back office (onglet Instagram), puis
 // renouvelé automatiquement par le site lui-même — voir php/INSTAGRAM.md.
 
+require_once __DIR__ . '/_commun.php';
+
 // Version de l'API Instagram Graph. Meta retire chaque version environ deux
 // ans après sa sortie : à monter ici si l'API renvoie une erreur de version.
 define('IG_API_BASE', 'https://graph.instagram.com/v24.0/');
@@ -17,16 +19,6 @@ define('IG_CACHE_FILE', __DIR__ . '/data/instagram-cache.json');
 // Le token dure 60 jours ; Meta n'accepte de le prolonger qu'après 24 h.
 // On le renouvelle dès qu'il a plus de 7 jours, à la première visite du site.
 define('IG_REFRESH_AFTER', 7 * 24 * 3600);
-
-function ig_read_json($path, $fallback) {
-    if (!file_exists($path)) return $fallback;
-    $decoded = json_decode(file_get_contents($path), true);
-    return is_array($decoded) ? $decoded : $fallback;
-}
-
-function ig_write_json($path, $data) {
-    file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
-}
 
 function ig_fetch_json($url) {
     $context = stream_context_create(['http' => ['timeout' => 10, 'ignore_errors' => true]]);
@@ -64,7 +56,7 @@ function ig_check_token($accessToken) {
 }
 
 function ig_save_token($accessToken, $username, $expiresIn) {
-    ig_write_json(IG_TOKEN_FILE, [
+    write_json_file(IG_TOKEN_FILE, [
         'access_token' => $accessToken,
         'username' => $username,
         'updated_at' => time(),
@@ -78,7 +70,7 @@ function ig_save_token($accessToken, $username, $expiresIn) {
 // plus de IG_REFRESH_AFTER. En cas d'échec du renouvellement, l'ancien token
 // reste utilisé (il sera retenté à la visite suivante).
 function ig_current_token() {
-    $tokenData = ig_read_json(IG_TOKEN_FILE, null);
+    $tokenData = read_json_file(IG_TOKEN_FILE, null);
     if (!$tokenData || empty($tokenData['access_token'])) return null;
 
     $updatedAt = (int) ($tokenData['updated_at'] ?? 0);

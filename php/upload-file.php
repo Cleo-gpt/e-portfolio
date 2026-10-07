@@ -9,40 +9,21 @@
 
 require __DIR__ . '/_auth.php';
 
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, X-Admin-Email, X-Admin-Password');
-
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(204);
-    exit;
-}
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['error' => 'Méthode non autorisée.']);
-    exit;
-}
-
+start_json_endpoint(['POST']);
 require_admin();
 
 $kind = isset($_POST['kind']) ? $_POST['kind'] : 'image';
 $maxSize = 5 * 1024 * 1024; // 5 Mo
 
 if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Aucun fichier valide reçu.']);
-    exit;
+    json_error(400, 'Aucun fichier valide reçu.');
 }
 
 $tmpPath = $_FILES['file']['tmp_name'];
 $size = $_FILES['file']['size'];
 
 if ($size > $maxSize) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Le fichier dépasse la taille maximale de 5 Mo.']);
-    exit;
+    json_error(400, 'Le fichier dépasse la taille maximale de 5 Mo.');
 }
 
 if ($kind === 'document') {
@@ -50,9 +31,7 @@ if ($kind === 'document') {
     $mime = finfo_file($finfo, $tmpPath);
 
     if ($mime !== 'application/pdf') {
-        http_response_code(400);
-        echo json_encode(['error' => 'Seuls les fichiers PDF sont acceptés pour un document.']);
-        exit;
+        json_error(400, 'Seuls les fichiers PDF sont acceptés pour un document.');
     }
 
     $extension = 'pdf';
@@ -61,9 +40,7 @@ if ($kind === 'document') {
 } else {
     $imageInfo = @getimagesize($tmpPath);
     if ($imageInfo === false) {
-        http_response_code(400);
-        echo json_encode(['error' => 'Le fichier n\'est pas une image valide.']);
-        exit;
+        json_error(400, 'Le fichier n\'est pas une image valide.');
     }
 
     $allowedMimes = [
@@ -74,9 +51,7 @@ if ($kind === 'document') {
     $mime = $imageInfo['mime'];
 
     if (!isset($allowedMimes[$mime])) {
-        http_response_code(400);
-        echo json_encode(['error' => 'Seuls les formats PNG, JPEG et WebP sont acceptés.']);
-        exit;
+        json_error(400, 'Seuls les formats PNG, JPEG et WebP sont acceptés.');
     }
 
     $extension = $allowedMimes[$mime];
@@ -88,19 +63,13 @@ if (!is_dir($targetDir)) {
     mkdir($targetDir, 0755, true);
 }
 
-$originalName = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME);
-$slug = strtolower($originalName);
-$slug = preg_replace('/[^a-z0-9]+/', '-', $slug);
-$slug = trim($slug, '-');
-if ($slug === '') $slug = $kind;
+$slug = slugify(pathinfo($_FILES['file']['name'], PATHINFO_FILENAME), $kind);
 
 $filename = $slug . '-' . substr(bin2hex(random_bytes(4)), 0, 8) . '.' . $extension;
 $destination = $targetDir . '/' . $filename;
 
 if (!move_uploaded_file($tmpPath, $destination)) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Impossible d\'enregistrer le fichier sur le serveur.']);
-    exit;
+    json_error(500, 'Impossible d\'enregistrer le fichier sur le serveur.');
 }
 
 echo json_encode(['path' => $publicPrefix . '/' . $filename]);

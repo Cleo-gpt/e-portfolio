@@ -5,62 +5,24 @@
 
 require __DIR__ . '/_auth.php';
 
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, X-Admin-Email, X-Admin-Password');
-
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(204);
-    exit;
-}
+start_json_endpoint(['GET', 'POST']);
 
 $dataFile = __DIR__ . '/data/content-social.json';
-
-$default = [
-    'name' => '',
-    'phone' => '',
-    'phoneDisplay' => '',
-    'linktree' => '',
-    'instagramLanterne' => '',
-    'linkedin' => '',
-    'email' => ''
-];
-
-function social_str($v) {
-    return trim((string) ($v ?? ''));
-}
+$fields = ['name', 'phone', 'phoneDisplay', 'linktree', 'instagramLanterne', 'linkedin', 'email'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    echo json_encode(array_merge($default, auth_read_json($dataFile, [])));
+    $default = array_fill_keys($fields, '');
+    echo json_encode(array_merge($default, read_json_file($dataFile, [])));
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_admin();
+require_admin();
+$payload = read_request_json();
 
-    $rawBody = file_get_contents('php://input');
-    $payload = json_decode($rawBody, true);
-    if (!is_array($payload)) {
-        http_response_code(400);
-        echo json_encode(['error' => 'Corps de requête invalide.']);
-        exit;
-    }
-
-    $cleaned = [
-        'name' => social_str($payload['name'] ?? ''),
-        'phone' => social_str($payload['phone'] ?? ''),
-        'phoneDisplay' => social_str($payload['phoneDisplay'] ?? ''),
-        'linktree' => social_str($payload['linktree'] ?? ''),
-        'instagramLanterne' => social_str($payload['instagramLanterne'] ?? ''),
-        'linkedin' => social_str($payload['linkedin'] ?? ''),
-        'email' => social_str($payload['email'] ?? '')
-    ];
-
-    auth_write_json($dataFile, $cleaned);
-    echo json_encode($cleaned);
-    exit;
+$cleaned = [];
+foreach ($fields as $field) {
+    $cleaned[$field] = str_field($payload[$field] ?? '');
 }
 
-http_response_code(405);
-echo json_encode(['error' => 'Méthode non autorisée.']);
+write_json_file($dataFile, $cleaned);
+echo json_encode($cleaned);

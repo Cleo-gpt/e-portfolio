@@ -1,6 +1,7 @@
 <?php
 // Authentification partagée du back office (email fixe + code modifiable),
-// utilisée par tous les endpoints d'écriture (content-*.php, upload-file.php).
+// utilisée par tous les scripts qui écrivent (content-*.php, upload-file.php,
+// instagram-token.php…).
 //
 // Email : constante ADMIN_EMAIL dans config.php.
 // Code : stocké dans data/credentials.json, modifiable via auth-change-password.php.
@@ -8,22 +9,12 @@
 // dans config.php.
 
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/_commun.php';
 
 define('CREDENTIALS_FILE', __DIR__ . '/data/credentials.json');
 
-function auth_read_json($path, $fallback) {
-    if (!file_exists($path)) return $fallback;
-    $content = file_get_contents($path);
-    $decoded = json_decode($content, true);
-    return is_array($decoded) ? $decoded : $fallback;
-}
-
-function auth_write_json($path, $data) {
-    file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
-}
-
 function auth_expected_password() {
-    $credentials = auth_read_json(CREDENTIALS_FILE, null);
+    $credentials = read_json_file(CREDENTIALS_FILE, null);
     if ($credentials && isset($credentials['password'])) {
         return $credentials['password'];
     }
@@ -43,22 +34,13 @@ function auth_provided_credentials() {
 }
 
 // Vérifie les identifiants fournis. En cas d'échec, envoie une réponse 401
-// JSON et termine le script — à appeler en tête de chaque endpoint protégé.
+// JSON et termine le script — à appeler en tête de chaque script protégé.
 function require_admin() {
-    $expectedEmail = strtolower(ADMIN_EMAIL);
     $expectedPassword = auth_expected_password();
-
-    if (!$expectedPassword) {
-        http_response_code(500);
-        echo json_encode(['error' => 'Aucun code admin configuré sur le serveur.']);
-        exit;
-    }
+    if (!$expectedPassword) json_error(500, 'Aucun code admin configuré sur le serveur.');
 
     $provided = auth_provided_credentials();
-
-    if ($provided['email'] !== $expectedEmail || $provided['password'] !== $expectedPassword) {
-        http_response_code(401);
-        echo json_encode(['error' => 'Email ou code incorrect.']);
-        exit;
-    }
+    $emailOk = hash_equals(strtolower(ADMIN_EMAIL), $provided['email']);
+    $passwordOk = hash_equals((string) $expectedPassword, $provided['password']);
+    if (!$emailOk || !$passwordOk) json_error(401, 'Email ou code incorrect.');
 }
