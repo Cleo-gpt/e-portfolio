@@ -1308,6 +1308,30 @@ input {
     outline-color: var(--lilas);
 }
 
+/* Flèches et points des pages de la grille Instagram */
+.lanterne-yuna .insta-grille__nav {
+    --ig-nav-couleur: var(--blanc);
+    --ig-nav-fond: rgba(13, 10, 48, 0.6);
+    --ig-nav-bord: var(--bord-fort);
+    --ig-nav-actif: var(--lilas);
+    --ig-nav-inactif: rgba(208, 160, 243, 0.3);
+    margin-top: 22px;
+}
+
+.lanterne-yuna .insta-grille__fleche {
+    width: 46px;
+    height: 46px;
+}
+
+.lanterne-yuna .insta-grille__fleche:hover:not(:disabled) {
+    background: rgba(113, 45, 163, 0.7);
+}
+
+.lanterne-yuna .insta-grille__fleche:focus-visible,
+.lanterne-yuna .insta-grille__point:focus-visible {
+    outline-color: var(--lilas);
+}
+
 /* ==========================================================================
    CPNV — Médiamatique
    ========================================================================== */

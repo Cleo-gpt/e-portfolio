@@ -127,13 +127,15 @@
     }
 
     // ---------- Publications Instagram — La Lanterne de Yuna ----------
-    // Toutes les publications, listées dans instagram-posts.js. Ce fichier et
+    // Toutes les publications, listées dans instagram-posts.js, dans l'ordre
+    // du profil Instagram (épinglées d'abord), par pages de 3 × 3. Ce fichier et
     // les images (Images/instagram/) sont mis à jour toutes les heures par
     // GitHub Actions : voir plugins/insta-grille/README.md.
 
     function initInstagram() {
         InstaGrille.monter('#lanternePosts', {
-            posts: window.INSTA_POSTS || []
+            posts: window.INSTA_POSTS || [],
+            parPage: 9 // 3 × 3, avec flèches et glissement pour voir la suite
         });
     }
 
