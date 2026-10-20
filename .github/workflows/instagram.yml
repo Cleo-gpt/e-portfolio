@@ -71,7 +71,7 @@ jobs:
           sudo apt-get install -y -qq lftp > /dev/null
           lftp -u "$FTP_UTILISATEUR,$FTP_MOT_DE_PASSE" "$FTP_SERVEUR" -e "
             set ftp:ssl-allow yes;
-            mirror --reverse --verbose --exclude-glob .git/ --exclude-glob .github/ --exclude-glob .vscode/ --exclude-glob scripts/ --exclude-glob .DS_Store --exclude-glob .gitignore --exclude-glob '*.md' --exclude-glob package.json --exclude-glob '*.command' . '${FTP_DOSSIER:-.}';
+            mirror --reverse --verbose --exclude-glob .git/ --exclude-glob .github/ --exclude-glob .vscode/ --exclude-glob scripts/ --exclude-glob .DS_Store --exclude-glob .gitignore --exclude-glob '*.md' --exclude-glob package.json . '${FTP_DOSSIER:-.}';
             bye"
 
       - name: Envoyer les publications Instagram (FTP)
