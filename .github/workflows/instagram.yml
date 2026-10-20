@@ -8,7 +8,12 @@ name: Publications Instagram
 on:
   schedule:
     - cron: '17 * * * *'   # toutes les heures, à la 17e minute
-  workflow_dispatch: {}    # bouton "Run workflow" pour lancer à la main
+  workflow_dispatch:       # bouton "Run workflow" pour lancer à la main
+    inputs:
+      tout_envoyer:
+        description: "Envoyer aussi tout le site sur le serveur (première mise en ligne ou grosse mise à jour)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write          # pour commiter les nouvelles images et la liste
@@ -57,8 +62,20 @@ jobs:
             echo "modifie=oui" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Envoyer sur le site (FTP)
-        if: steps.commit.outputs.modifie == 'oui' && env.FTP_SERVEUR != ''
+      - name: Envoyer tout le site (FTP)
+        # Seulement à la demande (case "tout_envoyer"). Rien n'est supprimé sur
+        # le serveur, et php/data/credentials.json (code admin) n'est jamais
+        # écrasé puisqu'il n'est pas dans le dépôt.
+        if: inputs.tout_envoyer && env.FTP_SERVEUR != ''
+        run: |
+          sudo apt-get install -y -qq lftp > /dev/null
+          lftp -u "$FTP_UTILISATEUR,$FTP_MOT_DE_PASSE" "$FTP_SERVEUR" -e "
+            set ftp:ssl-allow yes;
+            mirror --reverse --verbose --exclude-glob .git/ --exclude-glob .github/ --exclude-glob .vscode/ --exclude-glob scripts/ --exclude-glob .DS_Store --exclude-glob .gitignore --exclude-glob '*.md' --exclude-glob package.json . '${FTP_DOSSIER:-.}';
+            bye"
+
+      - name: Envoyer les publications Instagram (FTP)
+        if: steps.commit.outputs.modifie == 'oui' && !inputs.tout_envoyer && env.FTP_SERVEUR != ''
         run: |
           sudo apt-get install -y -qq lftp > /dev/null
           lftp -u "$FTP_UTILISATEUR,$FTP_MOT_DE_PASSE" "$FTP_SERVEUR" -e "

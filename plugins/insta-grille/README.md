@@ -67,9 +67,18 @@ repository secret**, et ajoute :
 | `FTP_MOT_DE_PASSE` | ton mot de passe FTP |
 | `FTP_DOSSIER` | le dossier du site sur le serveur, tel que FileZilla l'affiche à droite (ex : `/public_html`). Vide = dossier de connexion |
 
+Plus simple : lance `bash scripts/configurer-ftp.sh` dans le Terminal. Il
+demande le dossier du site et le mot de passe FTP (sans l'afficher), vérifie
+la connexion, enregistre les quatre secrets FTP et lance une mise en ligne
+complète du site.
+
 Sans les secrets FTP, le robot met quand même le dépôt à jour, mais il
 faudra envoyer `instagram-posts.js` et `Images/instagram/` toi-même avec
 FileZilla.
+
+Pour renvoyer tout le site sur le serveur (après de grosses modifications) :
+onglet **Actions** → **Publications Instagram** → **Run workflow** → coche
+**Envoyer aussi tout le site**. Rien n'est supprimé sur le serveur.
 
 ### 3. Lancer le robot une première fois
 
