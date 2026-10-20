@@ -7,7 +7,9 @@
 //   3. récupère TOUTES les publications du compte via l'API Instagram ;
 //   4. télécharge l'image de chaque nouvelle publication dans Images/instagram/
 //      (les adresses d'images d'Instagram expirent, celles-ci non) ;
-//   5. réécrit instagram-posts.js, lu par la grille (plugins/insta-grille).
+//   5. réécrit instagram-posts.js, lu par la grille (plugins/insta-grille),
+//      en marquant les publications épinglées listées dans instagram-epingles.json
+//      (l'API d'Instagram ne dit pas quels posts sont épinglés).
 //
 // Variables d'environnement :
 //   INSTAGRAM_TOKEN_KEY  phrase secrète qui chiffre le token (obligatoire)
@@ -26,6 +28,7 @@ const RACINE = join(dirname(fileURLToPath(import.meta.url)), '..');
 const FICHIER_TOKEN = join(RACINE, '.github', 'instagram-token.enc');
 const DOSSIER_IMAGES = join(RACINE, 'Images', 'instagram');
 const FICHIER_POSTS = join(RACINE, 'instagram-posts.js');
+const FICHIER_EPINGLES = join(RACINE, 'instagram-epingles.json');
 const CHEMIN_IMAGES_SITE = 'Images/instagram/'; // chemin vu depuis index.html
 
 const API = (process.env.INSTAGRAM_API_BASE || 'https://graph.instagram.com/v24.0/').replace(/\/?$/, '/');
@@ -166,7 +169,26 @@ async function telechargerImages(posts) {
     return { nouvelles, supprimees };
 }
 
+// Code court d'un post ("DeJkqygjHkN") à partir de son lien, quel qu'il soit.
+function codeDuPost(lien) {
+    const m = String(lien || '').match(/\/(?:p|reel|tv)\/([\w-]+)/);
+    return m ? m[1] : null;
+}
+
+// Rang d'épinglage (1, 2, 3) de chaque post listé dans instagram-epingles.json.
+function lireEpingles() {
+    if (!existsSync(FICHIER_EPINGLES)) return new Map();
+    try {
+        const liste = JSON.parse(readFileSync(FICHIER_EPINGLES, 'utf8')).epingles || [];
+        return new Map(liste.map((lien, i) => [codeDuPost(lien), i + 1]).filter(([code]) => code));
+    } catch (e) {
+        console.log('instagram-epingles.json illisible, ignoré : ' + e.message);
+        return new Map();
+    }
+}
+
 function ecrireListe(posts) {
+    const epingles = lireEpingles();
     const liste = posts
         .filter((p) => p.imageLocale && p.permalink)
         .map((p) => ({
@@ -174,7 +196,8 @@ function ecrireListe(posts) {
             lien: p.permalink,
             legende: (p.caption || '').replace(/\s+/g, ' ').trim().slice(0, 200),
             type: typePourGrille(p.media_type),
-            date: p.timestamp || undefined
+            date: p.timestamp || undefined,
+            epingle: epingles.get(codeDuPost(p.permalink)) || undefined
         }));
     const contenu =
         '// Fichier généré automatiquement par scripts/instagram-sync.mjs (GitHub Actions).\n' +

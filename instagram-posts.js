@@ -69,14 +69,16 @@ window.INSTA_POSTS = [
         "lien": "https://www.instagram.com/p/DeJkqygjHkN/",
         "legende": "Français Voici mes règles et mon processus pour les commandes. Je suis ouverte à toute demande ou toute question. Je n'accepte pas non plus les références faites par IA, ça va a l'encontre de mes vale",
         "type": "carrousel",
-        "date": "2026-10-06T10:30:06+0000"
+        "date": "2026-10-06T10:30:06+0000",
+        "epingle": 1
     },
     {
         "image": "Images/instagram/18085087427319435.jpg",
         "lien": "https://www.instagram.com/p/DeG_9HnCscu/",
         "legende": "🇫🇷 Français Moi c’est Yuna, je suis une illustratrice, étudiante et je suis unique. Je suis indépendante, je crée des illustrations, vos commandes, et encore d’autres projets à l’avenir. J’adore les",
         "type": "image",
-        "date": "2026-10-05T10:30:50+0000"
+        "date": "2026-10-05T10:30:50+0000",
+        "epingle": 2
     },
     {
         "image": "Images/instagram/17983504485087249.jpg",

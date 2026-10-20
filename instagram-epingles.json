@@ -1,0 +1,7 @@
+{
+    "explication": "Publications épinglées sur Instagram, dans l'ordre où elles apparaissent en haut du profil (3 au maximum). Colle ici le lien de chaque post épinglé ; le robot les place en tête de la grille du site. L'API d'Instagram ne dit pas quels posts sont épinglés, d'où cette liste.",
+    "epingles": [
+        "https://www.instagram.com/p/DeJkqygjHkN/",
+        "https://www.instagram.com/p/DeG_9HnCscu/"
+    ]
+}
