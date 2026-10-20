@@ -116,136 +116,111 @@
     text-align: center;
 }
 
-/* ---------- Pages de 3 × 3 (option parPage) ---------- */
+/* ---------- Fenêtre défilante (option lignesVisibles) ---------- */
 
-/* Comme sur l'app Instagram : 3 colonnes, même sur téléphone. */
-.insta-grille--pages {
-    --ig-colonnes: 3;
-    touch-action: pan-y;        /* le glissement horizontal change de page */
-    user-select: none;
-    -webkit-user-select: none;
-}
-
-.insta-grille__vide {
-    aspect-ratio: 1 / 1;        /* garde la même hauteur sur la dernière page */
-}
-
-.insta-grille--entree-suivante {
-    animation: ig-entree-suivante 0.35s ease;
-}
-
-.insta-grille--entree-precedente {
-    animation: ig-entree-precedente 0.35s ease;
-}
-
-@keyframes ig-entree-suivante {
-    from { opacity: 0; transform: translateX(40px); }
-    to { opacity: 1; transform: none; }
-}
-
-@keyframes ig-entree-precedente {
-    from { opacity: 0; transform: translateX(-40px); }
-    to { opacity: 1; transform: none; }
-}
-
-.insta-grille__nav {
-    --ig-nav-couleur: #262626;
-    --ig-nav-fond: #ffffff;
-    --ig-nav-bord: #dbdbdb;
-    --ig-nav-actif: #262626;
-    --ig-nav-inactif: #c7c7c7;
+/* La grille + sa barre verticale, côte à côte. La hauteur de la fenêtre est
+   calculée par le script pour montrer exactement le nombre de lignes voulu. */
+.insta-grille__cadre {
+    --ig-barre-largeur: 28px;
+    --ig-fil: rgba(0, 0, 0, 0.15);
+    --ig-curseur-taille: 28px;
+    --ig-curseur-couleur: #262626;
 
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 16px;
+    gap: 10px;
 }
 
-.insta-grille__nav[hidden] {
+.insta-grille__fenetre {
+    flex: 1;
+    min-width: 0;
+    overflow-y: auto;
+    overscroll-behavior: auto;
+    scroll-snap-type: y proximity;
+    scrollbar-width: none;      /* la barre d'origine est remplacée par la nôtre */
+}
+
+.insta-grille__fenetre::-webkit-scrollbar {
     display: none;
 }
 
-.insta-grille__fleche {
-    display: grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border: 1px solid var(--ig-nav-bord);
-    border-radius: 50%;
-    background: var(--ig-nav-fond);
-    color: var(--ig-nav-couleur);
+.insta-grille--fenetre {
+    --ig-colonnes: 3;           /* comme sur l'app Instagram, même sur téléphone */
+}
+
+.insta-grille--fenetre > li {
+    scroll-snap-align: start;
+}
+
+.insta-grille__cadre--tenu .insta-grille__fenetre {
+    scroll-snap-type: none;     /* pas d'aimantation pendant qu'on tient le curseur */
+}
+
+.insta-grille__barre {
+    position: relative;
+    flex: 0 0 var(--ig-barre-largeur);
     cursor: pointer;
-    transition: transform 0.15s ease, opacity 0.2s ease;
 }
 
-.insta-grille__fleche svg {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
+.insta-grille__cadre--court .insta-grille__barre {
+    display: none;              /* tout tient dans la fenêtre : pas de barre */
 }
 
-.insta-grille__fleche:hover:not(:disabled) {
-    transform: scale(1.08);
-}
-
-.insta-grille__fleche:disabled {
-    opacity: 0.3;
-    cursor: default;
-}
-
-.insta-grille__points {
-    display: flex;
-    gap: 8px;
-}
-
-.insta-grille__point {
-    width: 9px;
-    height: 9px;
-    padding: 0;
-    border: 0;
-    border-radius: 50%;
-    background: var(--ig-nav-inactif);
-    cursor: pointer;
-    transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.insta-grille__point[aria-current="true"] {
-    background: var(--ig-nav-actif);
-    transform: scale(1.3);
-}
-
-.insta-grille__fleche:focus-visible,
-.insta-grille__point:focus-visible {
-    outline: 3px solid #0095f6;
-    outline-offset: 2px;
-}
-
-/* Annonce "Page 2 sur 4" lue par les lecteurs d'écran, invisible à l'écran */
-.insta-grille__annonce {
+.insta-grille__fil {
     position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    translate: -1px 0;
+    border-radius: 2px;
+    background: var(--ig-fil);
 }
 
-/* ---------- Responsive (sans pages) : 3 colonnes → 2 → 1 ---------- */
+.insta-grille__curseur {
+    position: absolute;
+    top: 0;
+    left: calc((var(--ig-barre-largeur) - var(--ig-curseur-taille)) / 2);
+    display: block;
+    width: var(--ig-curseur-taille);
+    height: var(--ig-curseur-taille);
+    border-radius: 50%;
+    background: var(--ig-curseur-couleur);
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: scale 0.2s ease, filter 0.2s ease;
+}
+
+img.insta-grille__curseur {
+    border-radius: 0;
+    background: none;
+    object-fit: contain;
+}
+
+.insta-grille__barre:hover .insta-grille__curseur,
+.insta-grille__cadre--tenu .insta-grille__curseur {
+    scale: 1.15;
+}
+
+.insta-grille__cadre--tenu .insta-grille__curseur {
+    cursor: grabbing;
+}
+
+/* ---------- Responsive (sans fenêtre) : 3 colonnes → 2 → 1 ---------- */
 
 @media (max-width: 640px) {
-    .insta-grille:not(.insta-grille--pages) {
+    .insta-grille:not(.insta-grille--fenetre) {
         --ig-colonnes: 2;
     }
 
-    .insta-grille--pages {
+    .insta-grille--fenetre {
         --ig-espace: 3px;
     }
 }
 
 @media (max-width: 360px) {
-    .insta-grille:not(.insta-grille--pages) {
+    .insta-grille:not(.insta-grille--fenetre) {
         --ig-colonnes: 1;
     }
 }
@@ -253,13 +228,9 @@
 /* Moins d'animations si la personne l'a demandé dans ses réglages */
 @media (prefers-reduced-motion: reduce) {
     .insta-grille__image,
-    .insta-grille__voile {
+    .insta-grille__voile,
+    .insta-grille__curseur {
         transition: none;
-    }
-
-    .insta-grille--entree-suivante,
-    .insta-grille--entree-precedente {
-        animation: none;
     }
 }
 

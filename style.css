@@ -1332,8 +1332,6 @@ input {
     --ig-voile: rgba(32, 26, 119, 0.62);
     --ig-texte: var(--texte-doux);
     --ig-police: var(--police-texte);
-    max-width: 860px;
-    margin: 0 auto;
 }
 
 .lanterne-posts .insta-grille__post {
@@ -1344,28 +1342,28 @@ input {
     outline-color: var(--lilas);
 }
 
-/* Flèches et points des pages de la grille Instagram */
-.lanterne-yuna .insta-grille__nav {
-    --ig-nav-couleur: var(--blanc);
-    --ig-nav-fond: rgba(13, 10, 48, 0.6);
-    --ig-nav-bord: var(--bord-fort);
-    --ig-nav-actif: var(--lilas);
-    --ig-nav-inactif: rgba(208, 160, 243, 0.3);
-    margin-top: 22px;
+/* Fenêtre 3 × 3 qui défile, avec une lanterne qui glisse le long d'un fil */
+.lanterne-yuna .insta-grille__cadre {
+    --ig-barre-largeur: 34px;
+    --ig-fil: rgba(208, 160, 243, 0.25);
+    --ig-curseur-taille: 34px;
+    /* Assez petite pour que les 3 lignes tiennent à l'écran sous le menu */
+    max-width: min(920px, calc(100vh - var(--hauteur-nav) - 30px));
+    margin: 0 auto;
 }
 
-.lanterne-yuna .insta-grille__fleche {
-    width: 46px;
-    height: 46px;
+.lanterne-yuna .insta-grille__fenetre {
+    padding: 6px 12px 18px; /* place pour l'ombre des images */
+    scroll-padding-top: 6px;
 }
 
-.lanterne-yuna .insta-grille__fleche:hover:not(:disabled) {
-    background: rgba(113, 45, 163, 0.7);
+.lanterne-yuna .insta-grille__curseur {
+    filter: drop-shadow(0 0 7px rgba(255, 170, 60, 0.8));
 }
 
-.lanterne-yuna .insta-grille__fleche:focus-visible,
-.lanterne-yuna .insta-grille__point:focus-visible {
-    outline-color: var(--lilas);
+.lanterne-yuna .insta-grille__barre:hover .insta-grille__curseur,
+.lanterne-yuna .insta-grille__cadre--tenu .insta-grille__curseur {
+    filter: drop-shadow(0 0 12px rgba(255, 170, 60, 1));
 }
 
 /* ==========================================================================
@@ -1852,75 +1850,6 @@ input {
 }
 
 /* ==========================================================================
-   Barre de défilement lanterne (créée par site.js, souris uniquement)
-   ========================================================================== */
-html.avec-barre-lanterne {
-    scrollbar-width: none;
-}
-
-html.avec-barre-lanterne::-webkit-scrollbar {
-    display: none;
-}
-
-.barre-lanterne {
-    position: fixed;
-    top: 10px;
-    right: 4px;
-    bottom: 10px;
-    z-index: 60; /* au-dessus du menu */
-    width: 28px;
-    cursor: pointer;
-}
-
-.barre-lanterne[hidden] {
-    display: none;
-}
-
-.barre-lanterne__fil {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 2px;
-    translate: -1px 0;
-    border-radius: 2px;
-    background: rgba(201, 191, 227, 0.18);
-    transition: background 0.2s ease;
-}
-
-.barre-lanterne:hover .barre-lanterne__fil {
-    background: rgba(201, 191, 227, 0.32);
-}
-
-.barre-lanterne__lanterne {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 28px;
-    height: 28px;
-    cursor: grab;
-    touch-action: none;
-    user-select: none;
-    filter: drop-shadow(0 0 6px rgba(255, 170, 60, 0.75));
-    transition: filter 0.2s ease, scale 0.2s ease;
-}
-
-.barre-lanterne:hover .barre-lanterne__lanterne,
-.barre-lanterne--tenue .barre-lanterne__lanterne {
-    scale: 1.2;
-    filter: drop-shadow(0 0 10px rgba(255, 170, 60, 0.95));
-}
-
-.barre-lanterne--tenue .barre-lanterne__lanterne {
-    cursor: grabbing;
-}
-
-/* Le bouton carpe se pousse pour laisser passer la lanterne. */
-.avec-barre-lanterne .retour-haut {
-    right: 38px;
-}
-
-/* ==========================================================================
    Pop up de connexion admin
    ========================================================================== */
 .login-modal-overlay {
@@ -2082,12 +2011,23 @@ html.avec-barre-lanterne::-webkit-scrollbar {
         --ig-arrondi: 10px;
     }
 
+    .lanterne-yuna .insta-grille__cadre {
+        --ig-barre-largeur: 26px;
+        --ig-curseur-taille: 26px;
+        gap: 4px;
+    }
+
+    .lanterne-yuna .insta-grille__fenetre {
+        padding: 4px 4px 12px;
+        scroll-padding-top: 4px;
+    }
+
     .lanterne-deco {
         width: 60px;
     }
 
     .lanterne-deco-2 {
-        width: 50px;
+        display: none; /* elle tomberait sur la barre de la grille Instagram */
     }
 
     .lanterne-deco-3 {

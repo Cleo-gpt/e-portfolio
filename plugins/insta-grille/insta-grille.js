@@ -38,9 +38,9 @@
    publications épinglées (rang 1, 2, 3), puis les autres de la plus récente
    à la plus ancienne.
 
-   Pages : avec { parPage: 9 }, la grille affiche 3 × 3 publications et
-   ajoute des flèches (et le glissement du doigt ou de la souris) pour passer
-   d'une page à l'autre.
+   Fenêtre défilante : avec { lignesVisibles: 3 }, la grille montre 3 × 3
+   publications et les suivantes se découvrent en faisant défiler, avec une
+   barre verticale sur le côté ({ curseur: 'image.png' } pour son curseur).
 
    Si likes et commentaires sont absents, le survol affiche simplement
    "Voir sur Instagram" : aucun chiffre inventé.
@@ -58,9 +58,7 @@
         sortie: 'M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z',
         video: 'M5 3l15 9-15 9V3z',
         carrousel: 'M8 3h11a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-5 5h1v11a1 1 0 0 0 1 1h11v1H5a2 2 0 0 1-2-2V8z',
-        epingle: 'M15.4 2.6l6 6-1.4 1.4-1.1-.4-3.6 3.6.3 4.1-1.5 1.5-4.2-4.2-5.6 5.6H3v-1.3l5.6-5.6-4.2-4.2L5.9 7.6l4.1.3 3.6-3.6-.4-1.1 2.2-.6z',
-        precedent: 'M15.4 4.6L8 12l7.4 7.4-1.4 1.4L5.2 12 14 3.2z',
-        suivant: 'M8.6 4.6L16 12l-7.4 7.4 1.4 1.4L18.8 12 10 3.2z'
+        epingle: 'M15.4 2.6l6 6-1.4 1.4-1.1-.4-3.6 3.6.3 4.1-1.5 1.5-4.2-4.2-5.6 5.6H3v-1.3l5.6-5.6-4.2-4.2L5.9 7.6l4.1.3 3.6-3.6-.4-1.1 2.2-.6z'
     };
 
     // Crée une petite icône SVG (sans innerHTML, donc sans risque d'injection).
@@ -194,7 +192,6 @@
         lien.target = '_blank';
         lien.rel = 'noopener noreferrer';
         lien.setAttribute('aria-label', (post.epingle ? 'Publication épinglée : ' : '') + (post.legende || 'Publication Instagram') + ' (ouvre Instagram dans un nouvel onglet)');
-        lien.draggable = false;
 
         const img = document.createElement('img');
         img.className = 'insta-grille__image';
@@ -202,7 +199,6 @@
         img.alt = post.legende;
         img.loading = 'lazy';      // les images hors écran se chargent au défilement
         img.decoding = 'async';
-        img.draggable = false;     // pour que glisser change de page au lieu de déplacer l'image
         // Image introuvable (lien expiré…) : on retire la carte plutôt que
         // d'afficher un carré cassé.
         img.addEventListener('error', function () { item.remove(); });
@@ -259,140 +255,126 @@
             .map(function (x) { return x.p; });
     }
 
-    // ---------- Pages (3 × 3) ----------
+    // ---------- Fenêtre défilante (ex : 3 × 3 visibles) ----------
 
-    function bouton(classe, nomIcone, libelle) {
-        const b = document.createElement('button');
-        b.type = 'button';
-        b.className = classe;
-        b.setAttribute('aria-label', libelle);
-        b.appendChild(icone(nomIcone));
-        return b;
-    }
+    // Enveloppe la grille dans une fenêtre qui ne montre que quelques lignes,
+    // avec, sur le côté, une barre verticale dont le curseur (une image au
+    // choix) suit le défilement. Molette, doigt et clavier défilent la
+    // fenêtre ; le curseur se glisse et un clic sur la barre y saute.
+    function preparerFenetre(conteneur, lignes, imageCurseur) {
+        if (conteneur._instaFenetre) return conteneur._instaFenetre;
 
-    // Crée (une seule fois) la barre de navigation sous la grille et gère les
-    // changements de page : flèches, points, flèches du clavier et glissement.
-    function preparerPages(conteneur) {
-        if (conteneur._instaPages) return conteneur._instaPages;
+        const cadre = document.createElement('div');
+        cadre.className = 'insta-grille__cadre';
+        const fenetre = document.createElement('div');
+        fenetre.className = 'insta-grille__fenetre';
+        const barre = document.createElement('div');
+        barre.className = 'insta-grille__barre';
+        barre.setAttribute('aria-hidden', 'true');
+        const fil = document.createElement('span');
+        fil.className = 'insta-grille__fil';
+        const curseur = document.createElement(imageCurseur ? 'img' : 'span');
+        curseur.className = 'insta-grille__curseur';
+        if (imageCurseur) {
+            curseur.src = imageCurseur;
+            curseur.alt = '';
+            curseur.draggable = false;
+        }
+        barre.append(fil, curseur);
 
-        const nav = document.createElement('div');
-        nav.className = 'insta-grille__nav';
-        const precedent = bouton('insta-grille__fleche', 'precedent', 'Publications précédentes');
-        const suivant = bouton('insta-grille__fleche', 'suivant', 'Publications suivantes');
-        const points = document.createElement('div');
-        points.className = 'insta-grille__points';
-        const annonce = document.createElement('span');
-        annonce.className = 'insta-grille__annonce';
-        annonce.setAttribute('aria-live', 'polite');
-        nav.append(precedent, points, suivant, annonce);
-        conteneur.after(nav);
+        conteneur.before(cadre);
+        fenetre.appendChild(conteneur);
+        cadre.append(fenetre, barre);
+        conteneur.classList.add('insta-grille--fenetre');
 
-        const etat = { nav: nav, points: points, annonce: annonce, precedent: precedent, suivant: suivant, page: 0, pages: [] };
-        conteneur._instaPages = etat;
+        const etat = { cadre: cadre, fenetre: fenetre, barre: barre, curseur: curseur, lignes: lignes };
+        conteneur._instaFenetre = etat;
 
-        precedent.addEventListener('click', function () { allerA(conteneur, etat.page - 1); });
-        suivant.addEventListener('click', function () { allerA(conteneur, etat.page + 1); });
+        function course() {
+            return barre.clientHeight - curseur.offsetHeight;
+        }
 
-        conteneur.addEventListener('keydown', function (e) {
-            if (e.key === 'ArrowLeft') { allerA(conteneur, etat.page - 1); e.preventDefault(); }
-            if (e.key === 'ArrowRight') { allerA(conteneur, etat.page + 1); e.preventDefault(); }
-        });
+        function maxDefilement() {
+            return fenetre.scrollHeight - fenetre.clientHeight;
+        }
 
-        // Glissement (doigt, souris, stylet) : plus de 50 px à l'horizontale
-        // change de page. Le clic qui suit un glissement est annulé pour ne
-        // pas ouvrir la publication par erreur.
-        let depart = null;
-        let aGlisse = false;
-        conteneur.addEventListener('pointerdown', function (e) {
-            depart = { x: e.clientX, y: e.clientY };
-            aGlisse = false;
-        });
-        conteneur.addEventListener('pointerup', function (e) {
-            if (!depart) return;
-            const dx = e.clientX - depart.x;
-            const dy = e.clientY - depart.y;
-            depart = null;
-            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
-                aGlisse = true;
-                allerA(conteneur, etat.page + (dx < 0 ? 1 : -1));
+        etat.placer = function () {
+            const max = maxDefilement();
+            const part = max > 0 ? fenetre.scrollTop / max : 0;
+            curseur.style.transform = 'translateY(' + Math.round(part * course()) + 'px)';
+        };
+
+        // Hauteur de la fenêtre : exactement "lignes" rangées de carrés.
+        etat.ajuster = function () {
+            const premiere = conteneur.firstElementChild;
+            const total = Math.ceil(conteneur.children.length / 3);
+            if (!premiere || total <= lignes) {
+                fenetre.style.height = '';
+                cadre.classList.add('insta-grille__cadre--court');
+            } else {
+                const style = getComputedStyle(fenetre);
+                const espace = parseFloat(getComputedStyle(conteneur).rowGap) || 0;
+                const bords = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+                fenetre.style.height = (lignes * premiere.offsetHeight + (lignes - 1) * espace + bords) + 'px';
+                cadre.classList.remove('insta-grille__cadre--court');
             }
+            etat.placer();
+        };
+
+        let decalage = 0; // où le curseur a été attrapé
+        function defilerVers(y) {
+            const part = Math.min(1, Math.max(0, (y - barre.getBoundingClientRect().top - decalage) / course()));
+            fenetre.scrollTop = part * maxDefilement();
+        }
+
+        curseur.addEventListener('pointerdown', function (e) {
+            e.preventDefault();
+            decalage = e.clientY - curseur.getBoundingClientRect().top;
+            curseur.setPointerCapture(e.pointerId);
+            cadre.classList.add('insta-grille__cadre--tenu');
         });
-        conteneur.addEventListener('pointercancel', function () { depart = null; });
-        conteneur.addEventListener('click', function (e) {
-            if (aGlisse) { e.preventDefault(); e.stopPropagation(); aGlisse = false; }
-        }, true);
+        curseur.addEventListener('pointermove', function (e) {
+            if (curseur.hasPointerCapture(e.pointerId)) defilerVers(e.clientY);
+        });
+        function lacher() {
+            cadre.classList.remove('insta-grille__cadre--tenu');
+        }
+        curseur.addEventListener('pointerup', lacher);
+        curseur.addEventListener('pointercancel', lacher);
+
+        barre.addEventListener('pointerdown', function (e) {
+            if (e.target === curseur) return;
+            decalage = curseur.offsetHeight / 2;
+            defilerVers(e.clientY);
+        });
+        barre.addEventListener('wheel', function (e) {
+            fenetre.scrollTop += e.deltaY;
+            e.preventDefault();
+        }, { passive: false });
+
+        fenetre.addEventListener('scroll', etat.placer, { passive: true });
+        if (global.ResizeObserver) new ResizeObserver(etat.ajuster).observe(fenetre);
+        else global.addEventListener('resize', etat.ajuster);
 
         return etat;
     }
 
-    function allerA(conteneur, numero) {
-        const etat = conteneur._instaPages;
-        if (!etat || numero < 0 || numero >= etat.pages.length || numero === etat.page) return;
-        const sens = numero > etat.page ? 'suivante' : 'precedente';
-        etat.page = numero;
-        afficherPage(conteneur, sens);
-    }
-
-    function afficherPage(conteneur, sens) {
-        const etat = conteneur._instaPages;
-        const page = etat.pages[etat.page];
-        const fragment = document.createDocumentFragment();
-        page.forEach(function (post) { fragment.appendChild(creerCarte(post)); });
-        // Cases vides invisibles sur la dernière page : la grille garde la
-        // même hauteur d'une page à l'autre.
-        for (let i = page.length; i < etat.parPage; i++) {
-            const vide = document.createElement('li');
-            vide.className = 'insta-grille__vide';
-            vide.setAttribute('aria-hidden', 'true');
-            fragment.appendChild(vide);
-        }
-        conteneur.replaceChildren(fragment);
-
-        if (sens) {
-            conteneur.classList.remove('insta-grille--entree-suivante', 'insta-grille--entree-precedente');
-            void conteneur.offsetWidth; // relance l'animation
-            conteneur.classList.add('insta-grille--entree-' + sens);
-        }
-
-        const total = etat.pages.length;
-        etat.precedent.disabled = etat.page === 0;
-        etat.suivant.disabled = etat.page === total - 1;
-        etat.nav.hidden = total < 2;
-        etat.points.replaceChildren();
-        for (let i = 0; i < total; i++) {
-            const point = document.createElement('button');
-            point.type = 'button';
-            point.className = 'insta-grille__point';
-            point.setAttribute('aria-label', 'Page ' + (i + 1) + ' sur ' + total);
-            if (i === etat.page) point.setAttribute('aria-current', 'true');
-            point.addEventListener('click', function () { allerA(conteneur, i); });
-            etat.points.appendChild(point);
-        }
-        etat.annonce.textContent = 'Page ' + (etat.page + 1) + ' sur ' + total;
-    }
-
-    function afficher(conteneur, posts, complement, parPage) {
+    function afficher(conteneur, posts, complement, reglages) {
         const liste = ordonner(fusionner(normaliser(posts), normaliser(complement || [])));
         if (!liste.length) {
-            if (conteneur._instaPages) conteneur._instaPages.nav.hidden = true;
             message(conteneur, 'Aucune publication pour le moment.');
-            return;
-        }
-
-        if (parPage > 0) {
-            const etat = preparerPages(conteneur);
-            etat.parPage = parPage;
-            etat.pages = [];
-            for (let i = 0; i < liste.length; i += parPage) etat.pages.push(liste.slice(i, i + parPage));
-            etat.page = 0;
-            conteneur.classList.add('insta-grille--pages');
-            afficherPage(conteneur, null);
             return;
         }
 
         const fragment = document.createDocumentFragment();
         liste.forEach(function (post) { fragment.appendChild(creerCarte(post)); });
         conteneur.replaceChildren(fragment);
+
+        if (reglages.lignesVisibles > 0) {
+            const etat = preparerFenetre(conteneur, reglages.lignesVisibles, reglages.curseur);
+            etat.fenetre.scrollTop = 0;
+            etat.ajuster();
+        }
     }
 
     /**
@@ -404,9 +386,10 @@
      * @param {Array}  [options.posts]  OPTION A : publications collées à la main ;
      *                                  avec une source, elles complètent le flux
      *                                  (et le remplacent s'il ne répond pas)
-     * @param {number} [options.parPage] nombre de publications par page (ex : 9 pour
-     *                                  3 × 3), avec flèches et glissement ; sans
-     *                                  cette option, toutes s'affichent d'un coup
+     * @param {number} [options.lignesVisibles] nombre de lignes visibles (ex : 3 pour
+     *                                  3 × 3) ; les autres se découvrent en faisant
+     *                                  défiler, avec une barre verticale sur le côté
+     * @param {string} [options.curseur] image du curseur de cette barre (facultatif)
      * @param {string} [options.messageErreur] texte affiché si la source ne répond pas
      * @returns {Promise<void>}
      */
@@ -423,7 +406,10 @@
         }
 
         const secours = Array.isArray(options.posts) ? options.posts : null;
-        const parPage = Math.max(0, Math.floor(Number(options.parPage) || 0));
+        const reglages = {
+            lignesVisibles: Math.max(0, Math.floor(Number(options.lignesVisibles) || 0)),
+            curseur: options.curseur || null
+        };
 
         if (options.source) {
             message(conteneur, 'Chargement des publications…');
@@ -433,19 +419,19 @@
                     return reponse.json();
                 })
                 .then(function (donnees) {
-                    afficher(conteneur, extrairePosts(donnees), secours, parPage);
+                    afficher(conteneur, extrairePosts(donnees), secours, reglages);
                 })
                 .catch(function (erreur) {
                     console.warn('InstaGrille : source indisponible', erreur);
                     // Flux en panne : on montre les publications de secours
                     // (option A) s'il y en a, sinon un message.
-                    if (secours) afficher(conteneur, secours, null, parPage);
+                    if (secours) afficher(conteneur, secours, null, reglages);
                     else message(conteneur, options.messageErreur || 'Publications indisponibles pour le moment.');
                 });
         }
 
         if (secours) {
-            afficher(conteneur, secours, null, parPage);
+            afficher(conteneur, secours, null, reglages);
             return Promise.resolve();
         }
 

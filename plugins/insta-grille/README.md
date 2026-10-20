@@ -4,7 +4,8 @@ Plug-in interne en HTML / CSS / JavaScript pur (aucune dépendance, aucun
 PHP, aucun service externe) qui affiche **toutes** les publications d'un
 compte Instagram dans une grille de carrés, comme sur un profil Instagram.
 
-- 3 colonnes sur ordinateur, 2 sur téléphone, 1 sur très petit écran.
+- 3 colonnes sur ordinateur, 2 sur téléphone, 1 sur très petit écran
+  (toujours 3 avec `lignesVisibles`).
 - Images parfaitement carrées (`object-fit: cover`).
 - Au survol : likes et commentaires si la source les fournit, sinon
   « Voir sur Instagram ».
@@ -134,11 +135,14 @@ Format d'une publication (seuls `image` et `lien` sont obligatoires) :
 }
 ```
 
-### Pages de 3 × 3 et publications épinglées
+### Fenêtre de 3 × 3 et publications épinglées
 
-Avec `parPage: 9`, la grille montre 9 publications à la fois (3 colonnes,
-même sur téléphone) avec des flèches, des points, le glissement du doigt et
-les flèches du clavier pour changer de page.
+Avec `lignesVisibles: 3`, la grille montre 3 lignes de 3 publications (3
+colonnes, même sur téléphone) ; les suivantes se découvrent en faisant
+défiler la grille (molette, doigt, clavier). Sur le côté, une barre
+verticale suit le défilement : son curseur se glisse, et un clic sur la
+barre y saute. `curseur: 'image.png'` remplace le rond par une image (sur le
+portfolio : la lanterne de Yuna).
 
 L'ordre est celui du profil Instagram : d'abord les publications épinglées
 (champ `epingle: 1, 2, 3`), puis les autres de la plus récente à la plus
