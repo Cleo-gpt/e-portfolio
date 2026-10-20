@@ -134,6 +134,19 @@ Format d'une publication (seuls `image` et `lien` sont obligatoires) :
 }
 ```
 
+### Pages de 3 × 3 et publications épinglées
+
+Avec `parPage: 9`, la grille montre 9 publications à la fois (3 colonnes,
+même sur téléphone) avec des flèches, des points, le glissement du doigt et
+les flèches du clavier pour changer de page.
+
+L'ordre est celui du profil Instagram : d'abord les publications épinglées
+(champ `epingle: 1, 2, 3`), puis les autres de la plus récente à la plus
+ancienne. L'API d'Instagram ne dit pas quels posts sont épinglés : quand tu
+changes tes épingles sur Instagram, mets à jour la liste des liens dans
+`instagram-epingles.json` (à la racine du site), dans le même ordre ; le
+robot s'en sert à son prochain passage.
+
 ### Adapter le style
 
 Redéfinis les variables sur la grille, par exemple :

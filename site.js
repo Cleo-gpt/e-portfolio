@@ -139,9 +139,74 @@
         });
     }
 
+    // Barre de défilement : une petite lanterne glisse le long d'un fil à
+    // droite de l'écran. Seulement avec une souris ou un pavé tactile ; sur
+    // téléphone, la barre normale reste.
+
+    function initBarreLanterne() {
+        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+        var barre = document.createElement('div');
+        barre.className = 'barre-lanterne';
+        barre.setAttribute('aria-hidden', 'true');
+        barre.innerHTML = '<span class="barre-lanterne__fil"></span>' +
+            '<img class="barre-lanterne__lanterne" src="Images/lanterne-yuna/lanterne-yuna-icone.png" alt="" draggable="false">';
+        document.body.appendChild(barre);
+        document.documentElement.classList.add('avec-barre-lanterne');
+
+        var lanterne = barre.querySelector('.barre-lanterne__lanterne');
+        var decalage = 0; // où la lanterne a été attrapée
+
+        function course() {
+            return barre.clientHeight - lanterne.offsetHeight;
+        }
+
+        function maxDefilement() {
+            return document.documentElement.scrollHeight - window.innerHeight;
+        }
+
+        function placer() {
+            var max = maxDefilement();
+            barre.hidden = max <= 0;
+            var part = max > 0 ? window.scrollY / max : 0;
+            lanterne.style.transform = 'translateY(' + Math.round(part * course()) + 'px)';
+        }
+
+        function defilerVers(y) {
+            var part = Math.min(1, Math.max(0, (y - barre.getBoundingClientRect().top - decalage) / course()));
+            window.scrollTo({ top: part * maxDefilement(), behavior: 'instant' });
+        }
+
+        lanterne.addEventListener('pointerdown', function (e) {
+            e.preventDefault();
+            decalage = e.clientY - lanterne.getBoundingClientRect().top;
+            lanterne.setPointerCapture(e.pointerId);
+            barre.classList.add('barre-lanterne--tenue');
+        });
+        lanterne.addEventListener('pointermove', function (e) {
+            if (lanterne.hasPointerCapture(e.pointerId)) defilerVers(e.clientY);
+        });
+        lanterne.addEventListener('pointerup', function () {
+            barre.classList.remove('barre-lanterne--tenue');
+        });
+
+        // Un clic sur le fil y amène la lanterne.
+        barre.addEventListener('pointerdown', function (e) {
+            if (e.target === lanterne) return;
+            decalage = lanterne.offsetHeight / 2;
+            defilerVers(e.clientY);
+        });
+
+        window.addEventListener('scroll', placer, { passive: true });
+        window.addEventListener('resize', placer);
+        window.addEventListener('load', placer);
+        placer();
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         initConnexion();
         initCarrousel();
         initInstagram();
+        initBarreLanterne();
     });
 })();

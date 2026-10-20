@@ -672,7 +672,43 @@ input {
 
 .profil-cv {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+/* Attestations de travail : boutons plus discrets que celui du CV */
+.profil-attestations {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 10px;
+}
+
+.profil-attestation-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border: 1px solid var(--bord-fort);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--blanc);
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profil-attestation-btn svg {
+    color: var(--lilas);
+    flex-shrink: 0;
+}
+
+.profil-attestation-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--lilas);
+    box-shadow: 0 0 16px var(--lueur-violette);
 }
 
 .profil-cv .profil-cv-btn {
@@ -1813,6 +1849,75 @@ input {
 
 .retour-haut:hover img {
     translate: 0 -5px;
+}
+
+/* ==========================================================================
+   Barre de défilement lanterne (créée par site.js, souris uniquement)
+   ========================================================================== */
+html.avec-barre-lanterne {
+    scrollbar-width: none;
+}
+
+html.avec-barre-lanterne::-webkit-scrollbar {
+    display: none;
+}
+
+.barre-lanterne {
+    position: fixed;
+    top: 10px;
+    right: 4px;
+    bottom: 10px;
+    z-index: 60; /* au-dessus du menu */
+    width: 28px;
+    cursor: pointer;
+}
+
+.barre-lanterne[hidden] {
+    display: none;
+}
+
+.barre-lanterne__fil {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    translate: -1px 0;
+    border-radius: 2px;
+    background: rgba(201, 191, 227, 0.18);
+    transition: background 0.2s ease;
+}
+
+.barre-lanterne:hover .barre-lanterne__fil {
+    background: rgba(201, 191, 227, 0.32);
+}
+
+.barre-lanterne__lanterne {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    filter: drop-shadow(0 0 6px rgba(255, 170, 60, 0.75));
+    transition: filter 0.2s ease, scale 0.2s ease;
+}
+
+.barre-lanterne:hover .barre-lanterne__lanterne,
+.barre-lanterne--tenue .barre-lanterne__lanterne {
+    scale: 1.2;
+    filter: drop-shadow(0 0 10px rgba(255, 170, 60, 0.95));
+}
+
+.barre-lanterne--tenue .barre-lanterne__lanterne {
+    cursor: grabbing;
+}
+
+/* Le bouton carpe se pousse pour laisser passer la lanterne. */
+.avec-barre-lanterne .retour-haut {
+    right: 38px;
 }
 
 /* ==========================================================================
