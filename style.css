@@ -1280,25 +1280,6 @@ input {
     transform: translateY(-3px);
 }
 
-.lanterne-qr-link {
-    display: inline-block;
-    line-height: 0;
-    border-radius: 16px;
-    overflow: hidden;
-    transition: transform 0.2s ease;
-}
-
-.lanterne-qr-link:hover {
-    transform: translateY(-3px);
-}
-
-.lanterne-qr {
-    display: block;
-    width: 180px;
-    height: 180px;
-    object-fit: cover;
-}
-
 /* Grille Instagram (plug-in plugins/insta-grille) aux couleurs du site.
    ".lanterne-posts.insta-grille" pour passer devant les valeurs par défaut
    du plug-in, dont la feuille est chargée après celle-ci. */
@@ -2076,10 +2057,6 @@ input {
         width: 42px;
     }
 
-    .lanterne-qr {
-        width: 140px;
-        height: 140px;
-    }
 
     .cpnv-gallery-item {
         width: 100%;
