@@ -1,7 +1,7 @@
 name: Publications Instagram
 
 # Toutes les heures : récupère les publications Instagram de chaque compte
-# (@la_lanterne_de_yuna et @cleo.photographie), enregistre leurs images dans
+# (@la_lanterne_de_yuna et @cleo1712_photographie), enregistre leurs images dans
 # Images/instagram*/, met à jour instagram*-posts.js, puis envoie ces fichiers
 # sur le site par FTP (si les accès FTP sont configurés).
 # Mise en place : plugins/insta-grille/README.md.

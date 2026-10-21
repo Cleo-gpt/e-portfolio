@@ -15,7 +15,7 @@
 //   INSTAGRAM_TOKEN_KEY  phrase secrète qui chiffre les tokens (obligatoire)
 //   INSTAGRAM_TOKEN      token de départ de @la_lanterne_de_yuna, utilisé
 //                        seulement si son fichier chiffré n'existe pas encore
-//   INSTAGRAM_TOKEN_PHOTO  idem pour @cleo.photographie (compte sauté tant
+//   INSTAGRAM_TOKEN_PHOTO  idem pour @cleo1712_photographie (compte sauté tant
 //                        qu'il n'a ni token ni fichier chiffré)
 //   INSTAGRAM_API_BASE   adresse de l'API (pour les tests uniquement)
 //
@@ -41,7 +41,7 @@ const COMPTES = [
         epingles: 'instagram-epingles.json'
     },
     {
-        nom: 'cleo.photographie',
+        nom: 'cleo1712_photographie',
         token: '.github/instagram-photo-token.enc',
         variableToken: 'INSTAGRAM_TOKEN_PHOTO',
         images: 'Images/instagram-photo',

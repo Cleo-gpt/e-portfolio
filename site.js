@@ -133,7 +133,7 @@
     // mis à jour toutes les heures par GitHub Actions : voir
     // plugins/insta-grille/README.md.
 
-    // Même chose pour la section Photographie (@cleo.photographie,
+    // Même chose pour la section Photographie (@cleo1712_photographie,
     // instagram-photo-posts.js), avec une carpe comme curseur.
 
     function initInstagram() {

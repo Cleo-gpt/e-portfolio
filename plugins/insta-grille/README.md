@@ -38,6 +38,23 @@ Le token Instagram n'apparaît jamais en clair : il est rangé chiffré dans
 `.github/instagram-token.enc`, et le robot le prolonge de 60 jours chaque
 semaine. Il n'y a plus rien à faire une fois la mise en place terminée.
 
+## Deux comptes : Lanterne de Yuna et Photographie
+
+Le robot gère une liste de comptes (`COMPTES`, en haut de
+`scripts/instagram-sync.mjs`). Chacun a ses propres fichiers :
+
+| Compte | Secret du token | Images | Liste | Épingles |
+|---|---|---|---|---|
+| @la_lanterne_de_yuna | `INSTAGRAM_TOKEN` | `Images/instagram/` | `instagram-posts.js` | `instagram-epingles.json` |
+| @cleo1712_photographie | `INSTAGRAM_TOKEN_PHOTO` | `Images/instagram-photo/` | `instagram-photo-posts.js` | `instagram-photo-epingles.json` |
+
+Tant que `INSTAGRAM_TOKEN_PHOTO` n'existe pas, le compte photo est simplement
+sauté et la section Photographie affiche « Aucune publication pour le
+moment ». Pour l'activer : refais l'étape 1 ci-dessous en te connectant avec
+@cleo1712_photographie (même app Meta, **Ajouter un compte**), puis ajoute le
+token dans le secret `INSTAGRAM_TOKEN_PHOTO` et relance le robot. La phrase
+`INSTAGRAM_TOKEN_KEY` sert pour les deux comptes.
+
 ## Mise en place (une seule fois, environ 15 minutes)
 
 ### 1. Créer le token Instagram
