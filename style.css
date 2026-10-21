@@ -481,6 +481,7 @@ input {
 .profil,
 .retromania,
 .lanterne-yuna,
+.photographie,
 .cpnv {
     position: relative;
     z-index: 1;
@@ -492,6 +493,7 @@ input {
 .profil h2,
 .retromania h2,
 .lanterne-yuna h2,
+.photographie h2,
 .cpnv h2,
 .login-modal h2 {
     font-family: var(--police-titre);
@@ -505,6 +507,7 @@ input {
 .profil h2,
 .retromania h2,
 .lanterne-yuna h2,
+.photographie h2,
 .cpnv h2 {
     margin-bottom: 30px;
     text-align: center;
@@ -1299,7 +1302,8 @@ input {
 /* Grille Instagram (plug-in plugins/insta-grille) aux couleurs du site.
    ".lanterne-posts.insta-grille" pour passer devant les valeurs par défaut
    du plug-in, dont la feuille est chargée après celle-ci. */
-.lanterne-posts.insta-grille {
+.lanterne-posts.insta-grille,
+.photo-posts.insta-grille {
     --ig-espace: 14px;
     --ig-arrondi: 16px;
     --ig-fond-vide: rgba(255, 255, 255, 0.06);
@@ -1308,16 +1312,20 @@ input {
     --ig-police: var(--police-texte);
 }
 
-.lanterne-posts .insta-grille__post {
+.lanterne-posts .insta-grille__post,
+.photo-posts .insta-grille__post {
     box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
 }
 
-.lanterne-posts .insta-grille__post:focus-visible {
+.lanterne-posts .insta-grille__post:focus-visible,
+.photo-posts .insta-grille__post:focus-visible {
     outline-color: var(--lilas);
 }
 
-/* Fenêtre 3 × 3 qui défile, avec une lanterne qui glisse le long d'un fil */
-.lanterne-yuna .insta-grille__cadre {
+/* Fenêtre 3 × 3 qui défile, avec une lanterne (ou une carpe, en
+   Photographie) qui glisse le long d'un fil */
+.lanterne-yuna .insta-grille__cadre,
+.photographie .insta-grille__cadre {
     --ig-barre-largeur: 34px;
     --ig-fil: rgba(208, 160, 243, 0.25);
     --ig-curseur-taille: 34px;
@@ -1326,7 +1334,8 @@ input {
     margin: 0 auto;
 }
 
-.lanterne-yuna .insta-grille__fenetre {
+.lanterne-yuna .insta-grille__fenetre,
+.photographie .insta-grille__fenetre {
     padding: 6px 12px 18px; /* place pour l'ombre des images */
     scroll-padding-top: 6px;
 }
@@ -1338,6 +1347,53 @@ input {
 .lanterne-yuna .insta-grille__barre:hover .insta-grille__curseur,
 .lanterne-yuna .insta-grille__cadre--tenu .insta-grille__curseur {
     filter: drop-shadow(0 0 12px rgba(255, 170, 60, 1));
+}
+
+/* ==========================================================================
+   Photographie (@cleo.photographie)
+   ========================================================================== */
+.photographie-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Curseur : une carpe sur une petite lune, comme le bouton de retour en haut */
+.photographie .insta-grille__cadre {
+    --ig-barre-largeur: 38px;
+    --ig-curseur-taille: 38px;
+}
+
+.photographie .insta-grille__curseur {
+    padding: 5px;
+    border-radius: 50%;
+    background: var(--lune);
+    box-shadow: var(--lueur-lune);
+}
+
+.photo-instagram-block {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.photo-insta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 20px;
+    border-radius: 999px;
+    background: var(--degrade);
+    color: var(--blanc);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 700;
+    box-shadow: 0 0 18px var(--lueur-violette);
+    transition: transform 0.2s ease;
+}
+
+.photo-insta-btn:hover {
+    transform: translateY(-3px);
 }
 
 /* ==========================================================================
@@ -1980,18 +2036,30 @@ input {
         height: 110px;
     }
 
-    .lanterne-posts.insta-grille {
+    .lanterne-posts.insta-grille,
+    .photo-posts.insta-grille {
         --ig-espace: 8px;
         --ig-arrondi: 10px;
     }
 
-    .lanterne-yuna .insta-grille__cadre {
+    .lanterne-yuna .insta-grille__cadre,
+    .photographie .insta-grille__cadre {
         --ig-barre-largeur: 26px;
         --ig-curseur-taille: 26px;
         gap: 4px;
     }
 
-    .lanterne-yuna .insta-grille__fenetre {
+    .photographie .insta-grille__cadre {
+        --ig-barre-largeur: 30px;
+        --ig-curseur-taille: 30px;
+    }
+
+    .photographie .insta-grille__curseur {
+        padding: 4px;
+    }
+
+    .lanterne-yuna .insta-grille__fenetre,
+    .photographie .insta-grille__fenetre {
         padding: 4px 4px 12px;
         scroll-padding-top: 4px;
     }

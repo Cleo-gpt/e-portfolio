@@ -133,11 +133,19 @@
     // mis à jour toutes les heures par GitHub Actions : voir
     // plugins/insta-grille/README.md.
 
+    // Même chose pour la section Photographie (@cleo.photographie,
+    // instagram-photo-posts.js), avec une carpe comme curseur.
+
     function initInstagram() {
         InstaGrille.monter('#lanternePosts', {
             posts: window.INSTA_POSTS || [],
             lignesVisibles: 3, // 3 × 3 visibles, la suite en faisant défiler
             curseur: 'Images/lanterne-yuna/lanterne-yuna-icone.png' // la lanterne glisse sur le côté
+        });
+        InstaGrille.monter('#photoPosts', {
+            posts: window.INSTA_POSTS_PHOTO || [],
+            lignesVisibles: 3,
+            curseur: 'Images/identite-visuelle-cf/carpe-violette.svg'
         });
     }
 

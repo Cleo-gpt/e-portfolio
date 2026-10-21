@@ -1,20 +1,22 @@
 // instagram-sync.mjs — synchronise les publications Instagram avec le site.
 //
 // Lancé toutes les heures par GitHub Actions (.github/workflows/instagram.yml),
-// sans PHP ni service externe :
-//   1. lit le token Instagram (chiffré dans .github/instagram-token.enc) ;
+// sans PHP ni service externe. Pour chaque compte de la liste COMPTES :
+//   1. lit son token Instagram (chiffré dans .github/) ;
 //   2. le renouvelle s'il a plus de 7 jours (il en dure 60) ;
 //   3. récupère TOUTES les publications du compte via l'API Instagram ;
-//   4. télécharge l'image de chaque nouvelle publication dans Images/instagram/
-//      (les adresses d'images d'Instagram expirent, celles-ci non) ;
-//   5. réécrit instagram-posts.js, lu par la grille (plugins/insta-grille),
-//      en marquant les publications épinglées listées dans instagram-epingles.json
-//      (l'API d'Instagram ne dit pas quels posts sont épinglés).
+//   4. télécharge l'image de chaque nouvelle publication dans son dossier
+//      d'images (les adresses d'images d'Instagram expirent, celles-ci non) ;
+//   5. réécrit sa liste (ex : instagram-posts.js), lue par la grille
+//      (plugins/insta-grille), en marquant les publications épinglées listées
+//      dans son fichier d'épingles (l'API d'Instagram ne dit pas lesquelles).
 //
 // Variables d'environnement :
-//   INSTAGRAM_TOKEN_KEY  phrase secrète qui chiffre le token (obligatoire)
-//   INSTAGRAM_TOKEN      token de départ, utilisé seulement si le fichier
-//                        chiffré n'existe pas encore (premier lancement)
+//   INSTAGRAM_TOKEN_KEY  phrase secrète qui chiffre les tokens (obligatoire)
+//   INSTAGRAM_TOKEN      token de départ de @la_lanterne_de_yuna, utilisé
+//                        seulement si son fichier chiffré n'existe pas encore
+//   INSTAGRAM_TOKEN_PHOTO  idem pour @cleo.photographie (compte sauté tant
+//                        qu'il n'a ni token ni fichier chiffré)
 //   INSTAGRAM_API_BASE   adresse de l'API (pour les tests uniquement)
 //
 // Node 18+ requis (fetch intégré). Aucune dépendance.
@@ -25,11 +27,30 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const RACINE = join(dirname(fileURLToPath(import.meta.url)), '..');
-const FICHIER_TOKEN = join(RACINE, '.github', 'instagram-token.enc');
-const DOSSIER_IMAGES = join(RACINE, 'Images', 'instagram');
-const FICHIER_POSTS = join(RACINE, 'instagram-posts.js');
-const FICHIER_EPINGLES = join(RACINE, 'instagram-epingles.json');
-const CHEMIN_IMAGES_SITE = 'Images/instagram/'; // chemin vu depuis index.html
+
+// Un compte = un token, un dossier d'images, une liste pour la grille et un
+// fichier d'épingles. Chemins relatifs à la racine du site.
+const COMPTES = [
+    {
+        nom: 'la_lanterne_de_yuna',
+        token: '.github/instagram-token.enc',
+        variableToken: 'INSTAGRAM_TOKEN',
+        images: 'Images/instagram',
+        liste: 'instagram-posts.js',
+        variableListe: 'INSTA_POSTS',
+        epingles: 'instagram-epingles.json'
+    },
+    {
+        nom: 'cleo.photographie',
+        token: '.github/instagram-photo-token.enc',
+        variableToken: 'INSTAGRAM_TOKEN_PHOTO',
+        images: 'Images/instagram-photo',
+        liste: 'instagram-photo-posts.js',
+        variableListe: 'INSTA_POSTS_PHOTO',
+        epingles: 'instagram-photo-epingles.json',
+        facultatif: true // pas encore de token : on le saute sans erreur
+    }
+];
 
 const API = (process.env.INSTAGRAM_API_BASE || 'https://graph.instagram.com/v24.0/').replace(/\/?$/, '/');
 const API_REFRESH = process.env.INSTAGRAM_API_BASE
@@ -37,10 +58,6 @@ const API_REFRESH = process.env.INSTAGRAM_API_BASE
     : 'https://graph.instagram.com/refresh_access_token';
 const RENOUVELER_APRES = 7 * 24 * 3600 * 1000; // 7 jours
 
-function arreter(message) {
-    console.error('Erreur : ' + message);
-    process.exit(1);
-}
 
 // ---------- Token chiffré (AES-256-GCM, clé dérivée de la phrase secrète) ----------
 
@@ -62,23 +79,26 @@ function dechiffrer(texte, phrase) {
     return JSON.parse(Buffer.concat([dechiffreur.update(donnees), dechiffreur.final()]).toString('utf8'));
 }
 
-function lireToken(phrase) {
-    if (existsSync(FICHIER_TOKEN)) {
+// Token du compte, ou null s'il n'en a pas encore.
+function lireToken(compte, phrase) {
+    const fichier = join(RACINE, compte.token);
+    if (existsSync(fichier)) {
         try {
-            return dechiffrer(readFileSync(FICHIER_TOKEN, 'utf8'), phrase);
+            return dechiffrer(readFileSync(fichier, 'utf8'), phrase);
         } catch {
-            arreter('impossible de déchiffrer .github/instagram-token.enc : INSTAGRAM_TOKEN_KEY a-t-il changé ?');
+            throw new Error('impossible de déchiffrer ' + compte.token + ' : INSTAGRAM_TOKEN_KEY a-t-il changé ?');
         }
     }
-    const depart = (process.env.INSTAGRAM_TOKEN || '').trim();
-    if (!depart) arreter('aucun token : ajoute le secret INSTAGRAM_TOKEN (voir plugins/insta-grille/README.md).');
+    const depart = (process.env[compte.variableToken] || '').trim();
+    if (!depart) return null;
     // renouvele_le à 0 : le token de départ sera prolongé dès qu'il aura 24 h.
     return { access_token: depart, renouvele_le: 0 };
 }
 
-function enregistrerToken(token, phrase) {
-    mkdirSync(dirname(FICHIER_TOKEN), { recursive: true });
-    writeFileSync(FICHIER_TOKEN, chiffrer(token, phrase));
+function enregistrerToken(compte, token, phrase) {
+    const fichier = join(RACINE, compte.token);
+    mkdirSync(dirname(fichier), { recursive: true });
+    writeFileSync(fichier, chiffrer(token, phrase));
 }
 
 // ---------- API Instagram ----------
@@ -137,13 +157,14 @@ function typePourGrille(mediaType) {
     return 'image';
 }
 
-async function telechargerImages(posts) {
-    mkdirSync(DOSSIER_IMAGES, { recursive: true });
+async function telechargerImages(compte, posts) {
+    const dossier = join(RACINE, compte.images);
+    mkdirSync(dossier, { recursive: true });
     const gardees = new Set();
     let nouvelles = 0;
     for (const post of posts) {
         const nom = post.id.replace(/[^\w-]/g, '') + '.jpg';
-        const chemin = join(DOSSIER_IMAGES, nom);
+        const chemin = join(dossier, nom);
         if (!existsSync(chemin)) {
             const source = adresseImage(post);
             if (!source) continue;
@@ -156,13 +177,13 @@ async function telechargerImages(posts) {
             nouvelles++;
         }
         gardees.add(nom);
-        post.imageLocale = CHEMIN_IMAGES_SITE + nom;
+        post.imageLocale = compte.images + '/' + nom; // chemin vu depuis index.html
     }
     // Publication supprimée sur Instagram : on retire aussi son image.
     let supprimees = 0;
-    for (const fichier of readdirSync(DOSSIER_IMAGES)) {
+    for (const fichier of readdirSync(dossier)) {
         if (fichier.endsWith('.jpg') && !gardees.has(fichier)) {
-            unlinkSync(join(DOSSIER_IMAGES, fichier));
+            unlinkSync(join(dossier, fichier));
             supprimees++;
         }
     }
@@ -175,20 +196,22 @@ function codeDuPost(lien) {
     return m ? m[1] : null;
 }
 
-// Rang d'épinglage (1, 2, 3) de chaque post listé dans instagram-epingles.json.
-function lireEpingles() {
-    if (!existsSync(FICHIER_EPINGLES)) return new Map();
+// Rang d'épinglage (1, 2, 3) de chaque post listé dans le fichier d'épingles.
+function lireEpingles(compte) {
+    const fichier = join(RACINE, compte.epingles);
+    if (!existsSync(fichier)) return new Map();
     try {
-        const liste = JSON.parse(readFileSync(FICHIER_EPINGLES, 'utf8')).epingles || [];
+        const liste = JSON.parse(readFileSync(fichier, 'utf8')).epingles || [];
         return new Map(liste.map((lien, i) => [codeDuPost(lien), i + 1]).filter(([code]) => code));
     } catch (e) {
-        console.log('instagram-epingles.json illisible, ignoré : ' + e.message);
+        console.log(compte.epingles + ' illisible, ignoré : ' + e.message);
         return new Map();
     }
 }
 
-function ecrireListe(posts) {
-    const epingles = lireEpingles();
+function ecrireListe(compte, posts) {
+    const fichier = join(RACINE, compte.liste);
+    const epingles = lireEpingles(compte);
     const liste = posts
         .filter((p) => p.imageLocale && p.permalink)
         .map((p) => ({
@@ -202,32 +225,56 @@ function ecrireListe(posts) {
     const contenu =
         '// Fichier généré automatiquement par scripts/instagram-sync.mjs (GitHub Actions).\n' +
         '// Ne pas modifier à la main : il est réécrit à chaque nouvelle publication Instagram.\n' +
-        'window.INSTA_POSTS = ' + JSON.stringify(liste, null, 4) + ';\n';
-    const avant = existsSync(FICHIER_POSTS) ? readFileSync(FICHIER_POSTS, 'utf8') : '';
-    if (avant !== contenu) writeFileSync(FICHIER_POSTS, contenu);
+        'window.' + compte.variableListe + ' = ' + JSON.stringify(liste, null, 4) + ';\n';
+    const avant = existsSync(fichier) ? readFileSync(fichier, 'utf8') : '';
+    if (avant !== contenu) writeFileSync(fichier, contenu);
     return { total: liste.length, modifie: avant !== contenu };
 }
 
 // ---------- Programme ----------
 
-const phrase = (process.env.INSTAGRAM_TOKEN_KEY || '').trim();
-if (phrase.length < 16) arreter('le secret INSTAGRAM_TOKEN_KEY doit faire au moins 16 caractères.');
+async function synchroniser(compte, phrase) {
+    const token = lireToken(compte, phrase);
+    if (!token) {
+        if (compte.facultatif) {
+            console.log('@' + compte.nom + ' : pas encore de token (secret ' + compte.variableToken + '), compte sauté.');
+            return;
+        }
+        throw new Error('aucun token : ajoute le secret ' + compte.variableToken + ' (voir plugins/insta-grille/README.md).');
+    }
+    const premierLancement = !existsSync(join(RACINE, compte.token));
+    const renouvele = await renouvelerSiBesoin(token);
+    if (premierLancement || renouvele) enregistrerToken(compte, token, phrase);
 
-const token = lireToken(phrase);
-const premierLancement = !existsSync(FICHIER_TOKEN);
-const renouvele = await renouvelerSiBesoin(token);
-if (premierLancement || renouvele) enregistrerToken(token, phrase);
+    let posts;
+    try {
+        posts = await toutesLesPublications(token.access_token);
+    } catch (e) {
+        throw new Error('Instagram a refusé la demande : ' + e.message);
+    }
 
-let posts;
-try {
-    posts = await toutesLesPublications(token.access_token);
-} catch (e) {
-    arreter('Instagram a refusé la demande : ' + e.message);
+    const images = await telechargerImages(compte, posts);
+    const liste = ecrireListe(compte, posts);
+    console.log(
+        '@' + compte.nom + ' : ' + liste.total + ' publication(s) — ' + images.nouvelles + ' nouvelle(s) image(s), ' +
+        images.supprimees + ' supprimée(s)' + (liste.modifie ? ', liste mise à jour.' : ', aucun changement.')
+    );
 }
 
-const images = await telechargerImages(posts);
-const liste = ecrireListe(posts);
-console.log(
-    liste.total + ' publication(s) — ' + images.nouvelles + ' nouvelle(s) image(s), ' +
-    images.supprimees + ' supprimée(s)' + (liste.modifie ? ', liste mise à jour.' : ', aucun changement.')
-);
+const phrase = (process.env.INSTAGRAM_TOKEN_KEY || '').trim();
+if (phrase.length < 16) {
+    console.error('Erreur : le secret INSTAGRAM_TOKEN_KEY doit faire au moins 16 caractères.');
+    process.exit(1);
+}
+
+// Un compte en panne n'empêche pas de mettre les autres à jour.
+let echecs = 0;
+for (const compte of COMPTES) {
+    try {
+        await synchroniser(compte, phrase);
+    } catch (e) {
+        console.error('Erreur @' + compte.nom + ' : ' + e.message);
+        echecs++;
+    }
+}
+if (echecs) process.exit(1);

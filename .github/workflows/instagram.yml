@@ -1,8 +1,9 @@
 name: Publications Instagram
 
-# Toutes les heures : récupère les publications Instagram, enregistre leurs
-# images dans Images/instagram/, met à jour instagram-posts.js, puis envoie
-# ces fichiers sur le site par FTP (si les accès FTP sont configurés).
+# Toutes les heures : récupère les publications Instagram de chaque compte
+# (@la_lanterne_de_yuna et @cleo.photographie), enregistre leurs images dans
+# Images/instagram*/, met à jour instagram*-posts.js, puis envoie ces fichiers
+# sur le site par FTP (si les accès FTP sont configurés).
 # Mise en place : plugins/insta-grille/README.md.
 
 on:
@@ -42,13 +43,14 @@ jobs:
       - name: Récupérer les publications Instagram
         env:
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+          INSTAGRAM_TOKEN_PHOTO: ${{ secrets.INSTAGRAM_TOKEN_PHOTO }}
           INSTAGRAM_TOKEN_KEY: ${{ secrets.INSTAGRAM_TOKEN_KEY }}
         run: node scripts/instagram-sync.mjs
 
       - name: Enregistrer les changements dans le dépôt
         id: commit
         run: |
-          for f in Images/instagram instagram-posts.js .github/instagram-token.enc; do
+          for f in Images/instagram Images/instagram-photo instagram-posts.js instagram-photo-posts.js .github/instagram-token.enc .github/instagram-photo-token.enc; do
             [ -e "$f" ] && git add -A "$f"
           done
           if git diff --cached --quiet; then
@@ -81,5 +83,7 @@ jobs:
           lftp -u "$FTP_UTILISATEUR,$FTP_MOT_DE_PASSE" "$FTP_SERVEUR" -e "
             set ftp:ssl-allow yes;
             mirror --reverse --delete --verbose Images/instagram '${FTP_DOSSIER:-.}/Images/instagram';
+            mirror --reverse --delete --verbose Images/instagram-photo '${FTP_DOSSIER:-.}/Images/instagram-photo';
             put instagram-posts.js -o '${FTP_DOSSIER:-.}/instagram-posts.js';
+            put instagram-photo-posts.js -o '${FTP_DOSSIER:-.}/instagram-photo-posts.js';
             bye"
