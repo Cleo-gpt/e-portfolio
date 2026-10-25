@@ -4,70 +4,70 @@ window.INSTA_POSTS = [
     {
         "image": "Images/instagram/18115316420017859.jpg",
         "lien": "https://www.instagram.com/p/Dezpqa4I8Sj/",
-        "legende": "Print 2 collection Disney : Raiponce Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Raiponce ——————————— Print 2 collection Disney : Rapunzel To order, send me an email: Last Name: Fi",
+        "legende": "🇫🇷 Français Print 2 collection Disney : Raiponce Pour le commander envoyer moi un MP en mentionnant le modèle. Modèle : Raiponce ——————————— 🇬🇧English Print 2 collection Disney : Rapunzel To order",
         "type": "image",
         "date": "2026-10-22T18:44:50+0000"
     },
     {
         "image": "Images/instagram/17875949682636226.jpg",
         "lien": "https://www.instagram.com/p/DerDk9bjUrd/",
-        "legende": "7 juin 2026 : Skoliosexuel 2ère partie (vue horizontale) Print 7 collection Pride : Skoliosexuel Pour le commander envoyer moi un mp : Nom : Prénom : Modèle : Skoliosexuel ——————————— First part (v",
+        "legende": "🇫🇷 Français Print 7 collection Pride : Skoliosexuel (vue horizontale) Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Skoliosexuel (horizontal) ________________ 🇬🇧 English ",
         "type": "image",
         "date": "2026-10-19T10:35:08+0000"
     },
     {
         "image": "Images/instagram/18221390959343630.jpg",
         "lien": "https://www.instagram.com/p/DerDAMTCTRY/",
-        "legende": "7 juin 2026 : Skoliosexuel 1ère partie (vue verticale) Print 7 collection Pride : Skoliosexuel Pour le commander envoyer moi un mp : Nom : Prénom : Modèle : Skoliosexuel ——————————— First part (vu ver",
+        "legende": "🇫🇷 Français Print 7 collection Pride : Skoliosexuel (vue verticale) Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Skoliosexuel (vertical) ________________ 🇬🇧 English Prin",
         "type": "image",
         "date": "2026-10-19T10:30:07+0000"
     },
     {
         "image": "Images/instagram/18006506519792152.jpg",
         "lien": "https://www.instagram.com/p/Del5aaqj0Ik/",
-        "legende": "Print 6 collection STAR WARS : Alliance Rebelle Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Alliance Rebelle ——————————— Print 6 STAR WARS collection: Rebel Alliance To order, send",
+        "legende": "🇫🇷 Français Print 6 collection STAR WARS : Alliance Rebelle Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Alliance Rebelle ________________ 🇬🇧 English Print 6 collection ",
         "type": "image",
         "date": "2026-10-17T10:30:07+0000"
     },
     {
         "image": "Images/instagram/18099109235547685.jpg",
         "lien": "https://www.instagram.com/p/Degv05VjO9Q/",
-        "legende": "Print 1 collection Disney : Vaïana Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Vaïana ——————————— Print 1 collection Disney : Moana To order, send me an email: Last Name: First Nam",
+        "legende": "🇫🇷 Français Print 1 collection Disney : Vaïana Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Vaïana ________________ 🇬🇧 English Print 1 collection Disney: Moana To order,",
         "type": "image",
         "date": "2026-10-15T10:30:10+0000"
     },
     {
         "image": "Images/instagram/18123353458723979.jpg",
         "lien": "https://www.instagram.com/p/DebmzWdEjjU/",
-        "legende": "5 juin 2026 : Pansexuel 2ème partie (vue horizontale) Print 5 collection Pride : Pansexuel Pour le commander envoyer moi un mp : Nom : Prénom : Modèle : Pansexuel ——————————— Second part (vu horizonta",
+        "legende": "🇫🇷 Français Print 5 collection Pride : Pansexuel (vue horizontale) Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Pansexuel (horizontal) ________________ 🇬🇧 English Print ",
         "type": "image",
         "date": "2026-10-13T10:35:05+0000"
     },
     {
         "image": "Images/instagram/17925581826199958.jpg",
         "lien": "https://www.instagram.com/p/DebmOm0jFTt/",
-        "legende": "4 juin 2026 : Pansexuel 1ère partie (vue verticale) Print 4 collection Pride : Pansexuel Pour le commander envoyer moi un mp : Nom : Prénom : Modèle : Pansexuel ——————————— First part (vu vertical) Pr",
+        "legende": "🇫🇷 Français Print 5 collection Pride : Pansexuel (vue verticale) Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Pansexuel (vertical) ________________ 🇬🇧 English Print 5 co",
         "type": "image",
         "date": "2026-10-13T10:30:04+0000"
     },
     {
         "image": "Images/instagram/18026112338872507.jpg",
         "lien": "https://www.instagram.com/p/DeWcp7HjcWu/",
-        "legende": "Print 5 collection STAR WARS : Séparatistes Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Séparatistes ——————————— Print 5 STAR WARS collection: Separatists To order, send me an emai",
+        "legende": "🇫🇷 Français Print 5 collection STAR WARS : Séparatistes Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Séparatistes ________________ 🇬🇧 English Print 5 collection STAR WAR",
         "type": "image",
         "date": "2026-10-11T10:30:13+0000"
     },
     {
         "image": "Images/instagram/18135703243638810.jpg",
         "lien": "https://www.instagram.com/p/DeRTEU5DxnI/",
-        "legende": "Print 4 collection STAR WARS : Empire Sith Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Empire Sith ——————————— Print 4 STAR WARS collection: Sith Empire To order, send me an email:",
+        "legende": "🇫🇷 Français Print 4 collection STAR WARS : Empire Sith Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Empire Sith ________________ 🇬🇧 English Print 4 collection STAR WARS:",
         "type": "image",
         "date": "2026-10-09T10:30:14+0000"
     },
     {
         "image": "Images/instagram/18073818668467510.jpg",
         "lien": "https://www.instagram.com/p/DeMJeHBClkd/",
-        "legende": "Ma première commande ! Merciiii Gael (je ne trouve plus son instagram) Le print porte sur le jeu Fridaynight Funkik *Produit non officiel du jeu vidéo -------------------------------------------------",
+        "legende": "🇫🇷 Français Ma première commande ! Merciiii Gael (je ne trouve plus son Instagram) Le print est inspiré du jeu Friday Night Funkin'. *Produit non officiel du jeu vidéo ________________ 🇬🇧 English ",
         "type": "image",
         "date": "2026-10-07T10:30:12+0000"
     },
@@ -90,7 +90,7 @@ window.INSTA_POSTS = [
     {
         "image": "Images/instagram/17983504485087249.jpg",
         "lien": "https://www.instagram.com/p/Dd6H6PQlDZ8/",
-        "legende": "Print 3 collection STAR WARS : Stormtrooper Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Stormtrooper ——————————— Print 3 STAR WARS collection: Stormtrooper To order, send me an ema",
+        "legende": "🇫🇷 Français Print 3 collection STAR WARS : Stormtrooper Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Stormtrooper ________________ 🇬🇧 English Print 3 collection STAR WAR",
         "type": "image",
         "date": "2026-09-30T10:30:12+0000"
     },
