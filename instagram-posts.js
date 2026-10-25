@@ -2,6 +2,13 @@
 // Ne pas modifier à la main : il est réécrit à chaque nouvelle publication Instagram.
 window.INSTA_POSTS = [
     {
+        "image": "Images/instagram/18135428998774504.jpg",
+        "lien": "https://www.instagram.com/reel/De7UKeHoWAy/",
+        "legende": "🇫🇷 Français Making-of du print Raiponce ✨ Celui-ci m’a demandé beaucoup de temps et de patience, mais je suis vraiment fière du résultat ! Print 2 collection Disney : Raiponce Pour le commander, env",
+        "type": "video",
+        "date": "2026-10-25T18:12:33+0000"
+    },
+    {
         "image": "Images/instagram/18115316420017859.jpg",
         "lien": "https://www.instagram.com/p/Dezpqa4I8Sj/",
         "legende": "🇫🇷 Français Print 2 collection Disney : Raiponce Pour le commander envoyer moi un MP en mentionnant le modèle. Modèle : Raiponce ——————————— 🇬🇧English Print 2 collection Disney : Rapunzel To order",
@@ -97,84 +104,84 @@ window.INSTA_POSTS = [
     {
         "image": "Images/instagram/17951007513292005.jpg",
         "lien": "https://www.instagram.com/p/DdlWGeLiCCX/",
-        "legende": "Print 2 collection STAR WARS : Empire Galactique Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Empire Galactique ——————————— Print 2 STAR WARS collection: Galactic Empire To order, s",
+        "legende": "🇫🇷 Français Print 2 collection STAR WARS : Empire Galactique Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Empire Galactique ________________ 🇬🇧 English Print 2 collectio",
         "type": "image",
         "date": "2026-09-22T08:50:09+0000"
     },
     {
         "image": "Images/instagram/17901463659571287.jpg",
         "lien": "https://www.instagram.com/p/DdYMWVBIW3x/",
-        "legende": "Print 7 collection Dragon Ball : Boule 7 Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Boule 7 ——————————— Print 7 collection Dragon Ball : Ball 7 To order, send me an email: Last Na",
+        "legende": "🇫🇷 Français Print 7 collection Dragon Ball : Boule 7 Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Boule 7 ________________ 🇬🇧 English Print 7 collection Dragon Ball: Bal",
         "type": "image",
         "date": "2026-09-17T06:15:23+0000"
     },
     {
         "image": "Images/instagram/17916995013224225.jpg",
         "lien": "https://www.instagram.com/p/Db8z_cLiECL/",
-        "legende": "Print 6 collection Dragon Ball : Boule 6 Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Boule 6 ——————————— Print 6 collection Dragon Ball : Ball 6 To order, send me an email: Last Na",
+        "legende": "🇫🇷 Français Print 6 collection Dragon Ball : Boule 6 Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Boule 6 ________________ 🇬🇧 English Print 6 collection Dragon Ball: Bal",
         "type": "image",
         "date": "2026-08-12T18:31:05+0000"
     },
     {
         "image": "Images/instagram/18183300880362267.jpg",
         "lien": "https://www.instagram.com/p/Db2waNniJZZ/",
-        "legende": "Print 5 collection Dragon Ball : Boule 5 Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Boule 5 ——————————— Print 5 collection Dragon Ball : Ball 5 To order, send me an email: Last Na",
+        "legende": "🇫🇷 Français Print 5 collection Dragon Ball : Boule 5 Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Boule 5 ________________ 🇬🇧 English Print 5 collection Dragon Ball: Bal",
         "type": "image",
         "date": "2026-08-10T10:04:20+0000"
     },
     {
         "image": "Images/instagram/18108854606089004.jpg",
         "lien": "https://www.instagram.com/p/DbyQtyDCNOs/",
-        "legende": "Print 4 collection Dragon Ball : Boule 4 Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Boule 4 ——————————— Print 4 collection Dragon Ball : Ball 4 To order, send me an email: Last Na",
+        "legende": "🇫🇷 Français Print 4 collection Dragon Ball : Boule 4 Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Boule 4 ________________ 🇬🇧 English Print 4 collection Dragon Ball: Bal",
         "type": "image",
         "date": "2026-08-08T16:10:25+0000"
     },
     {
         "image": "Images/instagram/18129174322565728.jpg",
         "lien": "https://www.instagram.com/p/Dbs6Px_CLJ3/",
-        "legende": "Print 3 collection Dragon Ball : Boule 3 Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Boule 3 ——————————— Print 3 collection Dragon Ball : Ball 3 To order, send me an email: Last Na",
+        "legende": "🇫🇷 Français Print 3 collection Dragon Ball : Boule 3 Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Boule 3 ________________ 🇬🇧 English Print 3 collection Dragon Ball: Bal",
         "type": "image",
         "date": "2026-08-06T14:17:53+0000"
     },
     {
         "image": "Images/instagram/18127771510630604.jpg",
         "lien": "https://www.instagram.com/p/DbMPK5mhN2L/",
-        "legende": "Print 2 collection Dragon Ball : Boule 2 Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Boule 2 ——————————— Print 2 collection Dragon Ball : Ball 2 To order, send me an email: Last Na",
+        "legende": "🇫🇷 Français Print 2 collection Dragon Ball : Boule 2 Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Boule 2 ________________ 🇬🇧 English Print 2 collection Dragon Ball: Bal",
         "type": "image",
         "date": "2026-07-24T21:46:36+0000"
     },
     {
         "image": "Images/instagram/17904397380461149.jpg",
         "lien": "https://www.instagram.com/p/Da_qiIqhEHR/",
-        "legende": "6 juin 2026 : Omnisexuel 2ère partie (vue horizontale) Print 6 collection Pride : Omnisexuel Pour le commander envoyer moi un mp : Nom : Prénom : Modèle : Omnisexuel ——————————— First part (vu hori",
+        "legende": "🇫🇷 Français Print 6 collection Pride : Omnisexuel (vue horizontale) Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Omnisexuel (horizontal) ________________ 🇬🇧 English Prin",
         "type": "image",
         "date": "2026-07-20T00:35:36+0000"
     },
     {
         "image": "Images/instagram/18087431099553226.jpg",
         "lien": "https://www.instagram.com/p/Da_qRM2tBF5/",
-        "legende": "6 juin 2026 : Omnisexuel 1ère partie (vue verticale) Print 6 collection Pride : Omnisexuel Pour le commander envoyer moi un mp : Nom : Prénom : Modèle : Omnisexuel ——————————— First part (vu Vertic",
+        "legende": "🇫🇷 Français Print 6 collection Pride : Omnisexuel (vue verticale) Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Omnisexuel (vertical) ________________ 🇬🇧 English Print 6 ",
         "type": "image",
         "date": "2026-07-20T00:33:50+0000"
     },
     {
         "image": "Images/instagram/18138368917484454.jpg",
         "lien": "https://www.instagram.com/p/DaGcge6ofey/",
-        "legende": "4 juin 2026 : Polysexuel 2ère partie (vue horizontale) Print 4 collection Pride : Polysexuel Pour le commander envoyer moi un mp : Nom : Prénom : Modèle : Polysexuel ——————————— First part (vu horizon",
+        "legende": "🇫🇷 Français Print 4 collection Pride : Polysexuel (vue horizontale) Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Polysexuel (horizontal) ________________ 🇬🇧 English Prin",
         "type": "image",
         "date": "2026-06-27T19:16:13+0000"
     },
     {
         "image": "Images/instagram/17935601724290493.jpg",
         "lien": "https://www.instagram.com/p/DaGcHuDIDei/",
-        "legende": "4 juin 2026 : Polysexuel 1ère partie (vue verticale) Print 4 collection Pride : Polysexuel Pour le commander envoyer moi un mp : Nom : Prénom : Modèle : Polysexuel ——————————— First part (vu vertical)",
+        "legende": "🇫🇷 Français Print 4 collection Pride : Polysexuel (vue verticale) Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Polysexuel (vertical) ________________ 🇬🇧 English Print 4 ",
         "type": "image",
         "date": "2026-06-27T19:15:00+0000"
     },
     {
         "image": "Images/instagram/18328035613267585.jpg",
         "lien": "https://www.instagram.com/p/DZ0r-jfiJzA/",
-        "legende": "3 juin 2026 : Bisexuel 2ème partie (vue horizontale) Print 3 collection Pride : Bisexuel Pour le commander envoyer moi un mp : Nom : Prénom : Modèle : Bisexuel ——————————— Second part (vu horizontal) ",
+        "legende": "🇫🇷 Français Print 3 collection Pride : Bisexuel (vue horizontale) Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Bisexuel (horizontal) ________________ 🇬🇧 English Print 3 ",
         "type": "image",
         "date": "2026-06-20T21:44:20+0000"
     },
@@ -188,35 +195,35 @@ window.INSTA_POSTS = [
     {
         "image": "Images/instagram/17993475497968211.jpg",
         "lien": "https://www.instagram.com/p/DZkB_J5osOU/",
-        "legende": "2 juin 2026 : Lesbienne 2ème partie (vue horizontale) Print 2 collection Pride : Lesbienne Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Lesbienne ——————————— Second part (vu horizon",
+        "legende": "🇫🇷 Français Print 2 collection Pride : Lesbienne (vue horizontale) Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Lesbienne (horizontal) ________________ 🇬🇧 English Print ",
         "type": "image",
         "date": "2026-06-14T10:30:15+0000"
     },
     {
         "image": "Images/instagram/17976141609014040.jpg",
         "lien": "https://www.instagram.com/p/DZkBcbUoqGV/",
-        "legende": "2 juin 2026 : Lesbienne 1ère partie (vue verticale) Print 2 collection Pride : Lesbienne Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Lesbienne ——————————— First part (vu vertical) ",
+        "legende": "🇫🇷 Français Print 2 collection Pride : Lesbienne (vue verticale) Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Lesbienne (vertical) ________________ 🇬🇧 English Print 2 co",
         "type": "image",
         "date": "2026-06-14T10:29:19+0000"
     },
     {
         "image": "Images/instagram/18060121562498254.jpg",
         "lien": "https://www.instagram.com/p/DZi6N7ZohPf/",
-        "legende": "1er juin 2026 : Gay 2ème partie (vue horizontale) Print 1 collection Pride : Gay Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Gay ——————————— First part (vu horizontal) Print 1 coll",
+        "legende": "🇫🇷 Français Print 1 collection Pride : Gay (vue horizontale) Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Gay (horizontal) ________________ 🇬🇧 English Print 1 collection",
         "type": "image",
         "date": "2026-06-14T00:03:51+0000"
     },
     {
         "image": "Images/instagram/17853273450691930.jpg",
         "lien": "https://www.instagram.com/p/DZi5Vpzo9ej/",
-        "legende": "1er juin 2026 : Gay 1ère partie (vue verticale) Print 1 collection Pride : Gay Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Gay ——————————— First part (vu vertical) Print 1 collecti",
+        "legende": "🇫🇷 Français Print 1 collection Pride : Gay (vue verticale) Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Gay (vertical) ________________ 🇬🇧 English Print 1 collection Pri",
         "type": "image",
         "date": "2026-06-13T23:57:30+0000"
     },
     {
         "image": "Images/instagram/18027248318830914.jpg",
         "lien": "https://www.instagram.com/p/DZh7PcCI01O/",
-        "legende": "Print 1 collection Dragon Ball : Boule 1 Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Boule 1 ——————————— Print 1 collection Dragon Ball : Ball 1 To order, send me an email: Last Na",
+        "legende": "🇫🇷 Français Print 1 collection Dragon Ball : Boule 1 Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Boule 1 ________________ 🇬🇧 English Print 1 collection Dragon Ball: Bal",
         "type": "image",
         "date": "2026-06-13T14:53:52+0000"
     },
@@ -230,21 +237,21 @@ window.INSTA_POSTS = [
     {
         "image": "Images/instagram/17982714425834851.jpg",
         "lien": "https://www.instagram.com/p/DYW8nAUiH0e/",
-        "legende": "Print 2 collection Fleur : Sakura Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Sakura ——————————— Print 2 collection Flower : Sakura To order, send me an email: Last Name: First Nam",
+        "legende": "🇫🇷 Français Print 2 collection Fleur : Sakura Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Sakura ________________ 🇬🇧 English Print 2 collection Flower: Sakura To order,",
         "type": "image",
         "date": "2026-05-15T12:01:04+0000"
     },
     {
         "image": "Images/instagram/17913838884379463.jpg",
         "lien": "https://www.instagram.com/p/DYPQFJJIS5B/",
-        "legende": "Nouvelle collection ! Print 1 collection Fleur : Monoï Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Monoï ——————————— Print 1 collection Flower : Monoï To order, send me an email: L",
+        "legende": "🇫🇷 Français Print 1 collection Fleur : Monoï Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Monoï ________________ 🇬🇧 English Print 1 collection Flower: Monoï To order, se",
         "type": "image",
         "date": "2026-05-12T12:19:35+0000"
     },
     {
         "image": "Images/instagram/18369393307201157.jpg",
         "lien": "https://www.instagram.com/p/DX9E1_kIEKZ/",
-        "legende": "Print 1 collection STAR WARS : Alliance Jedi Pour le commander envoyer moi un mail : Nom : Prénom : Modèle : Alliance Jedi ——————————— Print 1 STAR WARS collection: Jedi Alliance To order, send me an ",
+        "legende": "🇫🇷 Français Print 1 collection STAR WARS : Alliance Jedi Pour le commander, envoyez-moi un MP en mentionnant le modèle. Modèle : Alliance Jedi ________________ 🇬🇧 English Print 1 collection STAR W",
         "type": "image",
         "date": "2026-05-05T10:53:26+0000"
     },
