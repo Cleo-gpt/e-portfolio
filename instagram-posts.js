@@ -16,13 +16,6 @@ window.INSTA_POSTS = [
         "date": "2026-10-26T17:40:51+0000"
     },
     {
-        "image": "Images/instagram/18135428998774504.jpg",
-        "lien": "https://www.instagram.com/reel/De7UKeHoWAy/",
-        "legende": "🇫🇷 Français Making-of du print Raiponce ✨ Celui-ci m’a demandé beaucoup de temps et de patience, mais je suis vraiment fière du résultat ! Print 2 collection Disney : Raiponce Pour le commander, env",
-        "type": "video",
-        "date": "2026-10-25T18:12:33+0000"
-    },
-    {
         "image": "Images/instagram/18115316420017859.jpg",
         "lien": "https://www.instagram.com/p/Dezpqa4I8Sj/",
         "legende": "🇫🇷 Français Print 2 collection Disney : Raiponce Pour le commander envoyer moi un MP en mentionnant le modèle. Modèle : Raiponce ——————————— 🇬🇧English Print 2 collection Disney : Rapunzel To order",
