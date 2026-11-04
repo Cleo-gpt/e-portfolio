@@ -366,6 +366,10 @@ input {
     color: var(--texte-doux);
 }
 
+.hero-contact {
+    margin-top: 22px;
+}
+
 .hero-suite {
     position: absolute;
     bottom: 26px;
@@ -398,6 +402,7 @@ input {
    ========================================================================== */
 .presentation,
 .profil,
+.extra,
 .retromania,
 .lanterne-yuna,
 .photographie,
@@ -410,6 +415,7 @@ input {
 
 .presentation-text h2,
 .profil h2,
+.extra h2,
 .retromania h2,
 .lanterne-yuna h2,
 .photographie h2,
@@ -424,6 +430,7 @@ input {
 }
 
 .profil h2,
+.extra h2,
 .retromania h2,
 .lanterne-yuna h2,
 .photographie h2,
@@ -734,6 +741,7 @@ input {
 /* Pastilles de filtre (compétences, outils, projets CPNV) */
 .tools-category,
 .cpnv-filter-btn,
+.extra-onglet,
 .experience-more-btn {
     display: inline-flex;
     align-items: center;
@@ -750,13 +758,15 @@ input {
 
 .tools-category:hover,
 .cpnv-filter-btn:hover,
+.extra-onglet:hover,
 .experience-more-btn:hover {
     background: rgba(208, 160, 243, 0.14);
     transform: translateY(-2px);
 }
 
 .tools-category.active,
-.cpnv-filter-btn.active {
+.cpnv-filter-btn.active,
+.extra-onglet.active {
     background: var(--degrade);
     border-color: transparent;
     color: var(--blanc);
@@ -880,6 +890,49 @@ input {
 /* ==========================================================================
    RetroMania
    ========================================================================== */
+/* ==========================================================================
+   Projets extra-professionnels : onglets RetroMania / Lanterne / Photographie
+   ========================================================================== */
+.extra-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.extra-onglets {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 26px;
+}
+
+.extra-onglet-icone {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+/* Les trois projets gardent leur style, sans l'espace d'une section entière */
+.extra .extra-panneau {
+    padding: 10px 20px 0;
+    scroll-margin-top: var(--hauteur-nav);
+}
+
+.extra .extra-panneau[hidden] {
+    display: none;
+}
+
+.extra-panneau:focus-visible {
+    outline: 2px solid var(--lilas);
+    outline-offset: 6px;
+    border-radius: 16px;
+}
+
+.extra-panneau .section-intro {
+    margin-top: 0;
+}
+
 .retromania-content {
     max-width: 900px;
     margin: 0 auto;

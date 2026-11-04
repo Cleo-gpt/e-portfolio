@@ -149,9 +149,53 @@
         });
     }
 
+    // ---------- Projets extra-professionnels : onglets ----------
+    // Un seul projet affiché à la fois. Les flèches du clavier passent d'un
+    // onglet à l'autre ; un lien vers #retromania, #lanterne-yuna ou
+    // #photographie ouvre directement le bon onglet.
+
+    function initOnglets() {
+        const onglets = Array.prototype.slice.call(document.querySelectorAll('.extra-onglet'));
+        if (!onglets.length) return;
+
+        function activer(onglet, focus) {
+            onglets.forEach(function (o) {
+                const actif = o === onglet;
+                o.classList.toggle('active', actif);
+                o.setAttribute('aria-selected', actif ? 'true' : 'false');
+                o.tabIndex = actif ? 0 : -1;
+                document.getElementById(o.getAttribute('aria-controls')).hidden = !actif;
+            });
+            if (focus) onglet.focus();
+        }
+
+        onglets.forEach(function (onglet, i) {
+            onglet.addEventListener('click', function () { activer(onglet); });
+            onglet.addEventListener('keydown', function (e) {
+                let cible = null;
+                if (e.key === 'ArrowRight') cible = onglets[(i + 1) % onglets.length];
+                if (e.key === 'ArrowLeft') cible = onglets[(i - 1 + onglets.length) % onglets.length];
+                if (e.key === 'Home') cible = onglets[0];
+                if (e.key === 'End') cible = onglets[onglets.length - 1];
+                if (cible) { e.preventDefault(); activer(cible, true); }
+            });
+        });
+
+        function suivreAncre() {
+            const id = decodeURIComponent(location.hash.slice(1));
+            const onglet = onglets.find(function (o) { return o.getAttribute('aria-controls') === id; });
+            if (!onglet) return;
+            activer(onglet);
+            document.getElementById(id).scrollIntoView();
+        }
+        window.addEventListener('hashchange', suivreAncre);
+        suivreAncre();
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         initConnexion();
         initCarrousel();
         initInstagram();
+        initOnglets();
     });
 })();
