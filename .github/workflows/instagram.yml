@@ -1,6 +1,6 @@
 name: Publications Instagram
 
-# Toutes les heures : récupère les publications Instagram de chaque compte
+# Régulièrement : récupère les publications Instagram de chaque compte
 # (@la_lanterne_de_yuna et @cleo1712_photographie), enregistre leurs images dans
 # Images/instagram*/, met à jour instagram*-posts.js, puis envoie ces fichiers
 # sur le site par FTP (si les accès FTP sont configurés).
@@ -8,7 +8,10 @@ name: Publications Instagram
 
 on:
   schedule:
-    - cron: '17 * * * *'   # toutes les heures, à la 17e minute
+    # Toutes les 10 minutes. GitHub saute une bonne partie des passages
+    # planifiés (avec "toutes les heures", il n'en faisait que 3 à 5 par
+    # jour) : en demandant plus souvent, les changements arrivent plus vite.
+    - cron: '*/10 * * * *'
   workflow_dispatch:       # bouton "Run workflow" pour lancer à la main
     inputs:
       tout_envoyer:
@@ -72,7 +75,9 @@ jobs:
         run: |
           sudo apt-get install -y -qq lftp > /dev/null
           lftp -u "$FTP_UTILISATEUR,$FTP_MOT_DE_PASSE" "$FTP_SERVEUR" -e "
-            set ftp:ssl-allow yes;
+            set ftp:ssl-force yes;
+            set ftp:ssl-protect-data yes;
+            set ssl:ca-file .github/ftp-serveur.pem;
             mirror --reverse --verbose --exclude-glob .git/ --exclude-glob .github/ --exclude-glob .vscode/ --exclude-glob scripts/ --exclude-glob .DS_Store --exclude-glob .gitignore --exclude-glob '*.md' --exclude-glob package.json . '${FTP_DOSSIER:-.}';
             bye"
 
@@ -81,7 +86,9 @@ jobs:
         run: |
           sudo apt-get install -y -qq lftp > /dev/null
           lftp -u "$FTP_UTILISATEUR,$FTP_MOT_DE_PASSE" "$FTP_SERVEUR" -e "
-            set ftp:ssl-allow yes;
+            set ftp:ssl-force yes;
+            set ftp:ssl-protect-data yes;
+            set ssl:ca-file .github/ftp-serveur.pem;
             mirror --reverse --delete --verbose Images/instagram '${FTP_DOSSIER:-.}/Images/instagram';
             mirror --reverse --delete --verbose Images/instagram-photo '${FTP_DOSSIER:-.}/Images/instagram-photo';
             put instagram-posts.js -o '${FTP_DOSSIER:-.}/instagram-posts.js';

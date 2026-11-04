@@ -10,7 +10,10 @@
 
 set -e
 DEPOT="Cleo-gpt/e-portfolio"
-SERVEUR="eleves.mediamatique.ch"
+# eleves.mediamatique.ch, sous le nom inscrit dans son certificat (auto-signé,
+# épinglé dans .github/ftp-serveur.pem) : la connexion chiffrée est vérifiée.
+SERVEUR="cpnv02.vps.wellhosted.ch"
+CERTIFICAT="$(dirname "$0")/../.github/ftp-serveur.pem"
 UTILISATEUR="cforclaz"
 
 if ! gh auth status >/dev/null 2>&1; then
@@ -20,8 +23,7 @@ fi
 
 echo "Serveur FTP : $SERVEUR   Utilisateur : $UTILISATEUR"
 echo
-echo "Dossier du site sur le serveur : c'est le chemin affiché à droite dans"
-echo "FileZilla quand tu ouvres le dossier qui contient index.html (ex : /e-portfolio)."
+echo "Dossier du site, depuis ton dossier de connexion FTP (ex : www/e-portfolio)."
 read -r -p "Dossier du site (Entrée = dossier de connexion) : " DOSSIER
 read -r -s -p "Mot de passe FTP de $UTILISATEUR : " MOT_DE_PASSE
 echo
@@ -32,7 +34,7 @@ if [ -z "$MOT_DE_PASSE" ]; then
 fi
 
 # Vérifie les accès avant de les enregistrer (liste le dossier, ne modifie rien).
-if ! curl -s --max-time 30 --ssl -u "$UTILISATEUR:$MOT_DE_PASSE" "ftp://$SERVEUR/${DOSSIER#/}/" -o /dev/null; then
+if ! curl -s --max-time 30 --ssl-reqd --cacert "$CERTIFICAT" -u "$UTILISATEUR:$MOT_DE_PASSE" "ftp://$SERVEUR/${DOSSIER#/}/" -o /dev/null; then
     echo "Connexion FTP refusée (mot de passe ou dossier incorrect) : rien n'a été enregistré."
     exit 1
 fi
