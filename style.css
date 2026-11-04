@@ -132,87 +132,6 @@ input {
     height: 100%;
 }
 
-/* Carpes qui traversent le ciel : un élément avance en ligne droite, son
-   enfant ondule de haut en bas, et l'image pivote pour suivre la pente. */
-.carpe-nage {
-    --taille: clamp(130px, 17vw, 250px);
-    --duree: 70s;
-    --vague: 8s;
-    position: absolute;
-    left: 0;
-    width: var(--taille);
-    opacity: 0.55;
-    animation: nage-vers-la-droite var(--duree) linear infinite;
-    will-change: transform;
-}
-
-.carpe-nage.vers-la-gauche {
-    animation-name: nage-vers-la-gauche;
-}
-
-.carpe-ondule {
-    animation: nage-ondule var(--vague) ease-in-out infinite alternate;
-}
-
-.carpe-nage img {
-    display: block;
-    width: 100%;
-    height: auto;
-    filter: drop-shadow(0 0 10px rgba(208, 160, 243, 0.55));
-    animation: nage-cap var(--vague) ease-in-out infinite alternate;
-    animation-delay: calc(var(--vague) / -2);
-}
-
-.carpe-nage.vers-la-gauche img {
-    scale: -1 1;
-    animation-direction: alternate-reverse;
-}
-
-.carpe-nage-1 {
-    top: 16vh;
-    --duree: 80s;
-    --vague: 9s;
-    animation-delay: -18s;
-}
-
-.carpe-nage-2 {
-    top: 52vh;
-    --taille: clamp(100px, 12vw, 180px);
-    --duree: 64s;
-    --vague: 7s;
-    opacity: 0.45;
-    animation-delay: -40s;
-}
-
-.carpe-nage-3 {
-    top: 78vh;
-    --taille: clamp(80px, 9vw, 130px);
-    --duree: 95s;
-    --vague: 6s;
-    opacity: 0.35;
-    animation-delay: -62s;
-}
-
-@keyframes nage-vers-la-droite {
-    from { transform: translateX(calc(-1 * var(--taille) - 6vw)); }
-    to { transform: translateX(106vw); }
-}
-
-@keyframes nage-vers-la-gauche {
-    from { transform: translateX(106vw); }
-    to { transform: translateX(calc(-1 * var(--taille) - 6vw)); }
-}
-
-@keyframes nage-ondule {
-    from { transform: translateY(-5vh); }
-    to { transform: translateY(5vh); }
-}
-
-@keyframes nage-cap {
-    from { rotate: -13deg; }
-    to { rotate: 13deg; }
-}
-
 @keyframes tourne {
     to { transform: rotate(360deg); }
 }
@@ -642,8 +561,17 @@ input {
     box-shadow: 0 0 34px var(--lueur-violette), 0 0 70px rgba(0, 111, 252, 0.25);
 }
 
+.presentation-colonne,
 .presentation-text {
     flex: 1;
+}
+
+/* Moyens de contact dès la première section */
+.presentation-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 6px;
 }
 
 .presentation-text h2 {
@@ -1714,23 +1642,6 @@ input {
     padding: 10px 0 50px;
 }
 
-/* Frise de carpes qui nagent en file (comme sur le brandboard) */
-.frise-carpes {
-    --frise-hauteur: 50px;
-    height: var(--frise-hauteur);
-    margin-bottom: 40px;
-    background: url('Images/identite-visuelle-cf/frise-carpes.svg') 0 50% / auto 100% repeat-x;
-    filter: drop-shadow(0 0 5px rgba(208, 160, 243, 0.6));
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-    animation: frise-nage 16s linear infinite;
-}
-
-/* Un motif de la frise (2 carpes) mesure 3,0922 fois sa hauteur. */
-@keyframes frise-nage {
-    to { background-position-x: calc(var(--frise-hauteur) * 3.0922); }
-}
-
 .footer-content {
     max-width: 700px;
     margin: 0 auto;
@@ -1756,20 +1667,6 @@ input {
     background: linear-gradient(90deg, var(--lilas), var(--bleu-vif));
 }
 
-.footer-tel {
-    margin: 0 0 30px;
-}
-
-.footer-tel a {
-    color: var(--texte-doux);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-tel a:hover {
-    color: var(--lilas);
-}
-
 .footer-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -1779,6 +1676,8 @@ input {
 }
 
 .footer-btn {
+    font-family: inherit;
+    cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 9px;
@@ -1858,6 +1757,267 @@ input {
 
 .retour-haut:hover img {
     translate: 0 -5px;
+}
+
+/* ==========================================================================
+   Descriptif sous le titre de chaque section
+   ========================================================================== */
+.section-intro {
+    max-width: 640px;
+    margin: -16px auto 30px;
+    color: var(--texte-doux);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* ==========================================================================
+   Contact : pastilles, bouton flottant, fenêtres (contact.js)
+   ========================================================================== */
+.contact-pastille {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border: 1px solid var(--bord-fort);
+    border-radius: 999px;
+    background: var(--carte);
+    color: var(--texte);
+    font: inherit;
+    font-size: 0.98rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.contact-pastille svg {
+    color: var(--lilas);
+    flex-shrink: 0;
+}
+
+.contact-pastille:hover {
+    transform: translateY(-2px);
+    border-color: var(--lilas);
+    box-shadow: 0 0 16px var(--lueur-violette);
+}
+
+.contact-flottant {
+    position: fixed;
+    left: 18px;
+    bottom: 18px;
+    z-index: 45;
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--degrade);
+    color: var(--blanc);
+    font: inherit;
+    font-weight: 700;
+    box-shadow: 0 0 18px var(--lueur-violette), 0 6px 18px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-flottant:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 28px var(--lueur-violette), 0 0 40px var(--lueur-bleue);
+}
+
+.contact-fenetre {
+    width: min(460px, calc(100% - 32px));
+    max-height: calc(100dvh - 32px);
+    overflow-y: auto;
+    margin: auto;
+    padding: 30px 26px 26px;
+    border-radius: 24px;
+    background: linear-gradient(180deg, #120d3f, var(--nuit));
+    border: 1px solid var(--bord-fort);
+    box-shadow: 0 0 40px var(--lueur-violette);
+    color: var(--texte);
+    text-align: center;
+}
+
+.contact-fenetre::backdrop {
+    background: rgba(2, 1, 10, 0.78);
+}
+
+.contact-fenetre h2 {
+    font-family: var(--police-titre);
+    font-weight: 400;
+    font-size: 1.8rem;
+    color: var(--blanc);
+    margin-bottom: 10px;
+}
+
+.contact-fenetre p {
+    color: var(--texte-doux);
+    margin-bottom: 18px;
+}
+
+.contact-fermer {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    border: 0;
+    background: none;
+    color: var(--texte-doux);
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.contact-formulaire {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.contact-formulaire label {
+    margin-bottom: 6px;
+    color: var(--texte-doux);
+    font-size: 0.95rem;
+}
+
+.contact-formulaire input,
+.contact-formulaire textarea {
+    width: 100%;
+    margin-bottom: 14px;
+    padding: 10px 14px;
+    border: 1px solid var(--bord-fort);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.35);
+    color: var(--blanc);
+    font: inherit;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+.contact-formulaire input:focus,
+.contact-formulaire textarea:focus {
+    outline: none;
+    border-color: var(--lilas);
+    box-shadow: 0 0 0 3px rgba(208, 160, 243, 0.25);
+}
+
+/* Champ piège : hors de l'écran (pas display:none, que certains robots repèrent) */
+.contact-piege {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.contact-envoyer {
+    align-self: center;
+    padding: 11px 34px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--degrade);
+    color: var(--blanc);
+    font: inherit;
+    font-weight: 700;
+    box-shadow: 0 0 18px var(--lueur-violette);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.contact-envoyer:hover:not(:disabled) {
+    transform: translateY(-2px);
+}
+
+.contact-envoyer:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.contact-statut {
+    min-height: 1.4em;
+    margin: 12px 0 0 !important;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.contact-statut--ok {
+    color: #9be7c4 !important;
+}
+
+.contact-statut--erreur {
+    color: #ffb4c4 !important;
+}
+
+.contact-liens {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--bord);
+}
+
+/* Vérification anti-robot : glisser la carpe jusqu'à la lune */
+.verification-piste {
+    --progression: 0;
+    position: relative;
+    height: 56px;
+    margin: 0 4px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--bord);
+}
+
+.verification-lune {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    width: 40px;
+    height: 40px;
+    translate: 0 -50%;
+    border-radius: 50%;
+    background: var(--lune);
+    box-shadow: var(--lueur-lune);
+}
+
+.verification-carpe {
+    position: absolute;
+    top: 50%;
+    left: calc(6px + var(--progression) * (100% - 62px));
+    width: 50px;
+    translate: 0 -50%;
+    rotate: 90deg;
+    pointer-events: none;
+    transition: scale 0.3s ease;
+}
+
+.verification-carpe--arrivee {
+    scale: 1.2;
+}
+
+/* Le vrai curseur, invisible, couvre la piste : souris, doigt et clavier */
+.verification-curseur {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: grab;
+}
+
+.verification-piste:has(.verification-curseur:focus-visible) {
+    outline: 2px solid var(--lilas);
+    outline-offset: 3px;
+}
+
+.verification-message {
+    min-height: 1.4em;
+    margin-bottom: 0 !important;
+    color: var(--lilas) !important;
 }
 
 /* ==========================================================================
@@ -1977,10 +2137,6 @@ input {
         padding-top: 28px;
     }
 
-    .carpe-nage-3 {
-        display: none;
-    }
-
     .presentation-content {
         flex-direction: column;
         text-align: center;
@@ -2070,10 +2226,6 @@ input {
     .cpnv-video-short {
         max-width: 160px;
     }
-
-    .frise-carpes {
-        --frise-hauteur: 38px;
-    }
 }
 
 @media (max-width: 600px) {
@@ -2086,6 +2238,15 @@ input {
         justify-content: center;
         width: 100%;
         max-width: 320px;
+    }
+
+    .contact-flottant {
+        left: 12px;
+        bottom: 14px;
+    }
+
+    .presentation-contact {
+        justify-content: center;
     }
 }
 
@@ -2103,17 +2264,5 @@ input {
     *::after {
         animation: none !important;
         transition-duration: 0.01ms !important;
-    }
-
-    .carpe-nage-1 {
-        transform: translateX(8vw);
-    }
-
-    .carpe-nage-2 {
-        transform: translateX(72vw);
-    }
-
-    .carpe-nage-3 {
-        transform: translateX(30vw);
     }
 }

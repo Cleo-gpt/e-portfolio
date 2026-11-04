@@ -19,7 +19,7 @@
             paragraphs: [
                 "Bonjour ! Je suis Cléo Ana Forclaz. Je suis actuellement en troisième année de médiamatique.",
                 "J'ai énormément de passions dans la vie comme l'illustration, Star Wars, Saint Seiya/ les chevaliers du zodiaque, Naruto, et plein d'autres choses",
-                "Vous découvrirez tout au long de ce E-portefolio, mon travail durant 3 ans, à l'école comme du personnel."
+                "Vous découvrirez tout au long de ce E-portefolio, mon travail durant 3 ans de formation et en dehors."
             ]
         },
         timeline: {
@@ -252,12 +252,11 @@
         },
         social: {
             name: "Cléo Ana Forclaz",
-            phone: "0764391272",
-            phoneDisplay: "076 439 12 72",
             linktree: "https://linktr.ee/Cleo_Forclaz_menu",
             instagramLanterne: "https://www.instagram.com/la_lanterne_de_yuna/",
-            linkedin: "https://www.linkedin.com/in/cleo-forclaz/",
-            email: "cleoforclaz2007@gmail.com"
+            linkedin: "https://www.linkedin.com/in/cleo-forclaz/"
+            // Pas d'e-mail ni de téléphone : le contact passe par le formulaire
+            // (contact.js → php/contact.php).
         }
     };
 
@@ -578,11 +577,6 @@
         const nameEl = document.getElementById('footerName');
         if (nameEl && data.name) nameEl.textContent = data.name;
 
-        const phoneLink = document.getElementById('footerPhoneLink');
-        if (phoneLink && data.phone) {
-            phoneLink.href = 'tel:' + data.phone;
-            phoneLink.textContent = data.phoneDisplay || data.phone;
-        }
 
         const linktree = document.getElementById('footerLinktree');
         if (linktree && data.linktree) linktree.href = data.linktree;
@@ -593,10 +587,6 @@
         const linkedin = document.getElementById('footerLinkedin');
         if (linkedin && data.linkedin) linkedin.href = data.linkedin;
 
-        const mail = document.getElementById('footerMail');
-        const mailText = document.getElementById('footerMailText');
-        if (mail && data.email) mail.href = 'mailto:' + data.email;
-        if (mailText && data.email) mailText.textContent = data.email;
     }
 
     // ---------- Chargement global ----------

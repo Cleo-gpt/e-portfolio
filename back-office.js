@@ -568,12 +568,9 @@
     function loadSocial() {
         return window.EPortfolioContent.fetchContent('social').then(function (data) {
             document.getElementById('socialName').value = data.name || '';
-            document.getElementById('socialPhone').value = data.phone || '';
-            document.getElementById('socialPhoneDisplay').value = data.phoneDisplay || '';
             document.getElementById('socialLinktree').value = data.linktree || '';
             document.getElementById('socialInstagramLanterne').value = data.instagramLanterne || '';
             document.getElementById('socialLinkedin').value = data.linkedin || '';
-            document.getElementById('socialEmail').value = data.email || '';
         });
     }
 
@@ -585,12 +582,9 @@
             headers: authHeaders(),
             body: JSON.stringify({
                 name: document.getElementById('socialName').value,
-                phone: document.getElementById('socialPhone').value,
-                phoneDisplay: document.getElementById('socialPhoneDisplay').value,
                 linktree: document.getElementById('socialLinktree').value,
                 instagramLanterne: document.getElementById('socialInstagramLanterne').value,
-                linkedin: document.getElementById('socialLinkedin').value,
-                email: document.getElementById('socialEmail').value
+                linkedin: document.getElementById('socialLinkedin').value
             })
         })
             .then(function (res) { if (!res.ok) throw new Error(); return res.json(); })
