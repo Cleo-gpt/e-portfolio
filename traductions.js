@@ -233,6 +233,17 @@ window.TRADUCTIONS = {
         en: "Development of a complete PHP fan site for the YouTuber Sylvain Lyve: home page, interactive JavaScript quiz with saved scores, results page and video management, all connected to a database (SQLite in this demo).",
         de: "Entwicklung einer vollständigen PHP-Fanseite für den YouTuber Sylvain Lyve: Startseite, interaktives JavaScript-Quiz mit gespeicherten Punktzahlen, Resultatseite und Videoverwaltung, alles mit einer Datenbank verbunden (SQLite in dieser Demo)."
     },
+    "Memory Multijoueur": { en: "Multiplayer Memory", de: "Memory für mehrere Spieler" },
+    "Plateau du jeu Memory Multijoueur": { en: "Board of the Multiplayer Memory game", de: "Spielbrett des Memory-Spiels" },
+    "Menu du Memory : thème, mode de jeu, nombre de cartes et difficulté": { en: "Memory menu: theme, game mode, number of cards and difficulty", de: "Memory-Menü: Thema, Spielmodus, Kartenzahl und Schwierigkeit" },
+    "Jeu de Memory en JavaScript : seul, contre l'ordinateur ou à plusieurs sur le même écran.": {
+        en: "A JavaScript memory game: play alone, against the computer or with friends on the same screen.",
+        de: "Ein Memory-Spiel in JavaScript: allein, gegen den Computer oder zu mehreren am selben Bildschirm."
+    },
+    "Jeu de Memory développé en HTML, CSS et JavaScript, sans framework, avec des classes (programmation orientée objet). On joue seul, contre l'ordinateur ou jusqu'à 4 joueurs sur le même écran : cinq thèmes de cartes, de 12 à 56 cartes, trois niveaux de mélange, 10 cœurs par joueur (une paire = +1, une erreur = −1) et 45 secondes par tour.": {
+        en: "A memory game built in HTML, CSS and JavaScript, without a framework, using classes (object-oriented programming). Play alone, against the computer or with up to 4 players on the same screen: five card themes, 12 to 56 cards, three shuffle levels, 10 hearts per player (a pair = +1, a mistake = −1) and 45 seconds per turn.",
+        de: "Ein Memory-Spiel in HTML, CSS und JavaScript, ohne Framework, mit Klassen (objektorientierte Programmierung). Man spielt allein, gegen den Computer oder mit bis zu 4 Personen am selben Bildschirm: fünf Kartenthemen, 12 bis 56 Karten, drei Mischstufen, 10 Herzen pro Person (ein Paar = +1, ein Fehler = −1) und 45 Sekunden pro Zug."
+    },
     "Vidéo de booktubing réalisée pour le cours de culture générale.": {
         en: "Booktubing video made for the general education class.",
         de: "Booktubing-Video für den Allgemeinbildungsunterricht."
