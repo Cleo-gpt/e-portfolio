@@ -741,7 +741,6 @@ input {
 /* Pastilles de filtre (compétences, outils, projets CPNV) */
 .tools-category,
 .cpnv-filter-btn,
-.extra-onglet,
 .experience-more-btn {
     display: inline-flex;
     align-items: center;
@@ -758,15 +757,13 @@ input {
 
 .tools-category:hover,
 .cpnv-filter-btn:hover,
-.extra-onglet:hover,
 .experience-more-btn:hover {
     background: rgba(208, 160, 243, 0.14);
     transform: translateY(-2px);
 }
 
 .tools-category.active,
-.cpnv-filter-btn.active,
-.extra-onglet.active {
+.cpnv-filter-btn.active {
     background: var(--degrade);
     border-color: transparent;
     color: var(--blanc);
@@ -891,7 +888,7 @@ input {
    RetroMania
    ========================================================================== */
 /* ==========================================================================
-   Projets extra-professionnels : onglets RetroMania / Lanterne / Photographie
+   Projets extra-professionnels : RetroMania, Lanterne et Photographie à la suite
    ========================================================================== */
 .extra-content {
     max-width: 900px;
@@ -899,34 +896,25 @@ input {
     text-align: center;
 }
 
-.extra-onglets {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 26px;
-}
-
-.extra-onglet-icone {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-}
-
-/* Les trois projets gardent leur style, sans l'espace d'une section entière */
+/* Chaque projet garde son style, sans l'espace d'une section entière */
 .extra .extra-panneau {
-    padding: 10px 20px 0;
+    padding: 34px 20px 0;
     scroll-margin-top: var(--hauteur-nav);
 }
 
-.extra .extra-panneau[hidden] {
-    display: none;
+.extra-panneau + .extra-panneau {
+    margin-top: 40px;
 }
 
-.extra-panneau:focus-visible {
-    outline: 2px solid var(--lilas);
-    outline-offset: 6px;
-    border-radius: 16px;
+.extra-titre {
+    font-family: var(--police-titre);
+    font-weight: 400;
+    font-size: clamp(1.7rem, 3.6vw, 2.2rem);
+    line-height: 1.2;
+    color: var(--blanc);
+    text-align: center;
+    text-shadow: 0 0 14px var(--lueur-violette);
+    margin-bottom: 26px;
 }
 
 .extra-panneau .section-intro {
