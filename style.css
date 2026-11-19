@@ -251,6 +251,38 @@ input {
     .main-nav a {
         font-size: 0.92rem;
     }
+
+    .langue-bouton {
+        padding: 4px 6px;
+        font-size: 0.78rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-nav {
+        gap: 8px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .site-nav-logo img {
+        height: 44px;
+        width: auto;
+    }
+
+    .langues {
+        padding: 2px;
+    }
+
+    .langue-bouton {
+        padding: 3px 5px;
+        font-size: 0.72rem;
+    }
+
+    .login-trigger {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
 }
 
 /* ==========================================================================
@@ -2062,6 +2094,39 @@ input {
 }
 
 /* ==========================================================================
+   Choix de la langue (FR / EN / DE) dans le menu
+   ========================================================================== */
+.langues {
+    display: flex;
+    flex-shrink: 0;
+    padding: 3px;
+    border: 1px solid var(--bord);
+    border-radius: 999px;
+}
+
+.langue-bouton {
+    padding: 4px 9px;
+    border: 0;
+    border-radius: 999px;
+    background: none;
+    color: var(--texte-doux);
+    font: inherit;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.langue-bouton:hover {
+    color: var(--blanc);
+}
+
+.langue-bouton[aria-pressed="true"] {
+    background: var(--degrade);
+    color: var(--blanc);
+}
+
+/* ==========================================================================
    Pop up de connexion admin
    ========================================================================== */
 .login-modal-overlay {
@@ -2306,4 +2371,423 @@ input {
         animation: none !important;
         transition-duration: 0.01ms !important;
     }
+}
+
+/* ==========================================================================
+   Direction artistique « fenêtres rétro » : le ciel étoilé et les carpes du
+   site, mêlés aux fenêtres d'ordinateur pastel (barre de titre, contour
+   foncé), aux étincelles jaunes et aux nuages de ma présentation.
+   ========================================================================== */
+:root {
+    --pastel-lilas: #b8a2e0;
+    --pastel-rose: #e8b6cf;
+    --pastel-jaune: #f6efb0;
+    --trait: #2b2440;
+    --barre: 34px;
+    --icones-fenetre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 74 20' fill='none' stroke='%232b2440' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M3 3l14 14M17 3L3 17'/%3E%3Crect x='32' y='6' width='10' height='11' rx='1.5'/%3E%3Cpath d='M35 3h9.5a1.5 1.5 0 0 1 1.5 1.5V14'/%3E%3Cpath d='M58 11h14'/%3E%3C/svg%3E");
+    --ronds-fenetre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 58 18' fill='%23fff' stroke='%232b2440' stroke-width='2.2'%3E%3Ccircle cx='9' cy='9' r='6.5'/%3E%3Ccircle cx='29' cy='9' r='6.5'/%3E%3Ccircle cx='49' cy='9' r='6.5'/%3E%3C/svg%3E");
+}
+
+/* Quadrillage léger par-dessus le ciel, comme une feuille quadrillée */
+.ciel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(208, 160, 243, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(208, 160, 243, 0.07) 1px, transparent 1px);
+    background-size: 44px 44px;
+}
+
+/* ---------- Fenêtres ---------- */
+.profil-card,
+.cpnv-card,
+.contact-fenetre,
+.login-modal {
+    position: relative;
+    overflow: hidden;
+    border: 2px solid var(--pastel-lilas);
+    border-radius: 18px;
+    box-shadow: 6px 6px 0 rgba(184, 162, 224, 0.28), 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.profil-card,
+.contact-fenetre,
+.login-modal {
+    padding-top: calc(var(--barre) + 24px);
+}
+
+/* Les fenêtres « Me contacter » et « Petite vérification » restent fixées
+   au centre de l'écran (position des <dialog>), la règle ci-dessus ne
+   s'applique pas à elles. */
+dialog.contact-fenetre {
+    position: fixed;
+}
+
+.profil-card::before,
+.cpnv-card::before,
+.contact-fenetre::before,
+.login-modal::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--barre);
+    border-bottom: 2px solid var(--trait);
+    background: var(--pastel-lilas) var(--icones-fenetre) 14px 50% / 64px 17px no-repeat;
+}
+
+/* Une couleur de barre par fenêtre, comme sur la présentation */
+.profil-grid > .profil-card:nth-child(2)::before {
+    background: var(--pastel-rose) var(--ronds-fenetre) 14px 50% / 54px 17px no-repeat;
+}
+
+.profil-colonne .profil-card::before {
+    background-color: var(--pastel-jaune);
+}
+
+/* Cartes des projets CPNV : petite barre rose à trois ronds */
+.cpnv-card {
+    --barre: 26px;
+    padding-top: var(--barre);
+}
+
+.cpnv-card::before {
+    background: var(--pastel-rose) var(--ronds-fenetre) 10px 50% / 44px 14px no-repeat;
+}
+
+.cpnv-card:hover {
+    box-shadow: 8px 8px 0 rgba(232, 182, 207, 0.4), 0 18px 36px rgba(0, 0, 0, 0.45);
+}
+
+.cpnv-card.active {
+    border-color: var(--pastel-jaune);
+}
+
+/* Fenêtres « Me contacter », vérification et connexion : la croix est sur
+   la barre de titre */
+.contact-fenetre::before,
+.login-modal::before {
+    background-image: none;
+}
+
+.contact-fermer,
+.login-modal-close {
+    top: 3px;
+    right: 12px;
+    color: var(--trait);
+    font-size: 1.7rem;
+    z-index: 1;
+}
+
+.contact-fermer:hover,
+.login-modal-close:hover {
+    color: var(--blanc);
+}
+
+/* ---------- Photo de présentation : fenêtre blanche à barre rose ---------- */
+.photo-cadre {
+    width: calc(var(--photo) + 24px);
+    height: calc(var(--photo) + var(--barre) + 24px);
+    padding: calc(var(--barre) + 10px) 10px 10px;
+    border: 2.5px solid var(--trait);
+    border-radius: 16px;
+    background: #fbf8ff;
+    box-shadow: 7px 7px 0 var(--pastel-lilas), 0 0 40px var(--lueur-violette);
+}
+
+.photo-cadre::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--barre);
+    border-bottom: 2.5px solid var(--trait);
+    border-radius: 13px 13px 0 0;
+    background: var(--pastel-rose) var(--ronds-fenetre) 12px 50% / 54px 17px no-repeat;
+}
+
+.profile-photo {
+    border: 2.5px solid var(--trait);
+    border-radius: 4px;
+    background: none;
+    box-shadow: none;
+}
+
+/* Carpes et étincelles tournent autour de la fenêtre */
+.photo-carpe,
+.photo-etoile {
+    --rayon: calc(var(--photo) / 2 + 58px);
+}
+
+.photo-etoile {
+    background: var(--pastel-jaune) !important;
+}
+
+/* ---------- Étincelles jaunes ---------- */
+.etincelle {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url("Images/identite-visuelle-cf/etincelle.svg") center / contain no-repeat;
+    pointer-events: none;
+    animation: etincelle-brille 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes etincelle-brille {
+    from { transform: scale(0.85) rotate(-6deg); opacity: 0.75; }
+    to { transform: scale(1.1) rotate(6deg); opacity: 1; }
+}
+
+.hero .etincelle-1 { top: 14%; left: 14%; width: 38px; height: 38px; }
+.hero .etincelle-2 { top: 24%; right: 15%; animation-delay: -1.2s; }
+.hero .etincelle-3 { top: 58%; left: 9%; width: 24px; height: 24px; animation-delay: -2.1s; }
+.hero .etincelle-4 { top: 50%; right: 10%; width: 42px; height: 42px; animation-delay: -0.6s; }
+
+/* Une étincelle de chaque côté des titres de section */
+.profil h2::before,
+.profil h2::after,
+.extra h2::before,
+.extra h2::after,
+.cpnv h2::before,
+.cpnv h2::after {
+    content: "";
+    display: inline-block;
+    width: 0.62em;
+    height: 0.62em;
+    margin: 0 0.35em;
+    vertical-align: 0.12em;
+    background: url("Images/identite-visuelle-cf/etincelle.svg") center / contain no-repeat;
+}
+
+/* ---------- Nuages ---------- */
+.nuage {
+    position: absolute;
+    z-index: 0;
+    width: clamp(140px, 20vw, 260px);
+    aspect-ratio: 2 / 1;
+    background: url("Images/identite-visuelle-cf/nuage.svg") center bottom / contain no-repeat;
+    opacity: 0.92;
+    pointer-events: none;
+    animation: nuage-flotte 9s ease-in-out infinite alternate;
+}
+
+@keyframes nuage-flotte {
+    from { translate: -8px 0; }
+    to { translate: 8px 0; }
+}
+
+.hero .nuage-1 { left: -30px; bottom: 6%; }
+.hero .nuage-2 { right: -40px; bottom: 18%; width: clamp(110px, 14vw, 190px); animation-delay: -4s; }
+.site-footer .nuage-3 { left: 4%; top: -40px; width: clamp(110px, 14vw, 180px); animation-delay: -2s; }
+.site-footer .nuage-4 { right: 3%; top: -26px; animation-delay: -6s; }
+
+/* ---------- Boutons « étiquette » blancs à contour, comme le nom sur la présentation ---------- */
+.hero-contact {
+    background: #fbf8ff;
+    color: var(--trait);
+    border: 2px solid var(--trait);
+    box-shadow: 4px 4px 0 var(--pastel-lilas);
+    font-weight: 700;
+}
+
+.hero-contact svg {
+    color: var(--violet);
+}
+
+.hero-contact:hover {
+    border-color: var(--trait);
+    box-shadow: 6px 6px 0 var(--pastel-jaune);
+}
+
+@media (max-width: 600px) {
+    .photo-cadre {
+        --photo: 200px;
+    }
+
+    .hero .etincelle-3,
+    .hero .nuage-2 {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .etincelle,
+    .nuage {
+        animation: none;
+    }
+}
+
+/* Les nuages débordent sur les côtés sans créer de défilement horizontal */
+.hero,
+.site-footer {
+    overflow-x: clip;
+}
+
+/* ---------- Projets extra-professionnels : chaque projet est une fenêtre ---------- */
+.extra .extra-panneau {
+    --barre: 42px;
+    position: relative;
+    max-width: 980px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: calc(var(--barre) + 30px) 30px 36px;
+    border: 2px solid var(--pastel-lilas);
+    border-radius: 20px;
+    background: var(--carte);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    box-shadow: 7px 7px 0 rgba(184, 162, 224, 0.28), 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.extra-panneau + .extra-panneau {
+    margin-top: 56px;
+}
+
+.extra .extra-panneau::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--barre);
+    border-bottom: 2px solid var(--trait);
+    border-radius: 18px 18px 0 0;
+    background: var(--pastel-lilas) var(--icones-fenetre) 16px 50% / 64px 17px no-repeat;
+}
+
+#lanterne-yuna.extra-panneau::before {
+    background: var(--pastel-rose) var(--ronds-fenetre) 16px 50% / 54px 17px no-repeat;
+}
+
+#photographie.extra-panneau::before {
+    background-color: var(--pastel-jaune);
+}
+
+/* Le nom du projet s'affiche dans la barre de titre */
+.extra-panneau .extra-titre {
+    position: absolute;
+    top: 0;
+    left: 90px;
+    right: 90px;
+    z-index: 1;
+    height: var(--barre);
+    margin: 0;
+    color: var(--trait);
+    font-size: 1.3rem;
+    line-height: var(--barre);
+    text-shadow: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Les lanternes décoratives restent dans la fenêtre, sous la barre */
+.extra .lanterne-yuna {
+    overflow: hidden;
+}
+
+/* Vignettes du carrousel : cadre blanc et ombre décalée, comme la photo */
+.retromania .carousel-slide {
+    border: 3px solid #fbf8ff;
+    border-radius: 14px;
+    box-shadow: 6px 6px 0 var(--pastel-lilas), 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Aperçu du site RetroMania : fenêtre de navigateur à barre jaune */
+.retromania-site-frame {
+    --barre: 30px;
+    padding-top: var(--barre);
+    border: 2px solid var(--pastel-lilas);
+    border-radius: 16px;
+    background: #000;
+    box-shadow: 7px 7px 0 rgba(184, 162, 224, 0.28), 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.retromania-site-frame::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    height: var(--barre);
+    border-bottom: 2px solid var(--trait);
+    background: var(--pastel-jaune) var(--ronds-fenetre) 12px 50% / 46px 15px no-repeat;
+}
+
+/* Publications Instagram : contour lilas et petite ombre décalée */
+.lanterne-posts .insta-grille__post,
+.photo-posts .insta-grille__post {
+    border: 2px solid var(--pastel-lilas);
+    box-shadow: 4px 4px 0 rgba(184, 162, 224, 0.35), 0 10px 22px rgba(0, 0, 0, 0.35);
+}
+
+/* Boutons des projets : contour foncé et ombre décalée, façon autocollant */
+.retromania-site-link,
+.lanterne-insta-btn,
+.photo-insta-btn {
+    border: 2px solid var(--trait);
+    box-shadow: 4px 4px 0 var(--pastel-lilas);
+}
+
+.retromania-site-link:hover,
+.lanterne-insta-btn:hover,
+.photo-insta-btn:hover {
+    box-shadow: 6px 6px 0 var(--pastel-jaune);
+}
+
+@media (max-width: 600px) {
+    .extra .extra-panneau {
+        --barre: 36px;
+        padding: calc(var(--barre) + 20px) 14px 26px;
+    }
+
+    .extra-panneau .extra-titre {
+        left: 94px;
+        right: 12px;
+        font-size: 1.05rem;
+        text-align: left;
+    }
+}
+
+/* La Lanterne : le titre se place dans la barre de la fenêtre (et non dans
+   le bloc de contenu), les lanternes décoratives restent derrière le texte. */
+.extra .lanterne-yuna-content {
+    position: static;
+}
+
+.extra .lanterne-yuna-content > :not(.extra-titre) {
+    position: relative;
+    z-index: 2;
+}
+
+/* RetroMania : pas de grande fenêtre autour du projet (titre au-dessus, comme
+   avant). Ses vignettes, l'aperçu du site et son bouton gardent le style rétro. */
+.extra #retromania.extra-panneau {
+    padding: 10px 20px 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
+}
+
+.extra #retromania.extra-panneau::before {
+    content: none;
+}
+
+#retromania .extra-titre {
+    position: static;
+    height: auto;
+    margin-bottom: 26px;
+    color: var(--blanc);
+    font-size: clamp(1.7rem, 3.6vw, 2.2rem);
+    line-height: 1.2;
+    text-shadow: 0 0 14px var(--lueur-violette);
+    white-space: normal;
+    text-align: center;
 }

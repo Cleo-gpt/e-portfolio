@@ -31,10 +31,23 @@
             <a href="#projets-extra">Projets extra-professionnels</a>
             <a href="#cpnv">CPNV-Médiamatique</a>
         </div>
+        <!-- Langue du site (i18n.js) : chaque bouton garde le nom de sa langue -->
+        <div class="langues" role="group" aria-label="Choisir la langue">
+            <button type="button" class="langue-bouton" data-langue="fr" lang="fr" title="Français" aria-pressed="true" data-pas-traduire>FR</button>
+            <button type="button" class="langue-bouton" data-langue="en" lang="en" title="English" aria-pressed="false" data-pas-traduire>EN</button>
+            <button type="button" class="langue-bouton" data-langue="de" lang="de" title="Deutsch" aria-pressed="false" data-pas-traduire>DE</button>
+        </div>
         <button class="login-trigger" id="loginTriggerBtn">Login</button>
     </nav>
 
     <header class="hero" id="accueil">
+        <!-- Étincelles et nuages (direction artistique « fenêtres rétro ») -->
+        <span class="etincelle etincelle-1" aria-hidden="true"></span>
+        <span class="etincelle etincelle-2" aria-hidden="true"></span>
+        <span class="etincelle etincelle-3" aria-hidden="true"></span>
+        <span class="etincelle etincelle-4" aria-hidden="true"></span>
+        <span class="nuage nuage-1" aria-hidden="true"></span>
+        <span class="nuage nuage-2" aria-hidden="true"></span>
         <div class="hero-astre">
             <div class="hero-lune">
                 <img src="Images/identite-visuelle-cf/logo-cf.svg" alt="CF — Multi médiamaticienne" class="hero-logo">
@@ -460,6 +473,8 @@
     <div class="section-divider"></div>
 
     <footer class="site-footer">
+        <span class="nuage nuage-3" aria-hidden="true"></span>
+        <span class="nuage nuage-4" aria-hidden="true"></span>
         <div class="footer-content">
             <p class="footer-name" id="footerName">Cléo Ana Forclaz</p>
             <div class="footer-divider"></div>
@@ -530,6 +545,8 @@
     </a>
 
     <script src="ciel.js"></script>
+    <script src="traductions.js"></script>
+    <script src="i18n.js"></script>
     <script src="contact.js"></script>
     <script src="content.js"></script>
     <script src="plugins/insta-grille/insta-grille.js"></script>
