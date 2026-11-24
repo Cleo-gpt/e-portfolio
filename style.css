@@ -2791,3 +2791,50 @@ dialog.contact-fenetre {
     white-space: normal;
     text-align: center;
 }
+
+/* ---------- Téléphone : retouches de la direction artistique ---------- */
+@media (max-width: 600px) {
+    /* Nuages du pied de page : plus petits et au-dessus du nom */
+    .site-footer .nuage-3,
+    .site-footer .nuage-4 {
+        width: 96px;
+        top: -64px;
+    }
+
+    /* Les étincelles des titres restent collées au texte (pas seules sur
+       une ligne) : plus petites, et seulement à gauche */
+    .profil h2::after,
+    .extra h2::after,
+    .cpnv h2::after {
+        content: none;
+    }
+
+    .profil h2::before,
+    .extra h2::before,
+    .cpnv h2::before {
+        width: 0.5em;
+        height: 0.5em;
+        margin: 0 0.25em 0 0;
+    }
+
+    /* Lanternes décoratives : elles cachaient le texte sur petit écran */
+    .extra .lanterne-deco {
+        display: none;
+    }
+
+    /* Boutons ronds du bas un peu plus petits */
+    .contact-flottant,
+    .retour-haut {
+        width: 46px;
+        height: 46px;
+    }
+
+    .contact-flottant svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .retour-haut img {
+        width: 30px;
+    }
+}
